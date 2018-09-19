@@ -31,12 +31,13 @@ die("<br><font color='red'>ERROR - Es konnte keine Verbindung zu der Datenbank a
 }
 $sql = "SELECT * FROM anzeige inner join inserent USING (Inserentennr) inner join besitzt USING (Anzeigennr) where Rubriknr=$zahl";
 
-foreach ($dbh->query($sql) as $row) 
-{
-print "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row["Anzeigendatum"]."</td></tr>
-<tr><td>Nickname:</td><td>".$row["Nickname"]."</td></tr>
-<tr><td>E-Mail:</td><td>".$row["Email"]."</td></tr>
-<tr><td>Anzeigentext:</td><td>".$row["Anzeigentext"]."</td></tr></table><br>";
+foreach ($dbh->query($sql) as $row) {
+	
+	echo "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row["Anzeigendatum"]."</td></tr>
+	<tr><td>Nickname:</td><td>".$row["Nickname"]."</td></tr>
+	<tr><td>E-Mail:</td><td>".$row["Email"]."</td></tr>
+	<tr><td>Anzeigentext:</td><td>".$row["Anzeigentext"]."</td></tr></table><br>";
+	
 }
 ?>
 <br><br><br><br><br>
