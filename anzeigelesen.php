@@ -17,41 +17,27 @@
   <center>
 <?php
 //Variablendeklaration
-
-$host='vweb19.nitrado.net';
-$benutzer='ni143121_5sql1';
-$kennwort='pimmelfresse';
-$datenbank='ni143121_5sql1';
-
-$zahl = $_GET ["Rubriknummer"];
-$abfrage = "SELECT * FROM anzeige inner join inserent USING (Inserentennr) inner join besitzt USING (Anzeigennr) where Rubriknr=$zahl";
-
-//Verbindung herstellen
-$verbindung = mysql_connect($host, $benutzer, $kennwort)
-    OR DIE ("Verbindung zum Server fehlgeschlagen.");
-
-mysql_query("SET NAMES 'utf8'");
-//Datenbank auswählen
-mysql_select_db($datenbank)
-    OR DIE ("Datenbank nicht gefunden.");
-
-//Abfrage ausführen
-$ergebnismenge = mysql_query($abfrage);
-/* Falls die Abfrage nicht ausgefuehrt wurde Fehlermeldung
-anzeigen lassen */
-if(!$ergebnismenge) {
-  echo "Fehler bei Abfrage: ".mysql_error();
-};
-//Ergebnis der Abfrage ausgeben
-while($liste = mysql_fetch_array($ergebnismenge)) {
-echo "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$liste["Anzeigendatum"]."</td></tr>
-<tr><td>Nickname:</td><td>".$liste["Nickname"]."</td></tr>
-<tr><td>E-Mail:</td><td>".$liste["Email"]."</td></tr>
-<tr><td>Anzeigentext:</td><td>".$liste["Anzeigentext"]."</td></tr></table><br>";
+try {
+	$dbuser = 'ni143121_5sql1';
+	$dbpass = 'pimmelfresse';
+	$dbhost = 'vweb19.nitrado.net';
+	$dbname='ni143121_5sql1';
+	$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
 }
-//Speicherplatz der Ergebnismenge freigeben, Verbindung schliessen
-mysql_free_result($ergebnismenge);
-mysql_close($verbindung);
+
+catch (PDOException $e) {
+echo "Error : " . $e->getMessage() . "<br/>";
+die("<br><font color='red'>ERROR - Es konnte keine Verbindung zu der Datenbank aufgebaut werden.</font>");
+}
+$sql = "SELECT * FROM anzeige inner join inserent USING (Inserentennr) inner join besitzt USING (Anzeigennr) where Rubriknr=$zahl"
+
+foreach ($dbh->query($sql) as $row) 
+{
+print "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row["Anzeigendatum"]."</td></tr>
+<tr><td>Nickname:</td><td>".$row["Nickname"]."</td></tr>
+<tr><td>E-Mail:</td><td>".$row["Email"]."</td></tr>
+<tr><td>Anzeigentext:</td><td>".$row["Anzeigentext"]."</td></tr></table><br>";
+}
 ?>
 <br><br><br><br><br>
 <form action="anzeigeneu.php"> <input type="submit" value="Neue Anzeige hinzufügen"/></form><br><br><br>
