@@ -21,7 +21,7 @@
 <?php
 try {
 	$dbuser = 'ni143121_5sql1';
-	$dbpass = 'adolfmeinmann';
+	$dbpass = 'pimmelfresse';
 	$dbhost = 'vweb19.nitrado.net';
 	$dbname='ni143121_5sql1';
 	$dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
