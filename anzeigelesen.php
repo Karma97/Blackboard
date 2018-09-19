@@ -16,6 +16,13 @@
   <div class="main">
   <center>
 <?php
+
+if ( !isset($_GET["Rubriknummer"]) or empty($_GET["Rubriknummer"])) {
+	$zahl = 0;
+} else {
+	$zahl = $_GET["Rubriknummer"];
+}
+
 //Variablendeklaration
 try {
 	$dbuser = 'ni143121_5sql1';
@@ -30,18 +37,22 @@ catch (PDOException $e) {
 	die("<br><font color='red'>ERROR - Es konnte keine Verbindung zu der Datenbank aufgebaut werden.</font>");
 }
 
+
 $zahl = $_GET["Rubriknummer"];
 
-$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
+if ( $zahl = 0 ) {
+	$sql = "SELECT * FROM anzeige";
+} else {
+	$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
+}
+
 $result = $dbh -> query($sql); 
-var_dump($result);
 
 foreach ($result as $row) {
 	echo "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row['Anzeigendatum']."</td></tr>
 	<tr><td>Nickname:</td><td>".$row['Nickname']."</td></tr>
 	<tr><td>E-Mail:</td><td>".$row['Email']."</td></tr>
 	<tr><td>Anzeigentext:</td><td>".$row['Anzeigentext']."</td></tr></table><br>";
-	
 }
 
 $dbh -> null;
