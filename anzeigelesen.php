@@ -30,8 +30,11 @@ catch (PDOException $e) {
 	die("<br><font color='red'>ERROR - Es konnte keine Verbindung zu der Datenbank aufgebaut werden.</font>");
 }
 
-$sql = "SELECT * FROM 'anzeige' INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
+$zahl = $_GET["Rubriknummer"];
+
+$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
 $result = $dbh -> query($sql); 
+var_dump($result);
 
 foreach ($result as $row) {
 	echo "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row['Anzeigendatum']."</td></tr>
