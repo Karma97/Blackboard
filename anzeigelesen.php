@@ -43,7 +43,7 @@ foreach ($dbh -> query($sql) as $row) {
 ?>
 <br><br><br><br><br>
 <form action="anzeigeneu.php"> <input type="submit" value="Neue Anzeige hinzufügen"/></form><br><br><br>
-<form action="index.php"> <input type="submit" value="Zurück"/></form>
+<form action="index.php"> <input type="submit" value="Zurück"/></form>3
   </center>
   </div>
   
