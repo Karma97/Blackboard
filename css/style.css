@@ -23,7 +23,7 @@ body {
 }
 
 .nohover, .nohover:hover {
-	background-color: inherit;
+	background-color: inherit !important;
 }
 
 form input {
