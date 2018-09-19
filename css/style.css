@@ -24,6 +24,7 @@ body {
 
 .nohover, .nohover:hover {
 	background-color: inherit !important;
+	color: inherit !important;
 }
 
 form input {
