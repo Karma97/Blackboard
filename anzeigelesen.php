@@ -17,11 +17,16 @@
   <center>
 <?php
 
-if ( !isset($_GET["Rubriknummer"]) or empty($_GET["Rubriknummer"])) {
-	$zahl = 0;
-} else {
+$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr)";
+
+if ($_GET["Rubriknummer"] === 0) {
+	
+} elseif ($_GET["Rubriknummer"] >= 1) {
 	$zahl = $_GET["Rubriknummer"];
-}
+	$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
+} else {
+	
+};
 
 //Variablendeklaration
 try {
@@ -37,14 +42,6 @@ catch (PDOException $e) {
 	die("<br><font color='red'>ERROR - Es konnte keine Verbindung zu der Datenbank aufgebaut werden.</font>");
 }
 
-
-$zahl = $_GET["Rubriknummer"];
-
-if ( $zahl = 0 ) {
-	$sql = "SELECT * FROM anzeige";
-} else {
-	$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
-}
 
 $result = $dbh -> query($sql); 
 
