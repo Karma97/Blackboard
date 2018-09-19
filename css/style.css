@@ -1,5 +1,8 @@
 * {
 	font-family: 'Roboto', sans-serif;
+}
+
+body {
 	background-color: #ecf0f1;
 }
 
@@ -17,6 +20,10 @@
 .center {
     padding: 70px 0;
 	margin-top: 50px;
+}
+
+.nohover, .nohover:hover {
+	background-color: inherit;
 }
 
 form input {
