@@ -1,0 +1,30 @@
+* {
+	font-family: 'Roboto', sans-serif;
+	background-color: #ecf0f1;
+}
+
+.rubriktab {
+	border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.rubriktab a{
+	text-decoration: none;
+	color: black;
+	font-size: 29px;
+}
+
+.center {
+    padding: 70px 0;
+	margin-top: 50px;
+}
+
+form input {
+	border: 2px solid black;
+}
+
+#table1 {
+    border-collapse: separate;
+    border-spacing: 10px;
+	border: 1px solid black;
+}
