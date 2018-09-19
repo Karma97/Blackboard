@@ -36,14 +36,14 @@ foreach ($dbh -> query($sql) as $row) {
 	
 	echo "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row['Anzeigendatum']."</td></tr>
 	<tr><td>Nickname:</td><td>".$row['Nickname']."</td></tr>
-	<tr><td>E-Mail3:</td><td>".$row['Email']."</td></tr>
+	<tr><td>E-Mail:</td><td>".$row['Email']."</td></tr>
 	<tr><td>Anzeigentext:</td><td>".$row['Anzeigentext']."</td></tr></table><br>";
 	
 }
 ?>
 <br><br><br><br><br>
 <form action="anzeigeneu.php"> <input type="submit" value="Neue Anzeige hinzufügen"/></form><br><br><br>
-<form action="index.php"> <input type="submit" value="Zurück"/></form>3
+<form action="index.php"> <input type="submit" value="Zurück"/></form>
   </center>
   </div>
   
