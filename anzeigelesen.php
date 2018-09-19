@@ -30,7 +30,7 @@ echo "Error : " . $e->getMessage() . "<br/>";
 die("<br><font color='red'>ERROR - Es konnte keine Verbindung zu der Datenbank aufgebaut werden.</font>");
 }
 
-$sql = "SELECT * FROM anzeige inner join inserent USING (Inserentennr) inner join besitzt USING (Anzeigennr) where Rubriknr=  '$zahl'";
+$sql = "SELECT * FROM 'anzeige' INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
 
 foreach ($dbh -> query($sql) as $row) {
 	
