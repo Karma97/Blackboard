@@ -31,8 +31,9 @@ catch (PDOException $e) {
 }
 
 $sql = "SELECT * FROM 'anzeige' INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
+$result = $dbh -> query($sql); 
 
-foreach ($dbh -> query($sql) as $row) {
+foreach ($result as $row) {
 	echo "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row['Anzeigendatum']."</td></tr>
 	<tr><td>Nickname:</td><td>".$row['Nickname']."</td></tr>
 	<tr><td>E-Mail:</td><td>".$row['Email']."</td></tr>
