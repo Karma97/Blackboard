@@ -1,5 +1,7 @@
 * {
 	font-family: 'Roboto', sans-serif;
+	margin: 0px;
+	padding: 0px;
 }
 
 body {
@@ -34,4 +36,8 @@ form input {
     border-collapse: separate;
     border-spacing: 10px;
 	border: 1px solid black;
+}
+
+.footer {
+	padding: 15px 0px;
 }
