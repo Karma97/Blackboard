@@ -1,10 +1,10 @@
-<script>
+
 function myFunction() {
-    var x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
+    var x = document.getElementById("navleiste");
+    if (x.className === "navigation") {
         x.className += " responsive";
     } else {
-        x.className = "topnav";
+        x.className = "navigation";
     }
 }
 
@@ -22,4 +22,3 @@ $(document).ready(function(){
                 }
             });
         });
-</script>

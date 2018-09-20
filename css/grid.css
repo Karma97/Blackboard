@@ -1,27 +1,9 @@
-.grid-container {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 4em 1fr 3em;
-  grid-gap: 1px 1px;
-  grid-template-areas: "nav nav" "main main" "footer footer";
-}
-
-.nav {
-	grid-area: nav;
-	width: 100%;
-	}
 
 .main {
-	grid-area: main;
 	width: 100%;
 	height: 100%;
-	margin: 0;
-	}
-	
-.main form {
-	vertical-align: middle;
 }
+	
 
 .footer {
 	grid-area: footer;
@@ -32,13 +14,13 @@
     width: 100%;
     color: white;
     text-align: center;
-	}
+}
 	
 .footer p {
 	background-color: #34495e;
 }
 
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 700px) {
   .nav, .main, .footer {
     width: 100%;
   }

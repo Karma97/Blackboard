@@ -6,10 +6,7 @@
 	<?php  include 'includes/links.php'?>
 </head>
 <body>
-<div class="grid-container">
-	<div class="nav" id="header">
-		<?php include 'includes/nav.php'?>
-	</div>
+<?php include 'includes/nav.php'?>
   <div class="main">
   
   
@@ -20,8 +17,6 @@
   <div class="footer">
 	<p>&copy; BBS Jever</p>
   </div>
-</div>
-<?php include 'js/responsiveNav.js'?>
 </body>
 
 </html>

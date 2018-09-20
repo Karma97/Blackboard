@@ -7,9 +7,6 @@
 </head>
 <body>
 
-<div class="grid-container">
-
-
 	<div class="nav" id="header">
 		<?php include 'includes/nav.php'?>
 	</div>
@@ -40,7 +37,7 @@ foreach ($result as $row) {
 	<tr><td>Anzeigentext:</td><td>".$row['Anzeigentext']."</td></tr></table><br>";
 }
 
-$dbh -> null;
+$verb -> null;
 ?>
 <br><br><br><br><br>
 
@@ -55,10 +52,6 @@ $dbh -> null;
   <div class="footer">
 	<p>&copy; BBS Jever</p>
   </div>
-  
-  
-</div>
-<?php include 'js/responsiveNav.js'?>
 </body>
 
 </html>
