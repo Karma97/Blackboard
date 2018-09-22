@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Sep 2018 um 16:31
+-- Erstellungszeit: 22. Sep 2018 um 21:04
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -75,6 +75,20 @@ CREATE TABLE `inserent` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `news`
+--
+
+CREATE TABLE `news` (
+  `nID` int(11) NOT NULL,
+  `titel` varchar(150) NOT NULL,
+  `beschreibung` text NOT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `orte`
 --
 
@@ -141,6 +155,12 @@ ALTER TABLE `inserent`
   ADD PRIMARY KEY (`iNR`);
 
 --
+-- Indizes für die Tabelle `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`nID`);
+
+--
 -- Indizes für die Tabelle `orte`
 --
 ALTER TABLE `orte`
@@ -181,6 +201,12 @@ ALTER TABLE `bilder`
 --
 ALTER TABLE `inserent`
   MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `news`
+--
+ALTER TABLE `news`
+  MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `rubriken`

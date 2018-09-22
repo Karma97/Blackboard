@@ -14,7 +14,6 @@
 	
   <div class="main">
 <?php
-
 $sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr)";
 
 if ($_GET["Rubriknummer"] === 0) {
@@ -38,6 +37,7 @@ foreach ($result as $row) {
 }
 
 $verb -> null;
+
 ?>
 <br><br><br><br><br>
 

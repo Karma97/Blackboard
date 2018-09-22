@@ -9,9 +9,7 @@
 <?php include 'includes/nav.php'?>
   <div class="main">
   
-  
 	<h1>Willkommen auf dem Schwarzen Brett!</h1>
-	
 	
 	</div>  
   <div class="footer">
