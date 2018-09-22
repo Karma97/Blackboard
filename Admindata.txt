@@ -1,0 +1,5 @@
+
+email:		admin@example.org
+pwd:		ulo99#2       
+
+hash_pwd:	bd7072cc61839ea82efd1ee1cf0712a2
