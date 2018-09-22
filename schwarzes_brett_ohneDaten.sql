@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Sep 2018 um 02:08
+-- Erstellungszeit: 22. Sep 2018 um 16:31
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -36,9 +36,22 @@ CREATE TABLE `anzeigen` (
   `betreff` varchar(100) NOT NULL,
   `beschreibung` text NOT NULL,
   `PLZ` varchar(5) NOT NULL,
-  `bild` mediumblob NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `bilder`
+--
+
+CREATE TABLE `bilder` (
+  `bID` int(11) NOT NULL,
+  `aNR` int(11) NOT NULL,
+  `bild` mediumblob,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -115,6 +128,13 @@ ALTER TABLE `anzeigen`
   ADD KEY `iNR` (`iNR`);
 
 --
+-- Indizes für die Tabelle `bilder`
+--
+ALTER TABLE `bilder`
+  ADD PRIMARY KEY (`bID`),
+  ADD KEY `aNR` (`aNR`);
+
+--
 -- Indizes für die Tabelle `inserent`
 --
 ALTER TABLE `inserent`
@@ -151,6 +171,12 @@ ALTER TABLE `anzeigen`
   MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT für Tabelle `bilder`
+--
+ALTER TABLE `bilder`
+  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `inserent`
 --
 ALTER TABLE `inserent`
@@ -172,6 +198,12 @@ ALTER TABLE `rubriken`
 ALTER TABLE `anzeigen`
   ADD CONSTRAINT `anzeigen_ibfk_1` FOREIGN KEY (`PLZ`) REFERENCES `orte` (`PLZ`),
   ADD CONSTRAINT `anzeigen_ibfk_2` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`);
+
+--
+-- Constraints der Tabelle `bilder`
+--
+ALTER TABLE `bilder`
+  ADD CONSTRAINT `bilder_ibfk_1` FOREIGN KEY (`aNR`) REFERENCES `anzeigen` (`aNR`);
 
 --
 -- Constraints der Tabelle `r_besitzt_a`
