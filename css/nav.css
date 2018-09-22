@@ -66,6 +66,11 @@
     text-align: left;
 }
 
+.dropdown-content-erste a {
+	width: 100%;
+	display: block;
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }

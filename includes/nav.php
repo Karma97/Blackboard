@@ -4,7 +4,7 @@
     <button class="dropbtn">Rubriken 
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content">
+    <div class="dropdown-content dropdown-content-erste">
 	<a href="anzeigelesen.php?Rubriknr=0">Alle Rubriken</a><?php
     
 		require_once 'connect.php';
