@@ -3,40 +3,38 @@
 <head>
 	<title>Schwarzes Brett - BBS Jever</title>
 	<meta charset="UTF-8">
-	<?php  include 'includes/links.php'?>
+	<?php  include 'includes/links.php';?>
 </head>
 <body>
 
 	<div class="nav" id="header">
-		<?php include 'includes/nav.php'?>
+		<?php
+		require_once 'includes/connect.php';
+		include 'includes/nav.php';		
+		?>
 	</div>
-	
-	
+		
   <div class="main">
 <?php
-$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr)";
+$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(PLZ)";
 
-if ($_GET["Rubriknummer"] === 0) {
+if ($_GET["rNR"] === 0) {
 	
-} elseif ($_GET["Rubriknummer"] >= 1) {
-	$zahl = $_GET["Rubriknummer"];
-	$sql = "SELECT * FROM anzeige INNER JOIN inserent USING (Inserentennr) INNER JOIN besitzt USING (Anzeigennr) WHERE Rubriknr = '$zahl'";
+} elseif ($_GET["rNR"] >= 1) {
+	$zahl = $_GET["rNR"];
+	$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) WHERE rNR = '$zahl'";
 } else {
 	
 };
 
-require_once 'includes/connect.php';
-
-$result = $verb -> query($sql); 
-
-foreach ($result as $row) {
-	echo "<table id='table1'><tr><td>Anzeigendatum:</td><td>".$row['Anzeigendatum']."</td></tr>
-	<tr><td>Nickname:</td><td>".$row['Nickname']."</td></tr>
-	<tr><td>E-Mail:</td><td>".$row['Email']."</td></tr>
-	<tr><td>Anzeigentext:</td><td>".$row['Anzeigentext']."</td></tr></table><br>";
+foreach ($verb -> query($abfrage) as $row) {
+	echo "<b>
+	".$row["betreff"]."</b><br>
+	".$row["beschreibung"]."<br>Online seit dem 
+	".date('d. F Y, h:i', strtotime($row["created_at"]))." Uhr<br><br>";
 }
 
-$verb -> null;
+$verb = null;
 
 ?>
 <br><br><br><br><br>

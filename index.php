@@ -3,10 +3,15 @@
 <head>
 	<title>Schwarzes Brett - BBS Jever</title>
 	<meta charset="UTF-8">
-	<?php  include 'includes/links.php'?>
+	<?php 
+		include 'includes/links.php';
+	?>
 </head>
 <body>
-<?php include 'includes/nav.php'?>
+<?php 
+	require_once 'includes/connect.php';
+	include 'includes/nav.php';
+?>
   <div class="main">
   
 	<h1>Willkommen auf dem Schwarzen Brett!</h1>

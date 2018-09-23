@@ -5,18 +5,14 @@
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content dropdown-content-erste">
-	<a href="anzeigelesen.php?Rubriknr=0">Alle Rubriken</a><?php
-    
-		require_once 'connect.php';
-		
-		$sql = 'SELECT * FROM anzeigenrubrik';	
+	<a href="anzeigelesen.php?rNR=0">Alle Rubriken</a><?php
+    		
+		$sql = 'SELECT * FROM rubriken';	
 		
         foreach ($verb -> query($sql) as $row) {
-            echo "<a href='anzeigelesen.php?Rubriknr=".$row["Rubriknr"]."'>".$row["Bezeichnung"]." &nbsp;<i class='".$row["iclass"]."'></i></a>";
+            echo "<a href='anzeigelesen.php?rNR=".$row["rNR"]."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
         }
-		
-		$verb = null;
-		
+				
         ?>
     </div>
   </div> 
