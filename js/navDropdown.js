@@ -1,11 +1,10 @@
 
-var z = document.getElementById("ichange");
-function Ix() {
-    z.classList.remove("fa-caret-down");
-    z.classList.add("fa-times");
+function Ix(id, remove) {
+    $(id).addClass('fa-times');
+	$(id).removeClass(remove);
 }
 
-function IarrowUp() {
-    z.classList.remove("fa-times");
-    z.classList.add("fa-caret-down");
+function Iarrow(id, remove) {
+    $(id).removeClass('fa-times');  
+	$(id).addClass(remove);
 }

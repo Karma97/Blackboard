@@ -1,10 +1,15 @@
-<?php include 'includes/head.php'; ?>
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<title>Schwarzes Brett - BBS Jever</title>
+<meta charset="UTF-8">
+<?php  include 'includes/links.php'?>
+</head>
 <body>
+
 <div class="nav" id="header">
-	<?php
-		require_once 'includes/connect.php';
-		include 'includes/nav.php'; 
-	?>
+	<?php include 'includes/nav.php'?>
 </div>
   
   <div class="main">
