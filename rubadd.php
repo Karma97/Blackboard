@@ -9,12 +9,15 @@
   
   <div class="main">
   <div class="container-fluid mt-3">
+  <?php 
+	
+  ?>
   <h1>Neue Rubrik anlegen</h1>
   
-  <form>
+  <form action="rubadd.php" method="POST">
 	  <div class="form-group">
     <label for="bezeichnung">Rubrikbezeichnung</label>
-    <input type="email" class="form-control" id="bezeichnung" placeholder="z.B: Videospiele">
+    <input type="text" class="form-control" id="bezeichnung" placeholder="z.B: Videospiele">
   </div>
 <div class="form-group">
     <label for="textarea">Rubrikbeschreibung</label>
@@ -24,6 +27,7 @@
 	</form>
   </div>
   </div>
+  
   
 	<?php 
 		include 'includes/footer.php';
