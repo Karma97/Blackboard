@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		
-		<div class="nav" id="header">
+		<div class="nav" id="top">
 			<?php
 				require_once 'includes/connect.php';
 				include 'includes/nav.php';		
@@ -27,6 +27,13 @@
 					
 				};
 				
+				$query = $verb -> query($abfrage);
+				$queryNumRows = $query -> fetchAll();
+				
+				if (count($queryNumRows) <= 0) {
+					echo "Bei dieser Rubrik wurden keine Anzeigen gefunden. <button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
+				} else {
+				
 				foreach ($verb -> query($abfrage) as $row) {
 					echo "<b>
 					".$row["betreff"]."</b><br>
@@ -36,6 +43,7 @@
 				
 				$verb = null;
 				
+				}
 			?>
 			<br><br><br><br><br>
 			
