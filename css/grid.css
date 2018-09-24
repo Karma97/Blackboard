@@ -5,20 +5,28 @@
 }
 	
 
-.footer {
+.footerbar {
 	grid-area: footer;
-	background-color: #34495e;
+	background-color: #ff9800;
 	position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 1em;
     width: 100%;
-    color: white;
+	float: left;
+    color: #212121;
     text-align: center;
 	box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.2), 0 -6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 	
-.footer p {
-	background-color: #34495e;
+.smallbar {
+	width: 100%;
+	position: fixed;
+	background-color: #c66900;
+	color: #212121;
+	height: 1em;
+	bottom: 0px;
+	left: 0px;
+	float: left;
 }
 
 @media screen and (max-width: 700px) {

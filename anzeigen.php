@@ -1,10 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Schwarzes Brett - BBS Jever</title>
-		<meta charset="UTF-8">
-		<?php  include 'includes/links.php';?>
-	</head>
+<?php include 'includes/head.php'; ?>
 	<body>
 		
 		<div class="nav" id="top">
@@ -15,6 +9,7 @@
 		</div>
 		
 		<div class="main">
+		<div class="container-fluid mt-3">
 			<?php
 				$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(PLZ)";
 				
@@ -45,19 +40,17 @@
 				
 				}
 			?>
-			<br><br><br><br><br>
 			
 			
 			<form action="anzeigeneu.php"> <input type="submit" value="Neue Anzeige hinzufügen"/></form><br><br><br>
 			<form action="index.php"> <input type="submit" value="Zurück"/></form>
 			
-			
+		</div>	
 		</div>
 		
-		
-		<div class="footer">
-			<p>&copy; BBS Jever</p>
-		</div>
+	<?php 
+		include 'includes/footer.php';
+	?>
 	</body>
 	
 </html>

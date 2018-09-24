@@ -8,16 +8,26 @@
 </div>
   
   <div class="main">
+  <div class="container-fluid mt-3">
   <h1>Neue Rubrik anlegen</h1>
-<form class="center" action="rubaddscript.php" method="post">
-<input type="text" name="rub" placeholder="Rubrikbezeichnung"><br><br>
-<input type="submit" value="Rubrik hinzufügen">
-</form>
+  
+  <form>
+	  <div class="form-group">
+    <label for="bezeichnung">Rubrikbezeichnung</label>
+    <input type="email" class="form-control" id="bezeichnung" placeholder="z.B: Videospiele">
+  </div>
+<div class="form-group">
+    <label for="textarea">Rubrikbeschreibung</label>
+    <textarea class="form-control" id="textarea" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-dark">Abspeichern</button>
+	</form>
+  </div>
   </div>
   
-  <div class="footer">
-  <p>&copy; BBS Jever</p>
-  </div>
+	<?php 
+		include 'includes/footer.php';
+	?>
 
 </body>
 

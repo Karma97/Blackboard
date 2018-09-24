@@ -1,25 +1,17 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Schwarzes Brett - BBS Jever</title>
-		<meta charset="UTF-8">
-		<?php 
-			include 'includes/links.php';
-		?>
-	</head>
+<?php include 'includes/head.php'; ?>
 	<body>
 		<?php 
 			require_once 'includes/connect.php';
 			include 'includes/nav.php';
 		?>
 		<div class="main">
-			
+	<div class="container-fluid mt-3">
 			<h1>Willkommen auf dem Schwarzen Brett!</h1>
 			
 		</div>  
-		<div class="footer">
-			<p>&copy; BBS Jever</p>
-		</div>
-	</body>
-	
+	</div>
+	<?php 
+		include 'includes/footer.php';
+	?>
+	</body>	
 </html>

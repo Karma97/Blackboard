@@ -1,11 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-<title>Schwarzes Brett - BBS Jever</title>
-<meta charset="UTF-8">
-<?php  include 'includes/links.php'?>
-</head>
+<?php include 'includes/head.php'; ?>
 <body>
 
 <div class="nav" id="header">
@@ -20,10 +13,10 @@
 </form>
   </div>
   
-  <div class="footer">
-  <p>&copy; BBS Jever</p>
-  </div>
-
+	<?php 
+		include 'includes/footer.php';
+	?>
+  
 </body>
 
 </html>
