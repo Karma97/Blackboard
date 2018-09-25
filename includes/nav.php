@@ -1,7 +1,6 @@
 <div class="headerbar">
 	WILLKOMMEN AUF DEM SCHWARZEN BRETT
 </div>
-
 <div class="navigationsleiste" id="navleiste">
 	<a href="index.php" class="navactive navItem">Start</a>
 	<div class="dropDown">

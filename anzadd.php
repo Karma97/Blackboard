@@ -1,9 +1,11 @@
 <?php include 'includes/head.php'; ?>
 <body>
 
-<div class="nav" id="header">
-	<?php include 'includes/nav.php'?>
-</div>
+	<?php 
+		/*include 'includes/pacman.php';*/
+		require_once 'includes/connect.php';
+		include 'includes/nav.php';
+		?>
   
   <div class="main">
   <h1>Neue Rubrik anlegen</h1>

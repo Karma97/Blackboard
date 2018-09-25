@@ -1,0 +1,109 @@
+.road {
+  position: absolute;
+  width: 70%;
+  border-top: 1.2vh dotted black;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  height: 100vh;
+  z-index: 1000;
+  top: 100%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.pacman {
+  position: absolute;
+  animation: walk 6s linear infinite;
+  top: 50%;
+   z-index: 1001;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.pacman:before, .pacman:after{
+  content: "";
+  display: block;
+  height: 0;
+  width: 0;
+  position: absolute;
+  border: solid 5vh #ffff00;
+  border-radius: 50%;
+  top: -4.8vh;
+}
+.pacman:before{
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  animation: chompTop 0.2s linear infinite alternate;
+}
+
+.pacman::after{
+  border-right-color: transparent;
+  border-top-color: transparent;
+  animation: chompBottom 0.2s linear infinite alternate;
+}
+
+.komplett {
+	position: absolute;
+	width: 100vw;
+	transition: opacity 0.7s;
+	height: 100vh;
+	z-index: 999;
+	background: linear-gradient(to top, #ff0000 0%, #ffbf00 100%);
+	overflow: hidden;
+}
+
+.martopLoading {
+	margin-top: 5vh;
+	font-size: 6vh !important;
+}
+
+@media screen and (max-width: 700px;) {
+	.komplett {
+		transform: rotate(180deg);
+	}
+}
+
+
+@keyframes walk{
+  0%{
+    left: 15%;
+    transform: scaleX(1)
+  }
+
+  49%{
+    left: 85%;
+    transform: scaleX(1)
+  }
+
+  50%{
+    transform: scaleX(-1)
+  }
+
+  100%{
+    left: 15%;
+    transform: scaleX(-1)
+  }
+}
+
+@keyframes chompTop{
+  0%{
+    transform: rotate(0deg)
+  }
+  100%{
+    transform: rotate(40deg)
+  }
+}
+
+@keyframes chompBottom{
+  0%{
+    transform: rotate(0deg)
+  }
+  100%{
+    transform: rotate(-40deg)
+  }
+}
