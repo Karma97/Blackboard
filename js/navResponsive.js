@@ -1,14 +1,14 @@
 
 function myFunction() {
     var x = document.getElementById("navleiste");
-    if (x.className === "navigation") {
+    if (x.className === "navigationsleiste") {
         x.className += " responsive";
     } else {
-        x.className = "navigation";
+        x.className = "navigationsleiste";
     }
 }
 
-var header = document.getElementById('header');
+/*var header = document.getElementById('header');
 $(document).ready(function(){       
             var scroll_pos = 0;
             $(document).scroll(function() { 
@@ -21,4 +21,4 @@ $(document).ready(function(){
 					header.classList.remove('header_after');
                 }
             });
-        });
+});*/
