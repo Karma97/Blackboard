@@ -58,8 +58,8 @@
 	}
 	
 	?>
-	
-<table class="mt-5 table mb-5 tablebottom table-hover table-responsive table-striped">
+	<div class="container-fluid">
+<table class="mt-5 table mb-5 ml-auto mr-auto tablebottom table-hover table-responsive table-striped">
  <caption>Liste aller aktuellen Rubriken</caption>
   <thead class="thead-dark">
     <tr>
@@ -94,6 +94,7 @@
 		?>
   </tbody>
 </table>
+</div>
   </div>
   </div>
   
