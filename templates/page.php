@@ -1,29 +1,20 @@
-<!DOCTYPE HTML>
-<html>
+<?php include 'includes/head.php'; ?>
+	<body>
+	<?php 
+		/*include 'includes/pacman.php';*/
+		require_once 'includes/connect.php';
+		include 'includes/nav.php';
+		?>
+		<div class="main">
+	<div class="container-fluid mt-3">
 
-<head>
-<title>Schwarzes Brett - BBS Jever</title>
-<meta charset="UTF-8">
-<?php  include 'includes/links.inc'?>
-</head>
-<body>
-<div class="grid-container">
+			
+		</div>  
+	</div>
+	<?php 
+		include 'includes/footer.php';
+		include 'includes/scripts.php';
+	?>
 
-<div class="nav" id="header">
-	<?php include 'includes/nav.inc'?>
-</div>
-  
-  <div class="main">
-  <center>
-  
-  </center>
-  </div>
-  
-  <div class="footer">
-  <p>&copy; BBS Jever</p>
-  </div>
-</div>
-<?php include 'js/responsiveNav.js'?>
-</body>
-
+	</body>	
 </html>
