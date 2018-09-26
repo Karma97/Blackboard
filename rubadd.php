@@ -59,7 +59,7 @@
 	
 	?>
 	
-<table class="mt-5 table mb-5 tablebottom table-hover table-striped">
+<table class="mt-5 table mb-5 tablebottom table-hover table-responsive table-striped">
  <caption>Liste aller aktuellen Rubriken</caption>
   <thead class="thead-dark">
     <tr>
