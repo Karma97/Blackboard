@@ -14,7 +14,7 @@
 				$sql = 'SELECT * FROM rubriken';	
 				$query = $verb -> query($sql);
 				
-				foreach ($query as $row) {
+				foreach ($query as $key => $row) {
 					echo "<a href='anzeigen.php?rNR=".$row["rNR"]."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
 				}
 				

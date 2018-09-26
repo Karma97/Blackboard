@@ -7,9 +7,9 @@
 		?>
 		<div class="main">
 	<div class="container-fluid mt-3">
-			<h1>Willkommen auf dem Schwarzen Brett!</h1>
-			
-		</div>  
+		<h1>Willkommen auf dem Schwarzen Brett!</h1>
+		
+	</div>  
 	</div>
 	<?php 
 		include 'includes/footer.php';
