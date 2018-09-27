@@ -4,6 +4,7 @@
 	<?php 
 		/*include 'includes/pacman.php';*/
 		require_once 'includes/connect.php';
+		include 'includes/nav.php';
 		?>
   
   <div class="main">
@@ -13,4 +14,11 @@
 <input type="submit" value="Rubrik hinzufügen">
 </form>
   </div>
+  
+	<?php 
+		include 'includes/footer.php';
+	?>
+  
+</body>
 
+</html>

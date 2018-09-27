@@ -3,6 +3,7 @@
 	<?php 
 		/*include 'includes/pacman.php';*/
 		require_once 'includes/connect.php';
+		include 'includes/nav.php';
 		?>
   
   <div class="main">
@@ -73,7 +74,7 @@
 		<?php
 						
 			$sql3 = "SELECT * FROM rubriken";	
-			$query3 = $verb -> query($sql3);
+			$query3 = $verb -> query($sql);
 				
 			foreach ($query3 as $key => $row) {
 			if ($row["created_at"] > date('Y-m-d h:i:s', strtotime('-1 hour'))) {
@@ -96,3 +97,12 @@
 </div>
   </div>
   </div>
+  
+  
+	<?php 
+		include 'includes/footer.php';
+	?>
+
+</body>
+
+</html>

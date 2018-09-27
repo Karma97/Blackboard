@@ -2,6 +2,7 @@
 	<body>
 	<?php 
 		/*include 'includes/pacman.php';*/
+		include 'includes/nav.php';
 		?>
 		<div class="main">
 	<div class="container-fluid mt-3">
@@ -88,3 +89,10 @@ Geburtsdatum:<br>
 ?>
 		</div>  
 	</div>
+	<?php 
+		include 'includes/footer.php';
+		include 'includes/scripts.php';
+	?>
+
+	</body>	
+</html>
