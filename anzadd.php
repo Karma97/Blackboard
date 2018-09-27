@@ -1,6 +1,3 @@
-<?php include 'includes/head.php'; ?>
-<body>
-
 	<?php 
 		/*include 'includes/pacman.php';*/
 		require_once 'includes/connect.php';
