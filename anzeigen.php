@@ -5,7 +5,6 @@
 		require_once 'includes/connect.php';
 		include 'includes/nav.php';
 		?>
-		
 		<div class="main">
 		<div class="container-fluid mt-3">
 			<?php
@@ -50,12 +49,12 @@
 				}
 			?>
 					
-		</div>	
 		</div>
-		
-	<?php 
-		include 'includes/footer.php';
+		</div>
+
+	<?php
+		include 'includes/scripts.php';
 	?>
-	</body>
-	
+
+	</body>	
 </html>

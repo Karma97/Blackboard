@@ -2,7 +2,7 @@
 	WILLKOMMEN AUF DEM SCHWARZEN BRETT
 </div>
 <div class="navigationsleiste" id="navleiste">
-	<a href="index.php" class="navactive navItem">Start</a>
+	<a href="#!index" class="navactive navItem">Start</a>
 	<div class="dropDown">
 		<button class="dropbtn" onmouseover="Ix('#ichange', 'fa-caret-right')" onmouseout="Iarrow('#ichange', 'fa-caret-right')">Rubriken 
 			<i id="ichange" class="fa fa-caret-right"></i>
@@ -15,14 +15,14 @@
 				$query = $verb -> query($sql);
 				
 				foreach ($query as $key => $row) {
-					echo "<a href='anzeigen.php?rNR=".$row["rNR"]."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
+					echo "<a  href='anzeigen.php?rNR=".$row["rNR"]."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
 				}
 				
 			?>
 		</div>
 	</div> 
-	<a class="navItem" href="rubadd.php">Neue Rubrik eintragen</a>
-	<a class="navItem" href="anzadd.php">Neue Anzeige aufgeben</a>
+	<a class="navItem" href="#!rubriken/add">Neue Rubrik eintragen</a>
+	<a class="navItem" href="#!anzeigen/add">Neue Anzeige aufgeben</a>
     
 	<a href="javascript:void(0);" class="icon nohover" onclick="myFunction()">
 		<i class="fa fa-bars"></i>

@@ -1,18 +1,13 @@
 <?php include 'includes/head.php'; ?>
-	<body>
+	<body ng-app="SB">
 	<?php 
 		/*include 'includes/pacman.php';*/
 		require_once 'includes/connect.php';
 		include 'includes/nav.php';
 		?>
-		<div class="main">
-	<div class="container-fluid mt-3">
-		<h1>Willkommen auf dem Schwarzen Brett!</h1>
-		
-	</div>  
-	</div>
-	<?php 
-		include 'includes/footer.php';
+		<div ng-view></div>
+
+	<?php
 		include 'includes/scripts.php';
 	?>
 
