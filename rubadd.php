@@ -2,7 +2,7 @@
 <body>
 	<?php 
 		/*include 'includes/pacman.php';*/
-		require_once __DIR__ 'includes/connect.php';
+		require_once 'includes/connect.php';
 		?>
   
   <div class="main">
