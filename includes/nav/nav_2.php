@@ -5,7 +5,7 @@
 	<a href="../startseite" class="navactive navItem">Start</a>
 	<div class="dropDown">
 		<button class="dropbtn" onclick="showDropdown()">Rubriken  
-			<i id="ichange" class="fas fa-chevron-circle-right"></i>
+			<i id="ichange" onclick="showDropdown()" class="fas fa-chevron-circle-right"></i>
 		</button>
 		<div class="dropdownContent dropdownContentErste">
 			<a class="erste" href="../anzeigen/alle">Alle Anzeigen &nbsp;<i class="fas fa-list-ul"></i></a>
