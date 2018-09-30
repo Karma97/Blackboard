@@ -74,8 +74,6 @@
 		<input type="file" name="files[]" class="custom-file-input" multiple id="files">
 		<label class="custom-file-label" for="files">Bilder hochladen </label>
   </div>
-  </div>
-  </div>
     </form>
   <div id="list"></div>
 
