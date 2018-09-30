@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 22. Sep 2018 um 21:04
+-- Erstellungszeit: 30. Sep 2018 um 00:48
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -35,7 +35,7 @@ CREATE TABLE `anzeigen` (
   `iNR` int(11) NOT NULL,
   `betreff` varchar(100) NOT NULL,
   `beschreibung` text NOT NULL,
-  `PLZ` varchar(5) NOT NULL,
+  `PLZ` int(5) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -93,13 +93,9 @@ CREATE TABLE `news` (
 --
 
 CREATE TABLE `orte` (
-  `PLZ` varchar(5) NOT NULL,
-  `Bezeichnung` varchar(100) DEFAULT NULL,
-  `Lon` double DEFAULT NULL,
-  `LAT` double DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `PLZ` int(5) NOT NULL,
+  `Bezeichnung` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -222,8 +218,8 @@ ALTER TABLE `rubriken`
 -- Constraints der Tabelle `anzeigen`
 --
 ALTER TABLE `anzeigen`
-  ADD CONSTRAINT `anzeigen_ibfk_1` FOREIGN KEY (`PLZ`) REFERENCES `orte` (`PLZ`),
-  ADD CONSTRAINT `anzeigen_ibfk_2` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`);
+  ADD CONSTRAINT `anzeigen_ibfk_2` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`),
+  ADD CONSTRAINT `anzeigen_ibfk_3` FOREIGN KEY (`PLZ`) REFERENCES `orte` (`PLZ`);
 
 --
 -- Constraints der Tabelle `bilder`

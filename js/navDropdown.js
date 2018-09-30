@@ -1,10 +1,23 @@
 
-function Ix(id, remove) {
-    $(id).addClass('fa-caret-down');
-	$(id).removeClass(remove);
+function showDropdown() {
+    $(".dropdownContent").toggleClass("showDropdown");
+
+	$("#ichange").toggleClass("fas fa-chevron-circle-right");
+	$("#ichange").toggleClass("fas fa-chevron-circle-down");
 }
 
-function Iarrow(id, remove) {
-    $(id).removeClass('fa-caret-down');  
-	$(id).addClass(remove);
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdownContent");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('showDropdown')) {
+        openDropdown.classList.remove('showDropdown');
+			$("#ichange").toggleClass("fas fa-chevron-circle-right");
+			$("#ichange").toggleClass("fas fa-chevron-circle-down");
+      }
+    }
+  }
 }

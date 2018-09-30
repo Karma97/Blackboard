@@ -31,6 +31,18 @@
 	float: left;
 }
 
+.vorschau {
+	height: 75px;
+}
+
+output {
+  display: block;
+}
+
+.custom-file-label::after {
+	content: "Durchsuchen" !important;
+}
+
 @media screen and (max-width: 700px) {
   .nav, .main, .footer {
     width: 100%;

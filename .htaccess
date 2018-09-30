@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteRule ^startseite?$ index.php
+
+RewriteRule ^rubriken/hinzufügen?$ rubadd.php
+RewriteRule ^anzeigen/hinzufügen?$ anzadd.php
+
+RewriteRule ^anzeigen/([0-9000]+) anzeigen.php?rNR=$1
+RewriteRule ^anzeigen/alle?$ anzeigen.php?rNR=0
+RewriteRule ^anzeigen?$ anzeigen.php?rNR=0
