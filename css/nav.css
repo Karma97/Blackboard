@@ -114,6 +114,7 @@
 	.navigationsleiste.responsive .dropdownContent {
 		position: relative;
 		box-shadow: none;
+		margin-bottom: 0em;
 	}
 	
 	.navigationsleiste.responsive .dropDown {
@@ -123,6 +124,7 @@
 	
 	.navigationsleiste.responsive a.navItem {
 		display: block;
+		width: 100%;
 		text-align: left;
 	}
 }

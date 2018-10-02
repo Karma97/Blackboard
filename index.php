@@ -7,7 +7,7 @@
 ?>
 	<body>
 	<?php 
-		/*include 'includes/pacman.php';*/
+		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
 		$nav_variante = 1;
@@ -42,24 +42,36 @@
 		<div id="slide" class="carousel slide" data-ride="carousel">
 		<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img class="rounded imgindex" src="images/keingeld.jpg" draggable="false">
+					<img class="rounded imgindex" src="images/Foto-Platzhalter.jpg" draggable="false">
 					  <div class="carousel-caption d-none d-md-block">
-						<h5></h5>
-						<p></p>
+						<h5>Gerade wenig Geld?</h5>
+						<p>Hier gibt es vielleicht auch etwas zum Verschenken</p>
+					</div>
+					<div class="customslidetext">
+						<h5>Gerade wenig Geld?</h5><hr>
+						<p>Hier gibt es vielleicht auch etwas zum Verschenken</p>					
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img class="rounded imgindex" src="images/trade.jpg" draggable="false">
+					<img class="rounded imgindex" src="images/Foto-Platzhalter.jpg" draggable="false">
 					<div class="carousel-caption d-none d-md-block">
-						<h5></h5>
-						<p></p>
+						<h5>Große Vielfalt</h5>
+						<p>Bei uns gibt es wenig einschränkungen, <br>was man Tauschen darf und was nicht.</p>
+					</div>
+					<div class="customslidetext">
+						<h5>Große Vielfalt</h5><hr>
+						<p>Bei uns gibt es wenig einschränkungen, <br>was man Tauschen darf und was nicht.</p>						
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img class="rounded imgindex" src="images/vertragsabschluss.jpg" draggable="false">
+					<img class="rounded imgindex" src="images/Foto-Platzhalter.jpg" draggable="false">
 					<div class="carousel-caption d-none d-md-block">
-						<h5></h5>
-						<p></p>
+						<h5>Sicherheit</h5>
+						<p>Ihre Daten bleiben bei Ihnen <br>und unsere Dienste sind für Sie frei nutzbar.</p>
+					</div>
+					<div class="customslidetext">
+						<h5>Sicherheit</h5><hr>
+						<p>Ihre Daten bleiben bei Ihnen <br>und unsere Dienste sind für Sie frei nutzbar.</p>				
 					</div>
 				</div>
 				<a class="carousel-control-prev carousel-control" href="#slide" role="button" data-slide="prev">
@@ -79,7 +91,57 @@
 			<h2 class="text-white">Neuigkeiten</h2>
 		</div>
 		<div class="card-body">
-			Neue Webseite!
+		<div class="container-fluid">
+		<?php
+		
+		$sql = "SELECT * FROM news ORDER BY nID DESC LIMIT 0,3";				
+		$query = $verb -> query($sql);
+		
+		$i = 1;
+		
+		setlocale(LC_ALL, 'de_DE.utf8');
+		
+		$monatsnamen = array(1=>"Januar",2=>"Februar",3=>"März",4=>"April",5=>"Mai",6=>"Juni",7=>"Juli",8=>"August",9=>"September",10=>"Oktober",11=>"November",12=>"Dezember");
+		
+		foreach ($query as $row) {
+		$monat = date("n", strtotime($row["created_at"]));
+			echo "
+			
+			<div class='row'>				
+				<strong>".$row["titel"]."</strong>
+				<p class='m-0' id='countStrings".$i."'>
+					".$row["beschreibung"]." 
+				</p>
+				News vom: &nbsp;".date("d.", strtotime($row["created_at"]))."
+				".$monatsnamen[$monat]." 
+				".date("Y", strtotime($row["created_at"])).",  
+				".date("H", strtotime($row["created_at"])).":00 Uhr<br><br>
+			</div>
+			
+			";
+			
+			$i++;
+			
+		}
+		
+		
+		$sql2 = "SELECT count(*) AS 'zahl' FROM news ORDER BY nID DESC LIMIT 0,3";
+		$query2 = $verb -> query($sql2);
+
+		
+		foreach ($query2 as $row){
+			echo "
+			<div class='row'>
+				<button type='button' class='btn btn-dark ml-0 p-1 pl-2 pr-2'>
+					Mehr News? &nbsp;<span class='badge badge-light'>".$row["zahl"]."</span>
+				</button>
+			</div>
+			";
+		}
+		
+		?>
+
+		</div>
 		</div>
 	</div>
 	</div>

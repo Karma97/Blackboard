@@ -16,7 +16,7 @@
 <meta name='keywords' content='HTML, PHP, Schwarzes Brett, Tauschbörse, Schenkbörse, Kleinanzeigen, Brett, Schwarz'>
 <meta name='author' content='Eike Hüls, Nichlas Schipper'>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>

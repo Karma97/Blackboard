@@ -7,7 +7,7 @@
 ?>
 <body>
 	<?php 
-		/*include 'includes/pacman.php';*/
+		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
 		$nav_variante = 2;
@@ -30,9 +30,8 @@
 				break;
 		}
 		
-		
 		?>
-  
+  <div class="main">
  <div class="container-fluid mt-3">
   <h1 class="mb-4">Anzeige aufgeben</h1>
   
@@ -76,14 +75,16 @@
   </div>
     </form>
   <div id="list"></div>
-
-
   
   <form action="../anzeigen/hinzufügen" method="POST">
   
     <button class="btn btn-dark" type="submit">Anzeige aufgeben</button>
 	
   </form>
+  </div>
+  </div>
+  </div>
+  </div>
 	<?php 
 		include 'includes/footer.php';
 		

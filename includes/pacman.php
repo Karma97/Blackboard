@@ -1,7 +1,8 @@
-<div class="komplett">
-	<div class="road">
-		<p class="martopLoading loading">Loading...</p>
-	</div>
-	<div class="pacman">
+<div id="komplett">
+	<div class="pacmanC">
+		<div class="road">
+		</div>
+		<div class="pacman">
+		</div>
 	</div>
 </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 30. Sep 2018 um 00:53
+-- Erstellungszeit: 02. Okt 2018 um 02:44
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -120,7 +120,9 @@ CREATE TABLE `news` (
 
 INSERT INTO `news` (`nID`, `titel`, `beschreibung`, `updated_at`, `created_at`) VALUES
 (1, 'Endlich neue Rubriken', 'Wir freuen uns euch mitteilen zu dürfen, dass wir neue Rubriken eingeführt haben, die sie bei Ihren anzeigen benutzen können.', '2018-09-22 19:00:00', '2018-09-22 18:26:12'),
-(2, 'Die Webseite ist da', 'Die neue Webseite ist endlich da. Nach mehreren Jahren ist es uns nun endlich gelungen die Webseite zu führen. Wir freuen uns auf erfolgreiche Jahre.', '2018-09-22 18:59:38', '2018-09-22 18:59:38');
+(2, 'Die Webseite ist da', 'Die neue Webseite ist endlich da. Nach mehreren Jahren ist es uns nun endlich gelungen die Webseite zu führen. Wir freuen uns auf erfolgreiche Jahre. Falls Sie Verbesserungsmöglichkeiten sehen, dann zögern Sie nicht diese uns mitzuteilen. Wir sind gerne für Vorschläge offen.', '2018-10-01 23:55:34', '2018-09-22 18:59:38'),
+(3, 'Accounts', 'Endlich ist es da. Sie können nun endlich einen kostenlosen Account erstellen und so die Dienste unserer Tausch- und Schenkbörse kostenlos benutzen. Dazu müssen sie nur zum Registrierformular gehen und sich registrieren.', '2018-10-01 23:20:47', '2018-10-01 23:20:47'),
+(4, 'Neue Rubriken', 'Es gibt endlich wieder mehr Vielfalt. Jetzt können Sie sich zwischen Zwei neuen Rubriken mehr entscheiden. Die Spielzeug und die Autorubrik sind auf häufiger Nachfrage erstellt und eingeweiht worden.\r\nMehrere Rubriken sind in Arbeit und werden zukünftig auch ins Team der vorhandenen Rubriken aufgenommen. Falls Sie Ideen für Rubriken haben, dann kontaktieren Sie uns gerne.', '2018-10-02 00:39:10', '2018-10-02 00:39:10');
 
 -- --------------------------------------------------------
 
@@ -650,7 +652,7 @@ ALTER TABLE `inserent`
 -- AUTO_INCREMENT für Tabelle `news`
 --
 ALTER TABLE `news`
-  MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `rubriken`

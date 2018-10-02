@@ -7,7 +7,7 @@
 ?>
 <body>
 	<?php 
-		/*include 'includes/pacman.php';*/
+		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
 		$nav_variante = 2;
@@ -91,7 +91,7 @@
 		<input type="text" class="form-control" name="searchR" id="searchR" placeholder="Rubrik suchen">
 	</div>
 	<div class="wrapper">
-<table class="table mb-5 ml-auto mr-auto tablebottom table-hover table-responsive table-striped w-100 d-block d-md-table">
+<table class="table ml-auto mr-auto table-hover table-responsive table-striped w-100 d-block d-md-table">
  <caption>Liste aller aktuellen Rubriken</caption>
   <thead class="thead-dark">
     <tr>
