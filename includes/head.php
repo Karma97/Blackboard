@@ -22,7 +22,7 @@
   message: 'Diese Seite nutzt Cookies, um bestmögliche Funktionalität bieten zu können.',
   agree: 'Ok, verstanden',
   learnMore: 'Mehr Infos',
-  link: 'https://website-tutor.com/datenschutz/',
+  link: 'datenschutz',
   theme: 'dunkel-unten'
  };
 </script>
