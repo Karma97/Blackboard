@@ -15,6 +15,20 @@
 		}
 			
 		?>
+		
+		<!-- Start Cookie Plugin -->
+<script type="text/javascript">
+  window.CookieHinweis_options = {
+  message: 'Diese Seite nutzt Cookies, um bestmögliche Funktionalität bieten zu können.',
+  agree: 'Ok, verstanden',
+  learnMore: 'Mehr Infos',
+  link: 'https://website-tutor.com/datenschutz/',
+  theme: 'dunkel-unten'
+ };
+</script>
+<script type="text/javascript" src="https://s3.eu-central-1.amazonaws.com/website-tutor/cookiehinweis/script.js
+"></script>
+<!-- Ende Cookie Plugin -->
 </head>
 
 
