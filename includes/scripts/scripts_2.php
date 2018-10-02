@@ -8,3 +8,4 @@
 <script type="text/javascript" src="../js/bildAuswahlForm.js"></script>
 <script type="text/javascript" src="../js/swipeDetectorIndexPHP.js"></script>
 <script type="text/javascript" src="../js/newsCountStrings.js"></script>
+<script type="text/javascript" src="../js/anzeigenCheckboxMax.js"></script>

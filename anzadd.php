@@ -52,14 +52,14 @@
 	</div>
 	<div class="col-md-10 mb-3">
 	<label for="selectOrt">Ort auswählen</label>
-    <select class="form-control" required id="selectOrt">
+    <select autocomplete='address-level2' class="form-control" required id="selectOrt">
 	<option value="" selected>Ort auswählen</option>
 				<?php
 				
 				$sql = 'SELECT PLZ, Bezeichnung FROM orte ORDER BY Bezeichnung';	
 				$query = $verb -> query($sql);
 				
-				foreach ($query as $key => $row) {
+				foreach ($query as $row) {
 					echo "<option value='".$row["PLZ"]."'>".$row["Bezeichnung"]."</option>";
 				}		
 				
@@ -67,6 +67,37 @@
 	<option id="noresult" disabled>Keine Ergebnisse</option>
     </select>
 	</div>
+	</div>
+	<div class="form-group">
+		<label for="rubriken">Rubriken wählen (maximal 3)</label><br>
+	
+<?php
+		
+		$sql1 = "SELECT * FROM rubriken ORDER BY bezeichnung";
+		$query1 = $verb -> query($sql1);
+		
+		$i = 1;
+		
+		echo "<div class='rubrikenContainer mb-2'>";
+		
+		foreach ($query1 as $row) {
+			echo "
+			
+				<div class='rubrikenRow'>
+					<div class='custom-control custom-checkbox'>
+						<input value='".$row["rNR"]."' type='checkbox' class='custom-control-input rubriken' id='defaultUnchecked".$i."'>
+						<label class='custom-control-label' for='defaultUnchecked".$i."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></label>
+					</div>	
+				</div>
+			
+			";
+			
+			$i++;
+		}
+		
+		echo "</div>";
+		
+		?>
 	</div>
 	<div class="custom-file">
 	<div class="form-group">
