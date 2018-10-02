@@ -104,15 +104,17 @@
 		$monatsnamen = array(1=>"Januar",2=>"Februar",3=>"März",4=>"April",5=>"Mai",6=>"Juni",7=>"Juli",8=>"August",9=>"September",10=>"Oktober",11=>"November",12=>"Dezember");
 		
 		foreach ($query as $row) {
-		$monat = date("n", strtotime($row["created_at"]));
+		
+			$monat = date("n", strtotime($row["created_at"]));
+			
 			echo "
 			
-			<div class='row'>				
+			<div class='row pointer' onclick=\"window.location.href='news/".$row["nID"]."'\">				
 				<strong>".$row["titel"]."</strong>
 				<p class='m-0' id='countStrings".$i."'>
 					".$row["beschreibung"]." 
 				</p>
-				News vom: &nbsp;".date("d.", strtotime($row["created_at"]))."
+				Veröffentlicht am: &nbsp;".date("d.", strtotime($row["created_at"]))."
 				".$monatsnamen[$monat]." 
 				".date("Y", strtotime($row["created_at"])).",  
 				".date("H", strtotime($row["created_at"])).":00 Uhr<br><br>
@@ -131,11 +133,13 @@
 		
 		foreach ($query2 as $row){
 			echo "
+			
 			<div class='row'>
-				<button type='button' class='btn btn-dark ml-0 p-1 pl-2 pr-2'>
+				<button type='button' class='btn btn-dark ml-0 p-1 pl-2 pr-2' onclick=\"window.location.href='news/alle'\">
 					Mehr News? &nbsp;<span class='badge badge-light'>".$row["zahl"]."</span>
 				</button>
 			</div>
+			
 			";
 		}
 		

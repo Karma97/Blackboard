@@ -23,6 +23,7 @@
 	</div> 
 	<a class="navItem" href="../rubriken/hinzufügen">Neue Rubrik eintragen</a>
 	<a class="navItem" href="../anzeigen/hinzufügen">Neue Anzeige aufgeben</a>
+	<a class="navItem" href="../news/alle">News</a>
     
 	<a href="javascript:void(0);" class="icon nohover" onclick="myFunction()">
 		<i class="fa fa-bars"></i>

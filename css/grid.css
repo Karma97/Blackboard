@@ -99,8 +99,18 @@ img {
 	text-align: center;
 }
 
+.row-2 {
+	width: 47%;
+	height: auto;
+	display: flex;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
 @media screen and (max-width: 700px) {
-	.nav, .main, .footer {
+.nav, .main, .footer {
 		width: 100%;
 	}  
 	.carousel-inner {

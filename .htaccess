@@ -6,6 +6,8 @@ RewriteRule ^anzeigen/hinzufügen?$ anzadd.php
 
 RewriteRule ^anzeigen/([0-900000]+) anzeigen.php?rNR=$1
 RewriteRule ^anzeigen/alle?$ anzeigen.php?rNR=0
-RewriteRule ^anzeigen?$ anzeigen.php?rNR=0
 
-RewriteRule "^datenschutz$"  "datenschutz.php"
+RewriteRule ^datenschutz?$  datenschutz.php
+
+RewriteRule ^news/([0-900000]+) news.php?nID=$1
+RewriteRule ^news/alle?$ news.php?nID=0
