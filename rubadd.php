@@ -40,7 +40,7 @@
   <form action="../rubriken/hinzufügen" method="POST">
 	<div class="form-group">
 		<label for="bezeichnung">Rubrikbezeichnung</label>
-		<input type="text" class="form-control" name="bez" required id="bezeichnung" placeholder="z.B: Videospiele">
+		<input autofocus type="text" class="form-control" name="bez" required id="bezeichnung" placeholder="z.B: Videospiele">
 	</div>
 	<div class="form-group">
 		<label for="textarea">Rubrikbeschreibung</label>
