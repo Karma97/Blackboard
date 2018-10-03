@@ -109,7 +109,7 @@
 			
 			echo "
 			
-			<div class='row pointer' onclick=\"window.location.href='news/".$row["nID"]."'\">				
+			<div class='row pointer' title='Jetzt klicken um zur News mit dem Titel: \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='news/".$row["nID"]."'\">				
 				<strong>".$row["titel"]."</strong>
 				<p class='m-0' id='countStrings".$i."'>
 					".$row["beschreibung"]." 

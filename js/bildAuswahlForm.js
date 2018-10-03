@@ -14,7 +14,7 @@ function dateiauswahl(evt) {
         return function(e) {
 	  
           var vorschau1 = document.createElement('img');
-		  vorschau1.className = 'vorschau hoverable rounded d-inline-block mb-5 ml-2 mr-2 mt-2';
+		  vorschau1.className = 'vorschau hoverable rounded d-inline-block mb-2 ml-2 mr-2 mt-2';
 
 		  vorschau1.src   = e.target.result;
 		  vorschau1.title = theFile.name;

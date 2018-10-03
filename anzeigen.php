@@ -76,14 +76,13 @@
 						</div>
 					<div class='card-body border-dark'>
 						".$row["beschreibung"]."
-						<br>
+						<br><br>
 						Online seit dem 
 						".date("d.", strtotime($row["created_at"]))."
 						".$monatsnamen[$monat]." 
 						".date("Y", strtotime($row["created_at"])).",  
 						".date("H", strtotime($row["created_at"])).":00 Uhr<br>
-						Ort: ".$row["Bezeichnung"]."<br>
-						Postleitzahl: ".$row["PLZ"]."
+						Ort: ".$row["Bezeichnung"]."
 					</div>
 					</div>
 					";

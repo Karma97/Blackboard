@@ -83,7 +83,7 @@
 		foreach ($query1 as $row) {
 			echo "
 			
-				<div class='rubrikenRow'>				
+				<div class='rubrikenRow' title='".$row["bezeichnung"]."'>				
 				<div class='custom-control custom-checkbox'>
 						<input value='".$row["rNR"]."' type='checkbox' name='rubriken[]' class='custom-control-input rubriken' id='defaultUnchecked".$i."'>
 						<label class='custom-control-label' for='defaultUnchecked".$i."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></label>
@@ -131,6 +131,7 @@
 		$z = 1;
 		$u = 0;
 		
+		/* Umsetzung des Arrays zu Variablen */
 		foreach ($rubriken as $row) {
 		
 			$rubrik = "rubrik".$z."";
@@ -141,17 +142,22 @@
 			
 		}
 		
-		/* $sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, ".$iNR.", ".$titel.", ".$beschreibung.", ".$ort.", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; */
-		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, '1', '".$titel."', '".$beschreibung."', '".$ort."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
-		$query = $verb -> query($sql1);
-		
 		$sql2 = "SELECT * FROM anzeigen WHERE beschreibung = '".$beschreibung."' AND betreff = '".$titel."' AND PLZ = '".$ort."'";
 		$query2 = $verb -> query($sql2);
 		$queryNumbers = $query2 -> fetchAll();
+				
+		foreach ($verb -> query($sql2) as $row) {
+			$aNR = $row["aNR"];
+		}
 		
-		if (count($queryNumbers) < 1 ) {
-			header("Location: error.php");
+		if (count($queryNumbers) > 0 ) {
+			$vorhanden = "vorhanden";
 		} else {
+		
+		/* $sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, ".$iNR.", ".$titel.", ".$beschreibung.", ".$ort.", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; */
+		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, '1', '".$titel."', '".$beschreibung."', '".$ort."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+		$query = $verb -> query($sql1);
+
 				
 		foreach ($verb -> query($sql2) as $row) {
 			$aNR = $row["aNR"];
@@ -181,7 +187,6 @@
   
   } else {
   
-  if ($fertig === "fertig") {
 	echo "
 	
 	<div class='text-success mt-4 mb-2'>
@@ -189,9 +194,24 @@
 	</div>
 	
 	";
-  }
+	
+  };
+
   
-  }
+  if (!isset($vorhanden)) {
+	  
+  } else {
+
+	echo "
+	
+	<div class='text-danger mt-4 mb-2'>
+		<h5>Die Anzeige ist bereits vorhanden! <a href='anzeigen/anzeige".$aNR."'>Jetzt einsehen</a></h5>
+	</div>
+	
+	";
+	
+  };
+  
   
   ?>
   </div>
