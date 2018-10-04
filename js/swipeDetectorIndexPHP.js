@@ -39,12 +39,10 @@
 
 var resim = $("#slide");
 resim.hammer().on("swipeleft", function() {
-    console.log('Carousel nach Rechts geswiped!');
 	resim.carousel("next");
 });
 
 resim.hammer().on("swiperight", function() {
-    console.log('Carousel nach Links geswiped!');
 	resim.carousel("prev");
 });
 

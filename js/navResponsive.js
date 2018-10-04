@@ -1,5 +1,5 @@
 
-function myFunction() {
+function navResponsive() {
     var x = document.getElementById("navleiste");
     if (x.className === "navigationsleiste") {
         x.className += " responsive";

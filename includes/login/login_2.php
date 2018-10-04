@@ -1,7 +1,7 @@
 
-<div class="loginkomplett">
+<div class="login_komplett">
 	
-	<div class="close" onclick="closeLogin('.loginkomplett')">
+	<div class="close" onclick="closeLogin('.login_komplett')">
 		<div class="closeicon">
 			<i class="fas fa-times fa-lg"></i>
 		</div>
@@ -9,7 +9,7 @@
 	
 	<h1><p class="ueberschrift_login text-center">Schwarzes Brett</p></h1>
 	
-	<div class="navbar_login bg-light">
+	<div class="navbar_login">
 	  <div class="container">
 	    <div class="row login_row">
 		  <div class="col">
@@ -26,10 +26,12 @@
 	  </div>
 	</div>
 	
+	<div id="login_item_wrapper">
+	
 	<div class="container mt-5" id="login_item">
 	
-		<h3><p class="mt-2 mb-0 text-center">Login zum Schwarzen Brett</p></h3>
-		<p class="mt-3 mb-0 text-center">Verwalten Sie Ihre Anzeigen, Accountdaten und vieles mehr!</p>
+		<h3><p class="login_p_tag mt-2 mb-0 text-center">Login zum Schwarzen Brett</p></h3>
+		<p class="login_p_tag mt-3 mb-0 text-center">Verwalten Sie Ihre Anzeigen, Accountdaten und vieles mehr!</p>
 		
 		<div class="login_inputs_container mt-3">
 		
@@ -52,10 +54,14 @@
 		</div>
 	</div>
 	
+	</div>
+	
+	<div id="register_item_wrapper">
+	
 	<div class="container mt-5" id="register_item">
 	
-		<h3><p class="mt-2 mb-0 text-center">Registrieren zum Schwarzen Brett</p></h3>
-		<p class="mt-3 mb-0 text-center">Registrieren Sie sich um die vollen Funktionen unserer Tauschbörse nutzen zu können!</p>
+		<h3><p class="login_p_tag mt-2 mb-0 text-center">Registrieren zum Schwarzen Brett</p></h3>
+		<p class="login_p_tag mt-3 mb-0 text-center">Registrieren Sie sich um die vollen Funktionen unserer Tauschbörse nutzen zu können!</p>
 		
 		<div class="register_inputs_container mt-3">
 		
@@ -118,6 +124,8 @@
 		  </form>
 		  
 		</div>
+	</div>
+	
 	</div>
 	
 </div>

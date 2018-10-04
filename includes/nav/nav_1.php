@@ -29,10 +29,10 @@
 	<a class="navItem" href="anzeigen/hinzufügen">Neue Anzeige aufgeben</a>
     <a class="navItem" href="news/alle">News</a>
 	
-	<a onclick="openRegister('.loginkomplett')" class="navItem pointer float-right">Registrieren <i class="fas fa-user-plus"></i></a>
-	<a onclick="openLogin('.loginkomplett')" class="navItem pointer float-right">Login <i class="fas fa-sign-in-alt"></i></a>
+	<a onclick="openRegister('.login_komplett')" class="navItem pointer float-right">Registrieren <i class="fas fa-user-plus"></i></a>
+	<a onclick="openLogin('.login_komplett')" class="navItem pointer float-right">Login <i class="fas fa-sign-in-alt"></i></a>
 	
-	<a href="javascript:void(0);" class="icon nohover" onclick="myFunction()">
+	<a href="javascript:void(0);" class="icon nohover" onclick="navResponsive()">
 		<i class="fa fa-bars"></i>
 	</a>
 </div>
