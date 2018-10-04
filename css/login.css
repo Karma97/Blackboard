@@ -1,0 +1,117 @@
+.loginkomplett {
+	position: fixed;
+	width: 100vw;
+	display: none;
+    overflow-y: scroll;
+	overflow-x: hidden;
+    height: 100vh;
+	z-index: 999;
+	background: linear-gradient(to top, #eeeeee 0%, #dddddd 100%);
+}
+
+.ueberschrift_login {
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+	color: #343a40 !important;
+}
+
+.close {
+	top: 50px !important;
+	right: 70px;
+	position: absolute;
+}
+
+.navbar_login {
+	width: 100vw;
+}
+
+.navbar_login {	
+	box-shadow: 0 1px 6px 0px rgba(50,50,50,0.6);
+}
+
+.navbar_login_item_container {
+	
+}
+
+.navbar_login_item_active {
+	border-bottom: 2px solid #262b2f !important;
+}
+
+.navbar_login_item {
+	text-align: center;
+	font-size: 14pt;
+	padding: 15px 0px;
+	
+	color: #343a40;
+	
+	border-top: 2px solid transparent;
+	border-bottom: 2px solid transparent;
+}
+
+/*
+body {
+	overflow-y: hidden;
+}
+*/
+
+.login_inputs_container {
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.register_inputs_container {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.login_row .col {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.register-label:before {
+	background-color: white;
+}
+
+.mt-custom4 {
+	margin-top: 1.7rem !important;
+}
+
+@media screen and (max-width: 700px) {
+	.ueberschrift_login {
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	.close {
+		top: 10px !important;
+		right: 20px;
+		position: absolute;
+	}
+	
+	.login_inputs_container {
+		width: 100%;
+	}
+	.register_inputs_container {
+		width: 100%;
+	}
+	.mt-custom4 {
+		margin-top: 0.5rem !important;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

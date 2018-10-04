@@ -9,3 +9,4 @@
 <script type="text/javascript" src="../js/swipeDetectorIndexPHP.js"></script>
 <script type="text/javascript" src="../js/newsCountStrings.js"></script>
 <script type="text/javascript" src="../js/anzeigenCheckboxMax.js"></script>
+<script type="text/javascript" src="../js/loginAndRegister.js"></script>

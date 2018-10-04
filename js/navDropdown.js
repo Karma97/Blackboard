@@ -1,6 +1,6 @@
 
 function showDropdown() {
-    $(".dropdownContent").toggleClass("showDropdown");
+    $('.dropdownContent').toggleClass("showDropdown");
 
 	$("#ichange").toggleClass("fas fa-chevron-circle-right");
 	$("#ichange").toggleClass("fas fa-chevron-circle-down");
@@ -9,7 +9,7 @@ function showDropdown() {
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
 
-    var dropdowns = document.getElementsByClassName("dropdownContent");
+    var dropdowns = $(".dropdownContent");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];

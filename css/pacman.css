@@ -50,7 +50,7 @@
 #komplett, .pacmanC {
 	position: fixed;
 	width: 100vw;
-	overflow: none;
+	overflow: hidden;
 	transition: opacity 0.7s;
 	height: 100vh;
 	z-index: 999;
