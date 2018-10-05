@@ -43,8 +43,8 @@
 			</div>
 			
 			<div class="form-group mb-5">
-				<label for="login_email_pwd">Passwort</label>
-				<input autocomplete="current-password" type="password" class="form-control" name="login_email_pwd" required id="login_email_pwd" placeholder="">
+				<label for="login_pwd">Passwort</label>
+				<input autocomplete="current-password" type="password" class="form-control" name="login_pwd" required id="login_pwd" placeholder="">
 			</div>
 			
 		    <button class="btn btn-dark mb-3 w-100" id="submitLogin" type="submit">Login</button>
@@ -112,7 +112,7 @@
 		   <div class="col-sm">		  
 			 <div class="form-group">
 				<div class="custom-control custom-checkbox mt-custom4">
-					<input type="checkbox" class="custom-control-input" id="register_news">					
+					<input type="checkbox" class="custom-control-input" value="1" name="register_news" id="register_news">					
 					<label class="custom-control-label register-label" for="register_news">Wollen Sie unseren Newsletter abonnieren?</label>
 				</div>
 			 </div>
@@ -127,4 +127,5 @@
 	</div>
 	
 	</div>
+	
 </div>

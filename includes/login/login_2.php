@@ -43,8 +43,8 @@
 			</div>
 			
 			<div class="form-group mb-5">
-				<label for="login_email_pwd">Passwort</label>
-				<input autocomplete="current-password" type="password" class="form-control" name="login_email_pwd" required id="login_email_pwd" placeholder="">
+				<label for="login_pwd">Passwort</label>
+				<input autocomplete="current-password" type="password" class="form-control" name="login_pwd" required id="login_pwd" placeholder="">
 			</div>
 			
 		    <button class="btn btn-dark mb-3 w-100" id="submitLogin" type="submit">Login</button>

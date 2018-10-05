@@ -14,3 +14,4 @@ RewriteRule ^news/alle?$ news.php?nID=0
 
 RewriteRule ^abwicklung-login?$  abwicklungLR.php
 RewriteRule ^abwicklung-register?$  abwicklungLR.php
+RewriteRule ^logout?$  abwicklungLR.php

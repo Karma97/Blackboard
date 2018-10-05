@@ -86,7 +86,7 @@
     display: block !important;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 960px) {
 	.navigationsleiste a.navItem:not(:first-child) {display: none;}
 	.navigationsleiste a.icon {
 		float: right;
@@ -104,7 +104,7 @@
 	}
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 960px) {
 	.navigationsleiste.responsive {position: relative;}
 	.navigationsleiste.responsive .icon {
 		position: absolute;

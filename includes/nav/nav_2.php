@@ -25,13 +25,35 @@
 			
 		</div>
 	</div> 
-	<a class="navItem" href="../rubriken/hinzufügen">Neue Rubrik eintragen</a>
-	<a class="navItem" href="../anzeigen/hinzufügen">Neue Anzeige aufgeben</a>
+	
 	<a class="navItem" href="../news/alle">News</a>
+
+	<?php
+	
+	if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
+			
+	?>
 	
 	<a onclick="openRegister('.login_komplett')" class="navItem pointer float-right">Registrieren <i class="fas fa-user-plus"></i></a>
 	<a onclick="openLogin('.login_komplett')" class="navItem pointer float-right">Login <i class="fas fa-sign-in-alt"></i></a>
-    
+	
+    <?php
+	
+	} else {
+	
+	?>
+	
+	<a class="navItem" href="../anzeigen/hinzufügen">Neue Anzeige aufgeben</a>
+	<a class="navItem" href="../rubriken/hinzufügen">Neue Rubrik eintragen</a>
+	
+	<a href="../logout" class="navItem pointer float-right">Logout <i class="fas fa-sign-out-alt"></i></a>
+	<a class="navItem pointer float-right">Mein Account <i class="fas fa-user-circle"></i></a>
+		
+	<?php
+	
+	}
+	
+	?>
 	<a href="javascript:void(0);" class="icon nohover" onclick="navResponsive()">
 		<i class="fa fa-bars"></i>
 	</a>

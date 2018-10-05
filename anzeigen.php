@@ -1,4 +1,6 @@
 <?php
+	ob_start();
+	session_start();
 	
 	$head_variante = 2;
 	
@@ -118,6 +120,8 @@
 				include 'includes/scripts/scripts_5.php';
 				break;
 		}
+		
+		ob_end_flush();
 	?>
 	</body>
 	

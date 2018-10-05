@@ -1,4 +1,6 @@
 <?php 
+	ob_start();
+	session_start();
 	
 	$head_variante = 2;
 	
@@ -33,7 +35,9 @@
 		?>
   <div class="main">
  <div class="container-fluid mt-3">
-  <h1 class="mb-4">Anzeige aufgeben</h1>
+  <h1 class="mt-1">Anzeige aufgeben</h1>
+  
+  <p class="text-dark mb-4">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.<br>Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.<br>Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.</p>
   
   <form action="../anzeigen/hinzufügen" id="anzeigenForm" method="POST">
 	<div class="form-group">
@@ -44,7 +48,7 @@
 		<label for="beschreibung">Anzeigenbeschreibung</label>
 		<textarea name="besch" class="form-control" required id="beschreibung" rows="3"></textarea>
 	</div>
-  <div class="form-group">
+	<div class="form-group">
    <div class="form-row">
     <div class="col-md-2 mb-3">
   	<label for="search">Ort Filtern</label>
@@ -117,7 +121,7 @@
 		$beschreibung = $_POST["besch"];
 		$titel = $_POST["titel"];
 		$ort = $_POST["ort"];
-		/* $iNR = $_SESSION["iNR"]; */
+		$iNR = $_SESSION["iNR"];
 		
 		/*
 		var_dump($ort);
@@ -142,22 +146,20 @@
 			
 		}
 		
-		$sql2 = "SELECT * FROM anzeigen WHERE beschreibung = '".$beschreibung."' AND betreff = '".$titel."' AND PLZ = '".$ort."'";
+		$sql2 = "SELECT * FROM anzeigen WHERE beschreibung = \"".$beschreibung."\" AND betreff = \"".$titel."\" AND PLZ = \"".$ort."\"";
 		$query2 = $verb -> query($sql2);
 		$queryNumbers = $query2 -> fetchAll();
-				
+						
 		foreach ($verb -> query($sql2) as $row) {
 			$aNR = $row["aNR"];
-		}
+		}		
 		
 		if (count($queryNumbers) > 0 ) {
 			$vorhanden = "vorhanden";
 		} else {
 		
-		/* $sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, ".$iNR.", ".$titel.", ".$beschreibung.", ".$ort.", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; */
-		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, '1', '".$titel."', '".$beschreibung."', '".$ort."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, \"".$iNR."\", \"".$titel."\", \"".$beschreibung."\", \"".$ort."\", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; 
 		$query = $verb -> query($sql1);
-
 				
 		foreach ($verb -> query($sql2) as $row) {
 			$aNR = $row["aNR"];
@@ -238,6 +240,8 @@
 				include 'includes/scripts/scripts_5.php';
 				break;
 		}
+		
+		ob_end_flush();
 	?>
   
 </body>

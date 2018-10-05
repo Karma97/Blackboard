@@ -1,4 +1,6 @@
 <?php 
+	ob_start();
+	session_start();
 	
 	$head_variante = 1;
 	
@@ -81,6 +83,8 @@ Wenn du einen Kommentar auf unserer Website schreibst, kann das eine Einwilligun
 				include 'includes/scripts/scripts_5.php';
 				break;
 		}
+		
+		ob_end_flush();
 	?>
 
 	</body>	

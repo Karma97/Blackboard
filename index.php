@@ -1,5 +1,8 @@
 <?php 
 	
+	ob_start();
+	session_start();
+	
 	$head_variante = 1;
 	
 	include 'includes/head.php'; 
@@ -7,6 +10,7 @@
 ?>
 	<body>
 	<?php 
+	
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
@@ -74,6 +78,7 @@
 						<p>Ihre Daten bleiben bei Ihnen <br>und unsere Dienste sind für Sie frei nutzbar.</p>				
 					</div>
 				</div>
+				<!--
 				<a class="carousel-control-prev carousel-control" href="#slide" role="button" data-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="sr-only">Previous</span>
@@ -82,6 +87,7 @@
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="sr-only">Next</span>
 				</a>
+				-->
 			</div>
 		</div>
 	</div>
@@ -179,6 +185,8 @@
 				include 'includes/scripts/scripts_5.php';
 				break;
 		}
+		
+		ob_end_flush();
 	?>
 
 	</body>	
