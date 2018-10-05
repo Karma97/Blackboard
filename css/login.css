@@ -77,7 +77,7 @@ body {
 	padding-right: 0px !important;
 }
 
-.register-label:before {
+.register-label:before, .login-label:before {
 	background-color: white;
 }
 
