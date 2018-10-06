@@ -77,6 +77,7 @@
 			
 				if ($session == true) {
 				
+				header("Location: startseite");
 				
 				?>					
 					<h4><p class='mt-3 mb-1 text-success'>Erfolgreich ausgeloggt.</p></h4>
@@ -208,7 +209,8 @@
 									$_SESSION['iNR'] = $row["iNR"];
 									$_SESSION['email'] = $row["email"];
 									$_SESSION['gebDatum'] = $row["gebdatum"];
-									$_SESSION['news'] = $row["newsletter"];
+									$_SESSION['news'] = $row["newsletter"];									
+									$_SESSION['identifier_token'] = $row["identifier_token"];
 								}
 							} else {
 							

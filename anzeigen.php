@@ -12,6 +12,8 @@
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
+		require 'includes/cookiecheck.php';
+		
 		$nav_variante = 2;
 		
 		switch ($nav_variante) {
@@ -39,6 +41,7 @@
 		<div class="container mt-3">
 		<div id="alle_anzeigen">
 			<?php
+			
 				$abfrage = "SELECT orte.Bezeichnung, anzeigen.PLZ, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(PLZ)";
 				
 				if ($_GET["rNR"] === 0 OR $_GET["rNR"] === "alle") {
@@ -77,7 +80,7 @@
 						".$row["betreff"]."
 						</div>
 					<div class='card-body border-dark'>
-						".$row["beschreibung"]."
+					".$row["beschreibung"]."
 						<br><br>
 						Online seit dem 
 						".date("d.", strtotime($row["created_at"]))."

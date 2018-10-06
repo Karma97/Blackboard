@@ -42,11 +42,17 @@
 				<input autofocus autocomplete="email" type="email" class="form-control" name="login_email" required id="login_email" placeholder="">
 			</div>
 			
-			<div class="form-group mb-5">
+			<div class="form-group">
 				<label for="login_pwd">Passwort</label>
 				<input autocomplete="current-password" type="password" class="form-control" name="login_pwd" required id="login_pwd" placeholder="">
 			</div>
-			
+			 <div class="form-group mb-3">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" value="1" name="login_remember_me" id="login_remember_me">					
+					<label class="custom-control-label login-label" for="login_remember_me">Angemeldet bleiben</label>
+				</div>
+			 </div>
+			 			
 		    <button class="btn btn-dark mb-3 w-100" id="submitLogin" type="submit">Login</button>
 			
 		  </form>
@@ -101,9 +107,6 @@
 			 </div>
 		   </div>
 		  </div>
-			<div id="errorpasswort" class="d-none text-danger">
-			Passwörter stimmen nicht überein!
-		  </div>	
 		 <div class="row mb-3">
 		   <div class="col-sm">		  
 			 <div class="form-group">
@@ -114,7 +117,7 @@
 		   <div class="col-sm">		  
 			 <div class="form-group">
 				<div class="custom-control custom-checkbox mt-custom4">
-					<input type="checkbox" class="custom-control-input" id="register_news">					
+					<input type="checkbox" class="custom-control-input" value="1" name="register_news" id="register_news">					
 					<label class="custom-control-label register-label" for="register_news">Wollen Sie unseren Newsletter abonnieren?</label>
 				</div>
 			 </div>

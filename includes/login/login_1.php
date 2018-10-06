@@ -107,12 +107,6 @@
 			 </div>
 		   </div>
 		  </div>
-		  <div id="truepasswort" class="mb-2 d-none text-success">
-			Passwörter stimmen überein!
-		  </div>
-		  <div id="errorpasswort" class="mb-2 d-none text-danger">
-			Passwörter stimmen nicht überein!
-		  </div>
 		 <div class="row mb-3">
 		   <div class="col-sm">		  
 			 <div class="form-group">

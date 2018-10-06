@@ -35,7 +35,7 @@
 	?>	
 	
 	<a onclick="openRegister('.login_komplett')" class="navItem pointer float-right">Registrieren <i class="fas fa-user-plus"></i></a>
-	<a onclick="openLogin('.login_komplett')" class="navItem pointer float-right">Login <i class="fas fa-sign-in-alt"></i></a>	
+	<a onclick="openLogin('.login_komplett')" class="navItem pointer float-right">Anmelden <i class="fas fa-sign-in-alt"></i></a>	
 	
     <?php
 	
@@ -44,15 +44,24 @@
 	?>
 	
 	<a class="navItem" href="anzeigen/hinzufügen">Neue Anzeige aufgeben</a>
+	
+	<?php
+	
+	if ($_SESSION['vorname'] === "S_B" && $_SESSION['nachname'] === "Admin" && $_SESSION['identifier_token'] === "rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK" && $_SESSION['gebDatum'] === "9999-09-09") {
+					
+	?>
+		
 	<a class="navItem" href="rubriken/hinzufügen">Neue Rubrik eintragen</a>
 	
+	<?php
+		}
+	?>
+		
 	<a href="logout" class="navItem pointer float-right">Logout <i class="fas fa-sign-out-alt"></i></a>
 	<a class="navItem pointer float-right">Mein Account <i class="fas fa-user-circle"></i></a>
 		
 	<?php
-	
-	}
-	
+	}	
 	?>
 	<a href="javascript:void(0);" class="icon nohover" onclick="navResponsive()">
 		<i class="fa fa-bars"></i>

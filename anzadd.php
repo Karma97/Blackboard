@@ -12,6 +12,8 @@
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
+		require 'includes/cookiecheck.php';
+		
 		$nav_variante = 2;
 		
 		switch ($nav_variante) {
@@ -35,6 +37,18 @@
 		?>
   <div class="main">
  <div class="container-fluid mt-3">
+ 		<?php
+			if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {#
+			header("Location: ../startseite");
+			?>
+			
+			<h4><p class="text-danger text-center">Um diese Funktion nutzen zu können, müssen Sie angemeldet sein!</p></h4>
+			
+			<?php
+			
+			} else {
+			
+		?>
   <h1 class="mt-1">Anzeige aufgeben</h1>
   
   <p class="text-dark mb-4">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.<br>Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.<br>Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.</p>
@@ -219,7 +233,11 @@
   </div>
   </div>
 	<?php 
+	}
+	
 		include 'includes/footer.php';
+		
+		
 		
 		$script_variante = 2;
 		
