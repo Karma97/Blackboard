@@ -36,7 +36,7 @@
 		?>
 		
 		<div class="main">
-		<div class="container-fluid mt-3">
+		<div class="container mt-3">
 		<div id="alle_anzeigen">
 			<?php
 				$abfrage = "SELECT orte.Bezeichnung, anzeigen.PLZ, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(PLZ)";

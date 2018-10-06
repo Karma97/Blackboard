@@ -35,7 +35,7 @@
 		
 		?>
 	<div class="main">		
-		<div class="container-fluid mt-3">
+		<div class="container mt-3">
 		<div id="alle_news">
 		<?php
 		

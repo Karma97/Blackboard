@@ -18,6 +18,10 @@
 		
 		session_destroy();		
 		
+		
+		unset($_COOKIE["identifier_token"]);	
+		setcookie("identifier_token", "", time() - 3600, "/");
+		
 		$session = true;
 		
 	} else {
@@ -27,6 +31,17 @@
 	$head_variante = 1;
 	
 	include 'includes/head.php'; 
+	
+	function generateRandomString($length) { 
+		$characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%&=#~";
+		$charsLength = strlen($characters) -1;
+		$string = "";
+			for($i = 0; $i < $length; $i++){
+				$randNum = mt_rand(0, $charsLength);
+				$string .= $characters[$randNum];
+			}
+		return $string;
+}
 	
 ?>
 	<body>
@@ -62,7 +77,6 @@
 			
 				if ($session == true) {
 				
-
 				
 				?>					
 					<h4><p class='mt-3 mb-1 text-success'>Erfolgreich ausgeloggt.</p></h4>
@@ -108,7 +122,8 @@
 						$error = true;	
 					}*/
 					
-					$pwd_hash = password_hash($pwd1, PASSWORD_DEFAULT);
+					$pwd_hash = password_hash($pwd1, PASSWORD_DEFAULT);	
+					$identifier_token = generateRandomString(500);	
 					
 					$sql2 = "SELECT * FROM `inserent` WHERE email = \"".$email."\" OR passwort = \"".$pwd_hash."\"";
 					
@@ -124,14 +139,32 @@
 						echo "<h4><p class='mt-3 text-dark'>Bitte versuchen Sie es erneut.<br>Sie werden automatisch weitergeleitet</p></h4>";
 						header("refresh:5;url=startseite");
 					} else {
-					
-					
-					
-					
-					$sql = "INSERT INTO `inserent`(`iNR`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES (null, '".$nachname."', '".$vorname."', '".$pwd_hash."', '".$email."', '".$gebDatum."', '".$news."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
-					
+							
+					$sql = "INSERT INTO `inserent` (`iNR`, `identifier_token`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES (null, '".$identifier_token."','".$nachname."', '".$vorname."', '".$pwd_hash."', '".$email."', '".$gebDatum."', '".$news."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 					$query = $verb -> query($sql);
+									
+					do {
 					
+					$sql5 = "SELECT * FROM `inserent` WHERE email = \"".$email."\" OR passwort = \"".$pwd_hash."\"";
+					
+					foreach ($verb -> query($sql5) as $row) {
+						$dbnewiNR = $row["iNR"];
+					}
+					
+					$newidentifier_token = generateRandomString(500);
+					
+					$sql4 = "UPDATE `inserent` SET `identifier_token` = '".$newidentifier_token."' WHERE iNR = '".$dbnewiNR."'";
+					$query4 = $verb -> query($sql4);	
+					
+					$sql3 = "SELECT * FROM `inserent` WHERE `identifier_token` = '".$newidentifier_token."'";
+					$query3 = $verb -> query($sql3);	
+					$queryNumRows2 = $query3 -> fetchAll();
+					
+					} while (
+						
+						count($queryNumRows2) > 1
+						
+					);
 					
 					?>
 					
@@ -156,6 +189,7 @@
 					
 					$passwortverify = false;
 					$emailverify = false;
+					
 					if (count($queryNumRows) > 0 && count($queryNumRows) < 2) {
 						
 						$emailverify = true;
@@ -164,18 +198,28 @@
 						foreach ($verb -> query($sql) as $row) {
 							$pwd_db = $row["passwort"];
 						}
-												
+						
 						if (password_verify($pwd, $pwd_db)) {
 							
-							foreach ($verb -> query($sql) as $row) {
-								$_SESSION['vorname'] = $row["vorname"];
-								$_SESSION['nachname'] = $row["nachname"];
-								$_SESSION['iNR'] = $row["iNR"];
-								$_SESSION['email'] = $row["email"];
-								$_SESSION['gebDatum'] = $row["gebdatum"];
-								$_SESSION['news'] = $row["newsletter"];
-							}
+							if (!isset($_POST["login_remember_me"])) {
+								foreach ($verb -> query($sql) as $row) {
+									$_SESSION['vorname'] = $row["vorname"];
+									$_SESSION['nachname'] = $row["nachname"];
+									$_SESSION['iNR'] = $row["iNR"];
+									$_SESSION['email'] = $row["email"];
+									$_SESSION['gebDatum'] = $row["gebdatum"];
+									$_SESSION['news'] = $row["newsletter"];
+								}
+							} else {
 							
+								foreach ($verb -> query($sql) as $row) {
+									$identifier_token = $row["identifier_token"];
+								}
+								
+								setcookie("identifier_token", $identifier_token, time() + ( 365 * 24 * 60 * 60), "/");
+							
+							}
+					
 							$passwortverify = true;
 							
 						} else {
@@ -186,7 +230,9 @@
 					}
 							
 						if ($passwortverify == true && $emailverify == true) {
-													
+									
+						header("Location: startseite");
+									
 						?>
 						
 						<h4><p class='mt-3 text-success'>Erfolgreich eingeloggt.</p></h4>

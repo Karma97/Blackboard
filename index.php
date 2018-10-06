@@ -14,6 +14,8 @@
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
+		require 'includes/cookiecheck.php';
+		
 		$nav_variante = 1;
 		
 		switch ($nav_variante) {

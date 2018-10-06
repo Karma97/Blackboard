@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 05. Okt 2018 um 02:27
+-- Erstellungszeit: 06. Okt 2018 um 23:26
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -62,6 +62,7 @@ CREATE TABLE `bilder` (
 
 CREATE TABLE `inserent` (
   `iNR` int(11) NOT NULL,
+  `identifier_token` varchar(700) NOT NULL,
   `nachname` varchar(100) NOT NULL,
   `vorname` varchar(100) NOT NULL,
   `passwort` varchar(500) NOT NULL,
@@ -148,7 +149,7 @@ ALTER TABLE `bilder`
 -- Indizes für die Tabelle `inserent`
 --
 ALTER TABLE `inserent`
-  ADD PRIMARY KEY (`iNR`);
+  ADD PRIMARY KEY (`iNR`,`identifier_token`);
 
 --
 -- Indizes für die Tabelle `news`

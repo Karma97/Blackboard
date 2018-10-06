@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 05. Okt 2018 um 02:27
+-- Erstellungszeit: 06. Okt 2018 um 23:26
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -62,6 +62,7 @@ CREATE TABLE `bilder` (
 
 CREATE TABLE `inserent` (
   `iNR` int(11) NOT NULL,
+  `identifier_token` varchar(700) NOT NULL,
   `nachname` varchar(100) NOT NULL,
   `vorname` varchar(100) NOT NULL,
   `passwort` varchar(500) NOT NULL,
@@ -76,8 +77,8 @@ CREATE TABLE `inserent` (
 -- Daten für Tabelle `inserent`
 --
 
-INSERT INTO `inserent` (`iNR`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES
-(1, 'Admin', 'S_B', '$2y$10$FQN5WR/GJ3TmiG72pyDSDOcfsiurDIy57V5zzSJd4I5eddhUOzfTy', 's_b_admin@example.com', '9999-12-31', 1, '2018-10-05 00:22:36', '2018-10-05 00:21:42');
+INSERT INTO `inserent` (`iNR`, `identifier_token`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES
+(1, 'rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK', 'Admin', 'S_B', '$2y$10$IMZgfoODrIo9eKEcl3Ijbuik75swhM2O7qnjTTnxLoBByu1GR49iW', 's_b_admin@example.com', '9999-09-09', 1, '2018-10-06 20:44:58', '2018-10-06 20:39:42');
 
 -- --------------------------------------------------------
 
@@ -570,7 +571,7 @@ ALTER TABLE `bilder`
 -- Indizes für die Tabelle `inserent`
 --
 ALTER TABLE `inserent`
-  ADD PRIMARY KEY (`iNR`);
+  ADD PRIMARY KEY (`iNR`,`identifier_token`);
 
 --
 -- Indizes für die Tabelle `news`
@@ -606,19 +607,19 @@ ALTER TABLE `r_besitzt_a`
 -- AUTO_INCREMENT für Tabelle `anzeigen`
 --
 ALTER TABLE `anzeigen`
-  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `bilder`
 --
 ALTER TABLE `bilder`
-  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `inserent`
 --
 ALTER TABLE `inserent`
-  MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `news`

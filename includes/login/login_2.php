@@ -65,7 +65,7 @@
 		
 		<div class="register_inputs_container mt-3">
 		
-		 <form action="../abwicklung-register" method="POST">
+		 <form action="../abwicklung-register" id="registerForm" method="POST">
 		 
 		 <div class="row">
 		   <div class="col-sm">
@@ -101,7 +101,9 @@
 			 </div>
 		   </div>
 		  </div>
-		  
+			<div id="errorpasswort" class="d-none text-danger">
+			Passwörter stimmen nicht überein!
+		  </div>	
 		 <div class="row mb-3">
 		   <div class="col-sm">		  
 			 <div class="form-group">

@@ -71,7 +71,7 @@
 		
 		<div class="register_inputs_container mt-3">
 		
-		 <form action="abwicklung-register" method="POST">
+		 <form action="abwicklung-register" id="registerForm" method="POST">
 		 
 		 <div class="row">
 		   <div class="col-sm">
@@ -107,7 +107,12 @@
 			 </div>
 		   </div>
 		  </div>
-		  
+		  <div id="truepasswort" class="mb-2 d-none text-success">
+			Passwörter stimmen überein!
+		  </div>
+		  <div id="errorpasswort" class="mb-2 d-none text-danger">
+			Passwörter stimmen nicht überein!
+		  </div>
 		 <div class="row mb-3">
 		   <div class="col-sm">		  
 			 <div class="form-group">
@@ -115,7 +120,7 @@
 			 	<input autocomplete="current-password" type="date" class="form-control" name="register_date" required id="register_date" placeholder="">
 			 </div>
 		   </div>
-		   <div class="col-sm">		  
+		   <div class="col-sm">
 			 <div class="form-group">
 				<div class="custom-control custom-checkbox mt-custom4">
 					<input type="checkbox" class="custom-control-input" value="1" name="register_news" id="register_news">					

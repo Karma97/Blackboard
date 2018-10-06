@@ -67,4 +67,5 @@ function myFunction(x) {
 
 var x = window.matchMedia("(max-width: 700px)");
 myFunction(x);
-x.addListener(myFunction); 
+x.addListener(myFunction);
+
