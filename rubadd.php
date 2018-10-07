@@ -52,8 +52,13 @@
 				
 			
 	?>
-  <h1 class="mb-4">Neue Rubrik anlegen</h1>
-  
+  <h1 class="mb-3">Neue Rubrik anlegen</h1>
+   <p class="text-dark mb-4 d-inline">
+   Frisch erstellte Rubriken werden <p class="d-inline mt-0 mb-0 text-success">Grün</p> markiert!
+   <br>
+   Frisch bearbeitete Rubriken werden <p class="d-inline mt-0 mb-0 text-primary">Blau</p> markiert!
+   </p> 
+   
   <form action="../rubriken/hinzufügen" method="POST">
 	<div class="form-group">
 		<label for="bezeichnung">Rubrikbezeichnung</label>
@@ -67,7 +72,7 @@
 		<label for="icon">Font-Awesome Icon-Klasse</label>
 		<input type="text" class="form-control" name="icon" required id="icon" placeholder="z.B.: fas fa-tv">
 	</div>
-		<button type="submit" class="btn btn-dark">Abspeichern</button>
+		<button type="submit" class="btn btn-dark mb-4">Abspeichern</button>
 	</form>
 	
 	<?php
@@ -88,61 +93,241 @@
 	
 	if (count($queryNumbers) > 0) {
 		echo "
-			<div class='mt-3 container-fluid text-danger'>
+		
+			<div class='mt-4 container-fluid text-danger'>
 				<p class='font-weight-bold'>Rubrik ist bereits vorhanden!</p>
 			</div>
+			
 			";
 	} else {
 		
 	$sql2 = "INSERT INTO `rubriken` (`rNR`, `bezeichnung`, `beschreibung`, `icon`, `updated_at`, `created_at`) VALUES (NULL, '$bez', '$besch', '$icon', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";	
 	
 	$query2 = $verb -> query($sql2);
+
+	echo "
 	
+		<div class='mt-1 mb-2 container-fluid text-success'>
+			<p class='font-weight-bold'>Die Rubrik wurde erfolgreich eingetragen und als Grün markiert!</p>
+		</div>
+		
+		";	
 	 }
 	}
 	
 	?>
 	<div class="container-fluid">
 	
-	<div class="form-group mt-5">
+	<div class="form-group mt-2">
 		<input type="text" class="form-control" name="searchR" id="searchR" placeholder="Rubrik suchen">
 	</div>
 	<div class="wrapper">
-<table class="table ml-auto mr-auto table-hover table-responsive table-striped w-100 d-block d-md-table">
+<form action="../rubriken/hinzufügen" method="POST">
+<table class="table ml-auto mr-auto table-hover mb-0 table-responsive table-striped w-100 d-block d-md-table">
  <caption>Liste aller aktuellen Rubriken</caption>
   <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Bezeichnung</th>           
-      <th scope="col">Beschreibung</th>          
+      <th scope="col">Beschreibung</th>     
+	  <th scope="col">Zuletzt bearbeitet</th>  
 	  <th scope="col">Icon</th>                  
 	  <th scope="col">Icon-Klasse</th>           
     </tr>                                        
   </thead>                                       
   <tbody id="tbodyR">
 		<?php
+			
+			$countChanges = 0;
+					
+			if (isset($_POST["changeBezeichnung"])) {
+			
+				$wert1 = $_POST["changeBezeichnung"];
+				
+				$r = 1;
+				$u = 0;
+				
+				foreach ($verb -> query("SELECT * FROM rubriken")  as $row) {	
+				
+					if ($row["bezeichnung"] === $wert1[$r]) {
+					
+					} else {
+					
+						$sql4 = "UPDATE `rubriken` SET `bezeichnung` = '".$wert1[$r]."' WHERE rNR = '".$wert1[$u]."'";	
+						$query4 = $verb -> query($sql4);				
+						
+						$countChanges++;
+						
+					}
+					
+					$u += 2;					
+					$r = $u + 1;
+					
+				}				
+			}
+				
+			if (isset($_POST["changeBeschreibung"])) {
+			
+				$wert2 = $_POST["changeBeschreibung"];
+							
+				$r2 = 1;
+				$u2 = 0;
+				$zahl = 0;
+				
+				
+				foreach ($verb -> query("SELECT * FROM rubriken") as $row) {	
+				
+					if ($row["beschreibung"] === $wert2[$r2]) {
+						
+					} else {
+					
+
+					
+						$sql4 = "UPDATE `rubriken` SET `beschreibung` = '".$wert2[$r2]."' WHERE rNR = '".$wert2[$u2]."'";	
+						$query4 = $verb -> query($sql4);				
+						
+						$countChanges++;
+						
+					}
+										
+					$zahl++;
+					$u2 += 2;					
+					$r2 = $u2 + 1;
+					
+				}	
+			}
+					
+			if (isset($_POST["changeIcon"])) {
+			
+				$wert1 = $_POST["changeIcon"];
+				
+				$r = 1;
+				$u = 0;
+				
+				foreach ($verb -> query("SELECT * FROM rubriken") as $row) {	
+				
+					if ($row["icon"] === $wert1[$r]) {
+					
+					} else {
+					
+						$sql4 = "UPDATE `rubriken` SET `icon` = '".$wert1[$r]."' WHERE rNR = '".$wert1[$u]."'";	
+						$query4 = $verb -> query($sql4);				
+						
+						$countChanges++;
+						
+					}
+					
+					$u += 2;					
+					$r = $u + 1;
+					
+				}	
+			}
 						
 			$sql3 = "SELECT * FROM rubriken";	
 			$query3 = $verb -> query($sql);
 				
-			foreach ($query3 as $key => $row) {
+			setlocale(LC_ALL, 'de_DE.utf8');
+				
+			$zahlplus = 1;
+				
+			foreach ($query3 as $row) {
+			
+			$countInsgesamt = $zahlplus;
+			
 			if ($row["created_at"] > date('Y-m-d h:i:s', strtotime('-1 hour'))) {
-				echo "<tr class='table-success'>";
+				echo "<tr ondblclick='toggleBearbeitenModus()' class='table-success'>";
+			} elseif ($row["updated_at"] > date('Y-m-d h:i:s', strtotime('-1 hour'))) {
+				echo "<tr ondblclick='toggleBearbeitenModus()' class='table-primary'>";
 			} else {
-				echo "<tr>";
+				echo "<tr ondblclick='toggleBearbeitenModus()'>";
 			}
 				echo "
 					<td scope='row'><strong>".$row["rNR"]."</strong></td>
-					<td>".$row["bezeichnung"]."</td>
-					<td>".$row["beschreibung"]."</td>
-					<td><i class='".$row["icon"]."'></i></td>
-					<td>".$row["icon"]."</td>
+					<td>
+					
+					<div class='changeinputshow'>						
+						<input type='hidden' name='changeBezeichnung[]' value='".$row["rNR"]."'>
+						<input class='form-control form-control-sm' value='".$row["bezeichnung"]."' name='changeBezeichnung[]' type='text' placeholder='".$row["bezeichnung"]."'>						
+					</div>
+					
+					<div class='changehide'>
+						".$row["bezeichnung"]."
+					</div>
+					
+					</td>
+					<td>
+					
+					<div class='changeinputshow'>					
+						<input type='hidden' name='changeBeschreibung[]' value='".$row["rNR"]."'>
+						<textarea class='form-control form-control-sm' name='changeBeschreibung[]' rows='1' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>
+					</div>			
+					
+					<div class='changehide'>
+						".$row["beschreibung"]."
+					</div>
+					
+					</td>
+					<td>".date("d.n.Y, H:i", strtotime($row["updated_at"]))." Uhr</td>
+					<td class='faa-parent animated-hover'><i class='faa-slow faa-horizontal ".$row["icon"]."'></i></td>
+					<td>
+					
+					<div class='changeinputshow'>
+						<input type='hidden' name='changeIcon[]' value='".$row["rNR"]."'>
+						<input class='form-control form-control-sm' name='changeIcon[]' type='text' value='".$row["icon"]."' placeholder='".$row["icon"]."'>
+					</div>
+					<div class='changehide'>
+						".$row["icon"]."
+					</div>					
+					
+					
+					</td>
 				</tr>";
+				
+				$zahlplus++;
+				
 			}
 		
 		?>
-  </tbody>
+		
+	
+	
+
+</tbody>
 </table>
+<?php
+	
+	if (isset($_POST["changeBeschreibung"]) or isset($_POST["changeIcon"]) or isset($_POST["changeBezeichnung"])) {
+		if ($countChanges > 0) {
+			echo "
+			
+			<div class='mb-4 mt-1 text-success d-block'>
+				<h5>".$countChanges." / ".$countInsgesamt." Rubriken bearbeitet!</h5>
+			</div>			
+			
+			";
+		} else {
+			
+			echo "
+			
+			<div class='mb-4 mt-1 text-danger d-block'>
+				<h5>".$countChanges." / ".$countInsgesamt." Rubriken bearbeitet!</h5>
+			</div>
+			
+			";			
+			
+		}
+	
+	} else {
+	
+	}
+	
+	?>
+
+	<button class="btn btn-dark mb-3" onclick="toggleBearbeitenModus()" id="activateRubrikChanges" type="button">Bearbeitungsmodus</button>
+
+	<button class="btn btn-dark mb-3 d-none" id="submitRubrikChanges" type="submit">Änderungen Speichern</button>
+
+</form>
 </div>
 </div>
   </div>
