@@ -48,6 +48,9 @@ form input {
 	padding: 15px 0px;
 }
 
+.admincard {
+	min-height: 80vh;
+}
 
 #error-container {
    position: absolute;
@@ -88,6 +91,16 @@ h1.error-h1 {
 	text-align: left;
 	padding-left: 40px;
 }
+
+.iconCollapseAll {
+	transition: 0.5s;
+}
+
+.collapsedIcon {
+	transform: rotate(180deg);
+}
+
+
 
 @media screen and (max-width: 1200px) {
 	.rubrikenRow {

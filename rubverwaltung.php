@@ -61,7 +61,7 @@
    Frisch bearbeitete Rubriken werden <p class="d-inline mt-0 mb-0 text-primary">Blau</p> markiert!
    </p> 
  
-  <form action="../rubriken/hinzufügen" method="POST">
+  <form action="../rubriken/verwalten" method="POST">
 	<div class="form-group">
 		<label for="bezeichnung">Rubrikbezeichnung</label>
 		<input autofocus type="text" class="form-control" name="bez" required id="bezeichnung" placeholder="z.B: Videospiele">
@@ -124,7 +124,7 @@
 		<input type="text" class="form-control" name="searchR" id="searchR" placeholder="Rubrik suchen">
 	</div>
 	<div class="wrapper">
-<form action="../rubriken/hinzufügen" method="POST">
+<form action="../rubriken/verwalten" method="POST">
 <table class="table ml-auto mr-auto table-hover mb-0 table-responsive table-striped w-100 d-block d-md-table">
  <caption>Liste aller aktuellen Rubriken</caption>
   <thead class="thead-dark">

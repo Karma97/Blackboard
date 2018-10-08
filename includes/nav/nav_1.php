@@ -1,5 +1,4 @@
 
-
 <div class="headerbar">
 	WILLKOMMEN AUF DEM SCHWARZEN BRETT
 </div>
@@ -43,7 +42,7 @@
 	
 	?>
 	
-	<a class="navItem" href="anzeigen/hinzufügen">Neue Anzeige aufgeben</a>
+	<a class="navItem" href="anzeigen/erstellen">Neue Anzeige aufgeben</a>
 	
 	<?php
 	
@@ -51,7 +50,7 @@
 					
 	?>
 		
-	<a class="navItem" href="rubriken/hinzufügen">Neue Rubrik eintragen</a>
+	<a class="navItem" href="adminarea">Adminarea <i class="fas fa-cogs"></i></a>
 	
 	<?php
 		}
