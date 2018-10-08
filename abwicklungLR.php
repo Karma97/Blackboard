@@ -3,8 +3,6 @@
 	
 	session_start();
 	
-	
-	
 	if (isset($_SESSION['vorname']) && isset($_SESSION['iNR']) && isset($_SESSION['news'])) {
 	
 		$name = "".$_SESSION['vorname']." ".$_SESSION['nachname']."";
@@ -28,7 +26,10 @@
 		$session = false;
 	};
 	
-	$head_variante = 1;
+	$head_variante = 1;	
+	$script_variante = 1;
+	$nav_variante = 1;
+	$footer_variante = 1;
 	
 	include 'includes/head.php'; 
 	
@@ -49,11 +50,10 @@
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
-		$nav_variante = 1;
 		
 		switch ($nav_variante) {
 			case $nav_variante === 1:
-				include 'includes/nav/nav_1.php';
+			include 'includes/nav/nav_1.php';
 				break;
 			case $nav_variante === 2:
 				include 'includes/nav/nav_2.php';
@@ -114,14 +114,28 @@
 					};
 					
 					if ($pwd1 !== $pwd2) {
-						echo "<h4><p class='text-danger'>Passwörter stimmen nicht überein!</p></h4>";
+						$registerPwdNotSame = true;
+						?>
+						
+						<div class="text-danger text-center mt-5">
+							<h3>Passwörter stimmen nicht überein!</h3>
+						</div>
+						
+						<?php
 						$error = true;
 					}
 										
-					/*if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-						echo "<h4><p class='text-danger'>E-Mail ist keine gültige E-Mail!</p></h4>";
+					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+						$registerEmailUnvalid = true;
+						?>
+						
+						<div class="text-danger text-center mt-2">
+							<h3>Die eingegeben E-Mail ist ungültig!</h3>
+						</div>
+						
+						<?php
 						$error = true;	
-					}*/
+					}
 					
 					$pwd_hash = password_hash($pwd1, PASSWORD_DEFAULT);	
 					$identifier_token = generateRandomString(500);	
@@ -132,13 +146,34 @@
 					$queryNumRows = $query2 -> fetchAll();
 					
 					if (count($queryNumRows) > 0 && count($queryNumRows) < 2) {
-						echo "<h4><p class='mt-3 text-danger'>Der Account ist bereits vorhanden!</p><p class='text-dark'>Sie werden automatisch weitergeleitet</p></h4>";
-						header("refresh:5;url=startseite");
-					} else {
+						$registerAccountVorhanden = true;
+						?>
+						
+						<div class="text-danger text-center mt-2">
+							<h3>Der Account ist bereits vorhanden!</h3>
+						</div>
+						
+						<?php
+						$error = true;	
+					}
+					
 					
 					if ($error == true) {
-						echo "<h4><p class='mt-3 text-dark'>Bitte versuchen Sie es erneut.<br>Sie werden automatisch weitergeleitet</p></h4>";
-						header("refresh:5;url=startseite");
+						
+						?>					
+					
+						<script text="text/javascript">
+						
+						$(document).ready(function() {
+							openRegister('.login_komplett');
+						});
+							
+						</script>
+						
+						<div class="text-danger text-center mt-5">
+						<h3><a href="startseite">Zur Startseite</a></h3>
+						</div>	
+						<?php
 					} else {
 							
 					$sql = "INSERT INTO `inserent` (`iNR`, `identifier_token`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES (null, '".$identifier_token."','".$nachname."', '".$vorname."', '".$pwd_hash."', '".$email."', '".$gebDatum."', '".$news."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
@@ -178,7 +213,6 @@
 						header( "refresh:10;url=startseite" );
 					
 						}
-					}
 				} elseif (!isset($_POST["register_vorname"]) && !isset($_POST["register_nachname"]) && !isset($_POST["register_email"]) && !isset($_POST["register_pwd1"]) && !isset($_POST["register_pwd2"]) && !isset($_POST["register_date"]) && $session == false) {
 					/* Loginabwicklung */
 					$email = $_POST["login_email"];
@@ -245,13 +279,27 @@
 						
 					} else {
 					
+					$loginerrorPwdEmail = true;
+					
 					?>
+					
+					<script text="text/javascript">
+					
+					$(document).ready(function() {
+						openLogin('.login_komplett');
+					});
 						
-						<h4><p class='mt-3 text-danger'>Passwort oder E-Mail falsch.</p></h4>
-						
-						<?php
-												
-						} 
+					</script>
+					<div class="text-danger text-center mt-5">
+						<h3>Passwort oder E-Mail falsch!
+							<br>
+							<a href="startseite" class="p-3">Zur Startseite</a>
+						</h3>
+					</div>
+					
+					<?php
+					
+					} 
 
 				} else {
 				
@@ -269,25 +317,22 @@
 	</div>
 
 	<?php 
-		include 'includes/footer.php';
-		
-		$script_variante = 1;
-		
-		switch ($script_variante) {
-			case $script_variante === 1:
-				include 'includes/scripts/scripts_1.php';
+	
+		switch ($footer_variante) {
+			case $footer_variante === 1:
+				include 'includes/footer/footer_1.php';
 				break;
-			case $script_variante === 2:
-				include 'includes/scripts/scripts_2.php';
+			case $footer_variante === 2:
+				include 'includes/footer/footer_2.php';
 				break;
-			case $script_variante === 3:
-				include 'includes/scripts/scripts_3.php';
+			case $footer_variante === 3:
+				include 'includes/footer/footer_3.php';
 				break;
-			case $script_variante === 4:
-				include 'includes/scripts/scripts_4.php';
+			case $footer_variante === 4:
+				include 'includes/footer/footer_4.php';
 				break;
-			case $script_variante === 5:
-				include 'includes/scripts/scripts_5.php';
+			case $footer_variante === 5:
+				include 'includes/footer/footer_5.php';
 				break;
 		}
 		

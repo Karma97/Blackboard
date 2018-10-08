@@ -1,4 +1,4 @@
-<?php include 'includes/login/login_1.php'; ?>
+
 
 <div class="headerbar">
 	WILLKOMMEN AUF DEM SCHWARZEN BRETT
@@ -34,8 +34,8 @@
 			
 	?>	
 	
-	<a onclick="openRegister('.login_komplett')" class="navItem pointer float-right">Registrieren <i class="fas fa-user-plus"></i></a>
-	<a onclick="openLogin('.login_komplett')" class="navItem pointer float-right">Anmelden <i class="fas fa-sign-in-alt"></i></a>	
+	<a onclick="openRegister('.login_komplett')" class="navItem pointer float-right faa-parent animated-hover">Registrieren <i class="faa-horizontal faa-slow fas fa-user-plus"></i></a>
+	<a onclick="openLogin('.login_komplett')" class="navItem pointer float-right faa-parent animated-hover">Anmelden <i class="faa-horizontal faa-slow fas fa-sign-in-alt"></i></a>	
 	
     <?php
 	
@@ -56,10 +56,10 @@
 	<?php
 		}
 	?>
-		
-	<a href="logout" class="navItem pointer float-right">Logout <i class="fas fa-sign-out-alt"></i></a>
-	<a class="navItem pointer float-right">Mein Account <i class="fas fa-user-circle"></i></a>
-		
+	
+	<a href="logout" class="navItem pointer float-right faa-parent animated-hover">Logout <i class="faa-horizontal faa-slow fas fa-sign-out-alt"></i></a>
+	<a class="navItem pointer float-right faa-parent animated-hover">Mein Account <i class="faa-horizontal faa-slow fas fa-user-circle"></i></a>
+	
 	<?php
 	}	
 	?>

@@ -2,7 +2,10 @@
 	ob_start();
 	session_start();
 	
-	$head_variante = 2;
+	$head_variante = 2;	
+	$script_variante = 2;
+	$nav_variante = 2;
+	$footer_variante = 2;
 	
 	include 'includes/head.php'; 
 	
@@ -13,8 +16,6 @@
 		require_once 'includes/connect.php';
 		
 		require 'includes/cookiecheck.php';
-		
-		$nav_variante = 2;
 		
 		switch ($nav_variante) {
 			case $nav_variante === 1:
@@ -53,12 +54,13 @@
 			
 	?>
   <h1 class="mb-3">Neue Rubrik anlegen</h1>
+  
    <p class="text-dark mb-4 d-inline">
    Frisch erstellte Rubriken werden <p class="d-inline mt-0 mb-0 text-success">Grün</p> markiert!
    <br>
    Frisch bearbeitete Rubriken werden <p class="d-inline mt-0 mb-0 text-primary">Blau</p> markiert!
    </p> 
-   
+ 
   <form action="../rubriken/hinzufügen" method="POST">
 	<div class="form-group">
 		<label for="bezeichnung">Rubrikbezeichnung</label>
@@ -345,9 +347,23 @@
 		}
 		}
 		
-		include 'includes/footer.php';
-		
-		$script_variante = 2;
+		switch ($footer_variante) {
+			case $footer_variante === 1:
+				include 'includes/footer/footer_1.php';
+				break;
+			case $footer_variante === 2:
+				include 'includes/footer/footer_2.php';
+				break;
+			case $footer_variante === 3:
+				include 'includes/footer/footer_3.php';
+				break;
+			case $footer_variante === 4:
+				include 'includes/footer/footer_4.php';
+				break;
+			case $footer_variante === 5:
+				include 'includes/footer/footer_5.php';
+				break;
+		}
 		
 		switch ($script_variante) {
 			case $script_variante === 1:

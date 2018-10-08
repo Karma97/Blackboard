@@ -28,6 +28,13 @@
 <script type="text/javascript" src="https://s3.eu-central-1.amazonaws.com/website-tutor/cookiehinweis/script.js
 "></script>
 </head>
-
-
-
+<?php
+	
+	$loginerrorPwdEmail = false;
+	$loginEmailUnvalid = false;
+	
+	$registerPwdNotSame = false;
+	$registerEmailUnvalid = false;
+	$registerAccountVorhanden = false;
+	
+?>

@@ -46,6 +46,17 @@
 				<label for="login_pwd">Passwort</label>
 				<input autocomplete="current-password" type="password" class="form-control" name="login_pwd" required id="login_pwd" placeholder="">
 			</div>
+			<?php
+			if ($loginerrorPwdEmail == true) {
+			?>
+			
+			<div id="pwdEmailWrong" class="text-danger mb-3">
+				Passwort oder E-Mail falsch!
+			</div>
+			
+			<?php
+			}
+			?>
 			 <div class="form-group mb-3">
 				<div class="custom-control custom-checkbox">
 					<input type="checkbox" class="custom-control-input" value="1" name="login_remember_me" id="login_remember_me">					
@@ -91,7 +102,18 @@
 			<div class="form-group">
 				<label for="register_email">E-Mail</label>
 				<input autofocus autocomplete="email" type="email" class="form-control" name="register_email" required id="register_email" placeholder="">
+			</div>		
+			<?php
+			if ($registerEmailUnvalid == true) {
+			?>
+			
+			<div class="text-danger mb-3">
+				Die eingegebene E-mail ist ungültig!
 			</div>
+			
+			<?php
+			}
+			?>
 			
 		 <div class="row">
 		   <div class="col-sm">			
@@ -105,8 +127,19 @@
 			 	<label for="register_pwd2">Passwort wiederholen</label>
 			 	<input autocomplete="current-password"  type="password" class="form-control" name="register_pwd2" required id="register_pwd2" placeholder="">
 			 </div>
-		   </div>
-		  </div>
+		   </div>	
+		  </div>	   
+			<?php
+			if ($registerPwdNotSame == true) {
+			?>
+			
+			<div class="text-danger mb-3">
+				Passwörter müssen übereinstimmen!
+			</div>
+			
+			<?php
+			}
+			?>
 		 <div class="row mb-3">
 		   <div class="col-sm">		  
 			 <div class="form-group">

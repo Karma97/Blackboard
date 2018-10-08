@@ -5,6 +5,7 @@
     overflow-y: scroll;
 	overflow-x: hidden;
     height: 100vh;
+    top: 0;
 	z-index: 999;
 	background: linear-gradient(to top, #eeeeee 0%, #dddddd 100%);
 }
