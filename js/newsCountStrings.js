@@ -21,4 +21,3 @@ for (i; i <= anzahlNews; i++) {
 	
 }
 
-

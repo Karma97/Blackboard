@@ -53,7 +53,7 @@
 				
 	?>
 	
-  <h1 class="mb-3">Neue Rubrik anlegen</h1>
+  <h1 class="mb-3">Rubriken einsehen/bearbeiten und löschen</h1>
   
    <p class="text-dark mb-4 d-inline">
    Frisch erstellte Rubriken werden <p class="d-inline mt-0 mb-0 text-success">Grün</p> markiert!
@@ -61,7 +61,7 @@
    Frisch bearbeitete Rubriken werden <p class="d-inline mt-0 mb-0 text-primary">Blau</p> markiert!
    </p> 
  
-  <form action="../rubriken/verwalten" method="POST">
+  <form action="../rubriken/bearbeiten" method="POST">
 	<div class="form-group">
 		<label for="bezeichnung">Rubrikbezeichnung</label>
 		<input autofocus type="text" class="form-control" name="bez" required id="bezeichnung" placeholder="z.B: Videospiele">
@@ -124,7 +124,7 @@
 		<input type="text" class="form-control" name="searchR" id="searchR" placeholder="Rubrik suchen">
 	</div>
 	<div class="wrapper">
-<form action="../rubriken/verwalten" method="POST">
+<form action="../rubriken/bearbeiten" method="POST">
 <table class="table ml-auto mr-auto table-hover mb-0 table-responsive table-striped w-100 d-block d-md-table">
  <caption>Liste aller aktuellen Rubriken</caption>
   <thead class="thead-dark">
@@ -158,7 +158,7 @@
 						$sql4 = "UPDATE `rubriken` SET `bezeichnung` = '".$wert1[$r]."' WHERE rNR = '".$wert1[$u]."'";	
 						$query4 = $verb -> query($sql4);				
 						
-						$countChanges++;
+						$countChanges += $query4 -> rowCount();
 						
 					}
 					
@@ -187,7 +187,7 @@
 						$sql4 = "UPDATE `rubriken` SET `beschreibung` = '".$wert2[$r2]."' WHERE rNR = '".$wert2[$u2]."'";	
 						$query4 = $verb -> query($sql4);				
 						
-						$countChanges++;
+						$countChanges += $query4 -> rowCount();
 						
 					}
 										
@@ -214,7 +214,7 @@
 						$sql4 = "UPDATE `rubriken` SET `icon` = '".$wert1[$r]."' WHERE rNR = '".$wert1[$u]."'";	
 						$query4 = $verb -> query($sql4);				
 						
-						$countChanges++;
+						$countChanges += $query4 -> rowCount();
 						
 					}
 					
@@ -302,7 +302,7 @@
 			echo "
 			
 			<div class='mb-4 mt-1 text-success d-block'>
-				<h5>".$countChanges." / ".$countInsgesamt." Rubriken bearbeitet!</h5>
+				<h5>".$countChanges." Datensätze bearbeitet!</h5>
 			</div>			
 			
 			";
@@ -311,7 +311,7 @@
 			echo "
 			
 			<div class='mb-4 mt-1 text-danger d-block'>
-				<h5>".$countChanges." / ".$countInsgesamt." Rubriken bearbeitet!</h5>
+				<h5>".$countChanges." Datensätze bearbeitet!</h5>
 			</div>
 			
 			";			

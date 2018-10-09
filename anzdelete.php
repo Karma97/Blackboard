@@ -66,8 +66,46 @@
 
 <div class="container-fluid">
 	
+	<h1 class="mb-3">Anzeigen bearbeiten/einsehen und löschen</h1>
+  
+   <p class="text-dark mb-4 d-inline">
+   Frisch erstellte Anzeigen werden <p class="d-inline mt-0 mb-0 text-success">Grün</p> markiert!
+   <br>
+   Frisch bearbeitete Anzeigen werden <p class="d-inline mt-0 mb-0 text-primary">Blau</p> markiert!   
+   <br>
+   Anzeigen, welche bald gelöscht werden, werden <p class="d-inline mt-0 mb-0 text-danger">Rot</p> markiert!
+   </p> 
+   
 <form action="../anzeigen/bearbeiten" method="POST">
+
+<?php
 	
+	$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, anzeigen.updated_at, anzeigen.created_at, anzeigen.aNR, orte.PLZ, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING(PLZ) ORDER BY updated_at";
+	
+	$query = $verb -> query($abfrage);
+	$queryNumRows = $query -> fetchAll();
+	
+	if (count($queryNumRows) <= 0) {
+	
+		echo "Es gibt zurzeit keine Anzeigen! <button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
+		
+	} else {
+	
+	echo "
+	
+	<div class='form-group'>
+		<input type='text' class='form-control' id='searchAD' placeholder='nach Anzeige zum löschen/bearbeiten suchen'>
+	</div>
+	
+	<button class='btn btn-dark mb-3 mr-2' onclick='toggleBearbeitenModusAZ()' id='activateAnzeigenChanges' type='button'>Bearbeitungsmodus</button>
+	
+	<button class='btn btn-dark mb-3 d-none' id='submitAnzeigenChanges' type='submit'>Änderungen Speichern</button>
+	";
+	
+	setlocale(LC_ALL, 'de_DE.utf8');
+				
+?>
+
 <table class="table ml-auto mr-auto table-hover mb-0 table-responsive table-striped w-100 d-block d-md-table">
  <caption>Liste aller Anzeigen</caption>
   <thead class="thead-dark">
@@ -85,34 +123,179 @@
   </thead>                                       
   <tbody id="tbodyAD">
 			<?php
-			
-				$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, anzeigen.updated_at, anzeigen.created_at, anzeigen.aNR, orte.PLZ, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING(PLZ) ORDER BY updated_at";
-			
-				$query = $verb -> query($abfrage);
-				$queryNumRows = $query -> fetchAll();
-				
-				if (count($queryNumRows) <= 0) {
-					echo "Es gibt zurzeit keine Anzeigen! <button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
-				} else {
-				echo "
-				
-				<div class='form-group'>
-					<input type='text' class='form-control' id='searchAD' placeholder='nach Anzeige zum löschen/bearbeiten suchen'>
-				</div>
-				
-				<button class='btn btn-dark mb-3 mr-2' onclick='toggleBearbeitenModusAZ()' id='activateAnzeigenChanges' type='button'>Bearbeitungsmodus</button>
-				
-				<button class='btn btn-dark mb-3 d-none' id='submitAnzeigenChanges' type='submit'>Änderungen Speichern</button>
-				";
-				
-				setlocale(LC_ALL, 'de_DE.utf8');
 						
+			$countChanges = 0;
+			$countDeletes = 0;
+			
+			echo "<br>";
+			
+			if (isset($_POST["delete"])) {
+			
+				$wert = $_POST["delete"];
+				
+				$r = 1;
+				$u = 0;
+				
+				for ($i = 0; $i < (count($wert) / 2); $i++) {						
+					if ($wert[$r] == 1) {
+										
+						$sql2 = "DELETE FROM `r_besitzt_a` WHERE aNR = '".$wert[$u]."'";	
+						$query2 = $verb -> query($sql2);
+						
+						$sql1 = "DELETE FROM `anzeigen` WHERE aNR = '".$wert[$u]."'";	
+						$query1 = $verb -> query($sql1);				
+						
+						$countDeletes += $query1 -> rowCount();	
+						
+					} else {
+					
+					}
+					
+					$u += 2;					
+					$r = $u + 1;
+					
+				}				
+			}
+			
+			if (isset($_POST["changeBetreff"])) {
+			
+				$wert1 = $_POST["changeBetreff"];
+				
+				$r1 = 1;
+				$u1 = 0;
+				
+				for ($i = 0; $i < (count($wert1) / 2); $i++) {	
+										
+					$sql3 = "UPDATE `anzeigen` SET `betreff` = '".$wert1[$r1]."' WHERE aNR = '".$wert1[$u1]."'";	
+					$query3 = $verb -> query($sql3);				
+					
+					$countChanges += $query3 -> rowCount();
+					
+					$u1 += 2;					
+					$r1 = $u1 + 1;
+					
+				}				
+			}
+			
+			if (isset($_POST["changeBeschreibung"])) {
+			
+				$wert2 = $_POST["changeBeschreibung"];
+				
+				$r2 = 1;
+				$u2 = 0;			
+				
+				for ($e = 0; $e < (count($wert2) / 2); $e++) {
+				
+				$sql4 = "UPDATE `anzeigen` SET `beschreibung` = '".$wert2[$r2]."' WHERE aNR = '".$wert1[$u2]."'";	
+				$query4 = $verb -> query($sql4);				
+				
+				$countChanges += $query4 -> rowCount();
+				
+				$u2 += 2;					
+				$r2 = $u2 + 1;				
+				
+				}
+			}
+
+			if (isset($_POST["changeOrt"])) {
+				
+				$wert3 = $_POST["changeOrt"];
+				
+				$r3 = 1;
+				$u3 = 0;			
+				
+				for ($f = 0; $f < (count($wert3) / 2); $f++) {
+				
+				$sql5 = "UPDATE `anzeigen` SET `PLZ` = '".$wert3[$r3]."' WHERE aNR = '".$wert3[$u3]."'";					
+				$query5 = $verb -> query($sql5);
+				
+				$countChanges += $query5 -> rowCount();
+				
+				$u3 += 2;
+				$r3 = $u3 + 1;				
+				
+				}		
+			}
+				
+				if (isset($_POST["changeBeschreibung"]) or isset($_POST["changeBetreff"]) or isset($_POST["changeOrt"])) {
+					if ($countChanges === 1) {
+						echo "
+						
+						<div class='mb-2 mt-2 text-success d-block'>
+							<h5>".$countChanges." Anzeige bearbeitet!</h5>
+						</div>		
+						
+						";
+					} elseif ($countChanges > 1) {
+						
+						echo "
+						
+						<div class='mb-2 mt-2 text-success d-block'>
+							<h5>".$countChanges." Anzeigen bearbeitet!</h5>
+						</div>	
+						
+						";			
+						
+					} else {
+					
+						echo "
+						
+						<div class='mb-2 mt-2 text-danger d-block'>
+							<h5>".$countChanges." Anzeigen bearbeitet!</h5>
+						</div>
+						
+						";	
+						
+					}
+					
+					if ($countDeletes === 1) {
+						echo "
+						
+						<div class='mb-2 mt-2 text-success d-block'>
+							<h5>".$countDeletes." Anzeige gelöscht!</h5>
+						</div>		
+						
+						";
+					} elseif ($countDeletes > 1) {
+						
+						echo "
+						
+						<div class='mb-2 mt-2 text-success d-block'>
+							<h5>".$countDeletes." Anzeigen gelöscht!</h5>
+						</div>	
+						
+						";			
+						
+					} else {
+					
+						echo "
+						
+						<div class='mb-2 mt-2 text-danger d-block'>
+							<h5>".$countDeletes." Anzeigen gelöscht!</h5>
+						</div>
+						
+						";	
+						
+					}				
+				} else {
+				
+				}		
+				
 				$i = 1;
 						
 				foreach ($verb -> query($abfrage) as $row) {
 				
+			if ($row["created_at"] > date('Y-m-d h:i:s', strtotime('+12 days'))) {
+				echo "<tr ondblclick='toggleBearbeitenModusAZ()' class='table-danger'>";
+			} elseif ($row["created_at"] > date('Y-m-d h:i:s', strtotime('-1 hour'))) {
+				echo "<tr ondblclick='toggleBearbeitenModusAZ()' class='table-success'>";
+			} elseif ($row["updated_at"] > date('Y-m-d h:i:s', strtotime('-1 hour'))) {
+				echo "<tr ondblclick='toggleBearbeitenModusAZ()' class='table-primary'>";
+			} else {
+				echo "<tr ondblclick='toggleBearbeitenModusAZ()'>";
+			}	
+			
 					echo "
-					<tr ondblclick='toggleBearbeitenModusAZ()'>						
 					
 					<td>
 						".$row["aNR"]."
@@ -124,16 +307,18 @@
 						</div>
 						
 						<div class='changeinputshow'>
+							<input type='hidden' name='changeBetreff[]' value='".$row["aNR"]."'>
 							<input class='form-control form-control-sm mw-12em' value='".$row["betreff"]."' name='changeBetreff[]' type='text' placeholder='".$row["betreff"]."'>	
 						</div>
 					</td>
 					
-					<td>
+					<td class='beschreibungTD' id='beschreibungTD".$i."'>
 						<div class='changehide'>						
 							".$row["beschreibung"]."
 						</div>	
 						
 						<div class='changeinputshow'>
+							<input type='hidden' name='changeBeschreibung[]' value='".$row["aNR"]."'>
 							<textarea class='form-control form-control-sm mw-12em' name='changeBeschreibung[]' rows='1' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>						
 						</div>
 					</td>
@@ -144,8 +329,9 @@
 						</div>
 						
 						<div class='changeinputshow'>
-								<select autocomplete class='form-control form-control-sm mw-12em' name='changeOrt[]' id='selectOrt'>
-									<option value='' selected class='text-danger'>Unverändert</option>
+							<input type='hidden' name='changeOrt[]' value='".$row["aNR"]."'>
+								<select autocomplete class='form-control form-control-sm mw-12em' name='changeOrt[]'>
+									<option value='".$row["PLZ"]."' selected class='text-danger'>Unverändert</option>
 								
 							";
 											
@@ -162,12 +348,14 @@
 					</td>
 		
 					<td>
-						".date("d.m.Y, H:i", strtotime($row["updated_at"]))."
+						".date("d.m.Y, H:i", strtotime($row["created_at"]))."<br>
+						".date("d.m.Y, H:i")."
 					</td>								
 					
 					<td class='löschenChanges d-none'>
 						<div class='custom-control custom-checkbox'>
-							<input type='checkbox' name='deleteAnzeige[]' class='custom-control-input' id='defaultUnchecked".$i."'>
+							<input type='hidden' name='delete[]' value='".$row["aNR"]."'>
+							<input type='hidden' value='0' name='delete[]'><input type='checkbox' onclick='this.previousSibling.value=1-this.previousSibling.value' class='custom-control-input' id='defaultUnchecked".$i."'>
 							<label class='custom-control-label text-danger' for='defaultUnchecked".$i."'>Vorsicht!!</label>
 						</div>	
 					</td>
