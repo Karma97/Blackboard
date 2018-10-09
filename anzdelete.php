@@ -13,9 +13,7 @@
 	include 'includes/head.php'; 
 	
 ?>
-
 <body>
-	
 <?php 
 
 	include 'includes/pacman.php';
@@ -66,8 +64,144 @@
 					
 ?>
 
-	Anzeigen löschen folgt...
+<div class="container-fluid">
 	
+<form action="../anzeigen/bearbeiten" method="POST">
+	
+<table class="table ml-auto mr-auto table-hover mb-0 table-responsive table-striped w-100 d-block d-md-table">
+ <caption>Liste aller Anzeigen</caption>
+  <thead class="thead-dark">
+    <tr>
+		<th scope="col">ID</th>
+		<th scope="col">Betreff</th>           
+		<th scope="col">Beschreibung</th>     
+		<th scope="col" class="löschenChanges">Ort</th>
+		<th scope="col" class="löschenChanges d-none">
+			<input type='text' class='form-control form-control-sm mw-12em' id='searchADOrt' placeholder='Orte filtern'>
+		</th>
+		<th scope="col">Zuletzt bearbeitet</th>
+		<th scope="col" class="löschenChanges d-none">Löschen?</th>
+    </tr>                                        
+  </thead>                                       
+  <tbody id="tbodyAD">
+			<?php
+			
+				$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, anzeigen.updated_at, anzeigen.created_at, anzeigen.aNR, orte.PLZ, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING(PLZ) ORDER BY updated_at";
+			
+				$query = $verb -> query($abfrage);
+				$queryNumRows = $query -> fetchAll();
+				
+				if (count($queryNumRows) <= 0) {
+					echo "Es gibt zurzeit keine Anzeigen! <button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
+				} else {
+				echo "
+				
+				<div class='form-group'>
+					<input type='text' class='form-control' id='searchAD' placeholder='nach Anzeige zum löschen/bearbeiten suchen'>
+				</div>
+				
+				<button class='btn btn-dark mb-3 mr-2' onclick='toggleBearbeitenModusAZ()' id='activateAnzeigenChanges' type='button'>Bearbeitungsmodus</button>
+				
+				<button class='btn btn-dark mb-3 d-none' id='submitAnzeigenChanges' type='submit'>Änderungen Speichern</button>
+				";
+				
+				setlocale(LC_ALL, 'de_DE.utf8');
+						
+				$i = 1;
+						
+				foreach ($verb -> query($abfrage) as $row) {
+				
+					echo "
+					<tr ondblclick='toggleBearbeitenModusAZ()'>						
+					
+					<td>
+						".$row["aNR"]."
+					</td>
+					
+					<td>
+						<div class='changehide'>						
+							".$row["betreff"]."						
+						</div>
+						
+						<div class='changeinputshow'>
+							<input class='form-control form-control-sm mw-12em' value='".$row["betreff"]."' name='changeBetreff[]' type='text' placeholder='".$row["betreff"]."'>	
+						</div>
+					</td>
+					
+					<td>
+						<div class='changehide'>						
+							".$row["beschreibung"]."
+						</div>	
+						
+						<div class='changeinputshow'>
+							<textarea class='form-control form-control-sm mw-12em' name='changeBeschreibung[]' rows='1' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>						
+						</div>
+					</td>
+					
+					<td>
+						<div class='changehide'>						
+							".$row["Bezeichnung"]."						
+						</div>
+						
+						<div class='changeinputshow'>
+								<select autocomplete class='form-control form-control-sm mw-12em' name='changeOrt[]' id='selectOrt'>
+									<option value='' selected class='text-danger'>Unverändert</option>
+								
+							";
+											
+								$sql2 = 'SELECT PLZ, Bezeichnung FROM orte ORDER BY Bezeichnung';	
+								$query2 = $verb -> query($sql2);
+								
+								foreach ($query2 as $row2) {
+									echo "<option value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+								}		
+										
+							echo "			
+								</select>	
+						</div>		
+					</td>
+		
+					<td>
+						".date("d.m.Y, H:i", strtotime($row["updated_at"]))."
+					</td>								
+					
+					<td class='löschenChanges d-none'>
+						<div class='custom-control custom-checkbox'>
+							<input type='checkbox' name='deleteAnzeige[]' class='custom-control-input' id='defaultUnchecked".$i."'>
+							<label class='custom-control-label text-danger' for='defaultUnchecked".$i."'>Vorsicht!!</label>
+						</div>	
+					</td>
+						
+					</tr>
+					
+					";
+					
+					$i++;
+					
+				}				
+				
+				$verb = null;
+				
+				}
+			?>	
+			</tbody>
+		</table>
+	</form>
+</div>
+						<!--<div class='card mb-3'>
+						<div class='card-header bg-dark text-white'>
+						".$row["betreff"]."
+						</div>
+					<div class='card-body border-dark'>
+					".$row["beschreibung"]."
+						<br><br>
+						Zuletzt bearbeitet am 
+						".date("d.", strtotime($row["updated_at"]))."
+						".$monatsnamen[$monat]." 
+						".date("Y", strtotime($row["updated_at"])).",  
+						".date("H", strtotime($row["updated_at"])).":00 Uhr<br>
+					</div>
+					</div>-->
 </div>
 </div>
 

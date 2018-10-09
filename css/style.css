@@ -25,9 +25,17 @@ h1, h2, h3, h4, h5 {
 	font-size: 29px;
 }
 
+.mw-12em {
+	min-width: 12em;
+}
+
 .center {
     padding: 70px 0;
 	margin-top: 50px;
+}
+
+.custom-control-label:before {
+	background-color: white !important; 
 }
 
 .nohover, .nohover:hover {

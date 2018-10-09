@@ -99,6 +99,7 @@
 			  <div class="collapse show" id="anzeigenEinstellungenCollapse">
 				<div class="card-body">
 					<p class="mb-1"><a href="anzeigen/erstellen">Anzeige erstellen</a></p>
+					<p class="mb-1"><a href="anzeigen/bearbeiten">Anzeigen bearbeiten</a></p>
 					<p class="mb-1"><a href="anzeigen/löschen">Anzeige löschen</a></p>
 					<p class="mb-1"><a href="anzeigen/löschen">Anzeigen einsehen</a></p>
 				</div>

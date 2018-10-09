@@ -114,7 +114,7 @@
 		</div>
 		
 		";	
-	 }
+		}
 	}
 	
 	?>
@@ -268,7 +268,7 @@
 					</div>
 					
 					</td>
-					<td>".date("d.n.Y, H:i", strtotime($row["updated_at"]))." Uhr</td>
+					<td>".date("d.n.Y, H:i", strtotime($row["updated_at"]))."</td>
 					<td class='faa-parent animated-hover'><i class='faa-slow faa-horizontal ".$row["icon"]."'></i></td>
 					<td>
 					

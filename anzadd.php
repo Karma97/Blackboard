@@ -56,7 +56,7 @@
   
   <p class="text-dark mb-4">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.<br>Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.<br>Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.</p>
   
-  <form action="../anzeigen/hinzufügen" id="anzeigenForm" method="POST">
+  <form action="../anzeigen/erstellen" id="anzeigenForm" method="POST">
 	<div class="form-group">
 		<label for="titel">Betreff der Anzeige</label>
 		<input autofocus type="text" class="form-control" name="titel" required id="titel" placeholder="">
