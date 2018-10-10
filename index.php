@@ -169,8 +169,6 @@
 	</div>
 
 	<?php 
-	
-		$footer_variante = 1;
 		
 		switch ($footer_variante) {
 			case $footer_variante === 1:
@@ -189,8 +187,6 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
-		
-		$script_variante = 1;
 		
 		switch ($script_variante) {
 			case $script_variante === 1:

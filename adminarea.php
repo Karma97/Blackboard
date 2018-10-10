@@ -101,7 +101,7 @@
 					<p class="mb-1"><a href="anzeigen/erstellen">Anzeige erstellen</a></p>
 					<p class="mb-1"><a href="anzeigen/bearbeiten">Anzeigen bearbeiten</a></p>
 					<p class="mb-1"><a href="anzeigen/löschen">Anzeige löschen</a></p>
-					<p class="mb-1"><a href="anzeigen/löschen">Anzeigen einsehen</a></p>
+					<p class="mb-1"><a href="anzeigen/einsehen">Anzeigen einsehen</a></p>
 				</div>
 			  </div>
 			</div>
@@ -205,24 +205,25 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
-	
-	switch ($script_variante) {
-		case $script_variante === 1:
-			include 'includes/scripts/scripts_1.php';
-			break;
-		case $script_variante === 2:
-			include 'includes/scripts/scripts_2.php';
-			break;
-		case $script_variante === 3:
-			include 'includes/scripts/scripts_3.php';
-			break;
-		case $script_variante === 4:
-			include 'includes/scripts/scripts_4.php';
-			break;
-		case $script_variante === 5:
-			include 'includes/scripts/scripts_5.php';
-			break;
-	}
+		
+		switch ($script_variante) {
+			case $script_variante === 1:
+				include 'includes/scripts/scripts_1.php';
+				break;
+			case $script_variante === 2:
+				include 'includes/scripts/scripts_2.php';
+				break;
+			case $script_variante === 3:
+				include 'includes/scripts/scripts_3.php';
+				break;
+			case $script_variante === 4:
+				include 'includes/scripts/scripts_4.php';
+				break;
+			case $script_variante === 5:
+				include 'includes/scripts/scripts_5.php';
+				break;
+		}
+		
 	
 	ob_end_flush();
 ?>

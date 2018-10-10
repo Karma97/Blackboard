@@ -17,8 +17,6 @@
 		
 		require 'includes/cookiecheck.php';
 		
-		$nav_variante = 2;
-		
 		switch ($nav_variante) {
 			case $nav_variante === 1:
 				include 'includes/nav/nav_1.php';
@@ -105,8 +103,6 @@
 		</div>
 		</div>
 	<?php 
-	
-		$footer_variante = 2;
 		
 		switch ($footer_variante) {
 			case $footer_variante === 1:
@@ -123,26 +119,6 @@
 				break;
 			case $footer_variante === 5:
 				include 'includes/footer/footer_5.php';
-				break;
-		}
-		
-		$script_variante = 2;
-		
-		switch ($script_variante) {
-			case $script_variante === 1:
-				include 'includes/scripts/scripts_1.php';
-				break;
-			case $script_variante === 2:
-				include 'includes/scripts/scripts_2.php';
-				break;
-			case $script_variante === 3:
-				include 'includes/scripts/scripts_3.php';
-				break;
-			case $script_variante === 4:
-				include 'includes/scripts/scripts_4.php';
-				break;
-			case $script_variante === 5:
-				include 'includes/scripts/scripts_5.php';
 				break;
 		}
 		

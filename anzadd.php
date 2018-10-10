@@ -17,8 +17,6 @@
 		
 		require 'includes/cookiecheck.php';
 		
-		$nav_variante = 2;
-		
 		switch ($nav_variante) {
 			case $nav_variante === 1:
 				include 'includes/nav/nav_1.php';
@@ -50,11 +48,11 @@
 			<?php
 			
 			} else {
-			
+				
 		?>
   <h1 class="mt-1">Anzeige aufgeben</h1>
   
-  <p class="text-dark mb-4">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.<br>Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.<br>Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.</p>
+  <p class="text-dark mb-4">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.<br>Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.<br>Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.<br><p class="d-inline mt-1 mb-0 text-danger">Ihre Anzeige wird nach 2 Wochen automatisch gelöscht!</p></p>
   
   <form action="../anzeigen/erstellen" id="anzeigenForm" method="POST">
 	<div class="form-group">
@@ -237,8 +235,6 @@
   </div>
 	<?php 
 	}
-	
-		$footer_variante = 2;
 		
 		switch ($footer_variante) {
 			case $footer_variante === 1:
@@ -256,9 +252,7 @@
 			case $footer_variante === 5:
 				include 'includes/footer/footer_5.php';
 				break;
-		}		
-		
-		$script_variante = 2;
+		}
 		
 		switch ($script_variante) {
 			case $script_variante === 1:
