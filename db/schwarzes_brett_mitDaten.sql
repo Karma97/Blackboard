@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 06. Okt 2018 um 23:26
+-- Erstellungszeit: 11. Okt 2018 um 16:55
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -40,6 +40,16 @@ CREATE TABLE `anzeigen` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Daten für Tabelle `anzeigen`
+--
+
+INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES
+(25, 1, 'Verkaufe Auto', 'Lamborghini', 26382, '2018-10-11 13:02:36', '2018-10-11 13:02:36'),
+(26, 1, 'Verkaufe Laufband', 'Neues Laufband für 200€ Verhandlungspreis!', 25813, '2018-10-11 13:07:00', '2018-10-11 13:07:00'),
+(27, 2, 'Verkaufe DAT Adams neues Album', '20€ Verhandlungsbasis', 26382, '2018-10-11 13:13:18', '2018-10-11 13:13:18'),
+(28, 2, 'Verkaufe DAT Adams neues Album', '20€ Verhandlungsbasis!', 26382, '2018-10-11 13:16:36', '2018-10-11 13:16:36');
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +72,7 @@ CREATE TABLE `bilder` (
 
 CREATE TABLE `inserent` (
   `iNR` int(11) NOT NULL,
+  `kundennummer` varchar(15) NOT NULL,
   `identifier_token` varchar(700) NOT NULL,
   `nachname` varchar(100) NOT NULL,
   `vorname` varchar(100) NOT NULL,
@@ -77,8 +88,9 @@ CREATE TABLE `inserent` (
 -- Daten für Tabelle `inserent`
 --
 
-INSERT INTO `inserent` (`iNR`, `identifier_token`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES
-(1, 'rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK', 'Admin', 'S_B', '$2y$10$IMZgfoODrIo9eKEcl3Ijbuik75swhM2O7qnjTTnxLoBByu1GR49iW', 's_b_admin@example.com', '9999-09-09', 1, '2018-10-06 20:44:58', '2018-10-06 20:39:42');
+INSERT INTO `inserent` (`iNR`, `kundennummer`, `identifier_token`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES
+(1, 'SB#1234567889', 'rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK', 'Admin', 'S_B', '$2y$10$IMZgfoODrIo9eKEcl3Ijbuik75swhM2O7qnjTTnxLoBByu1GR49iW', 's_b_admin@example.com', '9999-09-09', 1, '2018-10-11 12:39:50', '2018-10-06 20:39:42'),
+(2, 'SB#1824395773', 'Tp1mv4sln2lQsS#1Q8tcYPzU#34TC6szYm2Epf1oS2GCNfw%H%7A&jcBEBy6wpz75nVcwXxudQx5HPyrqjWzZiBw%QiL=M%W3H1F4G7Kfj&be=eKHbSpjOAPHkK8OB38u2OtFuz8~jsVZPFoE9tM4o0wryox4dVag=WX&WbpO86WK%~YqBFv4mMWJaUKDmbduUiQtHJ6ljEx~OHLmd=AUU6Z0H1~2w005LPKfAnMigkUwe3l4z9tjSa=rfYNY4oTvR17P4kSfAvBsmrEhU3XZZSMq=yeiVLG=xLIpKOg7lMEc5hypAo#6AfKuOaCHSrSj&~d47qYg9AxBfwCy5=4sL4~qC6JcMXbI&HuVOtTV4McgVTpNWrvKNRtyl35NISI=Nq8HtWG=MsWERbExm1YHbuzPO4Bzd1WB%dyi5=BNxlXnKuucuv#~V2Wcqpqj1DUg=4sbaBc=3%6KXSkRyN2te0Q#vW3uTe&5mdRegOejsBYfV&vh~HX', 'Hüls', 'Eike', '$2y$10$OX0GCC8dlF/0OjT2sREp0.GzrkMVo/9RMcVWlNvyPmppXfM.6CG7q', 'eike.huels@gmx.de', '1997-12-20', 1, '2018-10-11 13:01:00', '2018-10-08 16:27:42');
 
 -- --------------------------------------------------------
 
@@ -530,7 +542,7 @@ INSERT INTO `rubriken` (`rNR`, `bezeichnung`, `beschreibung`, `icon`, `updated_a
 (8, 'Computer', '', 'fas fa-laptop', '2018-09-22 17:48:04', '2018-09-22 17:48:04'),
 (9, 'Videospiele', '', 'fas fa-gamepad', '2018-09-22 17:48:04', '2018-09-22 17:48:04'),
 (10, 'Dekoration', '', 'fas fa-air-freshener', '2018-09-22 17:48:04', '2018-09-22 17:48:04'),
-(11, 'Spielzeuge', 'Spielzeuge für jedermann!', 'fas fa-space-shuttle', '2018-10-03 00:28:58', '2018-09-26 20:06:56'),
+(11, 'Spielzeuge', 'Spielzeuge für jedermann!', 'fas fa-space-shuttle', '2018-10-08 16:20:00', '2018-09-26 20:06:56'),
 (12, 'Autos', 'Gebrauchte Autos für jeden Autoliebhaber', 'fas fa-car', '2018-10-03 00:29:00', '2018-09-26 20:15:09'),
 (13, 'Lebensmittel', 'Für jeden Lebensmittel- und Essensliebhaber', 'fas fa-cookie-bite', '2018-10-03 00:29:02', '2018-10-02 17:44:18'),
 (14, 'Transaktionen', 'Für Tauschaktionen per Transaktion. Ganz Einfach das Geld überweisen lassen.', 'fab fa-paypal', '2018-10-03 01:14:22', '2018-10-03 01:12:11');
@@ -547,6 +559,17 @@ CREATE TABLE `r_besitzt_a` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `r_besitzt_a`
+--
+
+INSERT INTO `r_besitzt_a` (`rNR`, `aNR`, `updated_at`, `created_at`) VALUES
+(5, 27, '2018-10-11 13:13:18', '2018-10-11 13:13:18'),
+(5, 28, '2018-10-11 13:16:36', '2018-10-11 13:16:36'),
+(6, 26, '2018-10-11 13:07:00', '2018-10-11 13:07:00'),
+(7, 26, '2018-10-11 13:07:00', '2018-10-11 13:07:00'),
+(12, 25, '2018-10-11 13:02:36', '2018-10-11 13:02:36');
 
 --
 -- Indizes der exportierten Tabellen
@@ -571,7 +594,7 @@ ALTER TABLE `bilder`
 -- Indizes für die Tabelle `inserent`
 --
 ALTER TABLE `inserent`
-  ADD PRIMARY KEY (`iNR`,`identifier_token`);
+  ADD PRIMARY KEY (`iNR`,`kundennummer`,`identifier_token`);
 
 --
 -- Indizes für die Tabelle `news`
@@ -607,7 +630,7 @@ ALTER TABLE `r_besitzt_a`
 -- AUTO_INCREMENT für Tabelle `anzeigen`
 --
 ALTER TABLE `anzeigen`
-  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT für Tabelle `bilder`
