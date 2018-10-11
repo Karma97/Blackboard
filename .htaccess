@@ -15,9 +15,10 @@ RewriteRule ^anzeigen/bearbeiten?$ anzdelete.php
 RewriteRule ^anzeigen/löschen?$ anzdelete.php
 RewriteRule ^anzeigen/einsehen?$ anzeigen.php?rNR=0
 
-RewriteRule ^anzeigen/([0-900000]+) anzeigen.php?rNR=$1
+RewriteRule ^anzeigen/([0-90000000]+) anzeigen.php?rNR=$1
 RewriteRule ^anzeigen/alle?$ anzeigen.php?rNR=0
 
+RewriteRule ^anzeigen/anzeige-([0-90000000]+) anzeigeneinzeln.php?aNR=$1
 
 RewriteRule ^datenschutz?$  datenschutz.php
 

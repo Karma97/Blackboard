@@ -319,7 +319,7 @@
 						
 						<div class='changeinputshow'>
 							<input type='hidden' name='changeBeschreibung[]' value='".$row["aNR"]."'>
-							<textarea class='form-control form-control-sm mw-12em' name='changeBeschreibung[]' rows='1' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>						
+							<textarea class='form-control form-control-sm mw-12em' name='changeBeschreibung[]' rows='2' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>						
 						</div>
 					</td>
 					
@@ -348,8 +348,7 @@
 					</td>
 		
 					<td>
-						".date("d.m.Y, H:i", strtotime($row["created_at"]))."<br>
-						".date("d.m.Y, H:i")."
+						".date("d.m.Y, H:i", strtotime($row["created_at"]))."
 					</td>								
 					
 					<td class='löschenChanges d-none'>
@@ -368,7 +367,6 @@
 					
 				}				
 				
-				$verb = null;
 				
 				}
 			?>	
@@ -407,6 +405,8 @@
 	
 		}
 	}	
+	
+	require_once 'includes/loeschencheck.php';
 
 	switch ($footer_variante) {
 			case $footer_variante === 1:
@@ -425,7 +425,9 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
+		
 	require_once 'includes/loeschencheck.php';
+
 	switch ($script_variante) {
 		case $script_variante === 1:
 			include 'includes/scripts/scripts_1.php';

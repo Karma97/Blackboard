@@ -41,7 +41,7 @@ var elm1 = $("#register_item_wrapper");
 var elm2 = $("#login_item_wrapper");
 
 
-function myFunction(x) {
+function myFunction44(x) {
     if (x.matches) { 
        
 		elm1.hammer().on("swipeleft swiperight", function() {
@@ -66,6 +66,6 @@ function myFunction(x) {
 }
 
 var x = window.matchMedia("(max-width: 700px)");
-myFunction(x);
-x.addListener(myFunction);
+myFunction44(x);
+x.addListener(myFunction44);
 

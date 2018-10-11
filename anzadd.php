@@ -186,6 +186,14 @@
 			$query3 = $verb -> query($sql3);
 		}
 		
+		$sql5 = "SELECT * FROM anzeigen WHERE inR = '".$_SESSION["iNR"]."'"; 
+		$query5 = $verb -> query($sql5);	
+		$countNumRows2 = $query5 -> fetchAll();		
+		$countNumRows2total = count($countNumRows2);
+		
+		setcookie("anzahl_aktuelle_anzeigen", $countNumRows2total, time() + ( 365 * 24 * 60 * 60), "/");
+
+				
 		$fertig = "fertig";
 		
 		}
@@ -207,7 +215,7 @@
 	echo "
 	
 	<div class='text-success mt-4 mb-2'>
-		<h5>Anzeige aufgegeben! <a href='anzeigen/anzeige".$aNR."'>Jetzt einsehen</a></h5>
+		<h5>Anzeige aufgegeben! <a href='../anzeigen/anzeige".$aNR."'>Jetzt einsehen</a></h5>
 	</div>
 	
 	";
@@ -222,7 +230,7 @@
 	echo "
 	
 	<div class='text-danger mt-4 mb-2'>
-		<h5>Die Anzeige ist bereits vorhanden! <a href='anzeigen/anzeige".$aNR."'>Jetzt einsehen</a></h5>
+		<h5>Die Anzeige ist bereits vorhanden! <a href='../anzeigen/anzeige".$aNR."'>Jetzt einsehen</a></h5>
 	</div>
 	
 	";
@@ -253,7 +261,9 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
+		
 		require_once 'includes/loeschencheck.php';
+		
 		switch ($script_variante) {
 			case $script_variante === 1:
 				include 'includes/scripts/scripts_1.php';

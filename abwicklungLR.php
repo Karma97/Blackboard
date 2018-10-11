@@ -33,8 +33,19 @@
 	
 	include 'includes/head.php'; 
 	
-	function generateRandomString($length) { 
+function generateRandomString($length) { 
 		$characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%&=#~";
+		$charsLength = strlen($characters) -1;
+		$string = "";
+			for($i = 0; $i < $length; $i++){
+				$randNum = mt_rand(0, $charsLength);
+				$string .= $characters[$randNum];
+			}
+		return $string;
+}
+
+function generateKundennummer($length) { 
+		$characters = "123456789";
 		$charsLength = strlen($characters) -1;
 		$string = "";
 			for($i = 0; $i < $length; $i++){
@@ -126,6 +137,7 @@
 					}
 										
 					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+						
 						$registerEmailUnvalid = true;
 						?>
 						
@@ -146,6 +158,7 @@
 					$queryNumRows = $query2 -> fetchAll();
 					
 					if (count($queryNumRows) > 0 && count($queryNumRows) < 2) {
+						
 						$registerAccountVorhanden = true;
 						?>
 						
@@ -202,6 +215,35 @@
 						
 					);
 					
+					$kundennummer = generateKundennummer(10);
+					$kundennummer2 = "SB#".$kundennummer."";
+					echo $kundennummer2;
+					
+					do {
+					
+					$sql6 = "SELECT * FROM `inserent` WHERE email = \"".$email."\" OR passwort = \"".$pwd_hash."\"";
+					
+					foreach ($verb -> query($sql6) as $row) {
+						$dbnewiNR = $row["iNR"];
+					}
+					
+					$kundennummer = generateKundennummer(10);
+					$kundennummer2 = "SB#".$kundennummer."";
+					
+					$sql7 = "UPDATE `inserent` SET `kundennummer` = '".$kundennummer2."' WHERE iNR = '".$dbnewiNR."'";
+					$query7 = $verb -> query($sql7);	
+					
+					$sql8 = "SELECT * FROM `inserent` WHERE `kundennummer` = '".$kundennummer2."'";
+					$query8 = $verb -> query($sql8);
+					$queryNumRows8 = $query8 -> fetchAll();
+					
+					} while (
+						
+						count($queryNumRows8) > 1
+						
+					);					
+					
+					
 					?>
 					
 						<h4><p class='mt-3 text-success'>Erfolgreich registriert.</p></h4>
@@ -243,7 +285,8 @@
 									$_SESSION['iNR'] = $row["iNR"];
 									$_SESSION['email'] = $row["email"];
 									$_SESSION['gebDatum'] = $row["gebdatum"];
-									$_SESSION['news'] = $row["newsletter"];									
+									$_SESSION['news'] = $row["newsletter"];		
+									$_SESSION['kundennummer'] = $row["kundennummer"];									
 									$_SESSION['identifier_token'] = $row["identifier_token"];
 								}
 							} else {
@@ -253,7 +296,7 @@
 								}
 								
 								setcookie("identifier_token", $identifier_token, time() + ( 365 * 24 * 60 * 60), "/");
-							
+								
 							}
 					
 							$passwortverify = true;
@@ -335,7 +378,9 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
+		
 		require_once 'includes/loeschencheck.php';
+		
 		switch ($script_variante) {
 			case $script_variante === 1:
 				include 'includes/scripts/scripts_1.php';

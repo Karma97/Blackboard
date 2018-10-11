@@ -29,6 +29,14 @@ h1, h2, h3, h4, h5 {
 	min-width: 12em;
 }
 
+.buttonpadding {
+	padding-top: 0.5%;
+}
+
+a.anzeignenHref {
+	text-decoration: none;
+}
+
 .center {
     padding: 70px 0;
 	margin-top: 50px;
@@ -56,7 +64,7 @@ form input {
 	padding: 15px 0px;
 }
 
-.admincard, .accountcard {
+.admincard, .accountcard, .anzeigencard {
 	min-height: 80vh;
 }
 
@@ -119,11 +127,15 @@ h1.error-h1 {
 	width: 49%;
 	display: inline-block;
 }
+}
 
 @media screen and (max-width: 700px) {
 	.rubrikenRow {
 	width: 100%;
 	display: inline-block;
+}
+.buttonpadding {
+	padding-top: 1%;
 }
 .rubrikenContainer {
 	text-align: left;

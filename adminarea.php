@@ -112,13 +112,13 @@
 		 <div class="col-sm mb-4">
 			<div class="card">
 				<div class="card-header bg-dark text-white" data-toggle="collapse" data-target="#einstellung1EinstellungenCollapse" aria-expanded="false" aria-controls="einstellung1EinstellungenCollapse" onclick="collapseItem('#einstellung1EinstellungenCollapse', '#einstellung1EinstellungenCollapseIcon')">
-				<i class="fas fa-chevron-circle-up iconCollapseAll" id="einstellung1EinstellungenCollapseIcon"></i> &nbsp;&nbsp; Einstellungen folgen..
+				<i class="fas fa-chevron-circle-up iconCollapseAll" id="einstellung1EinstellungenCollapseIcon"></i> &nbsp;&nbsp; Newseinstellungen
 				</div>
 			  <div class="collapse show" id="einstellung1EinstellungenCollapse">
 				<div class="card-body">
-					<p class="mb-1"><a href="">Einstellung 1</a></p>
-					<p class="mb-1"><a href="">Einstellung 2</a></p>
-					<p class="mb-1"><a href="">Einstellung 3</a></p>
+					<p class="mb-1"><a href="">News erstellen</a></p>
+					<p class="mb-1"><a href="">News bearbeiten</a></p>
+					<p class="mb-1"><a href="">News löschen</a></p>
 				</div>
 			  </div>
 			</div>
@@ -206,7 +206,9 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
+		
 		require_once 'includes/loeschencheck.php';
+		
 		switch ($script_variante) {
 			case $script_variante === 1:
 				include 'includes/scripts/scripts_1.php';

@@ -57,6 +57,9 @@
 	<div class="card-body">
 		<?php
 		
+		
+
+		
 			$abfrage = "SELECT * FROM inserent WHERE identifier_token = '".$_SESSION['identifier_token']."' AND iNR = '".$_SESSION['iNR']."'";	
 			$query2 = $verb -> query($abfrage);	
 			
@@ -73,7 +76,7 @@
 							</div>
 							<div class='card-body'>
 							
-								Kundennummer: ".$row["iNR"]."<br><br>
+								Kundennummer: ".$_SESSION['kundennummer']."<br><br>
 								
 								Vorname: ".$row["vorname"]."<br>
 								Nachname: ".$row["nachname"]."<br>
@@ -116,9 +119,35 @@
 					<div class='card-header bg-dark text-white'>
 					";
 					
+				$abfrage4 = "SELECT * FROM anzeigen WHERE iNR = '".$_SESSION["iNR"]."'";	
+				$query4 = $verb -> query($abfrage4);	
+				$countNumRows = $query4 -> fetchAll();
+				
+				$löschung = false;		
+				
+				if (count($countNumRows) == $_COOKIE["anzahl_aktuelle_anzeigen"]) {
+					
+					$löschung = false;
+					
+				} else {			
+				
+					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen"] - count($countNumRows);
+					$löschung = true;
+					
+					setcookie("anzahl_aktuelle_anzeigen", count($countNumRows), time() + ( 365 * 24 * 60 * 60), "/");
+					
+				}
+					
+					
 				if (count($queryNumRows) > 0)  {
-						
-				echo "Meine Anzeigen (".count($queryNumRows)." insgesamt)
+				
+				echo "Meine Anzeigen (".count($queryNumRows)." insgesamt) "; 
+				
+				if ($löschung == true) {  
+					echo "&nbsp;&nbsp; <p class='d-inline text-danger'>".$countlöschunganzeigen." Ihrer Anzeige/n wurden wegen Verstößung von Richtlinien oder der Zeitüberschreitung von 2 Wochen gelöscht!</p>"; 
+				}
+				
+				echo "
 					</div>
 					<div class='card-body'>
 				";
@@ -147,7 +176,27 @@
 				echo "</div>";
 				
 			} else {
-						echo "Keine Anzeigen vorhanden! <a href='../anzeigen/erstellen'>Jetzt Anzeige aufgeben</a>";
+				
+				if (count($countNumRows) == $_COOKIE["anzahl_aktuelle_anzeigen"]) {
+					
+					$löschung = false;
+					
+				} else {			
+				
+					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen"] - count($countNumRows);
+					$löschung = true;
+					
+					setcookie("anzahl_aktuelle_anzeigen", count($countNumRows), time() + ( 365 * 24 * 60 * 60), "/");
+					
+				}
+				
+				if ($löschung == true) {  
+					echo "Keine Anzeigen vorhanden!&nbsp;&nbsp; <a href='../anzeigen/erstellen'><button class='btn btn-light'>Jetzt Anzeige aufgeben</button></a> &nbsp;&nbsp; <p class='d-inline text-danger'>".$countlöschunganzeigen." Ihrer Anzeige/n wurden wegen Verstößung von Richtlinien oder der Zeitüberschreitung von 2 Wochen gelöscht!</p>"; 
+				} else {
+					echo "Keine Anzeigen vorhanden!&nbsp;&nbsp; <a href='../anzeigen/erstellen'><button class='btn btn-light'>Jetzt Anzeige aufgeben</button></a>";
+				}		
+				
+				
 			}
 			}
 		?>
@@ -175,7 +224,9 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
+		
 		require_once 'includes/loeschencheck.php';
+		
 		switch ($script_variante) {
 			case $script_variante === 1:
 				include 'includes/scripts/scripts_1.php';

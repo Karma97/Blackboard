@@ -84,6 +84,8 @@ Wenn du einen Kommentar auf unserer Website schreibst, kann das eine Einwilligun
 				break;
 		}
 		
+		require_once 'includes/loeschencheck.php';
+		
 		ob_end_flush();
 	?>
 

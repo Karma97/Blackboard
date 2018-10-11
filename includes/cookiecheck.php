@@ -34,6 +34,7 @@ if (isset($_COOKIE["identifier_token"])) {
 				$_SESSION['vorname'] = $row["vorname"];
 				$_SESSION['nachname'] = $row["nachname"];
 				$_SESSION['iNR'] = $row["iNR"];
+				$_SESSION['kundennummer'] = $row["kundennummer"];
 				$_SESSION['identifier_token'] = $row["identifier_token"];
 				$_SESSION['email'] = $row["email"];
 				$_SESSION['gebDatum'] = $row["gebdatum"];
