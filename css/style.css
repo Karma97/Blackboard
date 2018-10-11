@@ -56,8 +56,12 @@ form input {
 	padding: 15px 0px;
 }
 
-.admincard {
+.admincard, .accountcard {
 	min-height: 80vh;
+}
+
+.d-hidden {
+	visibility: hidden;
 }
 
 #error-container {

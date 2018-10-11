@@ -187,6 +187,8 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
+		require_once 'includes/loeschencheck.php';	
+
 		
 		switch ($script_variante) {
 			case $script_variante === 1:

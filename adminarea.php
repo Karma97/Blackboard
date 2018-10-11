@@ -87,6 +87,7 @@
 					<p class="mb-1"><a href="rubriken/erstellen">Rubrik erstellen</a></p>
 					<p class="mb-1"><a href="rubriken/bearbeiten">Rubrik bearbeiten</a></p>
 					<p class="mb-1"><a href="rubriken/einsehen">Rubriken einsehen</a></p>
+					<p class="mb-1 d-hidden">platzhalter</p>
 				</div>
 			  </div>
 			</div>
@@ -205,7 +206,7 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
-		
+		require_once 'includes/loeschencheck.php';
 		switch ($script_variante) {
 			case $script_variante === 1:
 				include 'includes/scripts/scripts_1.php';

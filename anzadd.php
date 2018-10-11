@@ -39,7 +39,7 @@
   <div class="main">
  <div class="container-fluid mt-3">
  		<?php
-			if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {#
+			if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
 			header("Location: ../startseite");
 			?>
 			
@@ -52,9 +52,9 @@
 		?>
   <h1 class="mt-1">Anzeige aufgeben</h1>
   
-  <p class="text-dark mb-4">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.<br>Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.<br>Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.<br><p class="d-inline mt-1 mb-0 text-danger">Ihre Anzeige wird nach 2 Wochen automatisch gelöscht!</p></p>
+  <p class="text-dark mt-0 mb-0">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.</p><p class="text-dark mt-0 mb-0">Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.</p><p class="text-dark mt-0 mb-0">Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.</p><br><p class="d-inline mt-0 mb-0 text-danger">Ihre Anzeige wird nach 2 Wochen automatisch gelöscht!</p>
   
-  <form action="../anzeigen/erstellen" id="anzeigenForm" method="POST">
+  <form action="../anzeigen/erstellen" id="anzeigenForm" class="mt-4" method="POST">
 	<div class="form-group">
 		<label for="titel">Betreff der Anzeige</label>
 		<input autofocus type="text" class="form-control" name="titel" required id="titel" placeholder="">
@@ -253,7 +253,7 @@
 				include 'includes/footer/footer_5.php';
 				break;
 		}
-		
+		require_once 'includes/loeschencheck.php';
 		switch ($script_variante) {
 			case $script_variante === 1:
 				include 'includes/scripts/scripts_1.php';
