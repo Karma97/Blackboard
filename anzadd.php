@@ -257,7 +257,7 @@
 			case $footer_variante === 4:
 				include 'includes/footer/footer_4.php';
 				break;
-			case $footer_variante === 5:
+				case $footer_variante === 5:
 				include 'includes/footer/footer_5.php';
 				break;
 		}

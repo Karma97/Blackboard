@@ -120,12 +120,93 @@ h1.error-h1 {
 	transform: rotate(180deg);
 }
 
+a.href {
+	color: #007bff !important;
+    text-decoration: none !important;
+}
 
+a.href:hover {
+    color: #0056b3 !important;
+	cursor: pointer !important;
+    text-decoration: underline !important;
+}
+
+.change_pwd_email_overlay {
+    position: fixed;
+    width: 100vw;
+    opacity: 0.5;
+	z-index: 9999;
+    top: 0px;
+    margin: 0px;
+    height: 100vh;
+    background-color: #000;	
+}
+
+hr.changes {
+	background-color: #697581 !important;
+}
+
+#change_pwd_html, #change_email_html {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+	overflow-y: auto;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: auto;
+    padding: 40px;
+    background-color: #FFF;
+    border: 7px solid #343a40;
+    z-index: 10000;
+    box-shadow: #343a40 0 2px 18px;
+}
+
+#account_löschung {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+	overflow-y: auto;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: auto;
+    padding: 40px;
+    background-color: #FFF;
+    border: 7px solid #343a40;
+    z-index: 10000;
+    box-shadow: #343a40 0 2px 18px;	
+}
 
 @media screen and (max-width: 1200px) {
 	.rubrikenRow {
 	width: 49%;
 	display: inline-block;
+}
+#change_pwd_html {
+	left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;
+}
+
+#change_email_html  {
+	left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;	
 }
 }
 
@@ -134,6 +215,28 @@ h1.error-h1 {
 	width: 100%;
 	display: inline-block;
 }
+#change_pwd_html {
+	left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+}
+
+#change_email_html  {
+	left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;	
+}
+
 .buttonpadding {
 	padding-top: 1%;
 }

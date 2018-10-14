@@ -15,6 +15,156 @@
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
+		$weiter = false;
+		
+		$pwd_change = false;
+		$pwd_change_error_same = false;
+		$pwd_change_error_vorhanden = false;
+		
+		$email_change = false;
+		$email_change_error_vorhanden = false;
+		$email_change_error_same = false;
+		
+		// Change Passwort
+		if (isset($_POST["old_pwd"]) && isset($_POST["new_pwd"])) {
+		
+			$old_pwd = $_POST["old_pwd"];
+			$new_pwd = $_POST["new_pwd"];
+			$new_pwd_hash = password_hash($new_pwd, PASSWORD_DEFAULT);	
+		
+			$sql4 = "SELECT * FROM inserent WHERE iNR = '".$_SESSION["iNR"]."'";
+			$query4 = $verb -> query($sql4);
+			
+			foreach ($query4 as $row) {
+				$db_old_pwd = $row["passwort"];
+			}		
+			
+			if (password_verify($old_pwd, $db_old_pwd)) {
+				$weiter = true;
+			} else {
+				$pwd_change_error = true;
+			}
+			
+			if ($weiter == true) {
+				
+				$sql4 = "UPDATE `inserent` SET `passwort`= '".$new_pwd_hash."' WHERE iNR = '".$_SESSION["iNR"]."'";
+				$query4 = $verb -> query($sql4);
+				
+				$pwd_change = true;
+			
+			}	
+			
+				?>
+				
+				<script type="text/javascript">
+				
+				$(document).ready(function() {
+					open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')
+				});
+				
+				</script>
+				
+				<?php		
+				
+		}
+		
+		// Change E-Mail
+		if (isset($_POST["old_email"]) && isset($_POST["new_email"])) {
+			
+			$old_email = $_POST["old_email"];
+			$new_email = $_POST["new_email"];
+		
+			$sql4 = "SELECT * FROM inserent WHERE iNR = '".$_SESSION["iNR"]."'";
+			$query4 = $verb -> query($sql4);
+			
+			foreach ($query4 as $row) {
+				$db_old_email = $row["email"];
+			}		
+			
+			if ($db_old_email == $old_email) {
+				$weiter = true;
+			} else {
+				$email_change_error_same = true;
+			}
+
+			$sql5 = "SELECT * FROM inserent WHERE email = '".$new_email."'";
+			$query5 = $verb -> query($sql5);
+			$countNumRows = $query5 -> fetchAll();
+			
+			if (count($countNumRows) > 0) {
+				$weiter = false;
+				$email_change_error_vorhanden = true;
+			}
+			
+			if ($weiter == true) {
+						
+				$sql4 = "UPDATE `inserent` SET `email`= '".$new_email."' WHERE iNR = '".$_SESSION["iNR"]."'";
+				$query4 = $verb -> query($sql4);
+				
+				$email_change = true;
+						
+			}			
+				?>
+				
+				<script type="text/javascript">
+				
+				$(document).ready(function() {
+					open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')
+				});
+				
+				</script>
+				
+				<?php
+		}
+		
+		if (isset($_POST["löschung"])) {
+			
+			$sql4 = "SELECT * FROM anzeigen WHERE iNR = '".$_SESSION["iNR"]."'";
+			$query4 = $verb -> query($sql4);	
+			$queryNumRows = $query4 -> fetchAll();
+			
+			$keineanzeigen = false;
+			
+			if (count($queryNumRows) < 1) {
+			
+				$keineanzeigen = true;
+				
+			} else {
+				
+				foreach ($verb -> query($sql4) as $row) {
+				
+					$sql4 = "DELETE FROM r_besitzt_a WHERE aNR = '".$row["aNR"]."'";
+					$query4 = $verb -> query($sql4);			
+					
+					$sql4 = "DELETE FROM anzeigen WHERE aNR = '".$row["aNR"]."'";
+					$query4 = $verb -> query($sql4);	
+					
+				}
+				
+				$sql4 = "DELETE FROM `inserent` WHERE iNR = '".$_SESSION["iNR"]."'";
+				$query4 = $verb -> query($sql4);	
+				
+				header("Location: ../logout");
+				
+			}
+			
+			if ($keineanzeigen == true) {
+				
+				$sql4 = "DELETE FROM `inserent` WHERE iNR = '".$_SESSION["iNR"]."'";
+				$query4 = $verb -> query($sql4);					
+				
+				header("Location: ../logout");
+				
+			} else {
+			
+				$countAnzeigen = count($queryNumRows);
+			
+				
+			
+			}
+			
+		}
+		
 		require 'includes/cookiecheck.php';
 		
 		switch ($nav_variante) {
@@ -37,7 +187,155 @@
 		
 		?>
   <div class="main">
+   
+   
+<div class='change_pwd_email_overlay'></div>
+
+<div id='change_pwd_html'>
+	
+	<form action="../account/myaccount" method="POST">
+	
+	<h5 class="mb-4">Passwort ändern		
+		<div onclick="close_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')" class="pointer close_pwd_change float-right d-inline" title="Auf das X klicken oder ausserhalb des Fensters klicken, um das Fenster zu schließen">
+			<i class="fas fa-times fa-lg"></i>
+		</div>	
+	</h5>
+	
+	<hr class="changes">
+	
+	<div class="form-group mt-4">
+		<label for="old_pwd">Altes Passwort</label>
+		<input type="password" class="form-control" value="<?php
+			
+			if (isset($_POST["old_pwd"]) && isset($_POST["new_pwd"])) {
+				if ($pwd_change_error_vorhanden == true) {
+					echo "".$_POST["new_pwd"]."";
+				}
+			}
+				
+			?>" name="old_pwd" required id="old_pwd" placeholder="">
+	</div>
+	<div class="form-group">
+		<label for="new_pwd">Neues Passwort</label>
+		<input type="password" class="form-control" name="new_pwd" required id="new_pwd" placeholder="">
+	</div>
+	
+	<?php
+	
+	if ($pwd_change == true) {
+	
+		echo "<p class='text-success mt-2 mb-3'>Passwort erfolgreich zu ".$new_pwd." geändert!</p>";
+	
+	}
+	
+	if ($pwd_change_error_vorhanden == true) {
+	
+		echo "<p class='text-danger mt-2 mb-3'>Neues Passwort ist bereits registriert!</p>";
+	
+	}
+	
+	if ($pwd_change_error_same == true) {
+	
+		echo "<p class='text-danger mt-2 mb-3'>Alte E-Mail stimmt nicht!</p>";
+	
+	}
+	
+	?>
+	
+	<button class="btn btn-dark mb-3 w-100" id="submit_pwd_change" type="submit">Passwort ändern</button>
+	
+	</form>
+	
+</div>
+
+<div id='change_email_html'>
+	
+	<form action="../account/myaccount" method="POST">
+	
+	<h5 class="mb-4">E-Mail ändern		
+		<div onclick="close_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')" class="pointer close_email_change float-right d-inline" title="Auf das X klicken oder ausserhalb des Fensters klicken, um das Fenster zu schließen">
+			<i class="fas fa-times fa-lg"></i>
+		</div>	
+	</h5>
+	
+	<hr class="changes">
+	
+
+	
+	<div class="form-group mt-4">
+		<label for="old_email">Alte E-Mail</label>
+		<input type="email" class="form-control"  value="<?php
+			
+			if (isset($_POST["old_email"]) && isset($_POST["new_email"])) {
+				if ($email_change_error_vorhanden == false) {
+					echo "".$_POST["new_email"]."";
+				} else {
+					echo "".$_POST["old_email"]."";
+				}
+			}
+				
+			?>"	name="old_email" required id="old_email" placeholder="">
+	</div>
+	<div class="form-group">
+		<label for="new_email">Neue E-Mail</label>
+		<input type="email" class="form-control" name="new_email" required id="new_email" placeholder="">
+	</div>
+	
+	<?php
+	
+	if ($email_change == true) {
+	
+		echo "<p class='d-inline text-success mt-2 mb-3'>E-Mail erfolgreich zu <p class='d-inline text-dark'>".$new_email."</p><p class='d-inline text-success'> geändert !</p></p>";
+	
+	}
+	
+	if ($email_change_error_vorhanden == true) {
+		
+	echo "<p class='text-danger mt-2 mb-3'>Neue E-Mail ist bereits registriert!</p>";
+	
+	}
+	
+	if ($email_change_error_same == true) {
+	
+		echo "<p class='text-danger mt-2 mb-3'>Alte E-Mail stimmt nicht!</p>";
+	
+	}	
+	
+	?>	
+	
+	<button class="btn btn-dark mb-3 w-100 mt-3" id="submit_email_change" type="submit">E-Mail ändern</button>
+	
+	</form></div>
+
+
+
+<div id='account_löschung'>
+	
+	<form action="../account/myaccount" method="POST">
+	
+	<h5 class="mb-4">Wollen Sie Ihren Account wirklich löschen?		
+		<div onclick="close_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')" class="pointer close_email_change float-right d-inline" title="Auf das X klicken oder ausserhalb des Fensters klicken, um das Fenster zu schließen">
+			<i class="fas fa-times fa-lg"></i>
+		</div>	
+	</h5>
+	
+	<hr class="changes">
+	
+	<p class="text-danger">Wenn Sie Ihren Account löschen, werden alle Ihrer Anzeigen gelöscht!</p>
+	
+	<input name="löschung" type="hidden">
+	
+	<button class="btn d-inline btn-danger mb-3 w-40 mt-3 float-left" id="submit_account_löschung" type="submit">Account Löschen</button>
+	
+	<button class="btn d-inline btn-dark mb-3 w-40 mt-3 float-right" id="close_account_löschung" onclick="close_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')" type="button">Abbrechen</button>
+	
+	</form>
+
+</div>
+
  <div class="container-fluid mt-3">
+
+ 
  		<?php
 			if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
 			header("Location: ../startseite");
@@ -94,13 +392,29 @@
 							</div>
 							<div class='card-body'>
 							
-								<a href=''>Passwort ändern</a><br>
-								<a href=''>E-Mail ändern</a><br><br>
+								";
+								?>
+								<!--<p class="d-inline text-danger">Sie können Ihr Passwort alle 30 Tage ändern!</p><br>-->
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</a><br>							
+							
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</a><br><br>	
+								
+								<?php
+								
+								echo "
 								
 								<a href=''>Meine Anzeigen bearbeiten</a><br>
 								<a href=''>Meine Anzeigen löschen</a><br><br>
 								
-								<a href=''>Mein Account löschen</a><br>
+								";
+								?>					
+							
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</a><br>	
+								
+								<?php
+								
+								echo "
+								
 								
 							</div>
 						</div>						
@@ -119,23 +433,26 @@
 					<div class='card-header bg-dark text-white'>
 					";
 					
+				$löschung = false;	
+					
+				if (isset($_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""])) {
+					
 				$abfrage4 = "SELECT * FROM anzeigen WHERE iNR = '".$_SESSION["iNR"]."'";	
 				$query4 = $verb -> query($abfrage4);	
 				$countNumRows = $query4 -> fetchAll();
-				
-				$löschung = false;		
-				
-				if (count($countNumRows) == $_COOKIE["anzahl_aktuelle_anzeigen"]) {
+								
+				if (count($countNumRows) == $_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""]) {
 					
 					$löschung = false;
 					
 				} else {			
 				
-					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen"] - count($countNumRows);
+					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""] - count($countNumRows);
 					$löschung = true;
 					
 					setcookie("anzahl_aktuelle_anzeigen", count($countNumRows), time() + ( 365 * 24 * 60 * 60), "/");
 					
+				}
 				}
 					
 					
@@ -177,17 +494,19 @@
 				
 			} else {
 				
-				if (count($countNumRows) == $_COOKIE["anzahl_aktuelle_anzeigen"]) {
+				if (isset($_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""])) {
+				if (count($countNumRows) == $_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""]) {
 					
 					$löschung = false;
 					
 				} else {			
 				
-					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen"] - count($countNumRows);
+					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""] - count($countNumRows);
 					$löschung = true;
 					
-					setcookie("anzahl_aktuelle_anzeigen", count($countNumRows), time() + ( 365 * 24 * 60 * 60), "/");
+					setcookie("anzahl_aktuelle_anzeigen".$_SESSION['iNR']."", count($countNumRows), time() + ( 365 * 24 * 60 * 60), "/");
 					
+				}
 				}
 				
 				if ($löschung == true) {  
@@ -203,6 +522,7 @@
 	</div>
   </div>
   </div>
+  </div> 
   </div>
 	<?php 
 	}
@@ -247,7 +567,7 @@
 		
 		ob_end_flush();
 	?>
-  
+ 
 </body>
 
 </html>

@@ -35,3 +35,4 @@ function toggleBearbeitenModusAZ() {
 			x.toggleClass("btn-dark")
 		}
 }
+

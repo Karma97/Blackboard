@@ -107,7 +107,7 @@ function generateKundennummer($length) {
 					echo "<h3>Dies hier sollte nicht angezeigt werden. Falls doch, dann informieren Sie bitte den Support.</h3>";
 					
 				} elseif (!isset($_POST["login_pwd"]) && !isset($_POST["login_email"]) && $session == false) {
-					/* Registerabwicklung */
+					// Registerabwicklung
 					
 					$error = false;
 					
@@ -217,7 +217,6 @@ function generateKundennummer($length) {
 					
 					$kundennummer = generateKundennummer(10);
 					$kundennummer2 = "SB#".$kundennummer."";
-					echo $kundennummer2;
 					
 					do {
 					
@@ -256,7 +255,8 @@ function generateKundennummer($length) {
 					
 						}
 				} elseif (!isset($_POST["register_vorname"]) && !isset($_POST["register_nachname"]) && !isset($_POST["register_email"]) && !isset($_POST["register_pwd1"]) && !isset($_POST["register_pwd2"]) && !isset($_POST["register_date"]) && $session == false) {
-					/* Loginabwicklung */
+					// Loginabwicklung
+					
 					$email = $_POST["login_email"];
 					$pwd = $_POST["login_pwd"];
 				
@@ -274,6 +274,7 @@ function generateKundennummer($length) {
 						
 						foreach ($verb -> query($sql) as $row) {
 							$pwd_db = $row["passwort"];
+							$iNR = $row["iNR"];
 						}
 						
 						if (password_verify($pwd, $pwd_db)) {
@@ -293,6 +294,15 @@ function generateKundennummer($length) {
 							
 								foreach ($verb -> query($sql) as $row) {
 									$identifier_token = $row["identifier_token"];
+								}
+								
+								if (!isset($_COOKIE["anzahl_aktuelle_anzeigen"])) {
+									$sql5 = "SELECT * FROM anzeigen WHERE inR = '".$iNR."'"; 
+									$query5 = $verb -> query($sql5);	
+									$countNumRows2 = $query5 -> fetchAll();		
+									$countNumRows2total = count($countNumRows2);
+									
+									setcookie("anzahl_aktuelle_anzeigen".$iNR."", $countNumRows2total, time() + ( 365 * 24 * 60 * 60), "/");					
 								}
 								
 								setcookie("identifier_token", $identifier_token, time() + ( 365 * 24 * 60 * 60), "/");

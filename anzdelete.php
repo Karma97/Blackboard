@@ -80,7 +80,7 @@
 
 <?php
 	
-	$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, anzeigen.updated_at, anzeigen.created_at, anzeigen.aNR, orte.PLZ, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING(PLZ) ORDER BY updated_at";
+	$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, inserent.vorname, inserent.nachname, inserent.iNR, anzeigen.updated_at, anzeigen.created_at, anzeigen.aNR, orte.PLZ, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING(PLZ) INNER JOIN inserent USING (iNR) ORDER BY updated_at";
 	
 	$query = $verb -> query($abfrage);
 	$queryNumRows = $query -> fetchAll();
@@ -111,6 +111,7 @@
   <thead class="thead-dark">
     <tr>
 		<th scope="col">ID</th>
+		<th scope="col">Ersteller</th>  
 		<th scope="col">Betreff</th>           
 		<th scope="col">Beschreibung</th>     
 		<th scope="col" class="löschenChanges">Ort</th>
@@ -302,6 +303,10 @@
 					</td>
 					
 					<td>
+						".$row["vorname"]." ".$row["nachname"]."
+					</td>	
+					
+					<td>
 						<div class='changehide'>						
 							".$row["betreff"]."						
 						</div>
@@ -319,7 +324,7 @@
 						
 						<div class='changeinputshow'>
 							<input type='hidden' name='changeBeschreibung[]' value='".$row["aNR"]."'>
-							<textarea class='form-control form-control-sm mw-12em' name='changeBeschreibung[]' rows='2' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>						
+							<textarea class='form-control form-control-sm mw-12em' name='changeBeschreibung[]' rows='1' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>						
 						</div>
 					</td>
 					
@@ -339,7 +344,11 @@
 								$query2 = $verb -> query($sql2);
 								
 								foreach ($query2 as $row2) {
+								if ($row["Bezeichnung"] == $row2["Bezeichnung"]) {
+									echo "<option selected value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+								} else {
 									echo "<option value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+								}
 								}		
 										
 							echo "			

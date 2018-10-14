@@ -12,3 +12,4 @@
 <script type="text/javascript" src="js/loginAndRegister.js"></script>
 <script type="text/javascript" src="js/rubrikenChangeAnzeigenChange.js"></script>
 <script type="text/javascript" src="js/AdminAreaCollapse.js"></script>
+<script type="text/javascript" src="js/pwdEmailChange.js"></script>
