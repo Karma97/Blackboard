@@ -2,9 +2,9 @@
 	ob_start();
 	session_start();
 	
-	$head_variante = 1;	
+	$head_variante =   1;
+	$nav_variante =    1;
 	$script_variante = 1;
-	$nav_variante = 1;
 	$footer_variante = 1;
 	
 	include 'includes/head.php'; 
@@ -17,23 +17,7 @@
 		
 		require 'includes/cookiecheck.php';
 		
-		switch ($nav_variante) {
-			case $nav_variante === 1:
-				include 'includes/nav/nav_1.php';
-				break;
-			case $nav_variante === 2:
-				include 'includes/nav/nav_2.php';
-				break;
-			case $nav_variante === 3:
-				include 'includes/nav/nav_3.php';
-				break;
-			case $nav_variante === 4:
-				include 'includes/nav/nav_4.php';
-				break;
-			case $nav_variante === 5:
-				include 'includes/nav/nav_5.php';
-				break;
-		}
+		include 'includes/nav.php';	
 		
 		
 		?>

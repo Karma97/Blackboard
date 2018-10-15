@@ -5,8 +5,8 @@
 	
 	setlocale(LC_ALL, 'de_DE.utf8');
 	
-	$head_variante = 2;
-	$nav_variante = 2;
+	$head_variante =   2;
+	$nav_variante =    2;
 	$script_variante = 2;
 	$footer_variante = 2;
 	
@@ -21,24 +21,8 @@
 	include 'includes/pacman.php';
 	require_once 'includes/connect.php';
 	require 'includes/cookiecheck.php';
-	
-	switch ($nav_variante) {
-		case $nav_variante === 1:
-			include 'includes/nav/nav_1.php';
-			break;
-		case $nav_variante === 2:
-			include 'includes/nav/nav_2.php';
-			break;
-		case $nav_variante === 3:
-			include 'includes/nav/nav_3.php';
-			break;
-		case $nav_variante === 4:
-			include 'includes/nav/nav_4.php';
-			break;
-		case $nav_variante === 5:
-			include 'includes/nav/nav_5.php';
-			break;
-	}	
+		
+	include 'includes/nav.php';	
 	
 ?>
 

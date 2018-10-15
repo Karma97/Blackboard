@@ -7,7 +7,7 @@
 	margin-left:auto;
 	margin-right:auto;
 	height: 100vh;
-	z-index: 1000;
+	z-index: 1000001;
 	top: 100%;
 	-webkit-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
@@ -19,7 +19,7 @@
   position: absolute;
   animation: walk 6s linear infinite;
   top: 50%;
-   z-index: 1001;
+   z-index: 1000002;
 	-webkit-transform: translateY(-50%);
 	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
@@ -53,7 +53,7 @@
 	overflow: hidden;
 	transition: opacity 0.7s;
 	height: 100vh;
-	z-index: 999;
+	z-index: 1000000;
 	background: linear-gradient(to top, #262b2f 0%, #4a545b 100%);
 }
 

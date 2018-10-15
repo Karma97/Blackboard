@@ -5,8 +5,8 @@
 	
 	setlocale(LC_ALL, 'de_DE.utf8');
 	
-	$head_variante = 1;
-	$nav_variante = 1;
+	$head_variante =   1;
+	$nav_variante =    1;
 	$script_variante = 1;
 	$footer_variante = 1;
 	
@@ -22,23 +22,7 @@
 	require_once 'includes/connect.php';	
 	require 'includes/cookiecheck.php';
 	
-	switch ($nav_variante) {
-		case $nav_variante === 1:
-			include 'includes/nav/nav_1.php';
-			break;
-		case $nav_variante === 2:
-			include 'includes/nav/nav_2.php';
-			break;
-		case $nav_variante === 3:
-			include 'includes/nav/nav_3.php';
-			break;
-		case $nav_variante === 4:
-			include 'includes/nav/nav_4.php';
-			break;
-		case $nav_variante === 5:
-			include 'includes/nav/nav_5.php';
-			break;
-	}
+	include 'includes/nav.php';	
 
 ?>
   
@@ -187,48 +171,14 @@
 <?php
 	
 		}
-	}	
-
-	switch ($footer_variante) {
-			case $footer_variante === 1:
-				include 'includes/footer/footer_1.php';
-				break;
-			case $footer_variante === 2:
-				include 'includes/footer/footer_2.php';
-				break;
-			case $footer_variante === 3:
-				include 'includes/footer/footer_3.php';
-				break;
-			case $footer_variante === 4:
-				include 'includes/footer/footer_4.php';
-				break;
-			case $footer_variante === 5:
-				include 'includes/footer/footer_5.php';
-				break;
-		}
+	}
 		
 		require_once 'includes/loeschencheck.php';
 		
-		switch ($script_variante) {
-			case $script_variante === 1:
-				include 'includes/scripts/scripts_1.php';
-				break;
-			case $script_variante === 2:
-				include 'includes/scripts/scripts_2.php';
-				break;
-			case $script_variante === 3:
-				include 'includes/scripts/scripts_3.php';
-				break;
-			case $script_variante === 4:
-				include 'includes/scripts/scripts_4.php';
-				break;
-			case $script_variante === 5:
-				include 'includes/scripts/scripts_5.php';
-				break;
-		}
-		
+		include 'includes/footer.php';	
+		include 'includes/scripts.php';			
 	
-	ob_end_flush();
+		ob_end_flush();
 ?>
 
 </body>
