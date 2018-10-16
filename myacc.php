@@ -334,7 +334,7 @@
 		?>
   <div class="card accountcard">
 	<div class="card-header bg-dark text-white">			
-		Mein Account:
+		Mein Account
 	</div>
 	<div class="card-body">
 		<?php
@@ -383,11 +383,11 @@
 							
 								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</a><br><br>	
 								
+								<a class="href changeTrigger" onclick="toggleBearbeitenModusAZI()">Meine Anzeigen bearbeiten</a><br>								
 								<?php
 								
 								echo "
 								
-								<a href=''>Meine Anzeigen bearbeiten</a><br>
 								<a href=''>Meine Anzeigen löschen</a><br><br>
 								
 								";
@@ -407,7 +407,7 @@
 				
 				";
 				
-				$abfrage2 = "SELECT anzeigen.updated_at, anzeigen.created_at, anzeigen.betreff, anzeigen.PLZ, anzeigen.beschreibung, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING (PLZ) WHERE iNR = '".$_SESSION['iNR']."'";	
+				$abfrage2 = "SELECT anzeigen.updated_at, anzeigen.aNR, anzeigen.created_at, anzeigen.betreff, anzeigen.PLZ, anzeigen.beschreibung, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING (PLZ) WHERE iNR = '".$_SESSION['iNR']."'";	
 				$query3 = $verb -> query($abfrage2);
 				$queryNumRows= $query3 -> fetchAll();
 				
@@ -456,15 +456,58 @@
 				
 				foreach ($verb -> query($abfrage2) as $row) {
 				echo "
-				
 						<div class='card mb-3'>
 							<div class='card-header bg-dark text-white'>
-								Betreff: ".$row["betreff"]."
+								Betreff: 
+								<div class='changehide d-inline'>
+									".$row["betreff"]."
+								</div>
+								<div class='changeinputshow2 mt-1 d-none'>
+									<input type='hidden' name='changeBetreff[]' value='".$row["aNR"]."'>
+									<input class='form-control form-control-sm input2 mw-12em' value='".$row["betreff"]."' name='changeBetreff[]' type='text' placeholder='".$row["betreff"]."'>									
+								</div>
 							</div>
 							<div class='card-body'>
 							
-							Beschreibung: ".$row["beschreibung"]."<br><br>
-							Ort: ".$row["Bezeichnung"]."<br>
+							Beschreibung: 
+							<div class='changehide d-inline'>
+								".$row["beschreibung"]."
+							</div>
+							<div class='changeinputshow2 d-none'>
+								<input type='hidden' name='changeBeschreibung[]' value='".$row["aNR"]."'>
+								<textarea class='form-control form-control-sm input2 mw-12em' name='changeBeschreibung[]' rows='3' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>								
+							</div>
+							
+							<br>
+														
+							Ort: 
+							<div class='changehide d-inline'>
+								".$row["Bezeichnung"]."
+							</div>
+							<div class='changeinputshow2 d-none'>
+								<input type='hidden' name='changeOrt[]' value='".$row["aNR"]."'>
+									<select autocomplete class='form-control input2 form-control-sm mw-12em' name='changeOrt[]'>
+										<option value='".$row["PLZ"]."' selected class='text-danger'>Unverändert</option>
+									
+								";
+												
+									$sql2 = 'SELECT PLZ, Bezeichnung FROM orte ORDER BY Bezeichnung';	
+									$query2 = $verb -> query($sql2);
+									
+									foreach ($query2 as $row2) {
+									if ($row["Bezeichnung"] == $row2["Bezeichnung"]) {
+										echo "<option selected value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+									} else {
+										echo "<option value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+									}
+									}		
+											
+								echo "			
+									</select>							
+							</div>
+							
+							<br>
+							
 							Erstellt am: ".date("d.n.Y, H:i", strtotime($row["created_at"]))." Uhr<br>
 							Zuletzt bearbeitet am: ".date("d.n.Y, H:i", strtotime($row["updated_at"]))." Uhr<br>
 							
