@@ -89,23 +89,15 @@
 					Informationen
 				</div>
 				<div class='card-body text-dark'>
-					<p class='mb-0'><u>Betreff:</u></p> 
-					<p>".$row["betreff"]."</p>
+				
+					<p class='mb-0'><b>Betreff:</b></p> 
+					<p class=''>".$row["betreff"]."</p>
 					
-					<p class='mb-0'><u>Beschreibung:</u></p> 
-					<p>".$row["beschreibung"]."</p>
+					<p class='mb-0'><b>Beschreibung:</b></p> 
+					<p class=''>".$row["beschreibung"]."</p>
 					
-					<p class='mb-0'><u>Standort:</u></p> 
-					<div>
-							<div id='map-canvas'></div>
-					</div>
-						";
-						
-
-						
-						echo "
-					</div>
 				</div>
+			</div>
 			";
 			
 			

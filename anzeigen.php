@@ -15,32 +15,13 @@
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
-		require 'includes/cookiecheck.php';
-		
-		switch ($nav_variante) {
-			case $nav_variante === 1:
-				include 'includes/nav/nav_1.php';
-				break;
-			case $nav_variante === 2:
-				include 'includes/nav/nav_2.php';
-				break;
-			case $nav_variante === 3:
-				include 'includes/nav/nav_3.php';
-				break;
-			case $nav_variante === 4:
-				include 'includes/nav/nav_4.php';
-				break;
-			case $nav_variante === 5:
-				include 'includes/nav/nav_5.php';
-				break;
-		}
-		
+		require 'includes/cookiecheck.php';		
+		include 'includes/nav.php';			
 		
 		?>
 		
 		<div class="main">
 		<div class="container mt-3">
-		<div id="alle_anzeigen">
 			<?php
 			
 				$alle = false;		
@@ -80,6 +61,7 @@
 						
 						foreach ($query3 as $row) {
 							echo "
+							
 							<p class='float-left d-inline mb-0 buttonpadding'>
 								<i class='".$row["icon"]."'></i>&nbsp; ".$row["bezeichnung"]."
 							</p>
@@ -93,7 +75,7 @@
 						
 					} else {
 						
-						echo "Alle Rubriken";
+						echo "Alle Anzeigen";
 						
 					}
 							
@@ -107,7 +89,7 @@
 					";
 					
 				} else {
-					
+				
 					echo "
 					
 					<div class='card mb-2'>
@@ -151,6 +133,8 @@
 					<div class='form-group mb-5'>
 						<input type='text' class='form-control' id='searchA' placeholder='nach Anzeige/Betreff/Ort/Datum suchen'>
 					</div>
+					
+					<div id='alle_anzeigen'>
 				";
 				
 				setlocale(LC_ALL, 'de_DE.utf8');
@@ -163,7 +147,7 @@
 				
 					echo "
 					<a href='../anzeigen/anzeige-".$row["aNR"]."' class='anzeignenHref pointer text-dark'>
-					<div class='card mb-3'>
+					<div class='card mb-3' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".$row["betreff"]."\" zu kommen!'>
 						<div class='card-header bg-dark text-white'>
 						".$row["betreff"]."
 						</div>
@@ -204,6 +188,7 @@
 					
 					echo "					
 					</div>
+					</div>
 					";
 				}
 				
@@ -212,7 +197,6 @@
 			?>
 					
 		</div>	
-		</div>
 		</div>
 	<?php 
 		
