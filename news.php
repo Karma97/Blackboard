@@ -45,11 +45,15 @@
 		if (count($queryNumRows) <= 0) {
 			echo "Keine News gefunden. <button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
 		} else {
+			if ($_GET["nID"] == 0 OR $_GET["nID"] == "alle") {
 			echo "
 				<div class='form-group'>
 					<input type='text' class='form-control' id='searchN' placeholder='nach News/Titel/Inhalt/Datum suchen'>
 				</div>
 			";
+			} else {
+			
+			}
 		
 		
 		setlocale(LC_ALL, 'de_DE.utf8');		
@@ -63,7 +67,27 @@
 				
 		echo "
 			<div class='col'>
-				<div class='card mb-3'>
+			";
+			
+			if ($_GET["nID"] == 0 OR $_GET["nID"] == "alle") {
+			
+			echo "
+			
+				<div class='card mb-3 pointer' title='Jetzt klicken um zur News mit dem Titel \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='../news/".$row["nID"]."'\">
+				
+				";
+				
+			} else {
+			
+			echo "
+			
+				<div class='card mb-3 newscard'>
+				
+				";	
+				
+			}
+			
+			echo "
 					<div class='card-header bg-dark text-center'>
 						<h2 class='text-white'>".$row["titel"]."</h2>
 					</div>

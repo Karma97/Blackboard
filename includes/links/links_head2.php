@@ -26,8 +26,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
 
+
 <?php
-	
+	/*
 switch ($script_variante) {
 	case $script_variante === 1:
 		include 'includes/scripts/scripts_1.php';
@@ -45,6 +46,6 @@ switch ($script_variante) {
 		include 'includes/scripts/scripts_5.php';
 		break;
 }
-
+*/
 ?>
 

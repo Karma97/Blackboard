@@ -36,9 +36,12 @@
 		?>
   <h1 class="mt-1">Anzeige aufgeben</h1>
   
-  <p class="text-dark mt-0 mb-0">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.</p><p class="text-dark mt-0 mb-0">Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.</p><p class="text-dark mt-0 mb-0">Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil unter "Meine Anzeigen" Löschen oder bearbeiten.</p><br><p class="d-inline mt-0 mb-0 text-danger">Ihre Anzeige wird nach 2 Wochen automatisch gelöscht!</p>
+  <p class="text-dark mt-0 mb-0">Wenn Sie eine Anzeige aufgeben, wird diese Veröffentlicht und ist für jeden auf dem Schwarzen Brett sichtbar.</p>
+  <p class="text-dark mt-0 mb-0">Bedenken Sie daher persönliche Angaben. Kontaktdaten wie Telefonnummern oder E-Mails sind allerdings nützlich.</p>
+  <p class="text-dark mt-0 mb-0">Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil löschen oder bearbeiten.</p>
+  <p class="mt-2 mb-4 text-danger">Ihre Anzeige wird nach 2 Wochen automatisch gelöscht!</p>
   
-  <form action="../anzeigen/erstellen" id="anzeigenForm" class="mt-4" method="POST">
+  <form action="../anzeigen/erstellen" id="anzeigenForm" class="mt-0" method="POST">
 	<div class="form-group">
 		<label for="titel">Betreff der Anzeige</label>
 		<input autofocus type="text" class="form-control" name="titel" required id="titel" placeholder="">
@@ -72,7 +75,7 @@
 	</div>
 	</div>
 	<div class="form-group">
-		<label for="rubriken">Rubriken wählen (maximal 3, minimal 1)</label><br>
+		<label for="rubriken">Rubriken wählen (minimal 1, maximal 3)</label><br>
 	
 <?php
 		
@@ -103,7 +106,25 @@
 		
 		?>
 	</div>
-	<div id="checkboxError" class="mb-2 text-danger"></div>
+	<div id="checkboxError" class="mb-2 text-danger">
+		<?php  
+			
+		$rubrikenzuviel = false;
+			
+		if (isset($_POST["rubriken"])) {
+			$rubrikenc = $_POST["rubriken"];
+			if (count($rubrikenc) > 3) {
+				?>
+				
+				Zu viele Rubriken ausgewählt!
+				
+				<?php
+			$rubrikenzuviel = true;
+			}
+		}
+			
+		?>
+	</div>
 	<div class="custom-file">
 	<div class="form-group">
 		<input type="file" name="files[]" class="custom-file-input" multiple id="files">
@@ -114,9 +135,10 @@
   
   <?php
   
-    if (!isset($_POST["besch"]) or !isset($_POST["titel"])) {
+    if (!isset($_POST["besch"]) or !isset($_POST["titel"]) or !isset($_POST["ort"]) or !isset($_POST["rubriken"])) {
 		
 	} else {
+	if ($rubrikenzuviel == false) {
 		$beschreibung = $_POST["besch"];
 		$titel = $_POST["titel"];
 		$ort = $_POST["ort"];
@@ -131,6 +153,11 @@
 		
 		$rubriken = $_POST["rubriken"];	
 		$countR = count($rubriken);
+		
+		if ($countR > 3) {
+		
+		} else {
+		
 		$z = 1;
 		$u = 0;
 		
@@ -159,16 +186,17 @@
 		
 		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, \"".$iNR."\", \"".$titel."\", \"".$beschreibung."\", \"".$ort."\", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; 
 		$query = $verb -> query($sql1);
-				
+								
 		foreach ($verb -> query($sql2) as $row) {
 			$aNR = $row["aNR"];
 		}
+	
+			for ($i = 1; $i <= $countR; $i++) {
+				$rubrik = "rubrik".$i."";
+				$sql3 = "INSERT INTO `r_besitzt_a`(`rNR`, `aNR`, `updated_at`, `created_at`) VALUES ('".$$rubrik."', '".$aNR."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+				$query3 = $verb -> query($sql3);
+			}
 		
-		for ($i = 1; $i <= $countR; $i++) {
-			$rubrik = "rubrik".$i."";
-			$sql3 = "INSERT INTO `r_besitzt_a`(`rNR`, `aNR`, `updated_at`, `created_at`) VALUES ('".$$rubrik."', '".$aNR."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
-			$query3 = $verb -> query($sql3);
-		}
 		
 		$sql5 = "SELECT * FROM anzeigen WHERE inR = '".$_SESSION["iNR"]."'"; 
 		$query5 = $verb -> query($sql5);	
@@ -177,10 +205,11 @@
 		
 		setcookie("anzahl_aktuelle_anzeigen", $countNumRows2total, time() + ( 365 * 24 * 60 * 60), "/");
 
-				
 		$fertig = "fertig";
 		
 		}
+		}
+	}
 	}
   
   ?>
@@ -199,7 +228,7 @@
 	echo "
 	
 	<div class='text-success mt-4 mb-2'>
-		<h5>Anzeige aufgegeben! <a href='../anzeigen/anzeige".$aNR."'>Jetzt einsehen</a></h5>
+		<h5>Anzeige aufgegeben! <a href='../anzeigen/anzeige-".$aNR."'>Jetzt einsehen</a></h5>
 	</div>
 	
 	";
@@ -214,7 +243,7 @@
 	echo "
 	
 	<div class='text-danger mt-4 mb-2'>
-		<h5>Die Anzeige ist bereits vorhanden! <a href='../anzeigen/anzeige".$aNR."'>Jetzt einsehen</a></h5>
+		<h5>Die Anzeige ist bereits vorhanden! <a href='../anzeigen/anzeige-".$aNR."'>Jetzt einsehen</a></h5>
 	</div>
 	
 	";

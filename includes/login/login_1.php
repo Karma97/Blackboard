@@ -44,7 +44,7 @@
 			
 			<div class="form-group">
 				<label for="login_pwd">Passwort</label>
-				<input autocomplete="current-password" type="password" class="form-control" name="login_pwd" required id="login_pwd" placeholder="">
+				<input autocomplete="" type="password" class="form-control" name="login_pwd" required id="login_pwd" placeholder="">
 			</div>
 			<?php
 			if ($loginerrorPwdEmail == true) {
@@ -88,13 +88,13 @@
 		   <div class="col-sm">
 			 <div class="form-group">
 			 	<label for="register_vorname">Vorname</label>
-			 	<input autofocus type="text" class="form-control" name="register_vorname" required id="register_vorname" placeholder="">
+			 	<input autofocus autocomplete='given-name' type="text" class="form-control" name="register_vorname" required id="register_vorname" placeholder="">
 			 </div> 
 		  </div>
 		  <div class="col-sm">
 			 <div class="form-group">
 			 	<label for="register_nachname">Nachname</label>
-			 	<input autofocus type="text" class="form-control" name="register_nachname" required id="register_nachname" placeholder="">
+			 	<input autofocus autocomplete='family-name' type="text" class="form-control" name="register_nachname" required id="register_nachname" placeholder="">
 			 </div>
 		  </div>
 		 </div>

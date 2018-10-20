@@ -20,6 +20,7 @@
 	
 	require_once 'includes/connect.php';	
 	require 'includes/cookiecheck.php';
+	require_once 'includes/loeschencheck.php';
 	
 	include 'includes/nav.php';
 
@@ -72,7 +73,7 @@
 	
 	if (count($queryNumRows) <= 0) {
 	
-		echo "Es gibt zurzeit keine Anzeigen! <button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
+		echo "Es gibt zurzeit keine Anzeigen! &nbsp;<button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
 		
 	} else {
 	
@@ -271,7 +272,7 @@
 						
 				foreach ($verb -> query($abfrage) as $row) {
 				
-			if ($row["created_at"] > date('Y-m-d h:i:s', strtotime('+12 days'))) {
+			if ($row["created_at"] < date('Y-m-d h:i:s', strtotime('-12 days'))) {
 				echo "<tr ondblclick='toggleBearbeitenModusAZ()' class='table-danger'>";
 			} elseif ($row["created_at"] > date('Y-m-d h:i:s', strtotime('-1 hour'))) {
 				echo "<tr ondblclick='toggleBearbeitenModusAZ()' class='table-success'>";
@@ -284,7 +285,7 @@
 					echo "
 					
 					<td>
-						".$row["aNR"]."
+						<b>".$row["aNR"]."</b>
 					</td>
 					
 					<td>
@@ -320,7 +321,7 @@
 						
 						<div class='changeinputshow'>
 							<input type='hidden' name='changeOrt[]' value='".$row["aNR"]."'>
-								<select autocomplete class='form-control form-control-sm mw-12em' name='changeOrt[]'>
+								<select autocomplete id='selectOrt' class='form-control form-control-sm mw-12em' name='changeOrt[]'>
 									<option value='".$row["PLZ"]."' selected class='text-danger'>Unverändert</option>
 								
 							";
@@ -368,20 +369,6 @@
 		</table>
 	</form>
 </div>
-						<!--<div class='card mb-3'>
-						<div class='card-header bg-dark text-white'>
-						".$row["betreff"]."
-						</div>
-					<div class='card-body border-dark'>
-					".$row["beschreibung"]."
-						<br><br>
-						Zuletzt bearbeitet am 
-						".date("d.", strtotime($row["updated_at"]))."
-						".$monatsnamen[$monat]." 
-						".date("Y", strtotime($row["updated_at"])).",  
-						".date("H", strtotime($row["updated_at"])).":00 Uhr<br>
-					</div>
-					</div>-->
 </div>
 </div>
 
@@ -399,9 +386,7 @@
 	
 		}
 	}	
-	
-	require_once 'includes/loeschencheck.php';
-		
+			
 	include 'includes/footer.php';	
 	include 'includes/scripts.php';	
 

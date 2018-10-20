@@ -42,7 +42,7 @@
 	
 	?>
 	
-	<a class="navItem" href="anzeigen/erstellen">Neue Anzeige aufgeben</a>
+	<a class="navItem" href="anzeigen/erstellen">Anzeige aufgeben</a>
 	
 	<?php
 	

@@ -1,5 +1,5 @@
 * {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Roboto', Calibri, Arial, sans-serif;
 	margin: 0px;
 	padding: 0px;
 }
@@ -13,6 +13,8 @@ body {
 h1, h2, h3, h4, h5 {
 	display: block;
 }
+
+
 
 .rubriktab {
 	border-collapse: separate;
@@ -33,6 +35,10 @@ h1, h2, h3, h4, h5 {
 	padding-top: 0.5%;
 }
 
+.buttonpadding2 {
+	padding-top: 0.2%;
+}
+
 a.anzeignenHref {
 	text-decoration: none;
 }
@@ -40,6 +46,10 @@ a.anzeignenHref {
 .center {
     padding: 70px 0;
 	margin-top: 50px;
+}
+
+.sizeme {
+	width: 3em;
 }
 
 .custom-control-label:before {
@@ -64,7 +74,7 @@ form input {
 	padding: 15px 0px;
 }
 
-.admincard, .accountcard, .anzeigencard {
+.admincard, .accountcard, .anzeigencard, .newscard{
 	min-height: 80vh;
 }
 
@@ -123,6 +133,10 @@ h1.error-h1 {
 a.href {
 	color: #007bff !important;
     text-decoration: none !important;
+}
+
+.changeTrigger {
+	width: 15%;
 }
 
 a.href:hover {
@@ -187,6 +201,7 @@ hr.changes {
 	width: 49%;
 	display: inline-block;
 }
+
 #change_pwd_html {
 	left: 50%;
     top: 50%;
@@ -199,6 +214,16 @@ hr.changes {
 }
 
 #change_email_html  {
+	left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: auto;	
+}
+#account_löschung  {
 	left: 50%;
     top: 50%;
     -ms-transform: translate(-50%, -50%);
@@ -215,6 +240,13 @@ hr.changes {
 	width: 100%;
 	display: inline-block;
 }
+
+.changeTrigger {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 #change_pwd_html {
 	left: 50%;
     top: 50%;
@@ -237,8 +269,22 @@ hr.changes {
     height: auto;	
 }
 
+#account_löschung  {
+	left: 50%;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;	
+}
+
 .buttonpadding {
 	padding-top: 1%;
+}
+.buttonpadding2 {
+	padding-top: 0.6%;
 }
 .rubrikenContainer {
 	text-align: left;

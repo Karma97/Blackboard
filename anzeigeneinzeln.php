@@ -90,10 +90,10 @@
 				</div>
 				<div class='card-body text-dark'>
 				
-					<p class='mb-0'><b>Betreff:</b></p> 
+					<p class='mb-0'><b>Betreff</b></p> 
 					<p class=''>".$row["betreff"]."</p>
 					
-					<p class='mb-0'><b>Beschreibung:</b></p> 
+					<p class='mb-0'><b>Beschreibung</b></p> 
 					<p class=''>".$row["beschreibung"]."</p>
 					
 				</div>
@@ -109,11 +109,30 @@
 			
 			";
 			
-			$endtag = 4;
+			$tag = date("d", strtotime($row["created_at"])) + 14;
+			$monat = date("m", strtotime($row["created_at"]));
+			$jahr = date("Y", strtotime($row["created_at"]));
+			$stunden = date("H", strtotime($row["created_at"]));
+			$minuten = date("i", strtotime($row["created_at"]));
+			
+			$endtag = "".$tag.".".$monat.".".$jahr.", ".$stunden.":".$minuten." Uhr";
+			
+			if ($tag < date("d", strtotime($row["created_at"])) or $tag > (date("d", strtotime($row["created_at"])) + 15)) {
 			
 			echo "
-			Anzeige endet in <b>".$endtag."</b> Tagen!
-		</div>
+				<p class='text-danger mt-0 mb-0'>Anzeige sollte bereits gelöscht sein! ist dies nicht der Fall, bitte <a href='mailto:schwarzes.brett@sbrett.de?subject=Problem%beim%Schwarzen%Brett'>kontaktieren</a>!</p>
+			";
+			
+			} else {
+			
+			echo "
+				Anzeige endet am <b>".$endtag."</b>!
+			";
+			
+			}
+			
+			echo "
+			</div>
 		
 		</div>
 		

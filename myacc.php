@@ -381,9 +381,7 @@
 								<!--<p class="d-inline text-danger">Sie können Ihr Passwort alle 30 Tage ändern!</p><br>-->
 								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</a><br>							
 							
-								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</a><br><br>	
-								
-								<a class="href changeTrigger" onclick="toggleBearbeitenModusAZI()">Meine Anzeigen bearbeiten</a><br>								
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</a><br><br>			
 								<?php
 								
 								echo "
@@ -393,7 +391,9 @@
 								";
 								?>					
 							
-								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</a><br>	
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</a>
+								
+								<br><br>	
 								
 								<?php
 								
@@ -429,7 +429,7 @@
 					
 					$löschung = false;
 					
-				} else {			
+				} else {
 				
 					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""] - count($countNumRows);
 					$löschung = true;
@@ -438,14 +438,19 @@
 					
 				}
 				}
-					
-					
+				
 				if (count($queryNumRows) > 0)  {
 				
-				echo "Meine Anzeigen (".count($queryNumRows)." insgesamt) "; 
+				echo "
+				
+				<p class='float-left buttonpadding2 mb-0 mt-0'>Meine Anzeigen (".count($queryNumRows)." insgesamt)</p>
+							
+				<button class='float-right btn btn-sm btn-light changeTrigger' onclick='toggleBearbeitenModusAZIL()'>Bearbeiten/Löschen</button>				
+				
+				"; 
 				
 				if ($löschung == true) {  
-					echo "&nbsp;&nbsp; <p class='d-inline text-danger'>".$countlöschunganzeigen." Ihrer Anzeige/n wurden wegen Verstößung von Richtlinien oder der Zeitüberschreitung von 2 Wochen gelöscht!</p>"; 
+					echo "&nbsp;&nbsp; <p class='mb-0 mt-0 text-danger float-left d-inline buttonpadding2 pl-2'>".$countlöschunganzeigen." Ihrer Anzeige/n wurden wegen Verstößung von Richtlinien oder der Zeitüberschreitung von 2 Wochen gelöscht!</p>"; 
 				}
 				
 				echo "
@@ -458,7 +463,7 @@
 				echo "
 						<div class='card mb-3'>
 							<div class='card-header bg-dark text-white'>
-								Betreff: 
+								<p class='mb-0 mt-0 d-inline'>Betreff:</p>
 								<div class='changehide d-inline'>
 									".$row["betreff"]."
 								</div>
@@ -469,22 +474,20 @@
 							</div>
 							<div class='card-body'>
 							
-							Beschreibung: 
+							<p class='mb-0 mt-0'>Beschreibung:</p>
 							<div class='changehide d-inline'>
 								".$row["beschreibung"]."
 							</div>
-							<div class='changeinputshow2 d-none'>
+							<div class='changeinputshow2 mb-3 d-none'>
 								<input type='hidden' name='changeBeschreibung[]' value='".$row["aNR"]."'>
 								<textarea class='form-control form-control-sm input2 mw-12em' name='changeBeschreibung[]' rows='3' placeholder='".$row["beschreibung"]."'>".$row["beschreibung"]."</textarea>								
 							</div>
-							
-							<br>
 														
-							Ort: 
-							<div class='changehide d-inline'>
+							<p class='mb-0 mt-3'>Ort:</p>
+							<div class='changehide mb-3 d-inline'>
 								".$row["Bezeichnung"]."
 							</div>
-							<div class='changeinputshow2 d-none'>
+							<div class='changeinputshow2 mb-3 d-none'>
 								<input type='hidden' name='changeOrt[]' value='".$row["aNR"]."'>
 									<select autocomplete class='form-control input2 form-control-sm mw-12em' name='changeOrt[]'>
 										<option value='".$row["PLZ"]."' selected class='text-danger'>Unverändert</option>
@@ -506,10 +509,8 @@
 									</select>							
 							</div>
 							
-							<br>
-							
-							Erstellt am: ".date("d.n.Y, H:i", strtotime($row["created_at"]))." Uhr<br>
-							Zuletzt bearbeitet am: ".date("d.n.Y, H:i", strtotime($row["updated_at"]))." Uhr<br>
+							<p class='mb-0 mt-3'>Erstellt am: ".date("d.n.Y, H:i", strtotime($row["created_at"]))." Uhr</p>
+							<p class='mb-0 mt-0'>Zuletzt bearbeitet am: ".date("d.n.Y, H:i", strtotime($row["updated_at"]))." Uhr</p>
 							
 							</div>				
 					</div>				
@@ -529,7 +530,15 @@
 				} else {			
 				
 					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""] - count($countNumRows);
-					$löschung = true;
+					
+					if ($countlöschunganzeigen < 0) {
+						$countlöschunganzeigen = 0;
+						$löschung = false;
+					} else {
+						$löschung = true;
+					}
+					
+					
 					
 					setcookie("anzahl_aktuelle_anzeigen".$_SESSION['iNR']."", count($countNumRows), time() + ( 365 * 24 * 60 * 60), "/");
 					

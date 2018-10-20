@@ -52,14 +52,17 @@
 
 	<div class="card admincard">
 		<div class="card-header bg-dark text-white">
-		Admineinstellungen
+		<p class="float-left buttonpadding2 mb-0">
+			<i class="fas fa-cog"></i> &nbsp;Admineinstellungen
+		</p>
+		
+		<p class="float-right mb-0">
+			<button class="btn btn-sm btn-light rounded ml-1 sizeme" onclick="collapseAll()" type="button">+</button>
+			<button class="btn btn-sm btn-light rounded mr-1 sizeme" onclick="collapseNone()" type="button">&nbsp;-&nbsp;</button>
+		</p>
+		
 		</div>
 		<div class="card-body">
-		<div class="row">
-			<div class="col mb-3">
-				<button class="btn btn-dark" onclick="collapseAll()" type="button">Alle Aus/- und Einklappen</button>
-			</div>
-		</div>
 		<div class="row">
 		 <div class="col-sm mb-4">
 			<div class="card">
