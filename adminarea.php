@@ -103,9 +103,9 @@
 				</div>
 			  <div class="collapse show" id="einstellung1EinstellungenCollapse">
 				<div class="card-body">
-					<p class="mb-1"><a href="">News erstellen</a></p>
-					<p class="mb-1"><a href="">News bearbeiten</a></p>
-					<p class="mb-1"><a href="">News löschen</a></p>
+					<p class="mb-1"><a href="news/erstellen">News erstellen</a></p>
+					<p class="mb-1"><a href="news/bearbeiten">News bearbeiten</a></p>
+					<p class="mb-1"><a href="news/löschen">News löschen</a></p>
 				</div>
 			  </div>
 			</div>

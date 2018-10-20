@@ -153,7 +153,7 @@
 	
 	?>
 	
-	<div class="container">
+	<div class="rubrikencontainer container-fluid w-75 mb-1 mt-2">
 		<div class="card w-100">
 			<div class="card-header rounded text-center w-100 bg-dark text-white">
 				Wählen sie zwischen <b><?php echo $countRubriken; ?></b> verschiedenen Rubriken!

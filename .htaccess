@@ -24,7 +24,9 @@ RewriteRule ^datenschutz?$  datenschutz.php
 
 RewriteRule ^news/([0-900000]+) news.php?nID=$1
 RewriteRule ^news/alle?$ news.php?nID=0
-
+RewriteRule ^news/bearbeiten?$ addnews.php
+RewriteRule ^news/erstellen?$ addnews.php
+RewriteRule ^news/löschen?$ addnews.php
 
 RewriteRule ^abwicklung-login?$  abwicklungLR.php
 RewriteRule ^abwicklung-register?$  abwicklungLR.php

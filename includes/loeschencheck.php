@@ -75,7 +75,7 @@ foreach ($verb -> query($sql77) as $row) {
 		}
 	}
 	
-	console.dir(anzeigen);
+	console.log(anzeigen);
 	
 	</script>		
 	<?php

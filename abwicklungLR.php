@@ -242,6 +242,10 @@ function generateKundennummer($length) {
 						
 					);					
 					
+					foreach ($verb -> query($sql5) as $row) {
+						$email_empfaenger = $row["email"];
+					}
+					
 					
 					?>
 					
@@ -250,6 +254,18 @@ function generateKundennummer($length) {
 						<h4><p class="mt-1">Sie werden automatisch zur <a class="pointer" href="startseite">Startseite</a> weitergeleitet</p></h4>
 					
 					<?php
+					
+					/*
+					if (isset($email_empfaenger)) {
+					
+						$email_betreff = "Die Mail-Funktion";
+						$email_from = "From: Schwarzes Brett <absender@domain.de>";
+						$email_text = "Hier lernt Ihr, wie man mit PHP Mails verschickt";
+						
+						mail($email_empfaenger, $email_betreff, $email_text, $email_from);
+					}
+					*/
+					
 					
 						header( "refresh:10;url=startseite" );
 					

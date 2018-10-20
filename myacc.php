@@ -433,6 +433,13 @@
 				
 					$countlöschunganzeigen = $_COOKIE["anzahl_aktuelle_anzeigen".$_SESSION['iNR'].""] - count($countNumRows);
 					$löschung = true;
+
+					if ($countlöschunganzeigen < 0) {
+						$countlöschunganzeigen = 0;
+						$löschung = false;
+					} else {
+						$löschung = true;
+					}
 					
 					setcookie("anzahl_aktuelle_anzeigen", count($countNumRows), time() + ( 365 * 24 * 60 * 60), "/");
 					

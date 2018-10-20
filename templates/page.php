@@ -5,8 +5,8 @@
 	
 	setlocale(LC_ALL, 'de_DE.utf8');
 	
-	$head_variante = 1;
-	$nav_variante = 1;
+	$head_variante =   1;
+	$nav_variante =    1;
 	$script_variante = 1;
 	$footer_variante = 1;
 	
