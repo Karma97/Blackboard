@@ -79,7 +79,7 @@
 		</div>
 	</div>
 	<div class="col-md-5">
-	<div class="card" id="news">
+	<div class="card mb-3" id="news">
 		<div class="card-header bg-dark text-center">
 			<h2 class="text-white">Neuigkeiten</h2>
 		</div>
@@ -144,11 +144,56 @@
 	</div>
 	
 	</div>
-	</div>  
 	
+	<?php
+	
+	$sql7 = "SELECT * FROM rubriken";
+	$query7 = $verb -> query($sql7);
+	$countRubriken = count($query7 -> fetchAll());
+	
+	?>
+	
+	<div class="container">
+		<div class="card w-100">
+			<div class="card-header rounded text-center w-100 bg-dark text-white">
+				Wählen sie zwischen <b><?php echo $countRubriken; ?></b> verschiedenen Rubriken!
+			</div>
+		</div>
+	</div>
+	<div class="rubrikencontainer container-fluid w-75 mb-5 mt-2">
+	<div class="row">
+	<?php
+	
+	
+	foreach ($verb -> query($sql7) as $row) {
+		echo "
+		
+		<div class='colrubriken col-lg-3 mt-2 mb-2'>
+			<div class='card-header rubrikcardindex rounded text-left bg-light text-dark'>
+				<h5 class='mb-1 mt-1'>
+					<i class='".$row["icon"]."'></i>
+						&nbsp; ".$row["bezeichnung"]."
+				</h5>
+				
+				<div class='einfahren border pointer rounded-right text-white text-center bg-dark position-absolute' title='Jetzt klicken um zu den Anzeigen die zur Rubrik \"".$row["bezeichnung"]."\" gehören zu gelangen!' onclick=\"window.location.href='anzeigen/".$row["rNR"]."'\">
+				  <h5 class='h5rubriken mb-1 mt-1 faa-parent animated-hover'>
+					<i class='fas fa-caret-right faa-horizontal faa-slow'></i>
+				  </h5>
+				</div>
+				
+			</div>
+		</div>
+		
+		";
+	}
+	
+	?>
+
+				</div>
+			</div>  
+		</div>
 	</div>
 	
-	</div>
 
 	<?php 
 				

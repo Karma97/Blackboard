@@ -109,15 +109,18 @@
 			
 			";
 			
-			$tag = date("d", strtotime($row["created_at"])) + 14;
-			$monat = date("m", strtotime($row["created_at"]));
-			$jahr = date("Y", strtotime($row["created_at"]));
-			$stunden = date("H", strtotime($row["created_at"]));
-			$minuten = date("i", strtotime($row["created_at"]));
-			
-			$endtag = "".$tag.".".$monat.".".$jahr.", ".$stunden.":".$minuten." Uhr";
-			
-			if ($tag < date("d", strtotime($row["created_at"])) or $tag > (date("d", strtotime($row["created_at"])) + 15)) {
+			$date = date('Y-m-d H:i:s', strtotime($row["created_at"]));
+				
+			$newtimestamp = strtotime("".$row["created_at"]." + 14 days");
+			$endtag = date('Y-m-d H:i:s', $newtimestamp);
+					
+			$newtimestamp1 = strtotime("".$row["created_at"]." + 14 days");
+			$endtagEndgültig = date('d.m.Y, H:i', $newtimestamp1);
+					
+			$newtimestamp2 = strtotime("".$row["created_at"]." + 15 days");
+			$endtag2 = date('Y-m-d H:i:s', $newtimestamp2);
+					
+			if ($endtag < $date or $endtag > $endtag2) {
 			
 			echo "
 				<p class='text-danger mt-0 mb-0'>Anzeige sollte bereits gelöscht sein! ist dies nicht der Fall, bitte <a href='mailto:schwarzes.brett@sbrett.de?subject=Problem%beim%Schwarzen%Brett'>kontaktieren</a>!</p>
@@ -126,7 +129,7 @@
 			} else {
 			
 			echo "
-				Anzeige endet am <b>".$endtag."</b>!
+				Anzeige endet am <b>".$endtagEndgültig."</b>!
 			";
 			
 			}

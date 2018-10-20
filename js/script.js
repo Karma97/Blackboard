@@ -565,7 +565,30 @@ if ($('#countStrings' + i))	{
 }
 }
 
+// Arrows at the index.php
 
+$(".rubrikcardindex").click(function(){
+        $(this).find('.einfahren').css({"right": "15px", "opacity": "1"});
+		console.log("geht");
+})
+
+
+// Rubriken in index.php change col on responsive sight
+
+function responsiveRubrikenindex(o) {
+    if (o.matches) { 
+        $(".colrubriken").addClass("col-lg-4");
+		$(".colrubriken").removeClass("col-lg-3");
+    } else {
+        $(".colrubriken").removeClass("col-lg-4");
+		$(".colrubriken").addClass("col-lg-3");
+    }
+}
+
+
+var o = window.matchMedia("(max-width: 1550px)");
+responsiveRubrikenindex(o);
+o.addListener(responsiveRubrikenindex);
 
 
 
