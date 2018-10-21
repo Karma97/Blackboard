@@ -90,16 +90,17 @@
 	}
 		
 	?>
+	<h1 class="mt-1">Neue News eintragen!</h1>
 	
-<form action="../addnews.php" method="post">
+<form action="../news/erstellen" method="post">
 <div class="form-group">
-    <label for="titel" name="newstitle">Titel</label>
-    <input type="text" class="form-control"></input>
+    <label for="titel">Titel</label>
+    <input type="text" name="newstitle" class="form-control"></input>
   </div>
   
   <div class="form-group">
-    <label for="beschr" name="newsdesc">Beschreibung</label>
-    <input type="text" class="form-control"></input>
+    <label for="beschr">Beschreibung</label>
+    <textarea type="text" name="newsdesc" class="form-control" rows="3"></textarea>
   </div>
   
   <div>
@@ -109,7 +110,7 @@
 	if ($zuLang == true) {
 		echo "
 		
-		<p class='text-danger mb-1 mt-1'>News wurde erfolgreich erstellt!</p>
+		<p class='text-danger mb-1 mt-1'>News konnte nicht erstellt werden,<br>Beschreibung ist zu lang!</p>
 		
 		";		
 	}
@@ -126,7 +127,7 @@
 	  
   </div>
   
-  <button type="submit" class="btn btn-primary">Neue News eintragen</button>
+  <button type="submit" class="btn btn-dark">Neue News eintragen</button>
 </form>
 	
 </div>
