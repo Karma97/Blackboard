@@ -64,8 +64,33 @@
 	
 		if ($_SESSION['vorname'] === "S_B" && $_SESSION['nachname'] === "Admin" && $_SESSION['identifier_token'] === "rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK" && $_SESSION['gebDatum'] === "9999-09-09") {
 					
-?>
-
+	
+	$fertig = false;
+	$zuLang = false;
+	
+	if (isset($_POST["newstitle"]) && isset($_POST["newsdesc"])) {
+		
+		$beschreibung = $_POST["newsdesc"];
+		$titel = $_POST["newstitle"];
+		
+		if (strlen($beschreibung) > 5000) {	
+		
+			$zuLang = true;	
+			
+		}
+		
+		if ($zuLang == false) {
+		
+			$sql3 = "INSERT INTO `news`(`nID`, `titel`, `beschreibung`, `updated_at`, `created_at`) VALUES (null, '".$titel."', '".$beschreibung."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+			$query3 = $verb -> query($sql3);
+			
+			$fertig = true;
+			
+		}
+	}
+		
+	?>
+	
 <form action="../addnews.php" method="post">
 <div class="form-group">
     <label for="titel" name="newstitle">Titel</label>
@@ -76,7 +101,31 @@
     <label for="beschr" name="newsdesc">Beschreibung</label>
     <input type="text" class="form-control"></input>
   </div>
-  <div></div>
+  
+  <div>
+  
+	  <?php
+	  
+	if ($zuLang == true) {
+		echo "
+		
+		<p class='text-danger mb-1 mt-1'>News wurde erfolgreich erstellt!</p>
+		
+		";		
+	}
+	
+	if ($fertig == true) {
+		echo "
+		
+		<p class='text-success mb-1 mt-1'>News wurde erfolgreich erstellt!</p>
+		
+		";
+	}
+	  
+	  ?>
+	  
+  </div>
+  
   <button type="submit" class="btn btn-primary">Neue News eintragen</button>
 </form>
 	
