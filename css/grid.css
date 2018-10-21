@@ -3,7 +3,6 @@
 	width: 100%;
 	height: 100%;
 	padding-bottom: 4em;
-	overflow-x: hidden;
 }
 	
 /*
@@ -132,14 +131,6 @@ img {
 .nav, .main, .footer {
 		width: 100%;
 	}  
-.main {
-	padding-bottom: 4em;
-}
-.footerbar {
-	position: absolute;
-	right: 0;
-	bottom: -11.3em;
-}
 	.carousel-inner {
 		height: 100%;
 	}

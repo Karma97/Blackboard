@@ -64,6 +64,9 @@
 	
 		if ($_SESSION['vorname'] === "S_B" && $_SESSION['nachname'] === "Admin" && $_SESSION['identifier_token'] === "rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK" && $_SESSION['gebDatum'] === "9999-09-09") {
 					
+?>
+	<!-- logik -->
+	<?php
 	
 	$fertig = false;
 	$zuLang = false;
@@ -88,29 +91,14 @@
 			
 		}
 	}
-		
-	?>
-	<h1 class="mt-1">Neue News eintragen!</h1>
 	
-<form action="../news/erstellen" method="post">
-<div class="form-group">
-    <label for="titel">Titel</label>
-    <input type="text" name="newstitle" class="form-control"></input>
-  </div>
-  
-  <div class="form-group">
-    <label for="beschr">Beschreibung</label>
-    <textarea type="text" name="newsdesc" class="form-control" rows="3"></textarea>
-  </div>
-  
-  <div>
-  
-	  <?php
-	  
+
+	// feedback
+	
 	if ($zuLang == true) {
 		echo "
 		
-		<p class='text-danger mb-1 mt-1'>News konnte nicht erstellt werden,<br>Beschreibung ist zu lang!</p>
+		<p class='text-danger mb-1 mt-1'>News wurde erfolgreich erstellt!</p>
 		
 		";		
 	}
@@ -122,13 +110,11 @@
 		
 		";
 	}
-	  
-	  ?>
-	  
-  </div>
-  
-  <button type="submit" class="btn btn-dark">Neue News eintragen</button>
-</form>
+	
+	?>
+	
+	<!-- form -->
+	
 	
 </div>
 </div>
