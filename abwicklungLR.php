@@ -3,7 +3,6 @@
 	
 	session_start();
 	
-	// Logout
 	if (isset($_SESSION['vorname']) && isset($_SESSION['iNR']) && isset($_SESSION['news'])) {
 	
 		$name = "".$_SESSION['vorname']." ".$_SESSION['nachname']."";
