@@ -66,7 +66,19 @@
 					
 ?>
 
-	Pagetext Admin only!
+<form action="../addnews.php" method="post">
+<div class="form-group">
+    <label for="titel" name="newstitle">Titel</label>
+    <input type="text" class="form-control"></input>
+  </div>
+  
+  <div class="form-group">
+    <label for="beschr" name="newsdesc">Beschreibung</label>
+    <input type="text" class="form-control"></input>
+  </div>
+  <div></div>
+  <button type="submit" class="btn btn-primary">Neue News eintragen</button>
+</form>
 	
 </div>
 </div>
