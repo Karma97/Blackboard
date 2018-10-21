@@ -4,12 +4,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.2.1/font-awesome-animation.min.css">
 
-<link rel="stylesheet" type="text/css" href="../css/grid.css">
-<link rel="stylesheet" type="text/css" href="../css/nav.css">
-<link rel="stylesheet" type="text/css" href="../css/pacman.css">
-<link rel="stylesheet" type="text/css" href="../css/headerbar.css">
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<link rel="stylesheet" type="text/css" href="../css/login.css">
+<link rel="stylesheet" type="text/css" href="../css/styles.css">
 
 <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
 

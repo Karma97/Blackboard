@@ -34,11 +34,6 @@
 		&nbsp;&nbsp;&nbsp;
 		<i class="footericon fab fa-pinterest-p pointer" title="Pinterest"></i>
 </div>
-
-<!--
-<div class="smallbar pt-2 pb-2">
-	
 </div>
--->
 
 <?php include 'includes/login/login_2.php'; ?>

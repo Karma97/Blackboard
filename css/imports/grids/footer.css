@@ -1,0 +1,58 @@
+
+.footerbar {
+	position: absolute;
+	right: 0;
+	bottom: -6.8em;
+	left: 0;
+	height: auto;
+    width: 100%;
+	color: white;
+	background-color: #1b1e21;
+	text-align: center;
+	z-index: 996;
+	box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.2), 0 -6px 20px 0 rgba(0, 0, 0, 0.19);
+	text-align: center;
+}
+
+.smallbar {	
+	position: absolute;
+	right: 0;
+	padding: 0.7rem;
+	height: 3.2em;
+	left: 0;
+	width: 100%;
+	background-color: #262b2f;
+	color: white;
+	z-index: 996;;
+}
+
+.footercol:hover {
+	text-decoration: underline;
+}
+
+.hrfooter {
+	margin-top: 3.2em;
+}
+
+.hrfooter2 {
+	margin-bottom: 3.2em;
+}
+
+.footericon:hover {
+	color: lightgray;
+}
+
+.socialmedia {
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+	width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+	.footerbar {
+		position: absolute;
+		right: 0;
+		bottom: -11.3em;
+}
+}

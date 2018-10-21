@@ -1,0 +1,33 @@
+/* Setzung der Zeichenkodierung (charset) */
+@charset "UTF-8";
+
+/* Media-Queries
+@import url("imports/media_queries.css") list-of-media-queries;
+ */
+
+/* CSS-Dateien */
+/* Grid-Elemente */
+@import url("imports/grids/footer.css");
+@import url("imports/grids/header.css");
+@import url("imports/grids/main.css");
+@import url("imports/grids/sonstige_Grids.css");
+@import url("imports/grids/nav.css");
+@import url("imports/grids/scrolled_nav.css");
+
+/* Slider */
+@import url("imports/slider/slider.css");
+
+/* Pacman Loading Screen */
+@import url("imports/pacman/pacman.css");
+
+/* Login */
+@import url("imports/login/login.css");
+
+/* Allgemein */ 
+@import url("imports/allgemein.css");
+
+/* CSS nach Dateien */
+@import url("imports/nach_dateien/index.css");
+@import url("imports/nach_dateien/anzadd.css");
+@import url("imports/nach_dateien/myacc.css");
+@import url("imports/nach_dateien/adminarea.css");

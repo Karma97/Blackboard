@@ -39,7 +39,6 @@
 	background-color: #343a40;
 }
 
-
 .navbar_login_item_active {
 	border-bottom: 4px solid white !important;
 }
@@ -54,12 +53,6 @@
 	border-top: 2px solid transparent;
 	border-bottom: 2px solid transparent;
 }
-
-/*
-body {
-	overflow-y: hidden;
-}
-*/
 
 .login_inputs_container {
 	width: 60%;

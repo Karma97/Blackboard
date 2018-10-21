@@ -1,0 +1,38 @@
+.einfahren {
+	right: -20px;
+	bottom: 0px;
+	height: 100%;
+	width: 10%;
+	opacity: 0;
+	transition: 0.2s;
+}
+
+.rubrikcardindex {
+	border: 1px solid transparent;
+}
+
+.rubrikcardindex:hover {
+	border: 1px solid #dee2e6 !important;
+} 
+
+.rubrikcardindex:hover .einfahren { 
+	opacity: 1;
+	right: 15px;
+}
+
+.h5rubriken {
+	padding: .75rem 0px;
+	height: 100%;
+	width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+	.rubrikenContainer {
+		text-align: left;
+		padding-left: 0px;
+	}
+	
+	.rubrikencontainer {
+		width: 100% !important;
+	}
+}

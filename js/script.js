@@ -567,14 +567,16 @@ if ($('#countStrings' + i))	{
 
 // Arrows at the index.php
 
+if ($(".rubrikcardindex")) {
 $(".rubrikcardindex").click(function(){
         $(this).find('.einfahren').css({"right": "15px", "opacity": "1"});
-		console.log("geht");
-})
-
+		$(this).css({"border-size": "1px", "border-style": "solid", "border-color": "#dee2e6",})
+});
+}
 
 // Rubriken in index.php change col on responsive sight
 
+if ($(".colrubriken")) {
 function responsiveRubrikenindex(o) {
     if (o.matches) { 
         $(".colrubriken").addClass("col-lg-4");
@@ -589,6 +591,27 @@ function responsiveRubrikenindex(o) {
 var o = window.matchMedia("(max-width: 1550px)");
 responsiveRubrikenindex(o);
 o.addListener(responsiveRubrikenindex);
+}
 
+// change nav on scroll 
 
+if ($('#scrollnav')) {
+$(document).ready(function(){
+  var scrollTop = 0;
+  $(window).scroll(function(){
+    scrollTop = $(window).scrollTop();
+    
+    if (scrollTop >= 28) {
+      $('#scrollnav').addClass('scrolled');
+	  $('.main').css({"padding-top": "0em"});
+    }
+	if (scrollTop < 28 || scrollTop == 0) {
+      $('#scrollnav').removeClass('scrolled');
+	  $('.main').css({"padding-top": "0em"});
+    } 
+    
+  }); 
+  
+});
+}
 

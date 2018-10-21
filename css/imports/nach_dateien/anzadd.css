@@ -1,0 +1,24 @@
+.rubrikenRow {
+	width: 19%;
+	display: inline-block;
+}
+
+.rubrikenContainer {
+	text-align: left;
+	padding-left: 40px;
+}
+
+@media screen and (max-width: 1200px) {
+	.rubrikenRow {
+		width: 49%;
+		display: inline-block;
+	}
+	
+}
+
+@media screen and (max-width: 700px) {
+	.rubrikenRow {
+		width: 100%;
+		display: inline-block;
+	}
+}

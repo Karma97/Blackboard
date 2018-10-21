@@ -1,0 +1,7 @@
+.iconCollapseAll {
+	transition: 0.5s;
+}
+
+.collapsedIcon {
+	transform: rotate(180deg);
+}

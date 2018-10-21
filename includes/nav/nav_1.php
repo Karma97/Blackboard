@@ -1,7 +1,8 @@
 
 <div class="headerbar">
-	WILLKOMMEN AUF DEM SCHWARZEN BRETT
+	<p class="headerbar-text">WILLKOMMEN AUF DEM SCHWARZEN BRETT</p>
 </div>
+<div id="scrollnav" class="">
 <div class="navigationsleiste" id="navleiste">
 	<a href="startseite" class="navactive navItem">Start</a>
 	<div class="dropDown">
@@ -65,4 +66,5 @@
 	<a href="javascript:void(0);" class="icon nohover" onclick="navResponsive()">
 		<i class="fa fa-bars"></i>
 	</a>
+</div>
 </div>
