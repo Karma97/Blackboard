@@ -42,7 +42,9 @@ output {
 	display: block;
 }
 
-
+p {
+	display: block;
+}
 
 
 .overflow-y-hidden {

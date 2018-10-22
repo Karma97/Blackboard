@@ -255,16 +255,19 @@ function generateKundennummer($length) {
 					
 					<?php
 					
-					/*
+					
 					if (isset($email_empfaenger)) {
 					
+						$email_empfaenger = "Nichlas12323@gmail.com";
+					
 						$email_betreff = "Die Mail-Funktion";
-						$email_from = "From: Schwarzes Brett <absender@domain.de>";
+						$email_from = "From: Schwarzes Brett <schwarzzesbrettt@gmail.com>";
 						$email_text = "Hier lernt Ihr, wie man mit PHP Mails verschickt";
 						
 						mail($email_empfaenger, $email_betreff, $email_text, $email_from);
+						
 					}
-					*/
+					
 					
 					
 						header( "refresh:10;url=startseite" );

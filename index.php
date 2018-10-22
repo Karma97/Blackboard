@@ -103,10 +103,13 @@
 			echo "
 			
 			<div class='row mb-4 pointer' title='Jetzt klicken um zur News mit dem Titel \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='news/".$row["nID"]."'\">				
-				<strong>".$row["titel"]."</strong>
-				<p class='m-0' id='countStrings".$i."'>
-					".$row["beschreibung"]." 
+				<p class='m-0 newstitel'>
+					<b>".$row["titel"]."</b>
 				</p>
+				<p class='m-0 newsbesch' id='countStrings".$i."'>
+					".$row["beschreibung"]."
+				</p>
+				
 				Veröffentlicht am: &nbsp;".date("d.", strtotime($row["created_at"]))."
 				".$monatsnamen[$monat]." 
 				".date("Y", strtotime($row["created_at"])).",  

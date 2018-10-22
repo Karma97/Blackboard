@@ -26,6 +26,12 @@
 	width: 100%;
 }
 
+.newstitel, .newsbesch {
+	display: block;
+	min-width: 100%;
+}
+
+
 @media screen and (max-width: 700px) {
 	.rubrikenContainer {
 		text-align: left;

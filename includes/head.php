@@ -2,7 +2,7 @@
 <html lang="de">
 	<head>
 		<meta charset="UTF-8">
-		<title>Schwarzes Brett | Tausch- und Schenkbörse</title>
+		<title>Schwarzes Brett | Tauschbörse</title>
 		<?php 
 		
 		switch ($head_variante) {
