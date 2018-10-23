@@ -1,6 +1,13 @@
 
 #scrollnav.scrolled {
-	z-index: 999;
+	transition: 0.3s;
+}
+
+.scrolled #scrollNavbarIndicatorContainer {
+	position: absolute;
+	opacity: 1;
+	top: 41px;
+	transition: 0.3s;
 }
 
 .scrolled .navigationsleiste {
@@ -29,9 +36,9 @@
     padding: 10px 16px;
 }
 
-	.scrolled .showDropdown {
-		display: block !important;
-	}	
+.scrolled .showDropdown {
+	display: block !important;
+}	
 
 @media screen and (max-width: 960px) {
 	.scrolled .navigationsleiste a.navItem:not(:first-child) {display: none;}

@@ -4,13 +4,13 @@
 </div>
 <div id="scrollnav" class="">
 <div class="navigationsleiste" id="navleiste">
-	<a href="../startseite" class="navactive navItem">Start</a>
+	<a href="../startseite" class="navitems navItem">Start</a>
 	<div class="dropDown">
 		<button class="dropbtn" onclick="showDropdown()">Rubriken  
 			<i id="ichange" onclick="showDropdown()" class="fas fa-chevron-circle-right"></i>
 		</button>
 		<div class="dropdownContent dropdownContentErste">
-			<a class="erste" href="../anzeigen/alle">Alle Anzeigen &nbsp;<i class="fas fa-list-ul"></i></a>
+			<a class="navitems erste" href="../anzeigen/alle">Alle Anzeigen &nbsp;<i class="fas fa-list-ul"></i></a>
 			
 				<?php
 				
@@ -18,7 +18,7 @@
 				$query = $verb -> query($sql);
 				
 				foreach ($query as $key => $row) {
-					echo "<a href='../anzeigen/".$row["rNR"]."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
+					echo "<a class='navitems' href='../anzeigen/".$row["rNR"]."'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
 				}
 				
 			?>
@@ -26,7 +26,7 @@
 		</div>
 	</div> 
 	
-	<a class="navItem" href="../news/alle">News</a>
+	<a class="navitems navItem" href="../news/alle">News</a>
 
 	<?php
 	
@@ -34,8 +34,8 @@
 			
 	?>
 	
-	<a onclick="openRegister('.login_komplett')" class="navItem pointer float-right faa-parent animated-hover">Registrieren <i class="faa-horizontal faa-slow fas fa-user-plus"></i></a>
-	<a onclick="openLogin('.login_komplett')" class="navItem pointer float-right faa-parent animated-hover">Anmelden <i class="faa-horizontal faa-slow fas fa-sign-in-alt"></i></a>
+	<a onclick="openRegister('.login_komplett')" class="navitems navItem pointer float-right faa-parent animated-hover">Registrieren <i class="faa-horizontal faa-slow fas fa-user-plus"></i></a>
+	<a onclick="openLogin('.login_komplett')" class="navitems navItem pointer float-right faa-parent animated-hover">Anmelden <i class="faa-horizontal faa-slow fas fa-sign-in-alt"></i></a>
 	
     <?php
 	
@@ -43,7 +43,7 @@
 	
 	?>
 	
-	<a class="navItem" href="../anzeigen/erstellen">Anzeige aufgeben</a>
+	<a class="navitems navItem" href="../anzeigen/erstellen">Anzeige aufgeben</a>
 	
 	<?php
 	
@@ -51,14 +51,14 @@
 					
 	?>
 	
-	<a class="navItem" href="../adminarea">Adminarea <i class="fas fa-cogs"></i></a>
+	<a class="navitems navItem" href="../adminarea">Adminarea <i class="fas fa-cogs"></i></a>
 	
 	<?php
 		}
 	?>
 	
-	<a href="../logout" class="navItem pointer float-right faa-parent animated-hover">Logout <i class="faa-horizontal faa-slow fas fa-sign-out-alt"></i></a>
-	<a href="../account/myaccount" class="navItem pointer float-right faa-parent animated-hover">Mein Account <i class="faa-horizontal faa-slow fas fa-user-circle"></i></a>
+	<a href="../logout" class="navitems navItem pointer float-right faa-parent animated-hover">Logout <i class="faa-horizontal faa-slow fas fa-sign-out-alt"></i></a>
+	<a href="../account/myaccount" class="navitems navItem pointer float-right faa-parent animated-hover">Mein Account <i class="faa-horizontal faa-slow fas fa-user-circle"></i></a>
 		
 	<?php
 	}
@@ -66,5 +66,10 @@
 	<a href="javascript:void(0);" class="icon nohover" onclick="navResponsive()">
 		<i class="fa fa-bars"></i>
 	</a>
+</div>
+<div id="scrollNavbarIndicatorContainer">
+	<div id="scrollNavbarIndicator">
+		
+	</div>
 </div>
 </div>

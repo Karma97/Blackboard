@@ -1,3 +1,15 @@
+// set links
+
+// bsp.: /Blackboard
+var vorwahlLinks = "/Blackboard";
+
+
+
+
+
+
+
+
 // disable image drag on firefox
 if (document.getElementsByTagName('img')) {
 window.onload = function (e) {
@@ -615,3 +627,56 @@ $(document).ready(function(){
 });
 }
 
+// When the user scrolls the page, execute myFunction 
+if (document.getElementById("scrollNavbarIndicator")) {
+window.onscroll = function() {scrollIndicator()};
+
+function scrollIndicator() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("scrollNavbarIndicator").style.width = scrolled + "%";
+}
+}
+
+
+// move CSS 'active' class in the navigationsleiste
+
+$(function () {
+	
+function setNavigation() {
+    var path = window.location.pathname;
+    path = path.replace(/\/$/, "");
+    path = decodeURIComponent(path);
+	
+	$(".navigationsleiste .navitems").each(function() {
+		var aElemente = $(this).attr("href");
+		var ausgabe = aElemente.replace(/./, "");
+				
+		if ("" + vorwahlLinks + "" + ausgabe + "" == path) {
+			$(this).addClass("navactive");
+		} else {
+		
+		
+			var ausgabe2 = ausgabe.replace(/./, "");
+			
+			if ("" + vorwahlLinks + "" + ausgabe2 + "" == path) {
+				$(this).addClass("navactive");
+			}		
+			
+			
+		}	
+	});
+	
+	
+	/*
+    $(".nav a").each(function () {
+        var href = $(this).attr('href');
+        if (path.substring(0, href.length) === href) {
+            $(this).closest('li').addClass('active');
+        }
+    });
+	*/
+};
+    setNavigation();
+});
