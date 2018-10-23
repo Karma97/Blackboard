@@ -4,7 +4,7 @@
 </div>
 <div id="scrollnav" class="">
 <div class="navigationsleiste" id="navleiste">
-	<a href="./startseite" class="navitems navItem">Start</a>
+	<a href="./startseite" class="navitems navactive startseite navItem">Start</a>
 	<div class="dropDown">
 		<button class="dropbtn" onclick="showDropdown()">Rubriken 
 			<i id="ichange" onclick="showDropdown()" class="fas fa-chevron-circle-right"></i>

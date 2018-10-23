@@ -3,13 +3,6 @@
 // bsp.: /Blackboard
 var vorwahlLinks = "/Blackboard";
 
-
-
-
-
-
-
-
 // disable image drag on firefox
 if (document.getElementsByTagName('img')) {
 window.onload = function (e) {
@@ -640,7 +633,7 @@ function scrollIndicator() {
 }
 
 
-// move CSS 'active' class in the navigationsleiste
+// move CSS 'active' class in the navigation
 
 $(function () {
 	
@@ -654,6 +647,7 @@ function setNavigation() {
 		var ausgabe = aElemente.replace(/./, "");
 				
 		if ("" + vorwahlLinks + "" + ausgabe + "" == path) {
+			$(".startseite").removeClass("navactive");
 			$(this).addClass("navactive");
 		} else {
 		
@@ -661,12 +655,15 @@ function setNavigation() {
 			var ausgabe2 = ausgabe.replace(/./, "");
 			
 			if ("" + vorwahlLinks + "" + ausgabe2 + "" == path) {
+				$(".startseite").removeClass("navactive");
 				$(this).addClass("navactive");
-			}		
+			} 
 			
 			
 		}	
 	});
 };
+
     setNavigation();
+	
 });

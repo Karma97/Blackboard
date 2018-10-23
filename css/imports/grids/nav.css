@@ -41,8 +41,12 @@
 }
 
 .navactive {
-    background-color: inherit;
 	border-bottom: 1px solid white !important;
+}
+
+.dropDown .navactive {
+	font-weight: bold;
+	border-bottom: 1px solid transparent !important;
 }
 
 .navigationsleiste .icon {
