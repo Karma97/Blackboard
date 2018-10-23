@@ -379,21 +379,53 @@
 								";
 								?>
 								<!--<p class="d-inline text-danger">Sie können Ihr Passwort alle 30 Tage ändern!</p><br>-->
-								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</a><br>							
+								<div class="changeButtonsRsp">
+								
+								<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</button>
+								
+								</div>
+								
+								
+								<div class="changeHrefsRsp">
+								
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</a><br>
+								
+								</div>							
 							
-								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</a><br><br>			
-								<?php
-								
-								echo "
-								
-								<a href=''>Meine Anzeigen löschen</a><br><br>
-								
-								";
-								?>					
+							<div class="changeButtonsRsp">
 							
+							<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</button>
+							
+							</div>
+							
+								<div class="changeHrefsRsp">
+								
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</a><br><br>		
+								</div>								
+								
+								<div class="changeHrefsRsp">
+								
+								<a class='float-left href changeTrigger'>Meine Anzeigen löschen</a><br><br>
+									
+								</div>
+								
+								<div class="changeButtonsRsp">
+								
+								<button class='float-left btn btn-sm btn-dark changeTrigger'>Meine Anzeigen löschen</button><br><br>
+									
+								</div>
+								
+							<div class="changeButtonsRsp">
+							
+							<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</button>
+							
+							</div>
+								<div class="changeHrefsRsp">
+								
 								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</a>
 								
-								<br><br>	
+								</div>
+								<br>
 								
 								<?php
 								

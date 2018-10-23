@@ -55,6 +55,14 @@ hr.changes {
     box-shadow: #343a40 0 2px 18px;	
 }
 
+.changeHrefsRsp {
+	display: block;
+}
+
+.changeButtonsRsp {
+	display: none;
+}
+
 @media screen and (max-width: 1200px) {
 	#change_pwd_html {
 		left: 50%;
@@ -129,5 +137,13 @@ hr.changes {
 		width: 100%;
 		height: auto;	
 	}
+	
+.changeHrefsRsp {
+	display: none;
+}
+
+.changeButtonsRsp {
+	display: block;
+}
 
 }

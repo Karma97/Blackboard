@@ -30,7 +30,7 @@
 	<div class="row">
 	
 	<div class="col-md-7">
-		<div id="slide" class="carousel slide" data-ride="carousel">
+		<div id="slide" class="carousel slide" data-ride="carousel" data-interval="6000">
 		<div class="carousel-inner">
 				<div class="carousel-item active">
 					<img class="rounded imgindex" src="images/Foto-Platzhalter.jpg" draggable="false">
