@@ -23,7 +23,7 @@
 	<hr class="bg-light hrfooter2" style="color: white">
 	
 <div class="smallbar" style="bottom: 0">
-	Social Media: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<i class="footericon fab fa-facebook-f fa-lg pointer" title="Facebook"></i>
 		&nbsp;&nbsp;&nbsp;
 		<i class="footericon fab fa-twitter fa-lg pointer" title="Twitter"></i>
