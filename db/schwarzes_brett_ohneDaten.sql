@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 11. Okt 2018 um 16:55
--- Server-Version: 10.1.35-MariaDB
+-- Erstellungszeit: 23. Okt 2018 um 22:19
+-- Server-Version: 10.1.36-MariaDB
 -- PHP-Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -102,6 +102,22 @@ CREATE TABLE `orte` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `rezensionen`
+--
+
+CREATE TABLE `rezensionen` (
+  `kID` int(11) NOT NULL,
+  `iNR` int(11) NOT NULL,
+  `titel` varchar(600) NOT NULL,
+  `beschreibung` text NOT NULL,
+  `bewertung` decimal(10,1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `rubriken`
 --
 
@@ -163,6 +179,13 @@ ALTER TABLE `news`
 --
 ALTER TABLE `orte`
   ADD PRIMARY KEY (`PLZ`);
+
+--
+-- Indizes für die Tabelle `rezensionen`
+--
+ALTER TABLE `rezensionen`
+  ADD PRIMARY KEY (`kID`),
+  ADD KEY `iNR` (`iNR`);
 
 --
 -- Indizes für die Tabelle `rubriken`
@@ -228,6 +251,12 @@ ALTER TABLE `anzeigen`
 --
 ALTER TABLE `bilder`
   ADD CONSTRAINT `bilder_ibfk_1` FOREIGN KEY (`aNR`) REFERENCES `anzeigen` (`aNR`);
+
+--
+-- Constraints der Tabelle `rezensionen`
+--
+ALTER TABLE `rezensionen`
+  ADD CONSTRAINT `rezensionen_ibfk_1` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`);
 
 --
 -- Constraints der Tabelle `r_besitzt_a`

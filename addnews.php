@@ -67,8 +67,15 @@
 	
 	$fertig = false;
 	$zuLang = false;
+	$leer = false;
 	
 	if (isset($_POST["newstitle"]) && isset($_POST["newsdesc"])) {
+		
+		if (empty($_POST["newstitle"]) or empty($_POST["newsdesc"])) {
+			
+			$leer = true;
+			
+		} else {
 		
 		$beschreibung = $_POST["newsdesc"];
 		$titel = $_POST["newstitle"];
@@ -86,6 +93,7 @@
 			
 			$fertig = true;
 			
+			}
 		}
 	}
 		
@@ -121,6 +129,14 @@
 		<p class='text-success mb-1 mt-1'>News wurde erfolgreich erstellt!</p>
 		
 		";
+	}
+	
+	if ($leer == true) {
+		echo "
+		
+		<p class='text-danger mb-1 mt-1'>Sie müssen die Felder ausfüllen!</p>
+		
+		";		
 	}
 	  
 	  ?>

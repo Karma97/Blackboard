@@ -63,7 +63,7 @@
 							echo "
 							
 							<p class='float-left d-inline mb-0 buttonpadding'>
-								<i class='".$row["icon"]."'></i>&nbsp; ".$row["bezeichnung"]."
+								<i class='".$row["icon"]."'></i>&nbsp; ".strip_tags($row["bezeichnung"])."
 							</p>
 							
 							<a href='../anzeigen/alle' class='float-right'>
@@ -106,7 +106,7 @@
 							echo "
 							
 							<p class='float-left d-inline mb-0 buttonpadding'>
-								<i class='".$row["icon"]."'></i>&nbsp; ".$row["bezeichnung"]."
+								<i class='".$row["icon"]."'></i>&nbsp; ".strip_tags($row["bezeichnung"])."
 							</p>
 							
 							<a href='../anzeigen/alle' class='float-right'>
@@ -146,20 +146,20 @@
 				$monat = date("n", strtotime($row["created_at"]));
 				
 					echo "
-					<a href='../anzeigen/anzeige-".$row["aNR"]."' class='anzeignenHref pointer text-dark'>
-					<div class='card mb-3' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".$row["betreff"]."\" zu kommen!'>
+					<a href='../anzeigen/anzeige-".strip_tags($row["aNR"])."' class='anzeignenHref pointer text-dark'>
+					<div class='card mb-3' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
 						<div class='card-header bg-dark text-white'>
-						".$row["betreff"]."
+						".strip_tags($row["betreff"])."
 						</div>
 					<div class='card-body border-dark'>
-					".$row["beschreibung"]."
+					".strip_tags($row["beschreibung"])."
 						<br><br>
 						Online seit dem 
 						".date("d.", strtotime($row["created_at"]))."
 						".$monatsnamen[$monat]." 
 						".date("Y", strtotime($row["created_at"])).",  
 						".date("H", strtotime($row["created_at"])).":00 Uhr<br>
-						Ort: ".$row["Bezeichnung"]."						
+						Ort: ".strip_tags($row["Bezeichnung"])."						
 					</div>
 					
 					";
@@ -175,7 +175,7 @@
 						$query2 = $verb -> query($abfrage2);					
 						
 					foreach ($query2 as $row2) {
-							echo "&nbsp; <a href='".$row2["rNR"]."'><button class='btn btn-sm							btn-dark mb-1'>".$row2["bezeichnung"]."</button></a>";
+							echo "&nbsp; <a href='".$row2["rNR"]."'><button class='btn btn-sm btn-dark mb-1'>".strip_tags($row2["bezeichnung"])."</button></a>";
 						}
 						
 					echo "
