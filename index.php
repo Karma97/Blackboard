@@ -102,12 +102,12 @@
 			
 			echo "
 			
-			<div class='row mb-4 pointer' title='Jetzt klicken um zur News mit dem Titel \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='news/".$row["nID"]."'\">				
+			<div class='row mb-4 pointer' title='Jetzt klicken um zur News mit dem Titel \"".strip_tags($row["titel"])."\" zu kommen.' onclick=\"window.location.href='news/".$row["nID"]."'\">				
 				<p class='m-0 newstitel'>
-					<b>".$row["titel"]."</b>
+					<b>".strip_tags($row["titel"])."</b>
 				</p>
 				<p class='m-0 newsbesch' id='countStrings".$i."'>
-					".$row["beschreibung"]."
+					".strip_tags($row["beschreibung"])."
 				</p>
 				
 				Veröffentlicht am: &nbsp;".date("d.", strtotime($row["created_at"]))."
@@ -175,10 +175,10 @@
 			<div class='card-header rubrikcardindex rounded text-left bg-light text-dark'>
 				<h5 class='mb-1 mt-1'>
 					<i class='".$row["icon"]."'></i>
-						&nbsp; ".$row["bezeichnung"]."
+						&nbsp; ".strip_tags($row["bezeichnung"])."
 				</h5>
 				
-				<div class='einfahren border pointer rounded-right text-white text-center bg-dark position-absolute' title='Jetzt klicken um zu den Anzeigen die zur Rubrik \"".$row["bezeichnung"]."\" gehören zu gelangen!' onclick=\"window.location.href='anzeigen/".$row["rNR"]."'\">
+				<div class='einfahren border pointer rounded-right text-white text-center bg-dark position-absolute' title='Jetzt klicken um zu den Anzeigen die zur Rubrik \"".strip_tags($row["bezeichnung"])."\" gehören zu gelangen!' onclick=\"window.location.href='anzeigen/".strip_tags($row["rNR"])."'\">
 				  <h5 class='h5rubriken mb-1 mt-1 faa-parent animated-hover'>
 					<i class='fas fa-caret-right faa-horizontal faa-slow'></i>
 				  </h5>

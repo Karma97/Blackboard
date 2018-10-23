@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 11. Okt 2018 um 16:55
--- Server-Version: 10.1.35-MariaDB
+-- Erstellungszeit: 23. Okt 2018 um 22:19
+-- Server-Version: 10.1.36-MariaDB
 -- PHP-Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -46,9 +46,7 @@ CREATE TABLE `anzeigen` (
 
 INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES
 (25, 1, 'Verkaufe Auto', 'Lamborghini', 26382, '2018-10-11 13:02:36', '2018-10-11 13:02:36'),
-(26, 1, 'Verkaufe Laufband', 'Neues Laufband für 200€ Verhandlungspreis!', 25813, '2018-10-11 13:07:00', '2018-10-11 13:07:00'),
-(27, 2, 'Verkaufe DAT Adams neues Album', '20€ Verhandlungsbasis', 26382, '2018-10-11 13:13:18', '2018-10-11 13:13:18'),
-(28, 2, 'Verkaufe DAT Adams neues Album', '20€ Verhandlungsbasis!', 26382, '2018-10-11 13:16:36', '2018-10-11 13:16:36');
+(26, 1, '123', '213', 26382, '2018-10-23 19:51:44', '2018-10-23 19:51:44');
 
 -- --------------------------------------------------------
 
@@ -90,7 +88,8 @@ CREATE TABLE `inserent` (
 
 INSERT INTO `inserent` (`iNR`, `kundennummer`, `identifier_token`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES
 (1, 'SB#1234567889', 'rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK', 'Admin', 'S_B', '$2y$10$IMZgfoODrIo9eKEcl3Ijbuik75swhM2O7qnjTTnxLoBByu1GR49iW', 's_b_admin@example.com', '9999-09-09', 1, '2018-10-11 12:39:50', '2018-10-06 20:39:42'),
-(2, 'SB#1824395773', 'Tp1mv4sln2lQsS#1Q8tcYPzU#34TC6szYm2Epf1oS2GCNfw%H%7A&jcBEBy6wpz75nVcwXxudQx5HPyrqjWzZiBw%QiL=M%W3H1F4G7Kfj&be=eKHbSpjOAPHkK8OB38u2OtFuz8~jsVZPFoE9tM4o0wryox4dVag=WX&WbpO86WK%~YqBFv4mMWJaUKDmbduUiQtHJ6ljEx~OHLmd=AUU6Z0H1~2w005LPKfAnMigkUwe3l4z9tjSa=rfYNY4oTvR17P4kSfAvBsmrEhU3XZZSMq=yeiVLG=xLIpKOg7lMEc5hypAo#6AfKuOaCHSrSj&~d47qYg9AxBfwCy5=4sL4~qC6JcMXbI&HuVOtTV4McgVTpNWrvKNRtyl35NISI=Nq8HtWG=MsWERbExm1YHbuzPO4Bzd1WB%dyi5=BNxlXnKuucuv#~V2Wcqpqj1DUg=4sbaBc=3%6KXSkRyN2te0Q#vW3uTe&5mdRegOejsBYfV&vh~HX', 'Hüls', 'Eike', '$2y$10$OX0GCC8dlF/0OjT2sREp0.GzrkMVo/9RMcVWlNvyPmppXfM.6CG7q', 'eike.huels@gmx.de', '1997-12-20', 1, '2018-10-11 13:01:00', '2018-10-08 16:27:42');
+(2, 'SB#1824395773', 'Tp1mv4sln2lQsS#1Q8tcYPzU#34TC6szYm2Epf1oS2GCNfw%H%7A&jcBEBy6wpz75nVcwXxudQx5HPyrqjWzZiBw%QiL=M%W3H1F4G7Kfj&be=eKHbSpjOAPHkK8OB38u2OtFuz8~jsVZPFoE9tM4o0wryox4dVag=WX&WbpO86WK%~YqBFv4mMWJaUKDmbduUiQtHJ6ljEx~OHLmd=AUU6Z0H1~2w005LPKfAnMigkUwe3l4z9tjSa=rfYNY4oTvR17P4kSfAvBsmrEhU3XZZSMq=yeiVLG=xLIpKOg7lMEc5hypAo#6AfKuOaCHSrSj&~d47qYg9AxBfwCy5=4sL4~qC6JcMXbI&HuVOtTV4McgVTpNWrvKNRtyl35NISI=Nq8HtWG=MsWERbExm1YHbuzPO4Bzd1WB%dyi5=BNxlXnKuucuv#~V2Wcqpqj1DUg=4sbaBc=3%6KXSkRyN2te0Q#vW3uTe&5mdRegOejsBYfV&vh~HX', 'Hüls', 'Eike', '$2y$10$OX0GCC8dlF/0OjT2sREp0.GzrkMVo/9RMcVWlNvyPmppXfM.6CG7q', 'eike.huels@gmx.de', '1997-12-20', 1, '2018-10-11 13:01:00', '2018-10-08 16:27:42'),
+(3, 'SB#3874416764', 'EJWoc3wp~yUKDimNw&3hYOQEDRjYgM12Ko0WvWEVByrafgzZae&MQVVkE6D2ZrLy2EUkeD67n2haepWrGQ5gPdX#hVq6s8538MAu~qxkfM3ZCE82dZGZ#cd#sdb4eTAb25M04tSNOZonPuEWnA7pUOJ3OdveH#MX1HhObyK0B2gWseO&j~Jlt%fPkMM3FTWP91fnc6IUC2uwC5=6vH&Shzb9fu~wbSXkVlXuaQ4TnD1Igw9K2~UrVP3Gg7u03P~Vi2=3c&V~o5ADz1HWan%uTzvlpLgHsL9QY%P0mazLIUknwr55#G3JPqqHJ3iXTTUWggKVMIbxcH=TNFi~PlGwFBYnW71=D87To~IYu0p~aWAQOu8P23TxaDzbLbw5F&#7~%gAMw8l86fyEUGXPZEFSOGlV6hbd=AHLSf~7Ini%CTp2n#vom#mvvgA%3O5o9j=u#Qb6hGde14eRIhdpj1NuDOQOxbiAKR&kTXy2E=LBonC~uMQck3w', 'testnachname', 'testvorname', '$2y$10$sWKPLgLeCb8SE44NZgR.YOCdHaYn7aBaZxyeqmqNXpX7GZZbs1okO', 'test@web.de', '2018-10-09', 1, '2018-10-22 14:56:49', '2018-10-22 14:56:49');
 
 -- --------------------------------------------------------
 
@@ -114,7 +113,25 @@ INSERT INTO `news` (`nID`, `titel`, `beschreibung`, `updated_at`, `created_at`) 
 (1, 'Endlich neue Rubriken', 'Wir freuen uns euch mitteilen zu dürfen, dass wir neue Rubriken eingeführt haben, die sie bei Ihren anzeigen benutzen können.', '2018-09-22 19:00:00', '2018-09-22 18:26:12'),
 (2, 'Die Webseite ist da', 'Die neue Webseite ist endlich da. Nach mehreren Jahren ist es uns nun endlich gelungen die Webseite zu führen. Wir freuen uns auf erfolgreiche Jahre. Falls Sie Verbesserungsmöglichkeiten sehen, dann zögern Sie nicht diese uns mitzuteilen. Wir sind gerne für Vorschläge offen.', '2018-10-01 23:55:34', '2018-09-22 18:59:38'),
 (3, 'Accounts', 'Endlich ist es da. Sie können nun endlich einen kostenlosen Account erstellen und so die Dienste unserer Tausch- und Schenkbörse kostenlos benutzen. Dazu müssen sie nur zum Registrierformular gehen und sich registrieren.', '2018-10-01 23:20:47', '2018-10-01 23:20:47'),
-(4, 'Neue Rubriken', 'Es gibt endlich wieder mehr Vielfalt. Jetzt können Sie sich zwischen Zwei neuen Rubriken mehr entscheiden. Die Spielzeug und die Autorubrik sind auf häufiger Nachfrage erstellt und eingeweiht worden.\r\nMehrere Rubriken sind in Arbeit und werden zukünftig auch ins Team der vorhandenen Rubriken aufgenommen. Falls Sie Ideen für Rubriken haben, dann kontaktieren Sie uns gerne.', '2018-10-02 00:39:10', '2018-10-02 00:39:10');
+(4, 'Neue Rubriken', 'Es gibt endlich wieder mehr Vielfalt. Jetzt können Sie sich zwischen Zwei neuen Rubriken mehr entscheiden. Die Spielzeug und die Autorubrik sind auf häufiger Nachfrage erstellt und eingeweiht worden.\r\nMehrere Rubriken sind in Arbeit und werden zukünftig auch ins Team der vorhandenen Rubriken aufgenommen. Falls Sie Ideen für Rubriken haben, dann kontaktieren Sie uns gerne.', '2018-10-02 00:39:10', '2018-10-02 00:39:10'),
+(5, 'Responsive Nav', 'Die Navigation ist nun endlich Responsive und Browserünterstützend!', '2018-10-22 06:32:08', '2018-10-22 06:32:08'),
+(6, '312312', '1231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e13121231e1312.\r\n1231e13121231e13121231e13121231e13121231e13121231e1312\r\n1231e13121231e13121231e13121231e1312', '2018-10-22 07:45:19', '2018-10-22 07:45:19'),
+(7, '234234234', '234234234234234234234234234234234234234234234234234234', '2018-10-22 09:35:22', '2018-10-22 09:35:22'),
+(8, '4234', '234234234', '2018-10-23 19:35:56', '2018-10-23 19:35:56'),
+(9, '423423', '42342342', '2018-10-23 19:35:59', '2018-10-23 19:35:59'),
+(10, '435345345', '345345345', '2018-10-23 19:36:01', '2018-10-23 19:36:01'),
+(11, '45654654', '6546546', '2018-10-23 19:36:03', '2018-10-23 19:36:03'),
+(12, '234234234', '234235245235', '2018-10-23 19:36:06', '2018-10-23 19:36:06'),
+(13, '123213', '123123', '2018-10-23 19:44:53', '2018-10-23 19:44:53'),
+(14, '645654', '654654', '2018-10-23 19:44:55', '2018-10-23 19:44:55'),
+(15, '756756756', '7567567', '2018-10-23 19:44:57', '2018-10-23 19:44:57'),
+(16, '7q57q', '57q575q7', '2018-10-23 19:44:59', '2018-10-23 19:44:59'),
+(17, '54zq5z', 'z4e4ez4q', '2018-10-23 19:45:02', '2018-10-23 19:45:02'),
+(18, 'z7555555q', '5qz7q45z7', '2018-10-23 19:45:05', '2018-10-23 19:45:05'),
+(19, '47qqqz4q4', 'q5z75qz7q57', '2018-10-23 19:45:08', '2018-10-23 19:45:08'),
+(20, 'q7q57q7', 'q57q57q57z', '2018-10-23 19:45:10', '2018-10-23 19:45:10'),
+(21, 'q5q453q6', '5234q534', '2018-10-23 19:45:14', '2018-10-23 19:45:14'),
+(22, '64525', '34613463416', '2018-10-23 19:45:16', '2018-10-23 19:45:16');
 
 -- --------------------------------------------------------
 
@@ -515,6 +532,22 @@ INSERT INTO `orte` (`PLZ`, `Bezeichnung`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `rezensionen`
+--
+
+CREATE TABLE `rezensionen` (
+  `kID` int(11) NOT NULL,
+  `iNR` int(11) NOT NULL,
+  `titel` varchar(600) NOT NULL,
+  `beschreibung` text NOT NULL,
+  `bewertung` decimal(10,1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `rubriken`
 --
 
@@ -565,10 +598,9 @@ CREATE TABLE `r_besitzt_a` (
 --
 
 INSERT INTO `r_besitzt_a` (`rNR`, `aNR`, `updated_at`, `created_at`) VALUES
-(5, 27, '2018-10-11 13:13:18', '2018-10-11 13:13:18'),
-(5, 28, '2018-10-11 13:16:36', '2018-10-11 13:16:36'),
-(6, 26, '2018-10-11 13:07:00', '2018-10-11 13:07:00'),
-(7, 26, '2018-10-11 13:07:00', '2018-10-11 13:07:00'),
+(2, 26, '2018-10-23 19:51:44', '2018-10-23 19:51:44'),
+(6, 26, '2018-10-23 19:51:44', '2018-10-23 19:51:44'),
+(7, 26, '2018-10-23 19:51:44', '2018-10-23 19:51:44'),
 (12, 25, '2018-10-11 13:02:36', '2018-10-11 13:02:36');
 
 --
@@ -609,6 +641,13 @@ ALTER TABLE `orte`
   ADD PRIMARY KEY (`PLZ`);
 
 --
+-- Indizes für die Tabelle `rezensionen`
+--
+ALTER TABLE `rezensionen`
+  ADD PRIMARY KEY (`kID`),
+  ADD KEY `iNR` (`iNR`);
+
+--
 -- Indizes für die Tabelle `rubriken`
 --
 ALTER TABLE `rubriken`
@@ -630,7 +669,7 @@ ALTER TABLE `r_besitzt_a`
 -- AUTO_INCREMENT für Tabelle `anzeigen`
 --
 ALTER TABLE `anzeigen`
-  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT für Tabelle `bilder`
@@ -642,13 +681,13 @@ ALTER TABLE `bilder`
 -- AUTO_INCREMENT für Tabelle `inserent`
 --
 ALTER TABLE `inserent`
-  MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `news`
 --
 ALTER TABLE `news`
-  MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT für Tabelle `rubriken`
@@ -672,6 +711,12 @@ ALTER TABLE `anzeigen`
 --
 ALTER TABLE `bilder`
   ADD CONSTRAINT `bilder_ibfk_1` FOREIGN KEY (`aNR`) REFERENCES `anzeigen` (`aNR`);
+
+--
+-- Constraints der Tabelle `rezensionen`
+--
+ALTER TABLE `rezensionen`
+  ADD CONSTRAINT `rezensionen_ibfk_1` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`);
 
 --
 -- Constraints der Tabelle `r_besitzt_a`
