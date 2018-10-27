@@ -21,7 +21,7 @@
 		require 'includes/cookiecheck.php';
 		
 		include 'includes/nav.php';
-		
+				
 		?>
 		<div class="main">
 		

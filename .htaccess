@@ -22,7 +22,7 @@ RewriteRule ^anzeigen/anzeige-([0-90000000]+) anzeigeneinzeln.php?aNR=$1
 
 RewriteRule ^datenschutz?$  datenschutz.php
 
-RewriteRule ^news/([0-900000]+) news.php?nID=$1
+RewriteRule ^news/([0-90000000]+) news.php?nID=$1
 RewriteRule ^news/alle?$ news.php?nID=0
 RewriteRule ^news/bearbeiten?$ addnews.php
 RewriteRule ^news/erstellen?$ addnews.php
@@ -32,4 +32,8 @@ RewriteRule ^abwicklung-login?$  abwicklungLR.php
 RewriteRule ^abwicklung-register?$  abwicklungLR.php
 RewriteRule ^logout?$  abwicklungLR.php
 
+
 RewriteRule ^account/myaccount?$ myacc.php
+RewriteRule ^account/([0-90000000]+)?$ accounts.php?iNR=$1
+
+RewriteRule ^kontaktieren/([0-90000000]+)?$ contact_inserent.php
