@@ -647,16 +647,18 @@ function setNavigation() {
 		var ausgabe = aElemente.replace(/./, "");
 				
 		if ("" + vorwahlLinks + "" + ausgabe + "" == path) {
-			$(".startseite").removeClass("navactive");
+		
 			$(this).addClass("navactive");
+			
 		} else {
 		
 		
 			var ausgabe2 = ausgabe.replace(/./, "");
 			
 			if ("" + vorwahlLinks + "" + ausgabe2 + "" == path) {
-				$(".startseite").removeClass("navactive");
+			
 				$(this).addClass("navactive");
+				
 			} 
 			
 			

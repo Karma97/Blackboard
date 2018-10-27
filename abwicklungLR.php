@@ -234,6 +234,10 @@ function generateKundennummer($length) {
 					
 					mkdir("profilbilder/".$dbnewiNR."");
 					
+					$sql10 = "INSERT INTO `besucherzahlen`(`iNR`, `besucherzahl`, `created_at`, `updated_at`) VALUES ('".$dbnewiNR."', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+					$query10 = $verb -> query($sql10);	
+					
+					
 					$sql8 = "SELECT * FROM `inserent` WHERE `kundennummer` = '".$kundennummer2."'";
 					$query8 = $verb -> query($sql8);
 					$queryNumRows8 = $query8 -> fetchAll();
