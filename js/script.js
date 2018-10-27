@@ -642,16 +642,21 @@ function setNavigation() {
     path = path.replace(/\/$/, "");
     path = decodeURIComponent(path);
 	
+	if (vorwahlLinks  == path) {
+		
+		$(".startseite").addClass("navactive");
+		
+	} else {
+	
 	$(".navigationsleiste .navitems").each(function() {
 		var aElemente = $(this).attr("href");
 		var ausgabe = aElemente.replace(/./, "");
-				
+								
 		if ("" + vorwahlLinks + "" + ausgabe + "" == path) {
 		
 			$(this).addClass("navactive");
 			
 		} else {
-		
 		
 			var ausgabe2 = ausgabe.replace(/./, "");
 			
@@ -660,10 +665,9 @@ function setNavigation() {
 				$(this).addClass("navactive");
 				
 			} 
-			
-			
 		}	
 	});
+	};
 };
 
     setNavigation();
