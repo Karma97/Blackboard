@@ -145,7 +145,7 @@
 				
 				$monat = date("n", strtotime($row["created_at"]));
 				
-				$crypt_iNR = crypt($row["iNR"],'SB');
+				$crypt_iNR = str_replace("/", "",crypt($row["iNR"],'SB'));
 				
 					echo "
 					

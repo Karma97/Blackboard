@@ -232,6 +232,8 @@ function generateKundennummer($length) {
 					$sql7 = "UPDATE `inserent` SET `kundennummer` = '".$kundennummer2."' WHERE iNR = '".$dbnewiNR."'";
 					$query7 = $verb -> query($sql7);	
 					
+					mkdir("profilbilder/".$dbnewiNR."");
+					
 					$sql8 = "SELECT * FROM `inserent` WHERE `kundennummer` = '".$kundennummer2."'";
 					$query8 = $verb -> query($sql8);
 					$queryNumRows8 = $query8 -> fetchAll();

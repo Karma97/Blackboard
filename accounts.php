@@ -53,7 +53,7 @@
 
 	foreach ($verb -> query($sql) as $row) {
 	
-		if ($crypt_iNR == crypt($row["iNR"],'SB')) {			
+		if ($crypt_iNR == str_replace("/", "", crypt($row["iNR"],'SB'))) {			
 			$iNR = $row["iNR"];
 			$fehler = false;
 			break;
@@ -74,7 +74,7 @@
 	
 	$monat = date("n", strtotime($row["created_at"]));
 	
-		$crypt_iNR = crypt($row["iNR"],'SB');
+		$crypt_iNR = str_replace("/", "", crypt($row["iNR"],'SB'));
 		
 		echo "
 		
@@ -98,8 +98,8 @@
 						<div class='card'>
 							<div class='card-body bg-light text-center'>
 							";
-													
-							if (file_exists("profilbilder/".$row["iNR"]."")) {
+										
+							if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
 								
 								echo "<img class='w-50 h-75 ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/profil.png'>";
 								
