@@ -141,10 +141,13 @@
 					
 				}
 				
+				$sql4 = "DELETE FROM `besucherzahlen` WHERE iNR = '".$_SESSION["iNR"]."'";
+				$query4 = $verb -> query($sql4);
+				
 				$sql4 = "DELETE FROM `inserent` WHERE iNR = '".$_SESSION["iNR"]."'";
 				$query4 = $verb -> query($sql4);	
 				
-				header("Location: ../logout");
+				header("Location: ./logout");
 				
 			}
 			
@@ -153,7 +156,7 @@
 				$sql4 = "DELETE FROM `inserent` WHERE iNR = '".$_SESSION["iNR"]."'";
 				$query4 = $verb -> query($sql4);					
 				
-				header("Location: ../logout");
+				header("Location: ./logout");
 				
 			} else {
 			
@@ -177,7 +180,7 @@
 
 <div id='change_pwd_html'>
 	
-	<form action="../account/myaccount" method="POST">
+	<form action="./myaccount" method="POST">
 	
 	<h5 class="mb-4">Passwort ändern		
 		<div onclick="close_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')" class="pointer close_pwd_change float-right d-inline" title="Auf das X klicken oder ausserhalb des Fensters klicken, um das Fenster zu schließen">
@@ -234,7 +237,7 @@
 
 <div id='change_email_html'>
 	
-	<form action="../account/myaccount" method="POST">
+	<form action="./myaccount" method="POST">
 	
 	<h5 class="mb-4">E-Mail ändern		
 		<div onclick="close_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')" class="pointer close_email_change float-right d-inline" title="Auf das X klicken oder ausserhalb des Fensters klicken, um das Fenster zu schließen">
@@ -295,7 +298,7 @@
 
 <div id='account_löschung'>
 	
-	<form action="../account/myaccount" method="POST">
+	<form action="./myaccount" method="POST">
 	
 	<h5 class="mb-4">Wollen Sie Ihren Account wirklich löschen?		
 		<div onclick="close_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')" class="pointer close_email_change float-right d-inline" title="Auf das X klicken oder ausserhalb des Fensters klicken, um das Fenster zu schließen">

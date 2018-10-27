@@ -31,7 +31,7 @@
 	
 <?php
 	
-	
+		
 	if (!isset($_GET["iNR"]) or is_numeric($_GET["iNR"]) or empty($_GET["iNR"])) {
 		
 		header("Location: ../myaccount");
@@ -63,6 +63,17 @@
 		
 	}
 	
+	$sql5 = "SELECT * FROM besucherzahlen WHERE iNR = ".$iNR."";
+	$query5 = $verb -> query($sql5);	
+	
+	foreach ($query5 as $row) {
+		$zahl = $row["besucherzahl"];
+	}
+	
+	$zahl++;
+	
+	$sql4 = "UPDATE `besucherzahlen` SET `besucherzahl`= ".$zahl." WHERE iNR = '".$iNR."'";
+	$query88 = $verb -> query($sql4);
 	
 	if ($fehler == false) {
 
@@ -101,11 +112,11 @@
 										
 							if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
 								
-								echo "<img class='w-50 h-75 ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/profil.png'>";
+								echo "<img class='w-75 h-100 ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/profil.png'>";
 								
 							} else {
 							
-								echo "<img class='w-50 h-75 ml-auto mr-auto' src='../images/user.png'>";
+								echo "<img class='w-75 h-100 ml-auto mr-auto' src='../images/user.png'>";
 							
 							}
 							
@@ -127,8 +138,13 @@
 							foreach ($query1 as $row2) {
 								echo "Aktuell geschaltete Anzeigen: ".$row2["count"]."<br><br>";
 							}
+														
+							foreach ($verb -> query($sql5) as $row4) {
+								echo "Profil-Aufrufe: ".$row4["besucherzahl"]."<br><br>";
+							}
 							
 							echo "
+							
 							
 							Registriert seit: 	
 							
