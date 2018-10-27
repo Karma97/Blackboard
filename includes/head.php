@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>Schwarzes Brett | Tauschbörse</title>
 		<?php 
-		
+			
 		switch ($head_variante) {
 			case $head_variante == 1:
 				include __DIR__ . "/links/links_head1.php"; 

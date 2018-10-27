@@ -128,7 +128,7 @@
 					</div>
 					
 					";
-
+					
 				echo "
 					<div class='form-group mb-5'>
 						<input type='text' class='form-control' id='searchA' placeholder='nach Anzeige/Betreff/Ort/Datum suchen'>
@@ -145,6 +145,8 @@
 				
 				$monat = date("n", strtotime($row["created_at"]));
 				
+				$crypt_iNR = crypt($row["iNR"],'SB');
+				
 					echo "
 					
 					<div onclick=\"window.location.href = '../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
@@ -153,7 +155,7 @@
 								".strip_tags($row["betreff"])."
 							</p>
 							
-							<a href='../account/".$row["iNR"]."'>
+							<a href='../profil/".$crypt_iNR."'>
 							<button title='Jetzt klicken um zum Inserenten zu kommen!' class='btn btn-sm btn-light float-right'>
 								Zum Inserenten
 							</button>

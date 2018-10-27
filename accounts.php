@@ -31,46 +31,51 @@
 	
 <?php
 	
-	if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
 	
-	header("Location: ../startseite");
-	
-?>
-	
-	<h4><p class="text-danger text-center">Um diese Funktion nutzen zu können, müssen Sie angemeldet sein!</p></h4>
-	
-	</div>
-	</div>	
-	
-<?php
-	
-	} else {
-	
-	if (!isset($_GET["iNR"]) or !is_numeric($_GET["iNR"]) or empty($_GET["iNR"])) {
+	if (!isset($_GET["iNR"]) or is_numeric($_GET["iNR"]) or empty($_GET["iNR"])) {
 		
-		header("Location: ../account/myaccount");
+		header("Location: ../myaccount");
 		
 		?>
 		
 		<h2 class="text-danger">Es ist ein fehler aufgetreten!</h2>
 		
-		<?php	
+		<?php
+		
 	} else {
 	
-	$iNR = $_GET["iNR"];
-	
-	$sql = "SELECT * FROM inserent WHERE iNR = '".$iNR."'";
+	$crypt_iNR = $_GET["iNR"];
+		
+	$sql = "SELECT * FROM inserent";
 	$query = $verb -> query($sql);
-	$countNumRows = $query -> fetchAll();
 	
-	if (count($countNumRows) > 0) {
+	$fehler = false;
 
 	foreach ($verb -> query($sql) as $row) {
+	
+		if ($crypt_iNR == crypt($row["iNR"],'SB')) {			
+			$iNR = $row["iNR"];
+			$fehler = false;
+			break;
+		} else {
+			$fehler = true;
+		}
+		
+	}
+	
+	
+	if ($fehler == false) {
+
+	$sql1 = "SELECT * FROM inserent WHERE iNR = '".$iNR."'";
+	
+	foreach ($verb -> query($sql1) as $row) {
 	
 	$monatsnamen = array(1=>"Januar",2=>"Februar",3=>"März",4=>"April",5=>"Mai",6=>"Juni",7=>"Juli",8=>"August",9=>"September",10=>"Oktober",11=>"November",12=>"Dezember");
 	
 	$monat = date("n", strtotime($row["created_at"]));
 	
+		$crypt_iNR = crypt($row["iNR"],'SB');
+		
 		echo "
 		
 		<div class='card accountcard'>
@@ -79,7 +84,7 @@
 					Profil von ".$row["vorname"]." ".$row["nachname"]."
 				</p>
 				
-				<a href='../kontaktieren/".$row["iNR"]."'>
+				<a href='../kontaktieren/".$crypt_iNR."'>
 					<button title='Kontaktieren' class='btn btn-sm btn-light float-right'>
 						Kontaktieren
 					</button>
@@ -92,7 +97,19 @@
 					<div class='col-lg'>
 						<div class='card'>
 							<div class='card-body bg-light text-center'>
-								<img class='w-50 h-75 ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/profil.png'>
+							";
+													
+							if (file_exists("profilbilder/".$row["iNR"]."")) {
+								
+								echo "<img class='w-50 h-75 ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/profil.png'>";
+								
+							} else {
+							
+								echo "<img class='w-50 h-75 ml-auto mr-auto' src='../images/user.png'>";
+							
+							}
+							
+							echo "
 							</div>				
 						</div>
 					</div>
@@ -123,7 +140,26 @@
 						</div>
 					</div>
 				</div>
+				";
 				
+				$sql2 = "SELECT * FROM anzeigen WHERE iNR = '".$iNR."' ORDER BY created_at DESC";
+				$query2 = $verb -> query($sql2);
+				$countNumRows = $query2 -> fetchAll();
+				if (count($countNumRows) < 1) {
+				
+				echo "
+				
+				<div class='card mt-3'>
+					<div class='card-header bg-dark text-white'>
+						Es sind zurzeit keine Anzeigen geschaltet!
+					</div>
+				</div>
+					
+				";
+				
+				} else {
+				
+				echo "
 				<div class='card mt-3'>
 					<div class='card-header bg-dark text-white'>
 						Anzeigen des Inserenten
@@ -131,13 +167,16 @@
 					<div class='card-body'>
 						";
 						
-						$sql2 = "SELECT * FROM anzeigen WHERE iNR = '".$iNR."' ORDER BY created_at DESC";
-						$query2 = $verb -> query($sql2);							
+
 						
-						foreach ($query2 as $row3) {						
+
+						
+						foreach ($verb -> query($sql2) as $row3) {						
 			
 							$monat = date("n", strtotime($row3["created_at"]));
-			
+							
+							
+							
 							echo "
 							
 								<div title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row3["betreff"])."\" zu kommen!' onclick=\"window.location.href = '../anzeigen/anzeige-".$row3["aNR"]."'\" class='pointer card mb-3'>
@@ -157,8 +196,11 @@
 									</div>	
 								</div>	
 							
+							
+							
 							";
 							
+							//mkdir("profilbilder/".$row3["aNR"]."", 0755, true);
 						}
 						
 						echo "
@@ -170,13 +212,14 @@
 		</div>
 		
 		";
+		}
 	}
 	
-	// 
+	
 	
 	} else {
 	
-	header("Location: ../account/myaccount");
+	header("Location: ../myaccount");
 	
 	?>
 	
@@ -193,7 +236,6 @@
   </div>
  
 <?php 
-	}
 	}
 	
 		require_once 'includes/loeschencheck.php';

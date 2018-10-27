@@ -2,10 +2,10 @@
 	ob_start();
 	session_start();
 	
-	$head_variante =   2;
-	$nav_variante =    2;
-	$script_variante = 2;
-	$footer_variante = 2;
+	$head_variante =   1;
+	$nav_variante =    1;
+	$script_variante = 1;
+	$footer_variante = 1;
 	
 	include 'includes/head.php'; 
 	

@@ -33,7 +33,8 @@ RewriteRule ^abwicklung-register?$  abwicklungLR.php
 RewriteRule ^logout?$  abwicklungLR.php
 
 
-RewriteRule ^account/myaccount?$ myacc.php
-RewriteRule ^account/([0-90000000]+)?$ accounts.php?iNR=$1
+RewriteRule ^myaccount?$ myacc.php
+RewriteRule ^profil/([a-zA-Z0-9]+)?$ accounts.php?iNR=$1
 
-RewriteRule ^kontaktieren/([0-90000000]+)?$ contact_inserent.php
+
+RewriteRule ^kontaktieren/([a-zA-Z0-9]+)$ contact_inserent.php
