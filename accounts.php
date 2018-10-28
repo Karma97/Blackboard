@@ -93,14 +93,7 @@
 			<div class='card-header bg-dark text-white'>
 				<p class='mb-0 mt-0 d-inline buttonpadding'>
 					Profil von ".$row["vorname"]." ".$row["nachname"]."
-				</p>
-				
-				<a href='../kontaktieren/".$crypt_iNR."'>
-					<button title='Kontaktieren' class='btn btn-sm btn-light float-right'>
-						Kontaktieren
-					</button>
-				</a>
-				
+				</p>				
 			</div>
 			<div class='card-body'>
 				
@@ -109,19 +102,23 @@
 						<div class='card'>
 							<div class='card-body bg-light text-center'>
 							";
-										
+							
 							if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
-								
-								echo "<img class='w-75 h-100 ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/profil.png'>";
-								
+							
+								echo "
+									<img class='w-100 h-100 rounded ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."'>
+								";
+							
 							} else {
 							
-								echo "<img class='w-75 h-100 ml-auto mr-auto' src='../images/user.png'>";
+								echo "
+									<img class='w-100 h-100 rounded ml-auto mr-auto' src='../images/user.png'>
+								";
 							
 							}
 							
 							echo "
-							</div>				
+							</div>
 						</div>
 					</div>
 					<div class='col-lg-10'>
@@ -132,30 +129,30 @@
 							<div class='card-body'>
 							";
 							
-							$sql1 = "SELECT count(*) as 'count' FROM anzeigen WHERE iNR = '".$iNR."'";
-							$query1 = $verb -> query($sql1);							
+							$sql7 = "SELECT count(*) as 'count' FROM anzeigen WHERE iNR = '".$iNR."'";
+							$query7 = $verb -> query($sql7);	
 							
-							foreach ($query1 as $row2) {
+							foreach ($query7 as $row2) {
 								echo "Aktuell geschaltete Anzeigen: ".$row2["count"]."<br><br>";
 							}
-														
+							
 							foreach ($verb -> query($sql5) as $row4) {
 								echo "Profil-Aufrufe: ".$row4["besucherzahl"]."<br><br>";
 							}
 							
 							echo "
 							
-							
 							Registriert seit: 	
 							
 								".date("d.", strtotime($row["created_at"]))."
 								".$monatsnamen[$monat]." 
 								".date("Y", strtotime($row["created_at"]))."
-										
+							
 							</div>	
 						</div>
 					</div>
 				</div>
+				
 				";
 				
 				$sql2 = "SELECT * FROM anzeigen WHERE iNR = '".$iNR."' ORDER BY created_at DESC";
@@ -176,23 +173,19 @@
 				} else {
 				
 				echo "
-				<div class='card mt-3'>
+				
+				<div class='card mt-3 mb-4'>
 					<div class='card-header bg-dark text-white'>
 						Anzeigen des Inserenten
 					</div>
 					<div class='card-body'>
+					
 						";
-						
-
-						
-
-						
-						foreach ($verb -> query($sql2) as $row3) {						
+												
+						foreach ($verb -> query($sql2) as $row3) {
 			
 							$monat = date("n", strtotime($row3["created_at"]));
-							
-							
-							
+						
 							echo "
 							
 								<div title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row3["betreff"])."\" zu kommen!' onclick=\"window.location.href = '../anzeigen/anzeige-".$row3["aNR"]."'\" class='pointer card mb-3'>
@@ -208,27 +201,194 @@
 										".date("d.", strtotime($row3["created_at"]))."
 										".$monatsnamen[$monat]." 
 										".date("Y", strtotime($row3["created_at"])).", 
-										".date("H", strtotime($row["created_at"])).":00 Uhr<br>
+										".date("H", strtotime($row3["created_at"])).":00 Uhr<br>
 									</div>	
 								</div>	
-							
-							
-							
+						
 							";
-							
-							//mkdir("profilbilder/".$row3["aNR"]."", 0755, true);
+						
 						}
 						
 						echo "
 					
-					</div>				
-				</div>				
+					</div>
+				</div>
+		
+		";
+		}
+		
+				$sql3 = "SELECT * FROM bewertungen WHERE ist_für = '".$iNR."' ORDER BY created_at DESC";
+				$query3 = $verb -> query($sql3);
+				$countNumRows = $query3 -> fetchAll();
+				
+				if (count($countNumRows) < 1) {
+				
+				echo "
+				
+				<div class='card mt-3 mb-1'>
+					<div class='card-header bg-dark text-white'>
+						Es gibt zurzeit keine Bewertungen! 
+						
+						<a href='../bewerten/".$crypt_iNR."'>
+						";
+						
+						foreach ($verb -> query($sql1) as $row5) {
+						
+							echo "
+						
+								<button title='Jetzt Bewertung zu \"".$row5["vorname"]." ".$row5["nachname"]."\" schreiben!' class='btn btn-sm btn-light float-right'>
+									Bewertung schreiben
+								</button>
+							
+							";
+						}
+						echo "
+						
+						</a>
+					</div>
+				</div>
+					
+				";
+				
+				} else {
+				
+				echo "
+				
+				<div class='card mt-3'>
+					<div class='card-header bg-dark text-white'>
+						Bewertungen 
+						
+						<a href='../bewerten/".$crypt_iNR."'>
+						";
+						
+						foreach ($verb -> query($sql1) as $row5) {
+						
+							echo "
+						
+								<button title='Jetzt Bewertung zu \"".$row5["vorname"]." ".$row5["nachname"]."\" schreiben!' class='btn btn-sm btn-light float-right'>
+									Bewertung schreiben
+								</button>
+							
+							";
+						}
+						echo "
+						
+						</a>
+						
+					</div>
+					<div class='card-body'>
+					
+				";
+						
+						foreach ($verb -> query($sql3) as $row4) {
+			
+							$monat = date("n", strtotime($row4["created_at"]));
+							
+							echo "
+							
+								<div class='card mb-3'>
+									<div class='card-header bg-dark text-white'>
+										".$row4["betreff"]."
+									</div>
+									<div class='card-body'>
+										".$row4["beschreibung"]."
+										
+										<br><br>
+										
+										<div class='sterne' title='".$row4["bewertung"]." Sterne'>
+										
+										";
+										
+										$i = 0;
+										
+										while ($i < 5) {
+										
+										if ($i < $row4["bewertung"]) {
+											if ($i == 0) {
+												echo "
+												
+												<i style='color: red;' class='ml-1 fa fa-star'></i>
+												
+												";
+											} else {
+												echo "
+												
+												<i style='color: red;' class='fa fa-star'></i>
+												
+												";
+											}
+										} else {
+											echo "
+											
+											<i style='color: black;' class='fa fa-star'></i>
+											
+											";		
+										}
+										
+										$i++;
+											
+										}
+										
+										echo "
+										</div>
+									</div>
+									<div class='card-footer'>
+									
+									";
+									
+									$sql6 = "SELECT * FROM inserent WHERE iNR = '".$row4["kommt_von"]."'";
+									$query6 = $verb -> query($sql6);
+									
+									foreach ($query6 as $row) {
+												
+									$crypt_iNR2 = str_replace("/", "", crypt($row["iNR"],'SB')); 
+												
+									if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
+									
+									echo "
+											<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class='pointer rounded-circle ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."'>
+											~ ".$row["vorname"]." ".$row["nachname"]."
+									";
+									
+									} else {
+									
+									echo "
+											<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class=pointer 'rounded-circle ml-auto mr-auto' src='../images/user.png'>
+											~ ".$row["vorname"]." ".$row["nachname"]."
+									";
+									
+									}
+							
+									}
+									
+									echo "
+									
+									<br>
+									
+									<p class='mt-2 mb-0'>Veröffentlicht am: 
+												".date("d.", strtotime($row4["created_at"]))."
+												".$monatsnamen[$monat]." 
+												".date("Y", strtotime($row4["created_at"])).", 
+												".date("H", strtotime($row4["created_at"])).":00 Uhr
+									</p>
+									</div>
+								</div>
+						
+							";
+							
+						}
+						
+						echo "
+					
+					</div>
+				</div>
 				
 			</div>
 		</div>
 		
 		";
 		}
+		
 	}
 	
 	

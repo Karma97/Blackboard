@@ -53,8 +53,8 @@
 	<div class="form-group">
    <div class="form-row">
     <div class="col-md-2 mb-3">
-  	<label for="search">Ort Filtern</label>
-	<input type="text" class="form-control" id="search" placeholder="Ort Filtern">
+		<label for="search">Ort Filtern</label>
+		<input type="text" class="form-control" id="search" placeholder="Ort Filtern">
 	</div>
 	<div class="col-md-10 mb-3">
 	<label for="selectOrt">Ort auswählen</label>

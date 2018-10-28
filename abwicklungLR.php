@@ -232,7 +232,7 @@ function generateKundennummer($length) {
 					$sql7 = "UPDATE `inserent` SET `kundennummer` = '".$kundennummer2."' WHERE iNR = '".$dbnewiNR."'";
 					$query7 = $verb -> query($sql7);	
 					
-					mkdir("profilbilder/".$dbnewiNR."");
+					mkdir("profilbilder/".$dbnewiNR."", 0755, true);
 					
 					$sql10 = "INSERT INTO `besucherzahlen`(`iNR`, `besucherzahl`, `created_at`, `updated_at`) VALUES ('".$dbnewiNR."', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 					$query10 = $verb -> query($sql10);	

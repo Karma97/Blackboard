@@ -45,4 +45,9 @@
 	$registerEmailUnvalid = false;
 	$registerAccountVorhanden = false;
 	
+	// Prüfung ob String HTML-Tags enthält
+	function is_html($string){
+		return $string != strip_tags($string) ? true:false;
+	}
+	
 ?>

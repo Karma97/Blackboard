@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 27. Okt 2018 um 22:22
+-- Erstellungszeit: 28. Okt 2018 um 04:04
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -46,7 +46,9 @@ CREATE TABLE `anzeigen` (
 
 INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES
 (32, 1, 'Testanzeige', 'test', 26382, '2018-10-27 19:25:59', '2018-10-27 19:25:59'),
-(33, 1, 'Autem veniam voluptatem consequatur Est dicta odio velit fuga Distinctio Nisi veniam', 'Ea in mollit perspiciatis praesentium beatae aliquid autem', 32839, '2018-10-27 19:31:47', '2018-10-27 19:31:47');
+(33, 1, 'Autem veniam voluptatem consequatur Est dicta odio velit fuga Distinctio Nisi veniam', 'Ea in mollit perspiciatis praesentium beatae aliquid autem', 32839, '2018-10-27 19:31:47', '2018-10-27 19:31:47'),
+(35, 5, '34', '213123', 25813, '2018-10-27 20:33:24', '2018-10-27 20:33:24'),
+(36, 3, 'Rasenmäher', 'Biete meinen alten Rasenmäher für 200€ Verhandlungsbasis.\r\nDer Rasenmäher ist ein Aufsitzmäher und Benziner.', 26382, '2018-10-27 10:03:01', '2018-10-28 02:03:01');
 
 -- --------------------------------------------------------
 
@@ -66,7 +68,36 @@ CREATE TABLE `besucherzahlen` (
 --
 
 INSERT INTO `besucherzahlen` (`iNR`, `besucherzahl`, `created_at`, `updated_at`) VALUES
-(1, 16, '2018-10-27 19:57:45', '2018-10-27 20:22:15');
+(1, 175, '2018-10-27 19:57:45', '2018-10-28 02:57:42'),
+(2, 0, '2018-10-28 01:25:17', '2018-10-28 01:25:17'),
+(3, 28, '2018-10-28 01:25:17', '2018-10-28 02:51:20'),
+(5, 24, '2018-10-27 20:33:00', '2018-10-28 02:43:55');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `bewertungen`
+--
+
+CREATE TABLE `bewertungen` (
+  `bNR` int(11) NOT NULL,
+  `ist_für` int(11) NOT NULL,
+  `kommt_von` int(11) NOT NULL,
+  `betreff` varchar(120) NOT NULL,
+  `beschreibung` varchar(2000) NOT NULL,
+  `bewertung` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Daten für Tabelle `bewertungen`
+--
+
+INSERT INTO `bewertungen` (`bNR`, `ist_für`, `kommt_von`, `betreff`, `beschreibung`, `bewertung`, `created_at`, `updated_at`) VALUES
+(1, 1, 5, 'sehr Faires trading', '- gutes Trading\r\n- Fairer Preis\r\n- Schnelle Abwicklung', 4, '2018-10-27 23:59:19', '2018-10-28 01:26:43'),
+(3, 5, 1, 'Tolle arbeit', '- gutes Trading\r\n- Fairer Preis\r\n- Schnelle Abwicklung', 4, '2018-10-28 01:12:06', '2018-10-28 01:12:06'),
+(4, 1, 3, 'Sehr gutes und Faires Traiding', 'Der Tauschhandel verlief fair und ich habe den Rasenmäher für einen sehr Fairen Preis bekommen. Bin auch sehr zufrieden mit meinem neuen Rasenmäher.', 5, '2018-10-28 01:32:03', '2018-10-28 01:32:03');
 
 -- --------------------------------------------------------
 
@@ -90,14 +121,15 @@ CREATE TABLE `bilder` (
 
 CREATE TABLE `inserent` (
   `iNR` int(11) NOT NULL,
-  `kundennummer` varchar(15) NOT NULL,
-  `identifier_token` varchar(700) NOT NULL,
-  `nachname` varchar(100) NOT NULL,
   `vorname` varchar(100) NOT NULL,
+  `nachname` varchar(100) NOT NULL,
   `passwort` varchar(500) NOT NULL,
   `email` varchar(120) NOT NULL,
   `gebdatum` date NOT NULL,
   `newsletter` tinyint(1) NOT NULL,
+  `profilbildpfad` varchar(10000) NOT NULL,
+  `kundennummer` varchar(15) NOT NULL,
+  `identifier_token` varchar(700) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -106,10 +138,11 @@ CREATE TABLE `inserent` (
 -- Daten für Tabelle `inserent`
 --
 
-INSERT INTO `inserent` (`iNR`, `kundennummer`, `identifier_token`, `nachname`, `vorname`, `passwort`, `email`, `gebdatum`, `newsletter`, `updated_at`, `created_at`) VALUES
-(1, 'SB#1234567889', 'rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK', 'Admin', 'S_B', '$2y$10$IMZgfoODrIo9eKEcl3Ijbuik75swhM2O7qnjTTnxLoBByu1GR49iW', 's_b_admin@example.com', '9999-09-09', 1, '2018-10-11 12:39:50', '2018-10-06 20:39:42'),
-(2, 'SB#1824395773', 'Tp1mv4sln2lQsS#1Q8tcYPzU#34TC6szYm2Epf1oS2GCNfw%H%7A&jcBEBy6wpz75nVcwXxudQx5HPyrqjWzZiBw%QiL=M%W3H1F4G7Kfj&be=eKHbSpjOAPHkK8OB38u2OtFuz8~jsVZPFoE9tM4o0wryox4dVag=WX&WbpO86WK%~YqBFv4mMWJaUKDmbduUiQtHJ6ljEx~OHLmd=AUU6Z0H1~2w005LPKfAnMigkUwe3l4z9tjSa=rfYNY4oTvR17P4kSfAvBsmrEhU3XZZSMq=yeiVLG=xLIpKOg7lMEc5hypAo#6AfKuOaCHSrSj&~d47qYg9AxBfwCy5=4sL4~qC6JcMXbI&HuVOtTV4McgVTpNWrvKNRtyl35NISI=Nq8HtWG=MsWERbExm1YHbuzPO4Bzd1WB%dyi5=BNxlXnKuucuv#~V2Wcqpqj1DUg=4sbaBc=3%6KXSkRyN2te0Q#vW3uTe&5mdRegOejsBYfV&vh~HX', 'Hüls', 'Eike', '$2y$10$OX0GCC8dlF/0OjT2sREp0.GzrkMVo/9RMcVWlNvyPmppXfM.6CG7q', 'eike.huels@gmx.de', '1997-12-20', 1, '2018-10-11 13:01:00', '2018-10-08 16:27:42'),
-(3, 'SB#2448566136', 'dXGo=9jxVdihiv4QEgtZUIuiLFZlP1foKCEZ7cVirfKZXurrwcqLdh0ZT#MOC#29lwlC%izraTKW5xuNtkt=LOWZuse7cCc#xHT90&5I6LAhdDNZmHUdq~2jYKkTKh6JQY7IlkaLCB#2L19V8ENagewhzJI3RnId5liIe&TSFAteJTC5b3#qc4YTmwzUc2h#gi6X&W~C%sW6cfSPE4V%tMPJ5fn&~WWi5xmiAmxV7uUEs56mPc2lX~hYnxZ3yVQ%ZngHj9O813QLyW9QgzhO%K%VQ9~ODc6mIdxSFAzUOuZNhvVB=vSDYGYE&kcU01HowA3SH1U%rFoSsBTwEiZes98liTV6YwBzy4NRy&NQsRteP3zp=gmZ8go26HTTkmh4dvNtkuWaiyS7#JsJcX3B~Wwp1vfBp=933yoD%#JfwLqbwagq7k2AQIT%fUde~uPkTj%=CnVDYv8yyO~ZVt4L4c#y7AGP108Bd6LBnN6MS~sMdUUKHeyT', 'Schipper', 'Nichlas', '$2y$10$dPrTJ2OGfuNWYZ/ltQ0qlusZBZiLKbAu.M7H5jH4P/G8kK3UgAz2y', 'Nichlas12323@gmail.com', '2001-05-19', 1, '2018-10-15 12:38:21', '2018-10-15 12:38:21');
+INSERT INTO `inserent` (`iNR`, `vorname`, `nachname`, `passwort`, `email`, `gebdatum`, `newsletter`, `profilbildpfad`, `kundennummer`, `identifier_token`, `updated_at`, `created_at`) VALUES
+(1, 'S_B', 'Admin', '$2y$10$IMZgfoODrIo9eKEcl3Ijbuik75swhM2O7qnjTTnxLoBByu1GR49iW', 's_b_admin@example.com', '9999-09-09', 1, 'profil.png', 'SB#1234567889', 'rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK', '2018-10-28 00:36:38', '2018-10-06 20:39:42'),
+(2, 'Eike', 'Hüls', '$2y$10$OX0GCC8dlF/0OjT2sREp0.GzrkMVo/9RMcVWlNvyPmppXfM.6CG7q', 'eike.huels@gmx.de', '1997-12-20', 1, 'spacey.jpg', 'SB#1824395773', 'Tp1mv4sln2lQsS#1Q8tcYPzU#34TC6szYm2Epf1oS2GCNfw%H%7A&jcBEBy6wpz75nVcwXxudQx5HPyrqjWzZiBw%QiL=M%W3H1F4G7Kfj&be=eKHbSpjOAPHkK8OB38u2OtFuz8~jsVZPFoE9tM4o0wryox4dVag=WX&WbpO86WK%~YqBFv4mMWJaUKDmbduUiQtHJ6ljEx~OHLmd=AUU6Z0H1~2w005LPKfAnMigkUwe3l4z9tjSa=rfYNY4oTvR17P4kSfAvBsmrEhU3XZZSMq=yeiVLG=xLIpKOg7lMEc5hypAo#6AfKuOaCHSrSj&~d47qYg9AxBfwCy5=4sL4~qC6JcMXbI&HuVOtTV4McgVTpNWrvKNRtyl35NISI=Nq8HtWG=MsWERbExm1YHbuzPO4Bzd1WB%dyi5=BNxlXnKuucuv#~V2Wcqpqj1DUg=4sbaBc=3%6KXSkRyN2te0Q#vW3uTe&5mdRegOejsBYfV&vh~HX', '2018-10-28 00:36:58', '2018-10-08 16:27:42'),
+(3, 'Nichlas', 'Schipper', '$2y$10$dPrTJ2OGfuNWYZ/ltQ0qlusZBZiLKbAu.M7H5jH4P/G8kK3UgAz2y', 'Nichlas12323@gmail.com', '2001-05-19', 1, 'vigil.png', 'SB#2448566136', 'dXGo=9jxVdihiv4QEgtZUIuiLFZlP1foKCEZ7cVirfKZXurrwcqLdh0ZT#MOC#29lwlC%izraTKW5xuNtkt=LOWZuse7cCc#xHT90&5I6LAhdDNZmHUdq~2jYKkTKh6JQY7IlkaLCB#2L19V8ENagewhzJI3RnId5liIe&TSFAteJTC5b3#qc4YTmwzUc2h#gi6X&W~C%sW6cfSPE4V%tMPJ5fn&~WWi5xmiAmxV7uUEs56mPc2lX~hYnxZ3yVQ%ZngHj9O813QLyW9QgzhO%K%VQ9~ODc6mIdxSFAzUOuZNhvVB=vSDYGYE&kcU01HowA3SH1U%rFoSsBTwEiZes98liTV6YwBzy4NRy&NQsRteP3zp=gmZ8go26HTTkmh4dvNtkuWaiyS7#JsJcX3B~Wwp1vfBp=933yoD%#JfwLqbwagq7k2AQIT%fUde~uPkTj%=CnVDYv8yyO~ZVt4L4c#y7AGP108Bd6LBnN6MS~sMdUUKHeyT', '2018-10-28 03:03:37', '2018-10-15 12:38:21'),
+(5, 'testvorname2', 'testnachname2', '$2y$10$u0YM58dQETxgv3FOk70p5u72ZZU9nI5WbD9ml6pybqXyPxHZVeXHq', 'test2@web.de', '2018-10-10', 1, '10752601.jpg', 'SB#9971533154', '208U~svF7xKhrHRl5azavOWH8qerNIB79V2LR9o=oeyNltRWmG1AXf3z3ZeWA5yMzR4lta11eysY4tswsKz=&n#k3hL7i4Z&#eY7V#K5DVyTI#a39=O8xYRhiLF8uuOYE&TTQhEToL8ASvydm8Yxwv8WnWj9IKOMjfLhI4gUEhueW2gLBNY1OW%fo%L6Jjad#i1PTKqd1ViqALmfXgGqE0P#duj3pnaR7T9Gso0uWGeYM3P2UUUdsOd#tjviTT0pi4##RlgmglnVibyrTmWd85UcM%bpS008b4nyZbAJTKuLuv#RfTDXla=f4#R&ggr00AE%PXSw2tBu8F79m8b6TqbVurjWBK0ZVUGwiLy8lI%wBJakHrA6KmzYBbnIPL35fKFJN9Zf7e~#17B=bJ8UHkSyFvsoc1M7%UP#ZOJbDmb3mCH4D5ih4nurGlJQBsJgZzWPC3oJUje8tsSf89=9eL4#ZLUl%bx8KcH7TRSxPqEpUdFxMmt%', '2018-10-28 00:36:31', '2018-10-27 20:33:00');
 
 -- --------------------------------------------------------
 
@@ -586,10 +619,15 @@ CREATE TABLE `r_besitzt_a` (
 INSERT INTO `r_besitzt_a` (`rNR`, `aNR`, `updated_at`, `created_at`) VALUES
 (4, 32, '2018-10-27 19:25:59', '2018-10-27 19:25:59'),
 (4, 33, '2018-10-27 19:31:47', '2018-10-27 19:31:47'),
+(4, 35, '2018-10-27 20:33:24', '2018-10-27 20:33:24'),
 (5, 33, '2018-10-27 19:31:47', '2018-10-27 19:31:47'),
+(6, 35, '2018-10-27 20:33:24', '2018-10-27 20:33:24'),
 (7, 32, '2018-10-27 19:25:59', '2018-10-27 19:25:59'),
+(7, 36, '2018-10-28 02:03:01', '2018-10-28 02:03:01'),
+(8, 35, '2018-10-27 20:33:24', '2018-10-27 20:33:24'),
 (9, 33, '2018-10-27 19:31:47', '2018-10-27 19:31:47'),
-(10, 32, '2018-10-27 19:25:59', '2018-10-27 19:25:59');
+(10, 32, '2018-10-27 19:25:59', '2018-10-27 19:25:59'),
+(12, 36, '2018-10-28 02:03:01', '2018-10-28 02:03:01');
 
 --
 -- Indizes der exportierten Tabellen
@@ -609,6 +647,14 @@ ALTER TABLE `anzeigen`
 ALTER TABLE `besucherzahlen`
   ADD PRIMARY KEY (`iNR`),
   ADD KEY `iNR` (`iNR`);
+
+--
+-- Indizes für die Tabelle `bewertungen`
+--
+ALTER TABLE `bewertungen`
+  ADD PRIMARY KEY (`bNR`),
+  ADD KEY `ist_für` (`ist_für`,`kommt_von`),
+  ADD KEY `kommt_von` (`kommt_von`);
 
 --
 -- Indizes für die Tabelle `bilder`
@@ -657,7 +703,13 @@ ALTER TABLE `r_besitzt_a`
 -- AUTO_INCREMENT für Tabelle `anzeigen`
 --
 ALTER TABLE `anzeigen`
-  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT für Tabelle `bewertungen`
+--
+ALTER TABLE `bewertungen`
+  MODIFY `bNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `bilder`
@@ -669,7 +721,7 @@ ALTER TABLE `bilder`
 -- AUTO_INCREMENT für Tabelle `inserent`
 --
 ALTER TABLE `inserent`
-  MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `news`
@@ -699,6 +751,13 @@ ALTER TABLE `anzeigen`
 --
 ALTER TABLE `besucherzahlen`
   ADD CONSTRAINT `besucherzahlen_ibfk_1` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`);
+
+--
+-- Constraints der Tabelle `bewertungen`
+--
+ALTER TABLE `bewertungen`
+  ADD CONSTRAINT `bewertungen_ibfk_1` FOREIGN KEY (`ist_für`) REFERENCES `inserent` (`iNR`),
+  ADD CONSTRAINT `bewertungen_ibfk_2` FOREIGN KEY (`kommt_von`) REFERENCES `inserent` (`iNR`);
 
 --
 -- Constraints der Tabelle `bilder`

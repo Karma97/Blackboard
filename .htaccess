@@ -37,4 +37,4 @@ RewriteRule ^myaccount?$ myacc.php
 RewriteRule ^profil/([a-zA-Z0-9]+)?$ accounts.php?iNR=$1
 
 
-RewriteRule ^kontaktieren/([a-zA-Z0-9]+)$ contact_inserent.php
+RewriteRule ^bewerten/([a-zA-Z0-9]+)$ bewertung.php?iNR=$1

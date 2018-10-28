@@ -350,7 +350,10 @@
 			
 			setlocale(LC_ALL, 'de_DE.utf8');				
 			
-			foreach ($query2 as $row) {				
+			foreach ($query2 as $row) {	
+			
+				$crypt_iNR = str_replace("/", "", crypt($row["iNR"],'SB'));
+			
 				echo "
 				
 				<div class='row'>
@@ -360,15 +363,38 @@
 								Allgemeine Informationen
 							</div>
 							<div class='card-body'>
-							
-								Kundennummer: ".$_SESSION['kundennummer']."<br><br>
-								
-								Vorname: ".$row["vorname"]."<br>
-								Nachname: ".$row["nachname"]."<br>
-								Geburtsdatum: ".date("d.m.Y", strtotime($row["gebdatum"]))."<br><br>
-								
-								E-Mail: ".$row["email"]."<br>
-								
+								<div class='row'>
+									<div class='col-lg-7'>
+										Kundennummer: ".$row['kundennummer']."<br><br>
+										
+										Vorname: ".$row["vorname"]."<br>
+										Nachname: ".$row["nachname"]."<br>
+										Geburtsdatum: ".date("d.m.Y", strtotime($row["gebdatum"]))."<br><br>
+										
+										E-Mail: ".$row["email"]."<br>
+									</div>
+									<div class='col-lg-5 mt-2 mb-2 text-center'>
+									
+									";
+									
+									if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
+										
+										echo "
+											<img class='rounded ml-auto mr-auto w-75 h-100 ml-auto mr-auto' src='./profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."'>
+										";
+									
+									} else {
+									
+										echo "
+											<img class='rounded ml-auto mr-auto w-75 h-100 ml-auto mr-auto' src='./images/user.png'>
+										";
+									
+									}
+									
+									echo "
+									
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -381,54 +407,56 @@
 							
 								";
 								?>
-								<!--<p class="d-inline text-danger">Sie können Ihr Passwort alle 30 Tage ändern!</p><br>-->
+								
 								<div class="changeButtonsRsp">
-								
-								<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</button>
-								
+									<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</button>
 								</div>
-								
-								
 								<div class="changeHrefsRsp">
-								
-								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</a><br>
-								
+									<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_pwd_html')">Passwort ändern</a><br>
 								</div>							
 							
+							
+							
+							
 							<div class="changeButtonsRsp">
-							
-							<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</button>
-							
-							</div>
-							
-								<div class="changeHrefsRsp">
-								
+								<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</button>
+							</div>							
+							<div class="changeHrefsRsp">
 								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#change_email_html')">E-Mail ändern</a><br><br>		
-								</div>								
-								
-								<div class="changeHrefsRsp">
-								
-								<a class='float-left href changeTrigger'>Meine Anzeigen löschen</a><br><br>
-									
-								</div>
-								
-								<div class="changeButtonsRsp">
-								
-								<button class='float-left btn btn-sm btn-dark changeTrigger'>Meine Anzeigen löschen</button><br><br>
-									
-								</div>
-								
-							<div class="changeButtonsRsp">
+							</div>								
 							
-							<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</button>
 							
+							
+							
+							<div class="changeHrefsRsp">
+								<a class='float-left href changeTrigger'>Meine Anzeigen löschen</a><br>
 							</div>
-								<div class="changeHrefsRsp">
+							<div class="changeButtonsRsp">
+								<button class='float-left btn btn-sm btn-dark changeTrigger'>Meine Anzeigen löschen</button><br>
+							</div>
+							
+							
+							
+							
+							
+							<div class="changeHrefsRsp">
+								<a href="./profil/<?php echo $crypt_iNR; ?>" class='float-left href changeTrigger'>Mein Profil einsehen</a><br><br>
+							</div>
+							<div class="changeButtonsRsp">								
+								<button onclick="window.location.href='./profil/<?php echo $crypt_iNR; ?>'" class='float-left btn btn-sm btn-dark changeTrigger'>Mein Profil einsehen</button><br><br>									
+							</div>
 								
-								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</a>
 								
-								</div>
-								<br>
+								
+								
+							<div class="changeButtonsRsp">							
+								<button class='float-left btn btn-sm btn-dark changeTrigger' onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</button>						
+							</div>
+							<div class="changeHrefsRsp">								
+								<a class="href" onclick="open_pwd_email_change('.change_pwd_email_overlay', '#account_löschung')">Mein Account löschen</a>								
+							</div>
+							
+							
 								
 								<?php
 								
@@ -593,17 +621,183 @@
 					echo "Keine Anzeigen vorhanden!&nbsp;&nbsp; <a href='../anzeigen/erstellen'><button class='btn btn-light'>Jetzt Anzeige aufgeben</button></a>";
 				}		
 				
+
 				
 			}
 			}
 		?>
 	</div>
-  </div>
+<?php
+
+				$sql3 = "SELECT * FROM bewertungen WHERE ist_für = '".$_SESSION['iNR']."' ORDER BY created_at DESC";
+				$query3 = $verb -> query($sql3);
+				$countNumRows = $query3 -> fetchAll();	
+				
+				$sql1 = "SELECT * FROM inserent WHERE iNR = '".$_SESSION['iNR']."'";
+				
+				if (count($countNumRows) < 1) {
+					
+				echo "
+				
+				<div class='card mt-3 mb-1'>
+					<div class='card-header bg-dark text-white'>
+					
+						Es gibt zurzeit keine Bewertungen! 
+						
+					</div>
+				</div>
+					
+				";
+				
+				} else {
+				
+				echo "
+				
+				<div class='card mt-3'>
+					<div class='card-header bg-dark text-white'>
+						Bewertungen 
+						
+						<a href='../bewerten/".$crypt_iNR."'>
+						";
+						
+						foreach ($verb -> query($sql1) as $row5) {
+						
+							echo "
+						
+								<button title='Jetzt Bewertung zu \"".$row5["vorname"]." ".$row5["nachname"]."\" schreiben!' class='btn btn-sm btn-light float-right'>
+									Bewertung schreiben
+								</button>
+							
+							";
+						}
+						echo "
+						
+						</a>
+						
+					</div>
+					<div class='card-body'>
+					
+				";
+				
+					$monatsnamen = array(1=>"Januar",2=>"Februar",3=>"März",4=>"April",5=>"Mai",6=>"Juni",7=>"Juli",8=>"August",9=>"September",10=>"Oktober",11=>"November",12=>"Dezember");
+							
+						foreach ($verb -> query($sql3) as $row4) {
+			
+							$monat = date("n", strtotime($row4["created_at"]));
+							
+							echo "
+							
+								<div class='card mb-3'>
+									<div class='card-header bg-dark text-white'>
+										".$row4["betreff"]."
+									</div>
+									<div class='card-body'>
+										".$row4["beschreibung"]."
+										
+										<br><br>
+										
+										<div class='sterne' title='".$row4["bewertung"]." Sterne'>
+										
+										";
+										
+										$i = 0;
+										
+										while ($i < 5) {
+										
+										if ($i < $row4["bewertung"]) {
+											if ($i == 0) {
+												echo "
+												
+												<i style='color: red;' class='ml-1 fa fa-star'></i>
+												
+												";
+											} else {
+												echo "
+												
+												<i style='color: red;' class='fa fa-star'></i>
+												
+												";
+											}
+										} else {
+											echo "
+											
+											<i style='color: black;' class='fa fa-star'></i>
+											
+											";		
+										}
+										
+										$i++;
+											
+										}
+										
+										echo "
+										</div>
+									</div>
+									<div class='card-footer'>
+									
+									";
+									
+									$sql6 = "SELECT * FROM inserent WHERE iNR = '".$row4["kommt_von"]."'";
+									$query6 = $verb -> query($sql6);
+									
+									foreach ($query6 as $row) {
+												
+									$crypt_iNR2 = str_replace("/", "", crypt($row["iNR"],'SB')); 
+												
+									if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
+									
+									echo "
+											<img onclick=\"window.location.href='./profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class='pointer rounded-circle ml-auto mr-auto' src='./profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."'>
+											~ ".$row["vorname"]." ".$row["nachname"]."
+									";
+									
+									} else {
+									
+									echo "
+											<img onclick=\"window.location.href='./profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class=pointer 'rounded-circle ml-auto mr-auto' src='./images/user.png'>
+											~ ".$row["vorname"]." ".$row["nachname"]."
+									";
+									
+									}
+							
+									}
+									
+									echo "
+									
+									<br>
+									
+									<p class='mt-2 mb-0'>Veröffentlicht am: 
+												".date("d.", strtotime($row4["created_at"]))."
+												".$monatsnamen[$monat]." 
+												".date("Y", strtotime($row4["created_at"])).", 
+												".date("H", strtotime($row4["created_at"])).":00 Uhr
+									</p>
+									</div>
+								</div>
+						
+							";
+							
+						}
+						
+						echo "
+					
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		";
+		}
+	
+	?>
+</div>
   </div>
   </div> 
   </div>
 	<?php 
-	}		
+	}
+	
 		require_once 'includes/loeschencheck.php';
 		
 		include 'includes/footer.php';	

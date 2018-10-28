@@ -416,7 +416,7 @@ if (document.getElementById('files') && document.getElementById('list')) {
 function dateiauswahl(evt) {
     var dateien = evt.target.files;
 	
-       for (var i = 0, f; f = dateien[i]; i++) {
+      for (var i = 0, f; f = dateien[i]; i++) {
 
       if (!f.type.match('image.*')) {
         continue;
@@ -673,3 +673,44 @@ function setNavigation() {
     setNavigation();
 	
 });
+
+
+
+
+// Star changer for the "Bewertung"
+
+if ($("#bewertung")) {
+	
+	var anzahlSterne = 5;
+	
+	function bewertungSterne(zahl) {
+		
+		for (var i = 1; i <= zahl; i++) {
+				
+		var element = $("#bewertung" + i);
+		element.css("color", "red");				
+		
+		if (zahl < anzahlSterne) {
+			for (var e = zahl; e <= anzahlSterne; e++) {
+			var element = $("#bewertung" + e);
+				element.css("color", "black");
+				
+			var element = $("#bewertung" + zahl);
+				element.css("color", "red");
+			}
+		}		
+		
+		}
+		
+		$("#bewertung").attr("value", zahl);
+		
+	};
+
+}
+
+
+
+
+
+
+

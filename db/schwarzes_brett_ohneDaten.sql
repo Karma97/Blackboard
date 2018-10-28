@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 27. Okt 2018 um 22:22
+-- Erstellungszeit: 28. Okt 2018 um 03:58
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -56,6 +56,23 @@ CREATE TABLE `besucherzahlen` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `bewertungen`
+--
+
+CREATE TABLE `bewertungen` (
+  `bNR` int(11) NOT NULL,
+  `ist_für` int(11) NOT NULL,
+  `kommt_von` int(11) NOT NULL,
+  `betreff` varchar(120) NOT NULL,
+  `beschreibung` varchar(2000) NOT NULL,
+  `bewertung` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `bilder`
 --
 
@@ -75,14 +92,15 @@ CREATE TABLE `bilder` (
 
 CREATE TABLE `inserent` (
   `iNR` int(11) NOT NULL,
-  `kundennummer` varchar(15) NOT NULL,
-  `identifier_token` varchar(700) NOT NULL,
-  `nachname` varchar(100) NOT NULL,
   `vorname` varchar(100) NOT NULL,
+  `nachname` varchar(100) NOT NULL,
   `passwort` varchar(500) NOT NULL,
   `email` varchar(120) NOT NULL,
   `gebdatum` date NOT NULL,
   `newsletter` tinyint(1) NOT NULL,
+  `profilbildpfad` varchar(10000) NOT NULL,
+  `kundennummer` varchar(15) NOT NULL,
+  `identifier_token` varchar(700) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -160,6 +178,14 @@ ALTER TABLE `besucherzahlen`
   ADD KEY `iNR` (`iNR`);
 
 --
+-- Indizes für die Tabelle `bewertungen`
+--
+ALTER TABLE `bewertungen`
+  ADD PRIMARY KEY (`bNR`),
+  ADD KEY `ist_für` (`ist_für`,`kommt_von`),
+  ADD KEY `kommt_von` (`kommt_von`);
+
+--
 -- Indizes für die Tabelle `bilder`
 --
 ALTER TABLE `bilder`
@@ -209,6 +235,12 @@ ALTER TABLE `anzeigen`
   MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT für Tabelle `bewertungen`
+--
+ALTER TABLE `bewertungen`
+  MODIFY `bNR` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `bilder`
 --
 ALTER TABLE `bilder`
@@ -248,6 +280,13 @@ ALTER TABLE `anzeigen`
 --
 ALTER TABLE `besucherzahlen`
   ADD CONSTRAINT `besucherzahlen_ibfk_1` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`);
+
+--
+-- Constraints der Tabelle `bewertungen`
+--
+ALTER TABLE `bewertungen`
+  ADD CONSTRAINT `bewertungen_ibfk_1` FOREIGN KEY (`ist_für`) REFERENCES `inserent` (`iNR`),
+  ADD CONSTRAINT `bewertungen_ibfk_2` FOREIGN KEY (`kommt_von`) REFERENCES `inserent` (`iNR`);
 
 --
 -- Constraints der Tabelle `bilder`
