@@ -45,6 +45,23 @@
 	text-align: center;
 }
 
+/*
+.carousel-inner .carousel-item-right.active,
+.carousel-inner .carousel-item-next {
+  transform: translateX(33.33%);
+}
+
+.carousel-inner .carousel-item-left.active, 
+.carousel-inner .carousel-item-prev {
+  transform: translateX(-33.33%)
+}
+  
+.carousel-inner .carousel-item-right,
+.carousel-inner .carousel-item-left { 
+  transform: translateX(0);
+}
+*/
+
 @media screen and (max-width: 700px) {
 	.carousel-inner {
 		height: 100%;

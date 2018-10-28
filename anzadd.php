@@ -41,7 +41,7 @@
   <p class="text-dark mt-0 mb-0">Wenn Sie eingeloggt sind, dann können Sie Ihre Anzeigen unter Ihrem Profil löschen oder bearbeiten.</p>
   <p class="mt-2 mb-4 text-danger">Ihre Anzeige wird nach 2 Wochen automatisch gelöscht!</p>
   
-  <form action="../anzeigen/erstellen" id="anzeigenForm" class="mt-0" method="POST">
+  <form action="../anzeigen/erstellen" id="anzeigenForm" enctype="multipart/form-data" class="mt-0" method="POST">
 	<div class="form-group">
 		<label for="titel">Betreff der Anzeige</label>
 		<input autofocus type="text" class="form-control" name="titel" required id="titel" placeholder="">
@@ -128,10 +128,15 @@
 	<div class="custom-file">
 	<div class="form-group">
 		<input type="file" name="files[]" class="custom-file-input" multiple id="files">
-		<label class="custom-file-label" for="files">Bilder hochladen </label>
+		<label class="custom-file-label" for="files"><p id="labelimage">Bilder hochladen</p></label>
+  </div>
   </div>
 	
-  <div id="list"></div>
+	<div id="imagepreview" class="d-none">
+		<div id="imagepreview_images">
+		
+		</div>
+	</div>
   
   <?php
   
@@ -187,14 +192,70 @@
 		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, \"".$iNR."\", \"".$titel."\", \"".$beschreibung."\", \"".$ort."\", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; 
 		$query = $verb -> query($sql1);
 								
-		foreach ($verb -> query($sql2) as $row) {
-			$aNR = $row["aNR"];
-		}
+			$aNR = $verb -> lastInsertId();
 	
 			for ($i = 1; $i <= $countR; $i++) {
 				$rubrik = "rubrik".$i."";
 				$sql3 = "INSERT INTO `r_besitzt_a`(`rNR`, `aNR`, `updated_at`, `created_at`) VALUES ('".$$rubrik."', '".$aNR."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 				$query3 = $verb -> query($sql3);
+			}
+		
+		if (isset($_FILES["files"])) {
+						
+		$file_existiert = false;
+		$upload_erfolgreich = false;
+		$erneut_versuchen = false;
+		$falsche_groeße_und_typ = false;
+		
+		$j = 0; 
+		
+		for ($i = 0; $i < count($_FILES['files']['name']); $i++) { 
+		
+			if (!file_exists("anzeigenbilder/".$aNR."")) {
+				mkdir("anzeigenbilder/".$aNR."", 0755, true);
+			}
+			
+			$target_path1 = "anzeigenbilder/".$aNR."/"; 
+		
+			$validextensions = array("jpeg", "jpg", "png");
+			$ext = explode('.', basename($_FILES['files']['name'][$i]));
+			$file_extension = end($ext); 
+		
+			$target_path2 = $target_path1.str_replace("/", "", crypt($_FILES['files']['name'][$i], "SB")).".".$ext[count($ext) - 1];
+		
+				$sql90 = "INSERT INTO `anzeigenbilder`(`bID`, `aNR`, `bildpfad`, `created_at`, `updated_at`) VALUES ( null, '".$aNR."', '".$target_path1.$_FILES['files']['name'][$i]."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+
+				$query90 = $verb -> query($sql90);
+
+			$j++;
+
+			if (($_FILES["files"]["size"][$i] < (count($_FILES['files']['name']) * (1048576 * 10))) 
+				&& in_array($file_extension, $validextensions)) {
+			
+				if (file_exists($target_path2)) {
+					
+					$file_existiert = true;
+					
+				} else {
+					
+					if (move_uploaded_file($_FILES['files']['tmp_name'][$i], $target_path2)) {
+						
+						$upload_erfolgreich = true;
+						
+					} else {
+					
+						$erneut_versuchen = true;
+						
+					}
+					
+				}	
+		
+			} else {
+				
+					$falsche_groeße_und_typ = true;
+
+					}
+				}		
 			}
 		
 		
@@ -214,11 +275,11 @@
   
   ?>
   
-    <button class="btn btn-dark" id="submitAnzeige" type="submit">Anzeige aufgeben</button>
+    <button class="btn btn-dark mt-3" id="submitAnzeige" type="submit">Anzeige aufgeben</button>
 	
   </form>
   </div>
-  </div>
+  
   <?php
   
   if (!isset($fertig) or !isset($aNR)) {
@@ -254,7 +315,7 @@
   ?>
   </div>
   </div>
-	<?php 
+  <?php 
 	}
 	
 		require_once 'includes/loeschencheck.php';

@@ -129,6 +129,9 @@
 						$sql2 = "DELETE FROM `r_besitzt_a` WHERE aNR = '".$wert[$u]."'";	
 						$query2 = $verb -> query($sql2);
 						
+						$sql2 = "DELETE FROM `anzeigenbilder` WHERE aNR = '".$wert[$u]."'";	
+						$query2 = $verb -> query($sql2);
+						
 						$sql1 = "DELETE FROM `anzeigen` WHERE aNR = '".$wert[$u]."'";	
 						$query1 = $verb -> query($sql1);				
 						

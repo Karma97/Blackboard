@@ -38,3 +38,4 @@ RewriteRule ^profil/([a-zA-Z0-9]+)?$ accounts.php?iNR=$1
 
 
 RewriteRule ^bewerten/([a-zA-Z0-9]+)$ bewertung.php?iNR=$1
+RewriteRule ^upload?$ upload.php

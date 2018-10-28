@@ -64,86 +64,273 @@
 	
 		if ($_SESSION['vorname'] === "S_B" && $_SESSION['nachname'] === "Admin" && $_SESSION['identifier_token'] === "rOxrNwMC6TDKXf86QRILJ1R=vUKRTfDsGrJ&CEt1hl3Yv5G9mtbDgEJcFWkxL5An81JJF#Vu5ACK3VyrW&K=JXrzehQDSn=D0XEHY6aE5RKtxe0mvtLLd~JcwJ82Hdzrdjc1b5oT#8=K5XhnyQV1MgFgrIXDhMzQtvO5eB7RWa%4NgJOR0G1yNlwvC4nXkEgCgx9UV3xZP8ShpalLfHejvWzEBD8KbzNxViW%tU5XLpSq~67O7Rh0%NAPcHyrQ3zLdm87ikdi7WCOFr#haw6NwnCosFWEZRNSqX4NMVK554%=C%xUMeIXsQdqMVco2Txfq95=THNdpuvvlR=4pXwQ85Mzycic4C9xK03tJnL5SR=Q8myP2O&Ev6p6pb2xi%KkBXNEVcd#849Iie&EGwvm9%F~Q9JD3BuUMzMW7EHBW3xPgjM1k7MYmdKxe6Haq&ZjlO6gtypuYqT1Wp2HSAigMkWg%t2peTtiSF50XZRB8TGfBPUMWhK" && $_SESSION['gebDatum'] === "9999-09-09") {
 					
+	$fehler = false;
+	$vorhanden = false;
 	
-	$fertig = false;
-	$zuLang = false;
-	$leer = false;
+	$leer_titel = false;
+	$html_titel = false;
+	$zahlen_titel = false;
+	
+	$leer_beschreibung = false;
+	$html_beschreibung = false;
+	$zahlen_beschreibung = false;	
+	
+	
+	$ist_gesetzt = false;
 	
 	if (isset($_POST["newstitle"]) && isset($_POST["newsdesc"])) {
 		
-		if (empty($_POST["newstitle"]) or empty($_POST["newsdesc"])) {
-			
-			$leer = true;
-			
-		} else {
+		$ist_gesetzt = true;
 		
-		$beschreibung = $_POST["newsdesc"];
 		$titel = $_POST["newstitle"];
-		
-		if (strlen($beschreibung) > 5000) {	
-		
-			$zuLang = true;	
+		$beschreibung = $_POST["newsdesc"];
 			
+		//// Prüfungen
+		// Titel
+		if (empty($titel)) {
+			$leer_titel = true;
+			$fehler = true;
 		}
 		
-		if ($zuLang == false) {
+		if (is_numeric($titel)) {
+			$zahlen_titel = true;
+			$fehler = true;
+		}
 		
+		if (is_html($titel)) {
+			$html_titel = true;
+			$fehler = true;		
+		}
+		
+		// Beschreibung
+		if (empty($beschreibung)) {
+			$leer_beschreibung = true;
+			$fehler = true;
+		}
+		
+		if (is_numeric($beschreibung)) {
+			$zahlen_beschreibung = true;
+			$fehler = true;
+		}
+		
+		if (is_html($beschreibung)) {
+			$html_beschreibung = true;
+			$fehler = true;		
+		}
+
+		
+		if ($fehler == false) {
+		
+			$sql4 = "SELECT * FROM news WHERE titel = '".$titel."' AND beschreibung = '".$beschreibung."'";
+			$query4 = $verb -> query($sql4);	
+			$countNumRows = count($query4 -> fetchAll());
+		
+			if ($countNumRows > 0) {
+				
+				$vorhanden = true;
+			
+			} else {
+			
 			$sql3 = "INSERT INTO `news`(`nID`, `titel`, `beschreibung`, `updated_at`, `created_at`) VALUES (null, '".$titel."', '".$beschreibung."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 			$query3 = $verb -> query($sql3);
 			
-			$fertig = true;
+			$nID = $verb -> lastInsertId();
 			
-			}
+			if (!file_exists("newsbilder/".$nID."")) {
+				mkdir("newsbilder/".$nID."", 0755, true);
+			}			
+			
+			
+						
+		if (isset($_FILES["files"])) {
+		
+		$file_existiert = false;
+		$upload_erfolgreich = false;
+		$erneut_versuchen = false;
+		$falsche_groeße_und_typ = false;
+		
+		$j = 0; 
+		
+		for ($i = 0; $i < count($_FILES['files']['name']); $i++) { 
+		
+			$target_path1 = "newsbilder/".$nID."/"; 
+		
+			$validextensions = array("jpeg", "jpg", "png");
+			$ext = explode('.', basename($_FILES['files']['name'][$i]));
+			$file_extension = end($ext); 
+		
+			$target_path2 = $target_path1.str_replace("/", "", crypt($_FILES['files']['name'][$i], "SB")).".".$ext[count($ext) - 1];
+		
+				$sql90 = "INSERT INTO `newsbilder`(`bID`, `nID`, `bildpfad`, `created_at`, `updated_at`) VALUES ( null, '".$nID."', '".$target_path1.$_FILES['files']['name'][$i]."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+				
+				$query90 = $verb -> query($sql90);
+
+			$j++;
+
+			if (($_FILES["files"]["size"][$i] < (count($_FILES['files']['name']) * (1048576 * 10))) 
+				&& in_array($file_extension, $validextensions)) {
+			
+				if (file_exists($target_path2)) {
+					
+					$file_existiert = true;
+					
+				} else {
+					
+					if (move_uploaded_file($_FILES['files']['tmp_name'][$i], $target_path2)) {
+						
+						$upload_erfolgreich = true;
+						
+					} else {
+					
+						$erneut_versuchen = true;
+						
+					}
+					
+				}	
+		
+			} else {
+				
+					$falsche_groeße_und_typ = true;
+
+						}
+					}		
+				}	
+				}
+		} else {
+		
+		
 		}
 	}
 		
 	?>
 	<h1 class="mt-1">Neue News eintragen!</h1>
 	
-<form action="../news/erstellen" method="post">
-<div class="form-group">
-    <label for="titel">Titel</label>
-    <input type="text" name="newstitle" class="form-control"></input>
-  </div>
-  
-  <div class="form-group">
-    <label for="beschr">Beschreibung</label>
-    <textarea type="text" name="newsdesc" class="form-control" rows="3"></textarea>
-  </div>
-  
-  <div>
-  
-	  <?php
-	  
-	if ($zuLang == true) {
+<form action="../news/erstellen" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<label for="titel">Titel</label>
+		<input type="text" name="newstitle" class="form-control"></input>
+	</div>
+	<?php
+		
+	if ($leer_titel == true) {
 		echo "
 		
-		<p class='text-danger mb-1 mt-1'>News konnte nicht erstellt werden,<br>Beschreibung ist zu lang!</p>
-		
-		";		
-	}
-	
-	if ($fertig == true) {
-		echo "
-		
-		<p class='text-success mb-1 mt-1'>News wurde erfolgreich erstellt!</p>
-		
+			<p class='ml-1 mt-0 mb-1 text-danger'>
+				Bitte ausfüllen!
+			</p>
+			
 		";
 	}
 	
-	if ($leer == true) {
+	if ($html_titel == true) {
 		echo "
 		
-		<p class='text-danger mb-1 mt-1'>Sie müssen die Felder ausfüllen!</p>
+			<p class='ml-1 mt-0 mb-1 text-danger'>
+				Bitte keine HTML-Tags benutzen!
+			</p>
 		
-		";		
+		";			
 	}
-	  
-	  ?>
-	  
-  </div>
-  
-  <button type="submit" class="btn btn-dark">Neue News eintragen</button>
+	
+	if ($zahlen_titel == true) {
+		echo "
+		
+			<p class='ml-1 mt-0 mb-1 text-danger'>
+				Bitte keine Nummern angeben!
+			</p>
+		
+		";	
+	}
+	
+	?>
+	<div class="form-group">
+		<label for="beschr">Beschreibung</label>
+		<textarea type="text" name="newsdesc" class="form-control" rows="3"></textarea>
+	</div>
+	<?php
+	
+	if ($leer_beschreibung == true) {
+		echo "
+		
+			<p class='ml-1 mt-0 mb-1 text-danger'>
+				Bitte ausfüllen!
+			</p>
+			
+		";
+	}
+	
+	if ($html_beschreibung == true) {
+		echo "
+		
+			<p class='ml-1 mt-0 mb-1 text-danger'>
+				Bitte keine HTML-Tags benutzen!
+			</p>
+		
+		";			
+	}
+	
+	if ($zahlen_beschreibung == true) {
+		echo "
+		
+			<p class='ml-1 mt-0 mb-1 text-danger'>
+				Bitte keine Nummern angeben!
+			</p>
+		
+		";	
+	}
+	
+	?>
+	
+	<div class="custom-file mt-3">
+		<div class="form-group">
+			<input type="file" name="files[]" class="custom-file-input" multiple id="files">
+			<label class="custom-file-label" for="files"><p id="labelimage">Bilder hochladen</p></label>
+		</div>
+	</div>
+		
+	<div id="imagepreview" class="d-none">
+		<div id="imagepreview_images">
+		
+		</div>
+	</div>  
+	
+	<?php
+	
+	if ($fehler == true) {
+		echo "
+		
+			<button type='submit' class='mt-4 btn btn-danger'>Neue News eintragen</button>
+		
+			<p class='mt-3 mb-0 text-danger'>Bitte überprüfen Sie Ihre Eingaben!</p>
+		
+		";
+	} else {
+	
+		echo "
+		
+		<button type='submit' class='mt-4 btn btn-dark'>Neue News eintragen</button>
+		
+		";
+	
+		if ($ist_gesetzt == true) {
+			if ($vorhanden == true) {
+					echo "
+								
+						<p class='mt-4 mb-0 text-danger'>Die News ist bereits ähnlich veröffentlicht worden!</p>
+						
+					";	
+				} else {
+					echo "
+								
+						<p class='mt-4 mb-0 text-success'>Die News wurde veröffentlicht!</p>
+						
+						<p class='mt-0 mb-0 text-dark'>Sie können die News auf <a href='../news/".$nID."'>der Newsseite</a> einsehen!</p> 		
+					";				
+				}
+			}
+		}
+	
+	?>
 </form>
 	
 </div>

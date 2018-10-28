@@ -45,7 +45,7 @@ function collapseItem(item, icon) {
 		$(item).collapse('show');
 		$(icon).removeClass("collapsedIcon");
 	}	
-}
+	}
 
 function myFunction22(x) {
     if (x.matches) { 
@@ -412,44 +412,139 @@ for (i; i <= anzahlTDS; i++) {
 
 // bilder vorschau bei anzadd
 	
-if (document.getElementById('files') && document.getElementById('list')) {
-function dateiauswahl(evt) {
-    var dateien = evt.target.files;
+
 	
-      for (var i = 0, f; f = dateien[i]; i++) {
-
-      if (!f.type.match('image.*')) {
-        continue;
-      }
-
-      var reader = new FileReader();
-
-      reader.onload = (function(theFile) {
-        return function(e) {
-	  
-          var vorschau1 = document.createElement('img');
-		  vorschau1.className = 'vorschau hoverable rounded d-inline-block mb-2 ml-2 mr-2 mt-2';
-
-		  vorschau1.src   = e.target.result;
-		  vorschau1.title = theFile.name;
-          document.getElementById('list').insertBefore(vorschau1, null);
-        };
-		})(f);
-
-      reader.readAsDataURL(f);
-    }
+$("#labelimage").html("Bilder hochladen");
 	
-	var vorschau2 = document.createElement('label');
-	vorschau2.className = 'custom-file-label';
-	vorschau2.innerHTML = "Ihre Bilder:";
-    document.getElementById('list').insertBefore(vorschau2, null);
+$(function () {
+    $("#files").change(function () {
+		var k = 1;
 	
-  }
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#imagepreview_images");
+			$("#imagepreview").removeClass("d-none");
+			
+            dvPreview.html("");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+			
+			$("#labelimage").html("Bilder hochladen");
+			
+            $($(this)[0].files).each(function () { 	
+			
+				$("#labelimage").removeClass("text-danger");
+			
+                var file = $(this);
+                if (regex.test(file[0].name.toLowerCase())) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+					if (k > 10) {
+						$("#labelimage").addClass("text-danger");
+						$("#labelimage").html("Bitte max. 10 auswählen!");
+						return false;
+					} else {
+                        var img = $("<img />");
+                        img.attr("style", "height:100px;");
+                        img.attr("src", e.target.result);
+						img.attr("class", "w75 rounded ml-2 mr-2 mb-2 mt-2");
+						img.attr("title", file[0].name);
+                        dvPreview.append(img);	
+						
+						if (k == 1) {
+							$("#labelimage").html(k + " Bild wurde ausgewählt!");
+						} else if (k > 1) {
+							$("#labelimage").html(k + " Bilder wurden ausgewählt!");
+						} else {
+							$("#labelimage").html("Bilder hochladen");
+						}
+						
+					}
+						
+						k++;
+						
+                    }
+					reader.readAsDataURL(file[0]);
+					
+				} else { 
+				
+					$("#labelimage").html("Bilder hochladen");
+					dvPreview.html("");
+					return false;
+						
+					}
+               
+            });
+        } else {
+		
+        }	
+    });
+});  
 
-  
-  document.getElementById('files').addEventListener('change', dateiauswahl, false);
-  }
-  
+// bilder vorschau bei newsadd
+	
+$("#labelimage").html("Bilder hochladen");
+	
+$(function () {
+    $("#newsfiles").change(function () {
+		var k = 1;
+	
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#imagepreview_images");
+			$("#imagepreview").removeClass("d-none");
+            dvPreview.html("");
+			
+			$("#labelimage").html("Bilder hochladen");
+			
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
+            $($(this)[0].files).each(function () { 	
+			
+				$("#labelimage").removeClass("text-danger");
+			
+                var file = $(this);
+                if (regex.test(file[0].name.toLowerCase())) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+					if (k > 10) {
+						$("#labelimage").addClass("text-danger");
+						$("#labelimage").html("Bitte max. 10 auswählen!");
+						return false;
+					} else {
+                        var img = $("<img />");
+                        img.attr("style", "height:100px;");
+                        img.attr("src", e.target.result);
+						img.attr("class", "w75 rounded ml-2 mr-2 mb-2 mt-2");
+						img.attr("title", file[0].name);
+                        dvPreview.append(img);	
+						
+						if (k == 1) {
+							$("#labelimage").html(k + " Bild wurde ausgewählt!");
+						} else if (k > 1) {
+							$("#labelimage").html(k + " Bilder wurden ausgewählt!");
+						} else {
+							$("#labelimage").html("Bilder hochladen");
+						}
+						
+					}
+						
+						k++;
+						
+                    }
+					reader.readAsDataURL(file[0]);
+					
+				} else { 
+				
+					$("#labelimage").html("Bilder hochladen");
+					dvPreview.html("");
+					return false;
+						
+					}
+               
+            });
+        } else {
+		
+        }	
+    });
+});  
+
 // Loading screen
 
  /*$(function() {
@@ -708,6 +803,27 @@ if ($("#bewertung")) {
 
 }
 
+
+// multiple items in carousel
+
+$('#recipeCarousel').carousel({
+	interval: 10000
+})
+
+$('.carousel .carousel-item3').each(function(){
+    var next = $(this).next();
+    if (!next.length) {
+    next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    
+    if (next.next().length>0) {
+    next.next().children(':first-child').clone().appendTo($(this));
+    }
+    else {
+      $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+    }
+});
 
 
 

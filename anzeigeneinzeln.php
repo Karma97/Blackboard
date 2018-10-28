@@ -35,14 +35,14 @@
 	
 	if (isset($_GET["aNR"])) {		
 		if ($_GET["aNR"] < 1 or empty($_GET["aNR"])) {	
-			$nofound = false;			
+			$nofound = true;			
 		} else {
-			$nofound = true;
+			$nofound = false;
 			$aNR = $_GET["aNR"];
 		}		
 	}	
 	
-	if ($nofound == false) {
+	if ($nofound == true) {
 		
 		echo "keine anzeige gefunden!";
 		
@@ -63,7 +63,7 @@
 		    
 			";
 			
-			$sql2 = "SELECT * FROM bilder WHERE aNR = '".$aNR."'";
+			$sql2 = "SELECT * FROM anzeigenbilder WHERE aNR = '".$aNR."'";
 			$query2 = $verb -> query($sql2);
 			$countBilder = $query2 -> fetchAll();
 			
@@ -75,9 +75,60 @@
 					Bildergallerie (".count($countBilder)." insgesamt)
 				</div>
 				<div class='card-body text-dark'>
-					bilder kommen...
-				</div>	
+				<div class='row'>
+					";
+					
+				foreach ($verb -> query($sql2) as $row2) {
+					
+					$explode = explode('.', basename($row2["bildpfad"]));
+					
+					foreach ($explode as $key => $row5) {
+						$name = $explode[0];
+						$dateityp = $explode[1];
+					}
+					
+					$crypt_name = str_replace("/", "", crypt($name, "SB"));
+					$dateiname = $crypt_name.".".$dateityp;
+					
+					$countarray = count(array_diff(scandir("anzeigenbilder/".$row2["aNR"].""), array('..', '.')));
+					
+					if ($countarray > 0) {
+					if (file_exists("anzeigenbilder/".$row2["aNR"]."/".$dateiname."")) {
+					if ($countarray > 5) {					
+						echo "
+							<div class='col mt-1 mb-1 d-inline-block text-center'>
+								<img class='anzeigenbild rounded ml-auto mr-auto' src='../anzeigenbilder/".$row2["aNR"]."/".$dateiname."'>
+							</div>
+							";	
+					} else {
+						echo "
+							<div class='col mt-1 mb-1 d-inline-block text-center'>
+								<img class='anzeigenbild rounded ml-auto mr-auto' src='../anzeigenbilder/".$row2["aNR"]."/".$dateiname."'>
+							</div>
+							";						
+					}
+						} else {
+							echo "
+							<div class='col d-inline-block text-center'>
+								<img class='anzeigenbild rounded ml-auto mr-auto' src='../images/no-image.png' \>
+							</div>	
+							";								
+						}						
+					} else {
+						echo "
+							<div class='col d-inline-block text-center'
+								<img class='anzeigenbild rounded ml-auto mr-auto' src='../images/no-image.png' \>
+							</div>
+						";					
+					}
+					
+					}
+					
+					echo "
+						</div>
+					</div>
 				</div>
+				
 				";
 				
 			} 
