@@ -18,6 +18,15 @@ hr.changes {
 	background-color: #697581 !important;
 }
 
+.myaccimage {
+	max-height: auto;
+	overflow: hidden;
+}
+
+.accimage {
+	max-width: 100%;
+	min-height: auto;
+}
 
 #change_pwd_html, #change_email_html {
     position: fixed;

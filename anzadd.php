@@ -62,15 +62,14 @@
 	<option value="" selected>Ort auswählen</option>
 				<?php
 				
-				$sql = 'SELECT PLZ, Bezeichnung FROM orte ORDER BY Bezeichnung';	
+				$sql = 'SELECT ortID, Bezeichnung FROM orte ORDER BY Bezeichnung';	
 				$query = $verb -> query($sql);
 				
 				foreach ($query as $row) {
-					echo "<option value='".$row["PLZ"]."'>".$row["Bezeichnung"]."</option>";
+					echo "<option value='".$row["ortID"]."'>".$row["Bezeichnung"]."</option>";
 				}		
 				
 			?>
-	<option id="noresult" disabled>Keine Ergebnisse</option>
     </select>
 	</div>
 	</div>
@@ -166,7 +165,6 @@
 		$z = 1;
 		$u = 0;
 		
-		/* Umsetzung des Arrays zu Variablen */
 		foreach ($rubriken as $row) {
 		
 			$rubrik = "rubrik".$z."";
@@ -177,7 +175,7 @@
 			
 		}
 		
-		$sql2 = "SELECT * FROM anzeigen WHERE beschreibung = \"".$beschreibung."\" AND betreff = \"".$titel."\" AND PLZ = \"".$ort."\"";
+		$sql2 = "SELECT * FROM anzeigen WHERE beschreibung = \"".$beschreibung."\" AND betreff = \"".$titel."\" AND ortID = \"".$ort."\"";
 		$query2 = $verb -> query($sql2);
 		$queryNumbers = $query2 -> fetchAll();
 						
@@ -189,7 +187,7 @@
 			$vorhanden = "vorhanden";
 		} else {
 		
-		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `PLZ`, `updated_at`, `created_at`) VALUES (null, \"".$iNR."\", \"".$titel."\", \"".$beschreibung."\", \"".$ort."\", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; 
+		$sql1 = "INSERT INTO `anzeigen` (`aNR`, `iNR`, `betreff`, `beschreibung`, `ortID`, `updated_at`, `created_at`) VALUES (null, \"".$iNR."\", \"".$titel."\", \"".$beschreibung."\", \"".$ort."\", CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"; 
 		$query = $verb -> query($sql1);
 								
 			$aNR = $verb -> lastInsertId();
@@ -218,12 +216,13 @@
 			$target_path1 = "anzeigenbilder/".$aNR."/"; 
 		
 			$validextensions = array("jpeg", "jpg", "png");
-			$ext = explode('.', basename($_FILES['files']['name'][$i]));
+			$basename = basename($_FILES['files']['name'][$i]);
+			$ext = explode('.', $basename);
 			$file_extension = end($ext); 
+			
+			$target_path2 = $target_path1.$basename;
 		
-			$target_path2 = $target_path1.str_replace("/", "", crypt($_FILES['files']['name'][$i], "SB")).".".$ext[count($ext) - 1];
-		
-				$sql90 = "INSERT INTO `anzeigenbilder`(`bID`, `aNR`, `bildpfad`, `created_at`, `updated_at`) VALUES ( null, '".$aNR."', '".$target_path1.$_FILES['files']['name'][$i]."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+				$sql90 = "INSERT INTO `anzeigenbilder`(`bID`, `aNR`, `bildpfad`, `created_at`, `updated_at`) VALUES ( null, '".$aNR."', '".$target_path2."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 
 				$query90 = $verb -> query($sql90);
 
