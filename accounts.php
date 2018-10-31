@@ -356,7 +356,7 @@
 									} else {
 									
 									echo "
-											<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class=pointer 'rounded-circle ml-auto mr-auto' src='../images/user.png'>
+											<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class=pointer rounded-circle ml-auto mr-auto' src='../images/user.png'>
 											~ ".$row["vorname"]." ".$row["nachname"]."
 									";
 									
@@ -364,7 +364,7 @@
 							
 									} else {
 										echo "
-												<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class=pointer 'rounded-circle ml-auto mr-auto' src='../images/user.png'>
+												<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class=pointer rounded-circle ml-auto mr-auto' src='../images/user.png'>
 												~ ".$row["vorname"]." ".$row["nachname"]."
 										";	
 									}}

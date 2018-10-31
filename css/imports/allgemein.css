@@ -125,6 +125,12 @@ input:focus {
 }
 */
 
+a.nohref {
+	text-decoration: none !important;
+	color: inherit !important;
+}
+
+
 
 .eyeinput {
 	position: absolute;
@@ -158,5 +164,11 @@ input:focus {
 	.buttonpadding2 {
 		padding-top: 0.6%;
 	}	
+	.listeprofile {
+		float: left !important;
+		display: block;
+		min-width: 100%;
+		margin-top: 0.4rem !important;
+	}
 }
 	
