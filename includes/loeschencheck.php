@@ -1,5 +1,5 @@
 <?php
-		$sql77 = "SELECT anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at, anzeigen.updated_at, orte.Bezeichnung, orte.PLZ, inserent.vorname, inserent.nachname, inserent.iNR, inserent.kundennummer FROM anzeigen INNER JOIN orte USING (PLZ) INNER JOIN inserent USING (iNR)";	
+		$sql77 = "SELECT anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at, anzeigen.updated_at, orte.Bezeichnung, orte.ortID, inserent.vorname, inserent.nachname, inserent.iNR, inserent.kundennummer FROM anzeigen INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR)";	
 		$query77 = $verb -> query($sql77);
 		$countanzeigendelete = 0;
 

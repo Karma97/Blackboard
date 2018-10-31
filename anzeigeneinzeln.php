@@ -48,13 +48,13 @@
 		
 	} else {
 		
-	$sql1 = "SELECT * FROM anzeigen WHERE aNR = '".$aNR."'";
+	$sql1 = "SELECT * FROM anzeigen INNER JOIN orte USING (ortID) WHERE aNR = '".$aNR."'";
 	$query1 = $verb -> query($sql1);
 		
 	foreach ($query1 as $row) {
 		echo "
 		
-		<div class='card anzeigencard'>
+		<div class='card anzeigencard mb-4'>
 		<div class='card-header bg-dark text-white'>
 			".$row["betreff"]."
 		</div>
@@ -66,73 +66,7 @@
 			$sql2 = "SELECT * FROM anzeigenbilder WHERE aNR = '".$aNR."'";
 			$query2 = $verb -> query($sql2);
 			$countBilder = $query2 -> fetchAll();
-			
-			if (count($countBilder) > 0) {
-				
-				echo "
-				<div class='card mb-2'>
-				<div class='card-header bg-dark text-white'>
-					Bildergallerie (".count($countBilder)." insgesamt)
-				</div>
-				<div class='card-body text-dark'>
-				<div class='row'>
-					";
-					
-				foreach ($verb -> query($sql2) as $row2) {
-					
-					$explode = explode('.', basename($row2["bildpfad"]));
-					
-					foreach ($explode as $key => $row5) {
-						$name = $explode[0];
-						$dateityp = $explode[1];
-					}
-					
-					$crypt_name = str_replace("/", "", crypt($name, "SB"));
-					$dateiname = $crypt_name.".".$dateityp;
-					
-					$countarray = count(array_diff(scandir("anzeigenbilder/".$row2["aNR"].""), array('..', '.')));
-					
-					if ($countarray > 0) {
-					if (file_exists("anzeigenbilder/".$row2["aNR"]."/".$dateiname."")) {
-					if ($countarray > 5) {					
-						echo "
-							<div class='col mt-1 mb-1 d-inline-block text-center'>
-								<img class='anzeigenbild rounded ml-auto mr-auto' src='../anzeigenbilder/".$row2["aNR"]."/".$dateiname."'>
-							</div>
-							";	
-					} else {
-						echo "
-							<div class='col mt-1 mb-1 d-inline-block text-center'>
-								<img class='anzeigenbild rounded ml-auto mr-auto' src='../anzeigenbilder/".$row2["aNR"]."/".$dateiname."'>
-							</div>
-							";						
-					}
-						} else {
-							echo "
-							<div class='col d-inline-block text-center'>
-								<img class='anzeigenbild rounded ml-auto mr-auto' src='../images/no-image.png' \>
-							</div>	
-							";								
-						}						
-					} else {
-						echo "
-							<div class='col d-inline-block text-center'
-								<img class='anzeigenbild rounded ml-auto mr-auto' src='../images/no-image.png' \>
-							</div>
-						";					
-					}
-					
-					}
-					
-					echo "
-						</div>
-					</div>
-				</div>
-				
-				";
-				
-			} 
-			
+						
 			echo "
 			
 			<div class='card mb-2'>
@@ -140,21 +74,121 @@
 					Informationen
 				</div>
 				<div class='card-body text-dark'>
-				
-					<p class='mb-0'><b>Betreff</b></p> 
-					<p class=''>".$row["betreff"]."</p>
+				 <div class='row'>
+				  <div class='col-lg-7'>
+						<p class='mb-0'><b>Betreff</b></p> 
+						<p class=''>".$row["betreff"]."</p>
+						
+						<p class='mb-0'><b>Beschreibung</b></p> 
+						<p class=''>".$row["beschreibung"]."</p>
+				  </div>
+					";
 					
-					<p class='mb-0'><b>Beschreibung</b></p> 
-					<p class=''>".$row["beschreibung"]."</p>
+					?>
+					<div class="col-lg-5">
+					<p class="mb-0 mt-0 text-center">Standort: <?php echo $row["Bezeichnung"]; ?></p>
+						<iframe width="100%" height="300px" 
+						frameborder="0" scrolling="no" 
+						marginheight="0" marginwidth="0" 
+						src="https://www.openstreetmap.org/export/embed.html?bbox=
+						
+							16%2C
+							<?php echo $row["laenge"]; ?>%2C
+							<?php echo $row["breite"]; ?>%2C
+							<?php echo $row["laenge"]; ?>
+							
+							&amp;layer=mapnik&amp;marker=
+							
+							<?php echo $row["laenge"]; ?>%2C
+							<?php echo $row["breite"]; ?>" 
+							
+							style="border: 1px solid black">
+						</iframe>
+					</div>		
+					</div>
+					
+<?php
+					
+					echo "
 					
 				</div>
 			</div>
 			";
 			
 			
+				if (count($countBilder) > 0) {
+						
+				echo "
+				<div class='card-header bg-dark text-white'>
+					<p class='mb-0 mt-0 text-center'>Bildergallerie (".count($countBilder).")</p>
+				</div>
+				<div class='card mb-4'>
+				<div id='slide' style='height: 100%; max-width: auto;' class='carousel slide' data-ride='carousel' data-interval='9999999'>
+				
+				<ol class='carousel-indicators'>
+				";
+				
+				for ($e = 0; $e < count($countBilder); $e++) {
+					if ($e == 0) {
+						echo "<li data-target='#slide' data-slide-to='".$e."' title='Zum ".($e + 1)." Bild springen' class='pointer active'></li>";
+					} else {
+						echo "<li data-target='#slide' data-slide-to='".$e."' title='Zum ".($e + 1)." Bild springen' class='pointer'></li>";
+					}
+				}
+					
+				echo "
+				</ol>
+				
+				  <div class='carousel-inner'>
+					
+					";
+					
+				$i = 0;
+					
+				foreach ($verb -> query($sql2) as $row2) {
+					
+					$dateiname = $row2["bildpfad"];
+					
+					$countarray = count(array_diff(scandir("anzeigenbilder/".$row2["aNR"].""), array('..', '.')));
+					
+					if ($countarray > 0) {
+					if (file_exists("".$dateiname."")) {
+						echo "
+							<div class='carousel-item p-1 pb-5 pt-3 text-center "; if ($i == 0) { echo "active"; } echo "'>
+								<img class='image_preview_active anzeigenbild rounded ml-auto mr-auto' src='../".$dateiname."'>
+							</div>
+							";	
+						} else {
+							echo "
+							<div class='carousel-item p-1 pb-5 pt-3 text-center "; if ($i == 0) { echo "active"; } echo "'>
+								<img class='image_preview_active anzeigenbild rounded ml-auto mr-auto' src='../images/no-image.png' \>
+							</div>	
+							";								
+						}						
+					} else {
+						echo "
+							<div class='carousel-item p-1 pb-5 pt-3 text-center "; if ($i == 0) { echo "active"; } echo "'>
+								<img class='image_preview_active anzeigenbild rounded ml-auto mr-auto' src='../images/no-image.png' \>
+							</div>	
+						";					
+					}
+					
+					$i++;
+					
+					}
+					
+					echo "
+				</div>
+				</div>
+				";
+			} else {
+			
+			
+			}
+			
 			echo "
 		</div>
-		
+		</div>
 		<div class='card-footer'>
 			Erstellt am: ".date("d.m.Y, H:i", strtotime($row["created_at"]))."<br>
 			
@@ -167,7 +201,7 @@
 					
 			$newtimestamp1 = strtotime("".$row["created_at"]." + 14 days");
 			$endtagEndgültig = date('d.m.Y, H:i', $newtimestamp1);
-					
+			
 			$newtimestamp2 = strtotime("".$row["created_at"]." + 15 days");
 			$endtag2 = date('Y-m-d H:i:s', $newtimestamp2);
 					

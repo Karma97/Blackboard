@@ -340,11 +340,14 @@
 									$query6 = $verb -> query($sql6);
 									
 									foreach ($query6 as $row) {
-												
+										
+									$dateiname = "profilbilder/".$row["iNR"]."/".$row["profilbildpfad"];
+										
 									$crypt_iNR2 = str_replace("/", "", crypt($row["iNR"],'SB')); 
-												
-									if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
+									$countarray = count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.')));
 									
+									if ($countarray > 0) {
+									if (file_exists("".$dateiname."")) {									
 									echo "
 											<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class='pointer rounded-circle ml-auto mr-auto' src='../profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."'>
 											~ ".$row["vorname"]." ".$row["nachname"]."
@@ -359,7 +362,13 @@
 									
 									}
 							
-									}
+									} else {
+										echo "
+												<img onclick=\"window.location.href='../profil/".$crypt_iNR2."'\" title='Jetzt klicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen.' width='25' height='25' class=pointer 'rounded-circle ml-auto mr-auto' src='../images/user.png'>
+												~ ".$row["vorname"]." ".$row["nachname"]."
+										";	
+									}}
+									
 									
 									echo "
 									

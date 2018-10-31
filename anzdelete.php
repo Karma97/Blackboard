@@ -66,7 +66,7 @@
 
 <?php
 	
-	$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, inserent.vorname, inserent.nachname, inserent.iNR, anzeigen.updated_at, anzeigen.created_at, anzeigen.aNR, orte.PLZ, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING(PLZ) INNER JOIN inserent USING (iNR) ORDER BY updated_at";
+	$abfrage = "SELECT anzeigen.betreff, anzeigen.beschreibung, inserent.vorname, inserent.nachname, inserent.iNR, anzeigen.updated_at, anzeigen.created_at, anzeigen.aNR, orte.ortID, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR) ORDER BY updated_at";
 	
 	$query = $verb -> query($abfrage);
 	$queryNumRows = $query -> fetchAll();
@@ -196,7 +196,7 @@
 				
 				for ($f = 0; $f < (count($wert3) / 2); $f++) {
 				
-				$sql5 = "UPDATE `anzeigen` SET `PLZ` = '".$wert3[$r3]."' WHERE aNR = '".$wert3[$u3]."'";					
+				$sql5 = "UPDATE `anzeigen` SET `ortID` = '".$wert3[$r3]."' WHERE aNR = '".$wert3[$u3]."'";					
 				$query5 = $verb -> query($sql5);
 				
 				$countChanges += $query5 -> rowCount();
@@ -325,18 +325,18 @@
 						<div class='changeinputshow'>
 							<input type='hidden' name='changeOrt[]' value='".$row["aNR"]."'>
 								<select autocomplete id='selectOrt' class='form-control form-control-sm mw-12em' name='changeOrt[]'>
-									<option value='".$row["PLZ"]."' selected class='text-danger'>Unverändert</option>
+									<option value='".$row["ortID"]."' selected class='text-danger'>Unverändert</option>
 								
 							";
 											
-								$sql2 = 'SELECT PLZ, Bezeichnung FROM orte ORDER BY Bezeichnung';	
+								$sql2 = 'SELECT ortID, Bezeichnung FROM orte ORDER BY Bezeichnung';	
 								$query2 = $verb -> query($sql2);
 								
 								foreach ($query2 as $row2) {
 								if ($row["Bezeichnung"] == $row2["Bezeichnung"]) {
-									echo "<option selected value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+									echo "<option selected value='".$row2["ortID"]."'>".$row2["Bezeichnung"]."</option>";
 								} else {
-									echo "<option value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+									echo "<option value='".$row2["ortID"]."'>".$row2["Bezeichnung"]."</option>";
 								}
 								}		
 										

@@ -59,6 +59,9 @@
 	
 	<a href="../logout" class="navitems navItem pointer float-right faa-parent animated-hover">Logout <i class="faa-horizontal faa-slow fas fa-sign-out-alt"></i></a>
 	<a href="../myaccount" class="navitems navItem pointer float-right faa-parent animated-hover">Mein Account <i class="faa-horizontal faa-slow fas fa-user-circle"></i></a>
+	<a href="../merkliste" class="navitems navItem pointer float-right faa-parent animated-hover"><i class="faa-horizontal faa-slow far fa-clipboard"></i></a>	
+		
+		
 		
 	<?php
 	}

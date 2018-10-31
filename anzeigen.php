@@ -26,8 +26,8 @@
 			
 				$alle = false;		
 			
-				$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.PLZ, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(PLZ) INNER JOIN inserent USING (iNR)";
-				
+				$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR)";
+								
 				if ($_GET["rNR"] == 0 OR $_GET["rNR"] == "alle") {
 					
 					$alle = true;
@@ -36,7 +36,7 @@
 						
 					$zahl = $_GET["rNR"];
 					
-					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.PLZ, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (PLZ) INNER JOIN inserent USING (iNR) WHERE rNR = '$zahl'";
+					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '$zahl'";
 					
 					} else {
 					
@@ -190,8 +190,8 @@
 						$query2 = $verb -> query($abfrage2);					
 						
 					foreach ($query2 as $row2) {
-							echo "&nbsp; <a href='".$row2["rNR"]."' title='Jetz klicken um zu den Anzeigen zu kommen, die zu der Rubrik mit der Bezeichnung \"".$row2["bezeichnung"]."\" gehören, zu gelangen!'><button class='btn btn-sm btn-dark mb-1'>".strip_tags($row2["bezeichnung"])."</button></a>";
-						}
+						echo "&nbsp; <a href='".$row2["rNR"]."' title='Jetz klicken um zu den Anzeigen zu kommen, die zu der Rubrik mit der Bezeichnung \"".$row2["bezeichnung"]."\" gehören, zu gelangen!'><button class='btn btn-sm btn-dark mb-1'>".strip_tags($row2["bezeichnung"])."</button></a>";
+					}
 						
 					echo "
 						

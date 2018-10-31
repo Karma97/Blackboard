@@ -118,9 +118,35 @@ a.href:hover {
     text-decoration: underline !important;
 }
 
+/*
+input:focus {
+	border-color: rgba(255,0,0,0.25) !important;
+	box-shadow: 0 0 0 0.2rem rgba(255,0,0,0.25) !important;
+}
+*/
 
 
+.eyeinput {
+	position: absolute;
+	right: 1%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	top: 73%;
+}
 
+.eyeinput i  {
+	color: black;
+}
+
+.passwordwrapper {
+	position: relative;
+}
+
+
+.formloginregister .form-group {
+	margin-bottom: 0.5rem !important;
+}
 
 
 

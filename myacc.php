@@ -325,7 +325,7 @@
  
  		<?php
 			if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
-			header("Location: ../startseite");
+			header("Location: ./startseite");
 			?>
 			
 			<h4><p class="text-danger text-center">Um diese Funktion nutzen zu können, müssen Sie angemeldet sein!</p></h4>
@@ -377,18 +377,38 @@
 									
 									";
 									
+									if (file_exists("profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."")) {
 									if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
 										
 										echo "
-											<img class='rounded ml-auto mr-auto w-75 h-100 ml-auto mr-auto' src='./profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."'>
+										
+										<div class='card myaccimage bg-light'>
+											<img class='rounded ml-auto mr-auto accimage mb-0' src='./profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."'>
+										</div>
+										
 										";
 									
 									} else {
 									
 										echo "
-											<img class='rounded ml-auto mr-auto w-75 h-100 ml-auto mr-auto' src='./images/user.png'>
+										
+										<div class='card myaccimage bg-light'>
+											<img class='rounded ml-auto mr-auto accimage mb-0' src='./images/user.png'>
+										</div>
+										
 										";
 									
+									}
+									} else {
+									
+										echo "
+										
+										<div class='card myaccimage bg-light'>
+											<img class='rounded ml-auto mr-auto accimage mb-0' src='./images/user.png'>
+										</div>
+										
+										";
+										
 									}
 									
 									echo "
@@ -429,10 +449,10 @@
 							
 							
 							<div class="changeHrefsRsp">
-								<a class='float-left href changeTrigger'>Meine Anzeigen löschen</a><br>
+								<a class='float-left href'>Meine Anzeigen löschen</a><br>
 							</div>
 							<div class="changeButtonsRsp">
-								<button class='float-left btn btn-sm btn-dark changeTrigger'>Meine Anzeigen löschen</button><br>
+								<button class='float-left btn btn-sm btn-dark'>Meine Anzeigen löschen</button><br>
 							</div>
 							
 							
@@ -440,10 +460,10 @@
 							
 							
 							<div class="changeHrefsRsp">
-								<a href="./profil/<?php echo $crypt_iNR; ?>" class='float-left href changeTrigger'>Mein Profil einsehen</a><br><br>
+								<a href="./profil/<?php echo $crypt_iNR; ?>" class='float-left href'>Mein Profil einsehen</a><br><br>
 							</div>
 							<div class="changeButtonsRsp">								
-								<button onclick="window.location.href='./profil/<?php echo $crypt_iNR; ?>'" class='float-left btn btn-sm btn-dark changeTrigger'>Mein Profil einsehen</button><br><br>									
+								<button onclick="window.location.href='./profil/<?php echo $crypt_iNR; ?>'" class='float-left btn btn-sm btn-dark'>Mein Profil einsehen</button><br><br>									
 							</div>
 								
 								
@@ -470,7 +490,7 @@
 				
 				";
 				
-				$abfrage2 = "SELECT anzeigen.updated_at, anzeigen.aNR, anzeigen.created_at, anzeigen.betreff, anzeigen.PLZ, anzeigen.beschreibung, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING (PLZ) WHERE iNR = '".$_SESSION['iNR']."'";	
+				$abfrage2 = "SELECT anzeigen.updated_at, anzeigen.aNR, anzeigen.created_at, anzeigen.betreff, anzeigen.ortID, anzeigen.beschreibung, orte.Bezeichnung FROM anzeigen INNER JOIN orte USING (ortID) WHERE iNR = '".$_SESSION['iNR']."'";	
 				$query3 = $verb -> query($abfrage2);
 				$queryNumRows= $query3 -> fetchAll();
 				
@@ -560,18 +580,18 @@
 							<div class='changeinputshow2 mb-3 d-none'>
 								<input type='hidden' name='changeOrt[]' value='".$row["aNR"]."'>
 									<select autocomplete class='form-control input2 form-control-sm mw-12em' name='changeOrt[]'>
-										<option value='".$row["PLZ"]."' selected class='text-danger'>Unverändert</option>
+										<option value='".$row["ortID"]."' selected class='text-danger'>Unverändert</option>
 									
 								";
 												
-									$sql2 = 'SELECT PLZ, Bezeichnung FROM orte ORDER BY Bezeichnung';	
+									$sql2 = 'SELECT ortID, Bezeichnung FROM orte ORDER BY Bezeichnung';	
 									$query2 = $verb -> query($sql2);
 									
 									foreach ($query2 as $row2) {
 									if ($row["Bezeichnung"] == $row2["Bezeichnung"]) {
-										echo "<option selected value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+										echo "<option selected value='".$row2["ortID"]."'>".$row2["Bezeichnung"]."</option>";
 									} else {
-										echo "<option value='".$row2["PLZ"]."'>".$row2["Bezeichnung"]."</option>";
+										echo "<option value='".$row2["ortID"]."'>".$row2["Bezeichnung"]."</option>";
 									}
 									}		
 											
@@ -616,9 +636,9 @@
 				}
 				
 				if ($löschung == true) {  
-					echo "Keine Anzeigen vorhanden!&nbsp;&nbsp; <a href='../anzeigen/erstellen'><button class='btn btn-light'>Jetzt Anzeige aufgeben</button></a> &nbsp;&nbsp; <p class='d-inline text-danger'>".$countlöschunganzeigen." Ihrer Anzeige/n wurden wegen Verstößung von Richtlinien oder der Zeitüberschreitung von 2 Wochen gelöscht!</p>"; 
+					echo "Keine Anzeigen vorhanden!&nbsp;&nbsp; <a href='./anzeigen/erstellen'><button class='btn btn-light'>Jetzt Anzeige aufgeben</button></a> &nbsp;&nbsp; <p class='d-inline text-danger'>".$countlöschunganzeigen." Ihrer Anzeige/n wurden wegen Verstößung von Richtlinien oder der Zeitüberschreitung von 2 Wochen gelöscht!</p>"; 
 				} else {
-					echo "Keine Anzeigen vorhanden!&nbsp;&nbsp; <a href='../anzeigen/erstellen'><button class='btn btn-light'>Jetzt Anzeige aufgeben</button></a>";
+					echo "Keine Anzeigen vorhanden!&nbsp;&nbsp; <a href='./anzeigen/erstellen'><button class='btn btn-light'>Jetzt Anzeige aufgeben</button></a>";
 				}		
 				
 
@@ -626,7 +646,7 @@
 			}
 			}
 		?>
-	</div>
+	</div>	
 <?php
 
 				$sql3 = "SELECT * FROM bewertungen WHERE ist_für = '".$_SESSION['iNR']."' ORDER BY created_at DESC";
@@ -655,25 +675,7 @@
 				
 				<div class='card mt-3'>
 					<div class='card-header bg-dark text-white'>
-						Bewertungen 
-						
-						<a href='../bewerten/".$crypt_iNR."'>
-						";
-						
-						foreach ($verb -> query($sql1) as $row5) {
-						
-							echo "
-						
-								<button title='Jetzt Bewertung zu \"".$row5["vorname"]." ".$row5["nachname"]."\" schreiben!' class='btn btn-sm btn-light float-right'>
-									Bewertung schreiben
-								</button>
-							
-							";
-						}
-						echo "
-						
-						</a>
-						
+						Bewertungen (".count($countNumRows)." insgesamt)				
 					</div>
 					<div class='card-body'>
 					

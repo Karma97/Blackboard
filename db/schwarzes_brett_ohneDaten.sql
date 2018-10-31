@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 28. Okt 2018 um 03:58
+-- Erstellungszeit: 29. Okt 2018 um 23:14
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -35,9 +35,23 @@ CREATE TABLE `anzeigen` (
   `iNR` int(11) NOT NULL,
   `betreff` varchar(100) NOT NULL,
   `beschreibung` text NOT NULL,
-  `PLZ` int(5) NOT NULL,
+  `ortID` int(11) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `anzeigenbilder`
+--
+
+CREATE TABLE `anzeigenbilder` (
+  `bID` int(11) NOT NULL,
+  `aNR` int(11) NOT NULL,
+  `bildpfad` varchar(500) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -66,20 +80,6 @@ CREATE TABLE `bewertungen` (
   `betreff` varchar(120) NOT NULL,
   `beschreibung` varchar(2000) NOT NULL,
   `bewertung` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `bilder`
---
-
-CREATE TABLE `bilder` (
-  `bID` int(11) NOT NULL,
-  `aNR` int(11) NOT NULL,
-  `bild` mediumblob,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -122,12 +122,28 @@ CREATE TABLE `news` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `newsbilder`
+--
+
+CREATE TABLE `newsbilder` (
+  `bID` int(11) NOT NULL,
+  `nID` int(11) NOT NULL,
+  `bildpfad` varchar(400) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `orte`
 --
 
 CREATE TABLE `orte` (
-  `PLZ` int(5) NOT NULL,
-  `Bezeichnung` varchar(100) NOT NULL
+  `ortID` int(11) NOT NULL,
+  `Bezeichnung` varchar(300) DEFAULT NULL,
+  `laenge` varchar(20) DEFAULT NULL,
+  `breite` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -167,8 +183,15 @@ CREATE TABLE `r_besitzt_a` (
 --
 ALTER TABLE `anzeigen`
   ADD PRIMARY KEY (`aNR`),
-  ADD KEY `PLZ` (`PLZ`),
+  ADD KEY `PLZ` (`ortID`),
   ADD KEY `iNR` (`iNR`);
+
+--
+-- Indizes für die Tabelle `anzeigenbilder`
+--
+ALTER TABLE `anzeigenbilder`
+  ADD PRIMARY KEY (`bID`),
+  ADD KEY `aNR` (`aNR`);
 
 --
 -- Indizes für die Tabelle `besucherzahlen`
@@ -186,13 +209,6 @@ ALTER TABLE `bewertungen`
   ADD KEY `kommt_von` (`kommt_von`);
 
 --
--- Indizes für die Tabelle `bilder`
---
-ALTER TABLE `bilder`
-  ADD PRIMARY KEY (`bID`),
-  ADD KEY `aNR` (`aNR`);
-
---
 -- Indizes für die Tabelle `inserent`
 --
 ALTER TABLE `inserent`
@@ -205,10 +221,17 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`nID`);
 
 --
+-- Indizes für die Tabelle `newsbilder`
+--
+ALTER TABLE `newsbilder`
+  ADD PRIMARY KEY (`bID`),
+  ADD KEY `nID` (`nID`);
+
+--
 -- Indizes für die Tabelle `orte`
 --
 ALTER TABLE `orte`
-  ADD PRIMARY KEY (`PLZ`);
+  ADD PRIMARY KEY (`ortID`);
 
 --
 -- Indizes für die Tabelle `rubriken`
@@ -235,16 +258,16 @@ ALTER TABLE `anzeigen`
   MODIFY `aNR` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT für Tabelle `anzeigenbilder`
+--
+ALTER TABLE `anzeigenbilder`
+  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `bewertungen`
 --
 ALTER TABLE `bewertungen`
   MODIFY `bNR` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT für Tabelle `bilder`
---
-ALTER TABLE `bilder`
-  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `inserent`
@@ -257,6 +280,18 @@ ALTER TABLE `inserent`
 --
 ALTER TABLE `news`
   MODIFY `nID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `newsbilder`
+--
+ALTER TABLE `newsbilder`
+  MODIFY `bID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `orte`
+--
+ALTER TABLE `orte`
+  MODIFY `ortID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `rubriken`
@@ -273,7 +308,13 @@ ALTER TABLE `rubriken`
 --
 ALTER TABLE `anzeigen`
   ADD CONSTRAINT `anzeigen_ibfk_2` FOREIGN KEY (`iNR`) REFERENCES `inserent` (`iNR`),
-  ADD CONSTRAINT `anzeigen_ibfk_3` FOREIGN KEY (`PLZ`) REFERENCES `orte` (`PLZ`);
+  ADD CONSTRAINT `anzeigen_ibfk_3` FOREIGN KEY (`ortID`) REFERENCES `orte` (`ortID`);
+
+--
+-- Constraints der Tabelle `anzeigenbilder`
+--
+ALTER TABLE `anzeigenbilder`
+  ADD CONSTRAINT `anzeigenbilder_ibfk_1` FOREIGN KEY (`aNR`) REFERENCES `anzeigen` (`aNR`);
 
 --
 -- Constraints der Tabelle `besucherzahlen`
@@ -289,10 +330,10 @@ ALTER TABLE `bewertungen`
   ADD CONSTRAINT `bewertungen_ibfk_2` FOREIGN KEY (`kommt_von`) REFERENCES `inserent` (`iNR`);
 
 --
--- Constraints der Tabelle `bilder`
+-- Constraints der Tabelle `newsbilder`
 --
-ALTER TABLE `bilder`
-  ADD CONSTRAINT `bilder_ibfk_1` FOREIGN KEY (`aNR`) REFERENCES `anzeigen` (`aNR`);
+ALTER TABLE `newsbilder`
+  ADD CONSTRAINT `newsbilder_ibfk_1` FOREIGN KEY (`nID`) REFERENCES `news` (`nID`);
 
 --
 -- Constraints der Tabelle `r_besitzt_a`

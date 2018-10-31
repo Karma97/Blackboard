@@ -153,13 +153,14 @@
 		
 		for ($i = 0; $i < count($_FILES['files']['name']); $i++) { 
 		
-			$target_path1 = "newsbilder/".$nID."/"; 
+			$target_path1 = "newsbilder/".$nID."/";
 		
 			$validextensions = array("jpeg", "jpg", "png");
-			$ext = explode('.', basename($_FILES['files']['name'][$i]));
+			$basename = basename($_FILES['files']['name'][$i]);
+			$ext = explode('.', $basename);
 			$file_extension = end($ext); 
-		
-			$target_path2 = $target_path1.str_replace("/", "", crypt($_FILES['files']['name'][$i], "SB")).".".$ext[count($ext) - 1];
+			
+			$target_path2 = $target_path1.$basename;
 		
 				$sql90 = "INSERT INTO `newsbilder`(`bID`, `nID`, `bildpfad`, `created_at`, `updated_at`) VALUES ( null, '".$nID."', '".$target_path1.$_FILES['files']['name'][$i]."', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
 				

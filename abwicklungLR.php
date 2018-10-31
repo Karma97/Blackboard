@@ -3,6 +3,7 @@
 	
 	session_start();
 	
+	// Logout
 	if (isset($_SESSION['vorname']) && isset($_SESSION['iNR']) && isset($_SESSION['news'])) {
 	
 		$name = "".$_SESSION['vorname']." ".$_SESSION['nachname']."";
@@ -23,7 +24,9 @@
 		$session = true;
 		
 	} else {
+	
 		$session = false;
+		
 	};
 	
 	$head_variante = 1;	
@@ -32,35 +35,13 @@
 	$footer_variante = 1;
 	
 	include 'includes/head.php'; 
-	
-function generateRandomString($length) { 
-		$characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%&=#~";
-		$charsLength = strlen($characters) -1;
-		$string = "";
-			for($i = 0; $i < $length; $i++){
-				$randNum = mt_rand(0, $charsLength);
-				$string .= $characters[$randNum];
-			}
-		return $string;
-}
-
-function generateKundennummer($length) { 
-		$characters = "123456789";
-		$charsLength = strlen($characters) -1;
-		$string = "";
-			for($i = 0; $i < $length; $i++){
-				$randNum = mt_rand(0, $charsLength);
-				$string .= $characters[$randNum];
-			}
-		return $string;
-}
-	
+		
 ?>
 	<body>
 	<?php 
+	
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
-		
 		
 		switch ($nav_variante) {
 			case $nav_variante === 1:
@@ -83,7 +64,7 @@ function generateKundennummer($length) {
 		
 		?>
 	<div class="main">
-		<div class="container-fluid">
+		<div class="container-fluid pt-5">
 			<?php
 			
 				if ($session == true) {
@@ -110,6 +91,9 @@ function generateKundennummer($length) {
 					// Registerabwicklung
 					
 					$error = false;
+					$fehler_register = false;
+					
+					$o = 0;
 					
 					$vorname = $_POST["register_vorname"];
 					$nachname = $_POST["register_nachname"];
@@ -118,36 +102,275 @@ function generateKundennummer($length) {
 					$pwd2 = $_POST["register_pwd2"];
 					$gebDatum = $_POST["register_date"];	
 					
-					if (!isset($_POST["register_news"])) {
-						$news = 0;
-					} else {
-						$news = $_POST["register_news"];
-					};
+					//// Prüfungen
+					// Vorname
+					if (empty($vorname)) {
 					
-					if ($pwd1 !== $pwd2) {
-						$registerPwdNotSame = true;
-						?>
+						$fehler_register = true;
+						$register_vorname_leer = true;
 						
-						<div class="text-danger text-center mt-5">
-							<h3>Passwörter stimmen nicht überein!</h3>
-						</div>
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
 						
-						<?php
-						$error = true;
+						$o++;
+						
 					}
-										
-					if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+					if (is_html($vorname)) {
+					
+						$fehler_register = true;
+						$register_vorname_html = true;
 						
-						$registerEmailUnvalid = true;
-						?>
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
 						
-						<div class="text-danger text-center mt-2">
-							<h3>Die eingegeben E-Mail ist ungültig!</h3>
-						</div>
+						$o++;
 						
-						<?php
-						$error = true;	
 					}
+					if (is_numeric($vorname)) {
+					
+						$fehler_register = true;
+						$register_nachname_nummer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					
+					// Nachname
+					if (empty($nachname)) {
+					
+						$fehler_register = true;
+						$register_nachname_leer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					if (is_html($nachname)) {
+					
+						$fehler_register = true;
+						$register_nachname_html = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					if (is_numeric($nachname)) {
+					
+						$fehler_register = true;
+						$register_vorname_nummer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					
+					// E-Mail
+					if (empty($email)) {
+					
+						$fehler_register = true;
+						$register_email_leer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					if (is_html($email)) {
+					
+						$fehler_register = true;
+						$register_email_html = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					if (is_numeric($email)) {
+					
+						$fehler_register = true;
+						$register_email_nummer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+					
+						$fehler_register = true;
+						$register_email_gültig = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					
+					// Passwort 1 
+					if (empty($pwd1)) {
+					
+						$fehler_register = true;
+						$register_passwort1_leer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					if (is_html($pwd1)) {
+					
+						$fehler_register = true;
+						$register_passwort1_html = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					
+					// Passwort 2 
+					if (empty($pwd2)) {
+					
+						$fehler_register = true;
+						$register_passwort2_leer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					if (is_html($pwd2)) {
+					
+						$fehler_register = true;
+						$register_passwort2_html = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					
+					// Passwörter gleich
+					if (!empty($pwd1) && !empty($pwd2)) {
+						if ($pwd1 !== $pwd2) {
+							
+							$fehler_register = true;
+							$register_passwörter_gleich = true;
+							
+							if ($o == 0) {
+								include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+							}
+							
+							$o++;
+						
+						}
+					}
+					
+					// Geburtsdatum
+					if (empty($gebDatum)) {
+					
+						$fehler_register = true;
+						$register_geburtsdatum_leer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+						}
+						
+						$o++;
+						
+					}
+					
+					if (!empty($gebDatum)) {
+					
+						$date = date("d-m-Y");
+						$date = strtotime('-14 year', strtotime($date));
+						$date = date ( 'Y-m-d' , $date );
+												
+						if ($gebDatum > $date) {
+												
+							$fehler_register = true;
+							$register_geburtsdatum_ausserhalb = true;
+							
+							if ($o == 0) {
+								include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+							}
+							
+							$o++;
+							
+						}
+					}
+					
+					// News	
+					$news = 0;
+					
+					if (!empty($_POST["register_news"]) && isset($_POST["register_news"])) {
+					
+						$news = $_POST["register_news"];
+					
+						if (!is_numeric($news) || $news > 1) {
+							
+							$fehler_register = true;
+							$register_news_number = true;
+							
+							if ($o == 0) {
+								include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+							}
+							
+							$o++;
+							
+						}
+						if (is_html($news)) {
+							
+							$fehler_register = true;
+							$register_news_html = true;
+							
+							if ($o == 0) {
+								include 'includes/fehlermeldungen/abwicklungsfehlerregister.php';
+							}
+							
+							$o++;
+							
+						}
+					} else {
+						
+					}
+					
+					
+					
+					if ($fehler_register == true) {
+						
+					} else {
 					
 					$pwd_hash = password_hash($pwd1, PASSWORD_DEFAULT);	
 					$identifier_token = generateRandomString(500);	
@@ -159,7 +382,7 @@ function generateKundennummer($length) {
 					
 					if (count($queryNumRows) > 0 && count($queryNumRows) < 2) {
 						
-						$registerAccountVorhanden = true;
+						$register_account_vorhanden = true;
 						?>
 						
 						<div class="text-danger text-center mt-2">
@@ -279,23 +502,110 @@ function generateKundennummer($length) {
 						header( "refresh:10;url=startseite" );
 					
 						}
+					}
 				} elseif (!isset($_POST["register_vorname"]) && !isset($_POST["register_nachname"]) && !isset($_POST["register_email"]) && !isset($_POST["register_pwd1"]) && !isset($_POST["register_pwd2"]) && !isset($_POST["register_date"]) && $session == false) {
 					// Loginabwicklung
 					
+					$o = 0;
+					$fehler_login = false;
+					
 					$email = $_POST["login_email"];
 					$pwd = $_POST["login_pwd"];
-				
+					
+					// Prüfungen der E-Mail
+					if (empty($email)) {
+					
+						$fehler_login = true;
+						$login_email_leer = true;
+						
+						if ($o == 0) {$o++;
+							include 'includes/fehlermeldungen/abwicklungsfehlerlogin.php';
+						}
+						
+						$o++;
+						
+					}
+					
+					if (is_html($email)) {
+						
+						$fehler_login = true;
+						$login_email_html = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerlogin.php';
+						}
+						
+						$o++;
+					
+					}
+					
+					if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+						
+						$fehler_login = true;
+						$login_email_ungueltig = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerlogin.php';
+						}
+						
+						$o++;
+					
+					}
+					
+					if (is_numeric($email)) {
+					
+						$fehler_login = true;
+						$login_email_numeric = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerlogin.php';
+						}
+					
+						$o++;
+					
+					}
+					
+					
+					// Prüfungen des Passwortes
+					if (empty($pwd)) {
+					
+						$fehler_login = true;
+						$login_password_leer = true;
+						
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerlogin.php';
+						}
+					
+						$o++;
+					
+					}
+					
+					if (is_html($pwd)) {
+					
+						$fehler_login = true;
+						$login_password_html = true;
+
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerlogin.php';
+						}
+						
+						$o++;
+					
+					}
+					
+					if ($fehler_login == true) {
+					
+					} else {
+					
 					$sql = "SELECT * FROM `inserent` WHERE email = \"".$email."\"";
 					$query = $verb -> query($sql);
 					$queryNumRows = $query -> fetchAll();
-					
 					$passwortverify = false;
 					$emailverify = false;
 					
 					if (count($queryNumRows) > 0 && count($queryNumRows) < 2) {
 						
 						$emailverify = true;
-						
 						
 						foreach ($verb -> query($sql) as $row) {
 							$pwd_db = $row["passwort"];
@@ -357,27 +667,16 @@ function generateKundennummer($length) {
 						
 					} else {
 					
-					$loginerrorPwdEmail = true;
+						$login_error_PwdEmail = true;
 					
-					?>
+						if ($o == 0) {
+							include 'includes/fehlermeldungen/abwicklungsfehlerlogin.php';
+						}
 					
-					<script text="text/javascript">
-					
-					$(document).ready(function() {
-						openLogin('.login_komplett');
-					});
-						
-					</script>
-					<div class="text-danger text-center mt-5">
-						<h3>Passwort oder E-Mail falsch!
-							<br>
-							<a href="startseite" class="p-3">Zur Startseite</a>
-						</h3>
-					</div>
-					
-					<?php
+						$o++;
 					
 					} 
+					}
 
 				} else {
 				

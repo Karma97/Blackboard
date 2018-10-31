@@ -1,17 +1,6 @@
 
 <?php
 	
-function generateRandomString($length) { 
-    $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%&=#~";
-    $charsLength = strlen($characters) -1;
-    $string = "";
-    for($i = 0; $i < $length; $i++){
-        $randNum = mt_rand(0, $charsLength);
-        $string .= $characters[$randNum];
-    }
-    return $string;
-}
-
 if (isset($_COOKIE["identifier_token"])) {
 	
 	$identifiertoken = $_COOKIE["identifier_token"];

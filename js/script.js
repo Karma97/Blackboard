@@ -825,6 +825,47 @@ $('.carousel .carousel-item3').each(function(){
     }
 });
 
+// Login und Register Password hide and show 
+
+function showHidePassword(element, ielement) {
+	
+	if ($(ielement).hasClass("fa-eye")) {		
+		$(ielement).addClass("fa-eye-slash");
+		$(ielement).removeClass("fa-eye");
+	} else {
+		$(ielement).addClass("fa-eye");
+		$(ielement).removeClass("fa-eye-slash");
+	}
+	
+	if ($(element).attr("type") == "password") {
+	
+		$(element).attr("type", "text");
+		
+	} else {
+		
+		$(element).attr("type", "password");
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
