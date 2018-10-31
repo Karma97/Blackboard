@@ -91,12 +91,7 @@
 						frameborder="0" scrolling="no" 
 						marginheight="0" marginwidth="0" 
 						src="https://www.openstreetmap.org/export/embed.html?bbox=
-						
-<<<<<<< HEAD
-							16%2C
-=======
 							<?php echo $row["breite"]; ?>%2C
->>>>>>> cb0c1b0ffcc2e98516f005c4a2d82311e46c31a6
 							<?php echo $row["laenge"]; ?>%2C
 							<?php echo $row["breite"]; ?>%2C
 							<?php echo $row["laenge"]; ?>
