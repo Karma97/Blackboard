@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 29. Okt 2018 um 23:14
+-- Erstellungszeit: 31. Okt 2018 um 20:49
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -98,11 +98,29 @@ CREATE TABLE `inserent` (
   `email` varchar(120) NOT NULL,
   `gebdatum` date NOT NULL,
   `newsletter` tinyint(1) NOT NULL,
-  `profilbildpfad` varchar(10000) NOT NULL,
+  `profilbildpfad` varchar(10000) DEFAULT NULL,
   `kundennummer` varchar(15) NOT NULL,
   `identifier_token` varchar(700) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `nachrichten`
+--
+
+CREATE TABLE `nachrichten` (
+  `naID` int(11) NOT NULL,
+  `kommt_von` int(11) NOT NULL,
+  `ist_für` int(11) NOT NULL,
+  `betreff` varchar(300) NOT NULL,
+  `beschreibung` text NOT NULL,
+  `gelesen` tinyint(1) NOT NULL,
+  `gelöscht` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -215,6 +233,14 @@ ALTER TABLE `inserent`
   ADD PRIMARY KEY (`iNR`,`kundennummer`,`identifier_token`);
 
 --
+-- Indizes für die Tabelle `nachrichten`
+--
+ALTER TABLE `nachrichten`
+  ADD PRIMARY KEY (`naID`),
+  ADD KEY `kommt_von` (`kommt_von`,`ist_für`),
+  ADD KEY `ist_für` (`ist_für`);
+
+--
 -- Indizes für die Tabelle `news`
 --
 ALTER TABLE `news`
@@ -276,6 +302,12 @@ ALTER TABLE `inserent`
   MODIFY `iNR` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT für Tabelle `nachrichten`
+--
+ALTER TABLE `nachrichten`
+  MODIFY `naID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT für Tabelle `news`
 --
 ALTER TABLE `news`
@@ -328,6 +360,13 @@ ALTER TABLE `besucherzahlen`
 ALTER TABLE `bewertungen`
   ADD CONSTRAINT `bewertungen_ibfk_1` FOREIGN KEY (`ist_für`) REFERENCES `inserent` (`iNR`),
   ADD CONSTRAINT `bewertungen_ibfk_2` FOREIGN KEY (`kommt_von`) REFERENCES `inserent` (`iNR`);
+
+--
+-- Constraints der Tabelle `nachrichten`
+--
+ALTER TABLE `nachrichten`
+  ADD CONSTRAINT `nachrichten_ibfk_1` FOREIGN KEY (`kommt_von`) REFERENCES `inserent` (`iNR`),
+  ADD CONSTRAINT `nachrichten_ibfk_2` FOREIGN KEY (`ist_für`) REFERENCES `inserent` (`iNR`);
 
 --
 -- Constraints der Tabelle `newsbilder`
