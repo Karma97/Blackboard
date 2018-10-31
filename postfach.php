@@ -48,12 +48,33 @@
 	
 	//print_r($_POST);
 	
-	if (!isset($_POST["nachricht"]) && (!isset($_POST["gelöscht"]) || !isset($_POST["gelesen"])) && (!isset($_POST["alle_gelesen"]) || isset($_POST["alle_löschen"]))) {
+	$nicht_weiter = false;
+	
+	if (isset($_POST["alle_gelesen"])) {
+		
+		$sql = "UPDATE nachrichten SET gelesen = '1' WHERE gelesen = '0' AND ist_für = '".$_SESSION["iNR"]."'";
+		$query = $verb -> query($sql);
+		
+		$nicht_weiter = true;
+	}
+	
+	if (isset($_POST["alle_löschen"])) {
+	
+		$sql = "UPDATE nachrichten SET gelöscht = '1' WHERE gelöscht = '0' AND ist_für = '".$_SESSION["iNR"]."'";
+		$query = $verb -> query($sql);
+		
+		$nicht_weiter = true;
+	}
+	
+	if (!isset($_POST["nachricht"]) && (!isset($_POST["gelöscht"]) || !isset($_POST["gelesen"]))) {
+	
 		//echo "nicht gesetzt";
+		
 	} else {
-		if (isset($_POST["alle_gelesen"])) {
-			
+		if ($nicht_weiter == true) {
+			//echo "nicht weiter";
 		} else {
+		
 		//echo "gesetzt<br>";
 		
 		$fehler = false;
@@ -104,10 +125,9 @@
 			} else {
 			
 			
+				}
 			}
-		
-	}
-	}
+		}
 	}
 	
 	
@@ -140,6 +160,11 @@
 				}
 				
 				echo "
+				
+				<form class='float-right w-auto d-inline mt-0 mb-0' action='./postfach' method='POST'>
+					<button value='gelesen' title='Alle Nachrichten als gelesen markieren' class='btn btn-sm btn-light rounded-circle' name='alle_gelesen' type='submit'><i class='pointer fas fa-check-double'></i></button>
+				</form>
+				
 			</div>
 		";
 	}
@@ -171,8 +196,7 @@
 					".$row["betreff"]."
 					
 					<p class='float-right mt-0 mb-0'>
-						<button value='gelesen' title='Nachricht als gelesen markieren' class='btn btn-sm btn-light rounded-circle' name='gelesen' type='submit'><i class='pointer fas fa-check'></i></button>&nbsp;&nbsp;
-						<button value='gelöscht' title='Nachricht löschen' class='btn btn-sm btn-light rounded-circle' name='gelöscht' type='submit'><i class='pointer fas fa-times'></i></button>
+						<button value='gelesen' title='Nachricht als gelesen markieren' class='btn btn-sm btn-light rounded-circle' name='gelesen' type='submit'><i class='pointer fas fa-check'></i></button>
 					</p>
 					
 				</div>
@@ -235,7 +259,7 @@
 		
 		<?php
 	
-	$sql = "SELECT * FROM nachrichten WHERE ist_für = '".$_SESSION["iNR"]."' AND gelesen = '1'";
+	$sql = "SELECT * FROM nachrichten WHERE ist_für = '".$_SESSION["iNR"]."' AND gelesen = '1' AND gelöscht = '0'";
 	$query = $verb -> query($sql);
 	$countNumRows = count($query -> fetchAll());
 	
@@ -246,6 +270,11 @@
 			<div class='card mt-3'>
 				<div class='card-header text-white bg-dark'>
 					<i class='fas fa-check'></i>&nbsp; Gelesene Nachrichten (".$countNumRows." insgesamt)
+					
+					<form class='float-right w-auto d-inline mt-0 mb-0' action='./postfach' method='POST'>
+						<button value='gelöscht' title='Alle Nachrichten löschen' class='btn btn-sm btn-light rounded-circle' name='alle_löschen' type='submit'><i class='pointer fas fa-times'></i></button>
+					</form>
+					
 				</div>
 				<div class='card-body'>
 				
@@ -260,15 +289,14 @@
 		$monat = date("n", strtotime($row["created_at"]));
 		
 			echo "
-			
+			<form action='./postfach' method='POST'>
 			<div class='card mb-3'>
 				<div class='card-header text-white bg-dark'>
 					".$row["betreff"]."
 					
 					<p class='float-right mt-0 mb-0'>
-						<i title='Nachricht löschen' class='pointer fas fa-times'></i>
+						<button value='gelöscht' title='Nachricht löschen' class='btn btn-sm btn-light rounded-circle' name='gelöscht' type='submit'><i class='pointer fas fa-times'></i></button>
 					</p>
-					
 				</div>
 				<div class='card-body'>
 					".$row["beschreibung"]."
@@ -307,8 +335,11 @@
 					
 					Gesendet am: &nbsp;".date("d.", strtotime($row["created_at"]))."".$monatsnamen[$monat]." ".date("Y", strtotime($row["created_at"])).", ".date("H:i", strtotime($row["created_at"]))." Uhr
 					
+					<input type='hidden' value='".$row["naID"]."' name='nachricht[]' />
+					
 				</div>
 			</div>
+			</form>
 			";
 		}
 		}
