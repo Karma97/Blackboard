@@ -81,7 +81,9 @@
 	<div class="col-md-5">
 	<div class="card mb-3" id="news">
 		<div class="card-header bg-dark text-center">
-			<h2 class="text-white">Neuigkeiten</h2>
+		<div class="animatedParent animateOnce">
+			<h2 class="text-white animated growIn delay-500 slow">Neuigkeiten</h2>
+		</div>
 		</div>
 		<div class="card-body">
 		<div class="container-fluid">
@@ -170,9 +172,9 @@
 	
 	foreach ($verb -> query($sql7) as $row) {
 		echo "
-		
+	
 		<div class='colrubriken col-lg-3 mt-2 mb-2'>
-			<div class='card-header rubrikcardindex rounded text-left bg-light text-dark'>
+			<div class='card-header rubrikcardindex rounded text-left bg-light text-dark '>
 				<h5 class='mb-1 mt-1'>
 					<i class='".$row["icon"]."'></i>
 						&nbsp; ".strip_tags($row["bezeichnung"])."
@@ -186,7 +188,7 @@
 				
 			</div>
 		</div>
-		
+
 		";
 	}
 	

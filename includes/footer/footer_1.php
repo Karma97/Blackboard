@@ -1,39 +1,42 @@
 <div class="footerbar">
-	<div class="smallbar" style="top: 0">
-		Copyright &copy; by Schwarzes Brett
+	<div class="smallbar animatedParent animateOnce" style="top: 0">
+		<p class="animated growIn">Copyright &copy; by Schwarzes Brett</p>
 	</div>
 	<hr class="bg-light hrfooter" style="color: white">
 	<div class="container">
-		<div class="row">
-			<div class="col-sm footercol pointer">
+		<div class="row animatedParent animateOnce">
+			<div class="animated growIn col-sm footercol pointer">
 			Karriere
 			</div>
-			<div class="col-sm footercol pointer">
+			<div class="animated growIn col-sm footercol pointer">
 			Impressum
 			</div>
-			<div class="col-sm footercol pointer">
+			<div class="animated growIn col-sm footercol pointer">
 			Datenschutz
 			</div>
-			<div class="col-sm footercol pointer">
+			<div class="animated growIn col-sm footercol pointer">
 			Über uns
 			</div>
 		</div>
 	</div>
 	
 	<hr class="bg-light hrfooter2" style="color: white">
-	
-<div class="smallbar" style="bottom: 0">
+
+
+<div class="smallbar animatedParent animateOnce" style="bottom: 0">
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<i class="footericon fab fa-facebook-f fa-lg pointer" title="Facebook"></i>
+		<i class="animated fadeInLeftShort footericon fab fa-facebook-f fa-lg pointer" title="Facebook"></i>
 		&nbsp;&nbsp;&nbsp;
-		<i class="footericon fab fa-twitter fa-lg pointer" title="Twitter"></i>
+		<i class="animated fadeInLeftShort footericon fab fa-twitter fa-lg pointer" title="Twitter"></i>
 		&nbsp;&nbsp;&nbsp;
-		<i class="footericon fab fa-instagram fa-lg pointer" title="Instagram"></i>
+		<i class="animated fadeInDownShort footericon fab fa-instagram fa-lg pointer" title="Instagram"></i>
 		&nbsp;&nbsp;&nbsp;
-		<i class="footericon fab fa-youtube fa-lg pointer" title="Youtube"></i>
+		<i class="animated fadeInRightShort footericon fab fa-youtube fa-lg pointer" title="Youtube"></i>
 		&nbsp;&nbsp;&nbsp;
-		<i class="footericon fab fa-pinterest-p pointer" title="Pinterest"></i>
+		<i class="animated fadeInRightShort footericon fab fa-pinterest-p pointer" title="Pinterest"></i>
+
 </div>
 </div>
 
 <?php include 'includes/login/login_1.php'; ?>
+<script rel="text/javascript" src="./js/css3-animate-it.js"></script>
