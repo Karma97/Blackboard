@@ -20,7 +20,7 @@
 		
 		?>
 		
-		<div class="main">
+		<div class="main animatedParent animateOnce" data-sequence='320'>
 		<div class="container mt-3">
 			<?php
 			
@@ -205,6 +205,8 @@
 				
 				$monatsnamen = array(1=>"Januar",2=>"Februar",3=>"März",4=>"April",5=>"Mai",6=>"Juni",7=>"Juli",8=>"August",9=>"September",10=>"Oktober",11=>"November",12=>"Dezember");
 				
+				$e = 1;
+				
 				foreach ($verb -> query($abfrage) as $row) {
 				
 				$monat = date("n", strtotime($row["created_at"]));
@@ -213,7 +215,7 @@
 				
 					echo "
 					
-					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
+					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3 animated fadeInDownShort' data-id='".$e."' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
 						<div class='card-header bg-dark text-white'>
 							<p class='d-inline mb-0 mt-0 buttonpadding2'>
 								".strip_tags($row["betreff"])."
@@ -270,6 +272,7 @@
 					</div>
 					
 					";
+					$e++;
 				}
 				
 				

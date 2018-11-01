@@ -23,7 +23,7 @@
 		?>
 	<div class="main">		
 		<div class="container mt-3">
-		<div id="alle_news">
+		<div id="alle_news" class="animatedParent animateOnce" data-sequence='320'>
 		<?php
 		
 		$sql = "SELECT * FROM news ORDER BY nID DESC";
@@ -60,6 +60,7 @@
 		
 		$monatsnamen = array(1=>"Januar",2=>"Februar",3=>"März",4=>"April",5=>"Mai",6=>"Juni",7=>"Juli",8=>"August",9=>"September",10=>"Oktober",11=>"November",12=>"Dezember");
 		
+		$e = 1;
 		foreach ($verb -> query($sql) as $row){
 		
 		$monat = date("n", strtotime($row["created_at"]));
@@ -73,21 +74,22 @@
 			
 			echo "
 			
-				<div class='card mb-3 pointer' title='Jetzt klicken um zur News mit dem Titel \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='../news/".$row["nID"]."'\">
+				<div data-id='".$e."' class='card animated fadeInDownShort  mb-3 pointer' title='Jetzt klicken um zur News mit dem Titel \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='../news/".$row["nID"]."'\">
 				
 				";
 				
 			} else {
 			
 			echo "
-			
-				<div class='card mb-3 newscard'>
+				
+				<div data-id='".$e."' class='card animated fadeInDownShort mb-3 newscard'>
 				
 				";	
 				
 			}
 			
 			echo "
+				
 					<div class='card-header bg-dark text-center'>
 						<h2 class='text-white'>".$row["titel"]."</h2>
 					</div>
@@ -107,7 +109,9 @@
 				</div>
 				</div>
 			</div>
+			
 			";
+			$e++;
 		}
 		}
 		?>

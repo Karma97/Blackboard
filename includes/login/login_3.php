@@ -35,7 +35,7 @@
 		
 		<div class="login_inputs_container mt-3">
 		
-		 <form action="../abwicklung-login" method="POST" class="formloginregister">
+		 <form action="../../abwicklung-login" method="POST" class="formloginregister">
 		
 			<div class="form-group">
 				<label for="login_email">E-Mail</label>
@@ -140,7 +140,7 @@
 		
 		<div class="register_inputs_container mt-3">
 		
-		 <form action="../abwicklung-register" id="registerForm" method="POST" class="formloginregister">
+		 <form action="../../abwicklung-register" id="registerForm" method="POST" class="formloginregister">
 		 
 		 <div class="row">
 		   <div class="col-sm">
