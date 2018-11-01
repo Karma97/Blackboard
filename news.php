@@ -12,6 +12,7 @@
 	
 ?>
 	<body>
+	<a id='top'></a>
 	<?php 
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
@@ -24,6 +25,7 @@
 	<div class="main">		
 		<div class="container mt-3">
 		<div id="alle_news" class="animatedParent animateOnce" data-sequence='320'>
+		
 		<?php
 		
 		$sql = "SELECT * FROM news ORDER BY nID DESC";
@@ -115,8 +117,14 @@
 		}
 		}
 		?>
+		<div class='container text-center mt-3 mb-2'>
+			<div>
+				<button title='Zurück nach oben' class='btn btn-sm rounded-circle bg-dark text-white text-center d-inline float-none'><a href='#top' class='nohref'><i class='fas 		fa-arrow-up'></i></a></button>
+			</div>
 		</div>
-		</div>
+	</div>
+</div>
+	</div>
 	</div>
 
 	<?php 
