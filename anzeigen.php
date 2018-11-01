@@ -2,10 +2,10 @@
 	ob_start();
 	session_start();
 	
-	$head_variante =   2;
-	$nav_variante =    2;
-	$script_variante = 2;
-	$footer_variante = 2;
+	$head_variante =   3;
+	$nav_variante =    3;
+	$script_variante = 3;
+	$footer_variante = 3;
 	
 	include 'includes/head.php'; 
 	
@@ -24,10 +24,36 @@
 		<div class="container mt-3">
 			<?php
 			
-				$alle = false;		
 			
-				$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR)";
-								
+			
+				$alle = false;	
+				$page_vorhanden = false;
+				
+				if (!isset($_GET["seite"]) || $_GET["seite"] == 0 || !is_numeric($_GET["seite"])) {
+					
+				} else {
+				
+				$page = $_GET["seite"];
+				
+				$limit = 50;
+				$start_from = ($page - 1) * $limit;
+				
+				$page_vorhanden = true;
+				
+				}
+				
+				
+				if ($page_vorhanden == true) {
+
+					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR) LIMIT ".$start_from.", ".$limit."";	
+					
+				} else {
+
+					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR)";
+				
+				}
+				
+				
 				if ($_GET["rNR"] == 0 OR $_GET["rNR"] == "alle") {
 					
 					$alle = true;
@@ -36,16 +62,20 @@
 						
 					$zahl = $_GET["rNR"];
 					
-					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '$zahl'";
+					if ($page_vorhanden == true) {
+						$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."' LIMIT ".$start_from.", ".$limit."";		
+					} else {
+						$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."'";					
+					}
 					
 					} else {
 					
 				};
 				
 				$query = $verb -> query($abfrage);
-				$queryNumRows = $query -> fetchAll();
+				$queryNumRows2 = $query -> fetchAll();
 				
-				if (count($queryNumRows) <= 0) {
+				if (count($queryNumRows2) <= 0) {
 					
 					echo "
 					
@@ -66,7 +96,7 @@
 								<i class='".$row["icon"]."'></i>&nbsp; ".strip_tags($row["bezeichnung"])."
 							</p>
 							
-							<a href='../anzeigen/alle' class='float-right'>
+							<a href='../../anzeigen/alle/seite-1' class='float-right'>
 								<button class='btn btn-sm btn-light'>Alle Anzeigen</button>
 							</a>
 							
@@ -109,7 +139,7 @@
 								<i class='".$row["icon"]."'></i>&nbsp; ".strip_tags($row["bezeichnung"])."
 							</p>
 							
-							<a href='../anzeigen/alle' class='float-right'>
+							<a href='../../anzeigen/alle/seite-1' class='float-right'>
 								<button class='btn btn-sm btn-light'>Alle Anzeigen</button>
 							</a>
 							
@@ -133,7 +163,41 @@
 					<div class='form-group mb-5'>
 						<input type='text' class='form-control' id='searchA' placeholder='nach Anzeige/Betreff/Ort/Datum suchen'>
 					</div>
+					";
 					
+					if ($page_vorhanden == true) {
+					
+						$sql34 = "SELECT * FROM anzeigen";
+						$query34 = $verb -> query($sql34);
+						$countNumRows = count($query34 -> fetchAll());
+						
+						$total_records = $countNumRows;  
+						$total_pages = ceil($total_records / $limit);  
+						
+						if ($total_pages == 1) {
+						
+						} else {
+						
+							$pagLink = "<div class='pagination'>";  
+						
+							if ($alle == true) {
+								for ($i = 1; $i <= $total_pages; $i++) {  
+									$pagLink .= "<a href='../../anzeigen/alle/seite-".$i."'><button class='btn btn-sm btn-dark mr-1 ml-1'>".$i."</button></a>";  
+								};  
+							} else {
+								for ($i = 1; $i <= $total_pages; $i++) {  
+									$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$i."'><button class='btn btn-sm btn-dark mr-1 ml-1'>".$i."</button></a>";  
+								};
+							}
+						
+							echo $pagLink . "</div>";  
+						
+						}	
+					} else {
+					
+					}
+					
+					echo "
 					<div id='alle_anzeigen'>
 				";
 				
@@ -149,13 +213,13 @@
 				
 					echo "
 					
-					<div onclick=\"window.location.href = '../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
+					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
 						<div class='card-header bg-dark text-white'>
 							<p class='d-inline mb-0 mt-0 buttonpadding2'>
 								".strip_tags($row["betreff"])."
 							</p>
 							
-							<a href='../profil/".$crypt_iNR."'>
+							<a href='../../profil/".$crypt_iNR."'>
 							<button title='Jetzt klicken um zum Inserenten zu kommen!' class='btn btn-sm btn-light float-right'>
 								Zum Inserenten
 							</button>
@@ -190,7 +254,7 @@
 						$query2 = $verb -> query($abfrage2);					
 						
 					foreach ($query2 as $row2) {
-						echo "&nbsp; <a href='".$row2["rNR"]."' title='Jetz klicken um zu den Anzeigen zu kommen, die zu der Rubrik mit der Bezeichnung \"".$row2["bezeichnung"]."\" gehören, zu gelangen!'><button class='btn btn-sm btn-dark mb-1'>".strip_tags($row2["bezeichnung"])."</button></a>";
+						echo "&nbsp; <a href='../rubrik-".$row2["rNR"]."/seite-1' title='Jetzt klicken um zu den Anzeigen zu kommen, die zu der Rubrik mit der Bezeichnung \"".$row2["bezeichnung"]."\" gehören, zu gelangen!'><button class='btn btn-sm btn-dark mb-1'>".strip_tags($row2["bezeichnung"])."</button></a>";
 					}
 						
 					echo "

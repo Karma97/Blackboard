@@ -4,13 +4,13 @@
 </div>
 <div id="scrollnav" class="">
 <div class="navigationsleiste" id="navleiste">
-	<a href="../startseite" class="navitems startseite navItem">Start</a>
+	<a href="../../startseite" class="navitems startseite navItem">Start</a>
 	<div class="dropDown">
 		<button class="dropbtn" onclick="showDropdown()">Rubriken  
 			<i id="ichange" onclick="showDropdown()" class="fas fa-chevron-circle-right"></i>
 		</button>
 		<div class="dropdownContent dropdownContentErste">
-			<a class="navitems erste" href="../anzeigen/alle/seite-1">Alle Anzeigen &nbsp;<i class="fas fa-list-ul"></i></a>
+			<a class="navitems erste" href="../../anzeigen/alle/seite-1">Alle Anzeigen &nbsp;<i class="fas fa-list-ul"></i></a>
 			
 				<?php
 				
@@ -18,7 +18,7 @@
 				$query = $verb -> query($sql);
 				
 				foreach ($query as $key => $row) {
-					echo "<a class='navitems' href='../anzeigen/rubrik-".$row["rNR"]."/seite-1'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
+					echo "<a class='navitems' href='../../anzeigen/rubrik-".$row["rNR"]."/seite-1'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
 				}
 				
 			?>
@@ -26,7 +26,7 @@
 		</div>
 	</div> 
 	
-	<a class="navitems navItem" href="../news/alle">News</a>
+	<a class="navitems navItem" href="../../news/alle">News</a>
 
 	<?php
 	
@@ -43,7 +43,7 @@
 	
 	?>
 	
-	<a class="navitems navItem" href="../anzeigen/erstellen">Anzeige aufgeben</a>
+	<a class="navitems navItem" href="../../anzeigen/erstellen">Anzeige aufgeben</a>
 	
 	<?php
 	
@@ -51,15 +51,15 @@
 					
 	?>
 	
-	<a class="navitems navItem" href="../adminarea">Adminarea <i class="fas fa-cogs"></i></a>
+	<a class="navitems navItem" href="../../adminarea">Adminarea <i class="fas fa-cogs"></i></a>
 	
 	<?php
 		}
 	?>
 	
-	<a title="Logout" href="../logout" class="navitems navItem pointer float-right faa-parent animated-hover">Logout <i class="faa-horizontal faa-slow fas fa-sign-out-alt"></i></a>
-	<a title="Mein Account" href="../myaccount" class="navitems navItem pointer float-right faa-parent animated-hover">Mein Account <i class="faa-horizontal faa-slow fas fa-user-circle"></i></a>
-	<a title="Merkliste" href="../merkliste" class="navitems navItem pointer float-right"><i class="far fa-clipboard"></i></a>	
+	<a title="Logout" href="../../logout" class="navitems navItem pointer float-right faa-parent animated-hover">Logout <i class="faa-horizontal faa-slow fas fa-sign-out-alt"></i></a>
+	<a title="Mein Account" href="../../myaccount" class="navitems navItem pointer float-right faa-parent animated-hover">Mein Account <i class="faa-horizontal faa-slow fas fa-user-circle"></i></a>
+	<a title="Merkliste" href="../../merkliste" class="navitems navItem pointer float-right"><i class="far fa-clipboard"></i></a>	
 	
 	<?php
 	
@@ -72,7 +72,7 @@
 	if ($countNumRows69 > 0) {
 		echo "
 		
-		<a title='Postfach' href='../postfach' class='navitems navItem pointer float-right'><i class='far fa-envelope-open'></i>
+		<a title='Postfach' href='../../postfach' class='navitems navItem pointer float-right'><i class='far fa-envelope-open'></i>
 			<div class='postfach_overlay'>
 				".$countNumRows69."
 			</div>
@@ -81,7 +81,7 @@
 	} else {
 		echo "
 		
-		<a title='Postfach' href='../postfach' class='navitems navItem pointer float-right'><i class='far fa-envelope'></i></a>
+		<a title='Postfach' href='../../postfach' class='navitems navItem pointer float-right'><i class='far fa-envelope'></i></a>
 	
 		";
 	}

@@ -15,8 +15,8 @@ RewriteRule ^anzeigen/bearbeiten?$ anzdelete.php
 RewriteRule ^anzeigen/löschen?$ anzdelete.php
 RewriteRule ^anzeigen/einsehen?$ anzeigen.php?rNR=0
 
-RewriteRule ^anzeigen/([0-90000000]+) anzeigen.php?rNR=$1
-RewriteRule ^anzeigen/alle?$ anzeigen.php?rNR=0
+RewriteRule ^anzeigen/rubrik-([0-90000000]+)/seite-([0-90000000]+)?$ anzeigen.php?rNR=$1&seite=$2
+RewriteRule ^anzeigen/alle/seite-([0-90000000]+)?$ anzeigen.php?rNR=0&seite=$2
 
 RewriteRule ^anzeigen/anzeige-([0-90000000]+) anzeigeneinzeln.php?aNR=$1
 
@@ -42,3 +42,9 @@ RewriteRule ^bewerten/([a-zA-Z0-9]+)$ bewertung.php?iNR=$1
 RewriteRule ^merkliste?$ merkliste.php
 RewriteRule ^benutzerliste?$ benutzerliste.php
 RewriteRule ^postfach?$ postfach.php
+
+RewriteRule ^test/seite-([0-90000000]+)?$ tests.php?seite=$1
+RewriteRule ^test/?$ tests.php
+
+
+

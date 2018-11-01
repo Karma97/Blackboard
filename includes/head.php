@@ -13,10 +13,10 @@
 				include __DIR__ . "../links/links_head2.php"; 
 				break;	
 			case $head_variante == 3:
-				include __DIR__ . "../../links/links_head3.php";  
+				include __DIR__ . "../links/links_head3.php";  
 				break;	
 			case $head_variante == 4:
-				include __DIR__ . "../../../links/links_head4.php";  
+				include __DIR__ . "../links/links_head4.php";  
 				break;	 
 		}
 
