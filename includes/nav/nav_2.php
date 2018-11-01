@@ -59,12 +59,38 @@
 	
 	<a title="Logout" href="../logout" class="navitems navItem pointer float-right faa-parent animated-hover">Logout <i class="faa-horizontal faa-slow fas fa-sign-out-alt"></i></a>
 	<a title="Mein Account" href="../myaccount" class="navitems navItem pointer float-right faa-parent animated-hover">Mein Account <i class="faa-horizontal faa-slow fas fa-user-circle"></i></a>
-	<a title="Merkliste" href="../merkliste" class="navitems navItem pointer float-right faa-parent animated-hover"><i class="faa-horizontal faa-slow far fa-clipboard"></i></a>	
-	<a title="Postfach" href="../postfach" class="navitems navItem pointer float-right faa-parent animated-hover"><i class="faa-horizontal faa-slow far fa-envelope"></i></a>	
-		
-		
+	<a title="Merkliste" href="../merkliste" class="navitems navItem pointer float-right"><i class="far fa-clipboard"></i></a>	
+	
 	<?php
+	
+	// 
+	
+	$sql69 = "SELECT * FROM nachrichten WHERE ist_für = '".$_SESSION["iNR"]."' AND gelesen = '0' AND gelöscht = '0'";
+	$query69 = $verb -> query($sql69);
+	$countNumRows69 = count($query69 -> fetchAll());
+	
+	if ($countNumRows69 > 0) {
+		echo "
+		
+		<a title='Postfach' href='../postfach' class='navitems navItem pointer float-right'><i class='far fa-envelope-open'></i>
+			<div class='postfach_overlay'>
+				".$countNumRows69."
+			</div>
+		</a>
+		";
+	} else {
+		echo "
+		
+		<a title='Postfach' href='../postfach' class='navitems navItem pointer float-right'><i class='far fa-envelope'></i></a>
+	
+		";
 	}
+
+		
+	?>
+	
+	<?php
+	}	
 	?>
 	<a href="javascript:void(0);" class="icon nohover" onclick="navResponsive()">
 		<i class="fa fa-bars"></i>

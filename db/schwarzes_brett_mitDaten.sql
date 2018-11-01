@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 31. Okt 2018 um 20:49
+-- Erstellungszeit: 01. Nov 2018 um 00:54
 -- Server-Version: 10.1.35-MariaDB
 -- PHP-Version: 7.2.9
 
@@ -93,9 +93,9 @@ CREATE TABLE `besucherzahlen` (
 
 INSERT INTO `besucherzahlen` (`iNR`, `besucherzahl`, `created_at`, `updated_at`) VALUES
 (1, 0, '2018-10-27 19:57:45', '2018-10-29 22:11:35'),
-(2, 10, '2018-10-28 01:25:17', '2018-10-31 19:48:25'),
-(3, 2, '2018-10-28 01:25:17', '2018-10-31 18:38:42'),
-(5, 1, '2018-10-27 20:33:00', '2018-10-31 17:23:47');
+(2, 13, '2018-10-28 01:25:17', '2018-10-31 23:08:32'),
+(3, 6, '2018-10-28 01:25:17', '2018-10-31 23:51:12'),
+(5, 2, '2018-10-27 20:33:00', '2018-10-31 23:46:20');
 
 -- --------------------------------------------------------
 
@@ -179,9 +179,10 @@ CREATE TABLE `nachrichten` (
 --
 
 INSERT INTO `nachrichten` (`naID`, `kommt_von`, `ist_für`, `betreff`, `beschreibung`, `gelesen`, `gelöscht`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 'COCK', 'mebnsch', 1, 0, '2018-10-31 17:50:10', '2018-10-31 19:46:15'),
-(2, 3, 1, '321', '34234234', 1, 0, '2018-10-31 17:52:32', '2018-10-31 19:47:54'),
-(3, 5, 1, '423423', '4234234234', 1, 0, '2018-10-31 19:41:45', '2018-10-31 19:48:15');
+(4, 3, 1, 'Hallo', 'Ich bin nur so heir', 1, 0, '2018-11-01 11:41:05', '2018-10-31 23:44:18'),
+(5, 2, 1, 'Moin', 'Wie gehts dir so?', 1, 0, '2018-11-01 11:41:05', '2018-10-31 23:44:22'),
+(6, 5, 1, 'Na', 'Schon den Rasenmäher gekauft?', 0, 0, '2018-11-01 11:42:58', '2018-11-01 11:42:58'),
+(7, 3, 1, 'Hey hab vllt. ein Angebot', 'Habe einen Rasenmäher reingestellt. Habe gehört du suchst nach einem. Kannst ja einfach mal nachschauen ob er dir gefällt. :)', 0, 0, '2018-11-01 11:42:58', '2018-11-01 11:42:58');
 
 -- --------------------------------------------------------
 
@@ -1548,7 +1549,7 @@ ALTER TABLE `inserent`
 -- AUTO_INCREMENT für Tabelle `nachrichten`
 --
 ALTER TABLE `nachrichten`
-  MODIFY `naID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `naID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT für Tabelle `news`

@@ -22,30 +22,6 @@
 	require_once 'includes/connect.php';	
 	require 'includes/cookiecheck.php';
 	
-	include 'includes/nav.php';	
-	
-?>
-
-<div class="main">
-<div class="container-fluid mt-3">
-	
-<?php
-	
-	if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
-	
-	header("Location: ../startseite");
-	
-?>
-	
-	<h4><p class="text-danger text-center">Um diese Funktion nutzen zu können, müssen Sie angemeldet sein!</p></h4>
-	
-	</div>
-	</div>
-	
-<?php
-	
-	} else {
-	
 	//print_r($_POST);
 	
 	$nicht_weiter = false;
@@ -130,9 +106,31 @@
 		}
 	}
 	
+	include 'includes/nav.php';	
 	
 ?>
-  <div class="card mb-0">
+
+<div class="main">
+<div class="container-fluid mt-3">
+	
+<?php
+	
+	if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
+	
+	header("Location: ../startseite");
+	
+?>
+	
+	<h4><p class="text-danger text-center">Um diese Funktion nutzen zu können, müssen Sie angemeldet sein!</p></h4>
+	
+	</div>
+	</div>
+	
+<?php
+	
+	} else {
+	
+?>
   <?php
   
 	$sql = "SELECT * FROM nachrichten WHERE ist_für = '".$_SESSION["iNR"]."' AND gelesen = '0' AND gelöscht = '0'";
@@ -141,7 +139,7 @@
 	
 	if ($countNumRows < 1) {
 		echo "
-		
+		<div class='card mb-0'>
 			<div class='card-header text-white bg-dark'>
 				<i class='far fa-envelope'></i>&nbsp; Keine neuen Nachrichten vorhanden!
 			</div>
@@ -149,8 +147,13 @@
 		";
 	} else {
 		echo "
-		
-			<div class='card-header text-white bg-dark'>
+	<div class='card mb-0'>
+			<div class='card-header text-white bg-dark' data-toggle='collapse' data-target='#collapse_neue' aria-expanded='true' aria-controls='collapse_neue' onclick=\"collapseItem('#collapse_neue', '#collapse_icon_neue')\">
+				<div class='icon_collapse_container'>
+					<i style='transition: 0.4s;' id='collapse_icon_neue' class='fa-lg icon_in_container far fa-arrow-alt-circle-up'></i>
+				</div>
+				<div class='after_icon_content'>
+				<div class='beforeformtodrop'>
 				";
 				
 				if ($countNumRows == 1) {
@@ -160,25 +163,22 @@
 				}
 				
 				echo "
+				</div>
 				
-				<form class='float-right w-auto d-inline mt-0 mb-0' action='./postfach' method='POST'>
+				<form class='float-right formtodrop w-auto d-inline mt-0 mb-0' action='./postfach' method='POST'>
 					<button value='gelesen' title='Alle Nachrichten als gelesen markieren' class='btn btn-sm btn-light rounded-circle' name='alle_gelesen' type='submit'><i class='pointer fas fa-check-double'></i></button>
 				</form>
-				
+				</div>
 			</div>
 		";
 	}
-	
-  ?>
-  
-
-	
-		<?php
-		
+			
 		if ($countNumRows < 1) {
 			
 		} else {
-			echo "<div class='card-body'>";
+			echo "
+		<div id='collapse_neue' class='collapse show'>
+		<div class='card-body'>";
 		}
 		
 		if ($countNumRows > 0) {
@@ -239,8 +239,8 @@
 					
 					<input type='hidden' value='".$row["naID"]."' name='nachricht[]'>
 					
-				</div>
-			</div>
+						</div>
+					</div>
 			</form>
 			";
 		}
@@ -249,6 +249,7 @@
 		if ($countNumRows > 0) {		
 			echo "
 			
+				</div>
 				</div>
 				</div>	
 				
@@ -268,14 +269,22 @@
 	} else {
 		echo "
 			<div class='card mt-3'>
-				<div class='card-header text-white bg-dark'>
-					<i class='fas fa-check'></i>&nbsp; Gelesene Nachrichten (".$countNumRows." insgesamt)
+				<div class='card-header text-white bg-dark' data-toggle='collapse' data-target='#collapse_gelesene' aria-expanded='false' aria-controls='collapse_gelesene' onclick=\"collapseItem('#collapse_gelesene', '#collapse_icon_gelesene')\">
+				<div class='icon_collapse_container'>
+					<i style='transition: 0.4s;' id='collapse_icon_gelesene' class='collapsedIcon fa-lg icon_in_container far fa-arrow-alt-circle-up'></i>
+				</div>
+				<div class='after_icon_content'>
+					<div class='beforeformtodrop'>
+						<i class='fas fa-check'></i>&nbsp; Gelesene Nachrichten (".$countNumRows." insgesamt)
+					</div>
 					
-					<form class='float-right w-auto d-inline mt-0 mb-0' action='./postfach' method='POST'>
+					<form class='float-right formtodrop w-auto d-inline mt-0 mb-0' action='./postfach' method='POST'>
 						<button value='gelöscht' title='Alle Nachrichten löschen' class='btn btn-sm btn-light rounded-circle' name='alle_löschen' type='submit'><i class='pointer fas fa-times'></i></button>
 					</form>
 					
 				</div>
+				</div>
+				<div id='collapse_gelesene' class='collapse show'>
 				<div class='card-body'>
 				
 				";
@@ -366,6 +375,10 @@
 		ob_end_flush();
 		
 ?>
-  
+<script type="text/javascript">
+	$( document ).ready(function() {
+		$('#collapse_gelesene').collapse('hide');
+	});
+</script>
 </body>
 </html>

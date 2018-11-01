@@ -1,0 +1,50 @@
+
+.icon_collapse_container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 40px;
+	background-color: white;
+	color: black;
+	text-align: center;
+}
+
+.icon_in_container {
+	padding: 20px 0px;
+}
+
+.after_icon_content {
+	margin-left: 40px;
+}
+
+.formtodrop {
+	display: inline;
+}
+
+.beforeformtodrop {
+	display: inline;
+}
+
+.postfach_overlay {
+	position: relative;
+	border-radius: 20%;
+	background-color: red;
+	display: inline;
+	margin-left: 4px;
+	padding: 3px 5px;
+}
+
+@media screen and (max-width: 700px) {
+	.icon_in_container {
+		margin: 0.75rem 0px;
+	}	
+	.formtodrop {
+		display: block !important;
+	}
+	.beforeformtodrop {
+		display: block !important;
+		min-width: 100%;
+		float: left !important;
+	}
+}
