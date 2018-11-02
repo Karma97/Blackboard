@@ -76,9 +76,9 @@
 	</div>
 	<div class="col-md-5">
 	<div class="card mb-3" id="news">
-		<div class="card-header bg-dark text-center">
+		<div class="card-header text-white bg-dark text-center">
 		<div class="animatedParent animateOnce">
-			<h2 class="text-white animated growIn delay-400 slow">Neuigkeiten</h2>
+			<h2 class="animated growIn delay-400 slow">Neuigkeiten</h2>
 		</div>
 		</div>
 		<div class="card-body">

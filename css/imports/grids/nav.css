@@ -111,16 +111,13 @@
 	position: absolute;
 	opacity: 0;
 	z-index: 1;	
-	
 	transition: 0.4s;
-	
 	background-color: transparent;
 }
 
 #scrollNavbarIndicator {
 	width: 0%;
 	height: 8px;
-	
 	background-color: #262b2f;
 }
 

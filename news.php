@@ -42,7 +42,7 @@
 		
 		if (count($queryNumRows) <= 0) {
 			echo "Keine News gefunden. <button onclick='window.history.back();' type='button' class='btn btn-dark'>Zurück</button>";
-		} else {
+			} else {
 			if ($_GET["nID"] == 0 OR $_GET["nID"] == "alle") {
 			echo "
 				<div class='form-group'>
@@ -88,8 +88,8 @@
 			
 			echo "
 				
-					<div class='card-header bg-dark text-center'>
-						<h2 class='text-white'>".$row["titel"]."</h2>
+					<div class='card-header text-white bg-dark text-center'>
+						<h2>".$row["titel"]."</h2>
 					</div>
 				<div class='card-body'>
 					".$row["beschreibung"]."

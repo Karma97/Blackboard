@@ -36,14 +36,14 @@
   top: -4.8vh;
 }
 .pacman:before{
-  border-right-color: transparent;
-  border-bottom-color: transparent;
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
   animation: chompTop 0.2s linear infinite alternate;
 }
 
 .pacman::after{
-  border-right-color: transparent;
-  border-top-color: transparent;
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
   animation: chompBottom 0.2s linear infinite alternate;
 }
 

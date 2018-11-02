@@ -37,3 +37,9 @@
 
 /* Image Preview */
 @import url("imports/image_preview.css");
+
+/* Scrollbar */
+@import url("imports/scrollbar/scrollbar.css");
+
+/* Colors */
+@import url("imports/colors.css");
