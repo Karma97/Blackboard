@@ -715,7 +715,7 @@ $(document).ready(function(){
 });
 }
 
-// When the user scrolls the page, execute myFunction 
+// When the user scrolls the page, execute scrollIndicator 
 if (document.getElementById("scrollNavbarIndicator")) {
 window.onscroll = function() {scrollIndicator()};
 
@@ -850,15 +850,47 @@ function showHidePassword(element, ielement) {
 }
 
 
+// Scroll smooth to top
+
+$(document).ready(function(){
+  $("a.scrollbutton").on('click', function(event) {
+
+    if (this.hash !== "") {
+      event.preventDefault();
+
+      var hash = this.hash;
+
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+      });	
+    }	
+  });
+});
 
 
+if ($(".buttonscroll")) {
+$(".buttonscroll").hide();
 
-
-
-
-
-
-
+$(document).ready(function(){
+    var mHeight = document.documentElement.clientHeight;
+    $(window).scroll(function(){
+		var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+		var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		var scrolled = (winScroll / height) * 100;
+		
+		var element = $(".buttonscroll");
+		
+		if (scrolled >= 50) {
+			$(element).fadeIn();		
+		} else {
+			$(element).fadeOut();		
+		}
+		 
+    });
+});
+}
 
 
 

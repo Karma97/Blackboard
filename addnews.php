@@ -10,13 +10,7 @@
 	$script_variante = 2;
 	$footer_variante = 2;
 	
-	include 'includes/head.php'; 
-	
-?>
-
-<body>
-	
-<?php 
+	include 'includes/head.php';
 
 	include 'includes/pacman.php';
 	require_once 'includes/connect.php';	

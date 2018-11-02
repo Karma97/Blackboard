@@ -11,10 +11,6 @@
 	$footer_variante = 2;
 	
 	include 'includes/head.php'; 
-	
-?>
-<body>
-<?php 
 
 	include 'includes/pacman.php';
 	

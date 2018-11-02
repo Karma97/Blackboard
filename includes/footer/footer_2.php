@@ -1,6 +1,6 @@
 <div class="footerbar">
 	<div class="smallbar animatedParent animateOnce" style="top: 0">
-		<p class="animated growIn">Copyright &copy; by Schwarzes Brett</p>
+		<p class="d-inline animated growIn">Copyright &copy; by Schwarzes Brett</p>
 	</div>
 	<hr class="bg-light hrfooter" style="color: white">
 	<div class="container">
@@ -40,3 +40,5 @@
 
 <?php include 'includes/login/login_2.php'; ?>
 <script rel="text/javascript" src="../js/css3-animate-it.js"></script>
+
+<p class="buttonscroll pl-2 pr-2 float-right"><a href="#scrolltop" class="scrollbutton"><button class="btn btn-dark"><i class="fas fa-angle-double-up"></i></button></a></p>

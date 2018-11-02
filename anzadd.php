@@ -9,17 +9,15 @@
 	
 	include 'includes/head.php'; 
 	
+	include 'includes/pacman.php';
+	require_once 'includes/connect.php';
+	
+	require 'includes/cookiecheck.php';
+	
+	include 'includes/nav.php';	
+		
 ?>
-<body>
-	<?php 
-		include 'includes/pacman.php';
-		require_once 'includes/connect.php';
-		
-		require 'includes/cookiecheck.php';
-		
-		include 'includes/nav.php';	
-		
-		?>
+
   <div class="main">
  <div class="container-fluid mt-3">
  		<?php

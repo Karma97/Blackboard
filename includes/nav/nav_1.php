@@ -9,7 +9,7 @@
 		<button class="dropbtn" onclick="showDropdown()">Rubriken 
 			<i id="ichange" onclick="showDropdown()" class="fas fa-chevron-circle-right"></i>
 		</button>
-		<div class="dropdownContent dropdownContentErste animatedParent animateOnce">
+		<div class="dropdownContent dropdownContentErste">
 			<a class="navitems erste" href="./anzeigen/alle/seite-1">Alle Anzeigen &nbsp;<i class="fas fa-list-ul"></i></a>
 			
 				<?php
@@ -21,7 +21,7 @@
 				
 				foreach ($query as $key => $row) {
 				
-					echo "<a class='navitems' href='./anzeigen/rubrik-".$row["rNR"]."/seite-1'>".$row["bezeichnung"]." &nbsp;<i class='animated fadeInRightShort ".$row["icon"]."'></i></a>";
+					echo "<a class='navitems' href='./anzeigen/rubrik-".$row["rNR"]."/seite-1'>".$row["bezeichnung"]." &nbsp;<i class='".$row["icon"]."'></i></a>";
 					
 					$p++;
 					

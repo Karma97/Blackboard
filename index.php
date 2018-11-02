@@ -11,10 +11,6 @@
 	
 	include 'includes/head.php'; 
 	
-?>
-	<body>
-	<?php 
-	
 		include 'includes/pacman.php';
 		require_once 'includes/connect.php';
 		
@@ -82,7 +78,7 @@
 	<div class="card mb-3" id="news">
 		<div class="card-header bg-dark text-center">
 		<div class="animatedParent animateOnce">
-			<h2 class="text-white animated growIn delay-500 slow">Neuigkeiten</h2>
+			<h2 class="text-white animated growIn delay-400 slow">Neuigkeiten</h2>
 		</div>
 		</div>
 		<div class="card-body">
