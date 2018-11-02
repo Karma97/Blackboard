@@ -20,7 +20,7 @@
 		
 		?>
 		
-		<div class="main animatedParent animateOnce" data-sequence='320'>
+		<div class="main">
 		<div class="container mt-3">
 			<?php
 			
@@ -35,7 +35,7 @@
 				
 				$page = $_GET["seite"];
 				
-				$limit = 50;
+				$limit = 500;
 				$start_from = ($page - 1) * $limit;
 				
 				$page_vorhanden = true;
@@ -53,25 +53,25 @@
 				
 				}
 				
-				
+					
 				if ($_GET["rNR"] == 0 OR $_GET["rNR"] == "alle") {
 					
-					$alle = true;
+					$alle = true;	
 					
 					} elseif ($_GET["rNR"] >= 1) {
 						
 					$zahl = $_GET["rNR"];
 					
-					if ($page_vorhanden == true) {
-						$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."' LIMIT ".$start_from.", ".$limit."";		
-					} else {
-						$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."'";					
-					}
-					
+						if ($page_vorhanden == true) {
+							$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."' LIMIT ".$start_from.", ".$limit."";		
+						} else {
+							$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."'";					
+						}
+										
 					} else {
 					
 				};
-				
+								
 				$query = $verb -> query($abfrage);
 				$queryNumRows2 = $query -> fetchAll();
 				
@@ -166,8 +166,12 @@
 					";
 					
 					if ($page_vorhanden == true) {
-					
-						$sql34 = "SELECT * FROM anzeigen";
+						
+						if ($alle == true) {
+							$sql34 = "SELECT * FROM anzeigen";							
+						} else {						
+							$sql34 = "SELECT * FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) WHERE rNR = '".$zahl."'";
+						}
 						$query34 = $verb -> query($sql34);
 						$countNumRows = count($query34 -> fetchAll());
 						
@@ -178,19 +182,106 @@
 						
 						} else {
 						
-							$pagLink = "<div class='pagination'>";  
+							$pagLink = "
+							<div class='pagination w-100 mb-3'>
+								<div class='pagination-container w-auto ml-auto mr-auto'>
+							";  
 						
 							if ($alle == true) {
-								for ($i = 1; $i <= $total_pages; $i++) {  
-									$pagLink .= "<a href='../../anzeigen/alle/seite-".$i."'><button class='btn btn-sm btn-dark mr-1 ml-1'>".$i."</button></a>";  
-								};  
+							
+								if ($page > 1) {
+									$pagLink .= "<a class='mr-2 nohref' href='../../anzeigen/alle/seite-".($page - 1)."'><i class='d-inline fas fa-angle-double-left'></i></a>";					
+								} else {
+								}
+												
+									if ($page == 1) {
+										$pagLink .= "<a href='../../anzeigen/alle/seite-1'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>1</button></a>";
+									} else {
+										$pagLink .= "<a href='../../anzeigen/alle/seite-1'><button class='rounded btn btn-sm btn-dark mr-1 ml-1'>1</button></a>";
+									}
+									
+									$start = 0;
+									$sum = 0;
+									
+									for ($i = $start; $i <= $total_pages; $i++) {
+										$sum += $i;
+									}
+									
+									/*
+									$sum = round($sum / $total_pages, 0);
+									
+									
+										for ($i = 2; $i <= ($total_pages - 1); $i++) {
+											if ($i == $page) {
+												$pagLink .= "<a href='../../anzeigen/alle/seite-".$i."'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>".$i."</button></a>";
+											} else {
+												$pagLink .= "<a href='../../anzeigen/alle/seite-".$i."'><button class='rounded btn btn-sm btn-dark mr-1 ml-1'>".$i."</button></a>";
+											}
+										}
+									*/
+												
+			 						if ($page == $total_pages) {
+										$pagLink .= "<a href='../../anzeigen/alle/seite-".$total_pages."'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>".$total_pages."</button></a>"; 
+									} else {
+										$pagLink .= "<a href='../../anzeigen/alle/seite-".$total_pages."'><button class='rounded btn btn-sm btn-dark mr-1 ml-1'>".$total_pages."</button></a>"; 
+									}
+									
+								if ($page == $total_pages) {
+									
+								} else {
+
+									$pagLink .= "<a class='ml-2 nohref' href='../../anzeigen/alle/seite-".($page + 1)."'><i class='d-inline fas fa-angle-double-right'></i></a>";		
+								}
+									
 							} else {
-								for ($i = 1; $i <= $total_pages; $i++) {  
-									$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$i."'><button class='btn btn-sm btn-dark mr-1 ml-1'>".$i."</button></a>";  
-								};
+								if ($page > 1) {
+									$pagLink .= "<a class='mr-2 nohref' href='../../anzeigen/rubrik-".$zahl."/seite-".($page - 1)."'><i class='d-inline fas fa-angle-double-left'></i></a>";					
+								} else {
+								}
+												
+									if ($page == 1) {
+										$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-1'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>1</button></a>";
+									} else {
+										$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-1'><button class='rounded btn btn-sm btn-dark mr-1 ml-1'>1</button></a>";
+									}
+									
+									$start = 0;
+									$sum = 0;
+									
+									for ($i = $start; $i <= $total_pages; $i++) {
+										$sum += $i;
+									}
+									
+									/*
+									$sum = round($sum / $total_pages, 0);
+									
+									
+										for ($i = 2; $i <= ($total_pages - 1); $i++) {
+											if ($i == $page) {
+												$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$i."'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>".$i."</button></a>";
+											} else {
+												$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$i."'><button class='rounded btn btn-sm btn-dark mr-1 ml-1'>".$i."</button></a>";
+											}
+										}
+									*/
+												
+			 						if ($page == $total_pages) {
+										$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$total_pages."'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>".$total_pages."</button></a>"; 
+									} else {
+										$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$total_pages."'><button class='rounded btn btn-sm btn-dark mr-1 ml-1'>".$total_pages."</button></a>"; 
+									}
+									
+								if ($page == $total_pages) {
+									
+								} else {
+
+									$pagLink .= "<a class='ml-2 nohref' href='../../anzeigen/rubrik-".$zahl."/seite-".($page + 1)."'><i class='d-inline fas fa-angle-double-right'></i></a>";		
+								}
+									
+									
 							}
 						
-							echo $pagLink . "</div>";  
+							echo $pagLink."</div></div>";  
 						
 						}	
 					} else {
@@ -198,14 +289,14 @@
 					}
 					
 					echo "
-					<div id='alle_anzeigen'>
+					<div id='alle_anzeigen' class='animatedParent animateOnce' data-sequence='320'>
 				";
 				
 				setlocale(LC_ALL, 'de_DE.utf8');
 				
 				$monatsnamen = array(1=>"Januar",2=>"Februar",3=>"März",4=>"April",5=>"Mai",6=>"Juni",7=>"Juli",8=>"August",9=>"September",10=>"Oktober",11=>"November",12=>"Dezember");
 				
-				$e = 1;
+				$k = 1;
 				
 				foreach ($verb -> query($abfrage) as $row) {
 				
@@ -215,7 +306,7 @@
 				
 					echo "
 					
-					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3 animated fadeInDownShort' data-id='".$e."' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
+					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3 animated fadeInDownShort' data-id='".$k."'  title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
 						<div class='card-header bg-dark text-white'>
 							<p class='d-inline mb-0 mt-0 buttonpadding2'>
 								".strip_tags($row["betreff"])."
@@ -272,7 +363,9 @@
 					</div>
 					
 					";
-					$e++;
+					
+					$k++;
+					
 				}
 				
 				
