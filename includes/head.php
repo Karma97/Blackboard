@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Schwarzes Brett | Tauschbörse</title>
+
 		<?php 
 			
 		switch ($head_variante) {

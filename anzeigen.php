@@ -22,7 +22,7 @@
 			<?php
 			
 			
-			
+				
 				$alle = false;	
 				$page_vorhanden = false;
 				
@@ -32,6 +32,7 @@
 				
 				$page = $_GET["seite"];
 				
+				$scroll_at = 7;
 				$limit = 50;
 				$start_from = ($page - 1) * $limit;
 				
