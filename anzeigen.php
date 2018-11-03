@@ -32,7 +32,7 @@
 				
 				$page = $_GET["seite"];
 				
-				$limit = 100;
+				$limit = 50;
 				$start_from = ($page - 1) * $limit;
 				
 				$page_vorhanden = true;
@@ -273,7 +273,7 @@
 					}
 					
 					echo "
-					<div id='alle_anzeigen' class='animatedParent'>
+					<div id='alle_anzeigen'>
 				";
 				
 				setlocale(LC_ALL, 'de_DE.utf8');
@@ -289,7 +289,7 @@
 				$crypt_iNR = str_replace(array("/", "."), "", crypt($row["iNR"],'SB'));
 				
 					echo "
-					
+					<div class='animatedParent animateOnce'>
 					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3 animated delay-450 ";
 					
 					if (is_int($k / 2)) {
@@ -353,6 +353,7 @@
 					
 					echo "	
 					
+						</div>
 					</div>
 					
 					";

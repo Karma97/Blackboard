@@ -20,7 +20,7 @@
 		?>
 	<div class="main">		
 		<div class="container mt-3">
-		<div id="alle_news" class="animatedParent">
+		<div id="alle_news">
 		
 		<?php
 		
@@ -33,9 +33,7 @@
 			$sql = "SELECT * FROM news WHERE nID = '$nID' ORDER BY nID DESC";
 		} else {
 				
-		};
-				
-		
+		};	
 	
 		$query = $verb -> query($sql);		
 		$queryNumRows = $query -> fetchAll();
@@ -65,14 +63,13 @@
 		$monat2 = date("n", strtotime($row["updated_at"]));
 				
 		echo "
-			<div class='col'>
+			<div class='col animatedParent animateOnce'>
 			";
 			
 			if ($_GET["nID"] == 0 OR $_GET["nID"] == "alle") {
 			
 			echo "
-			
-				<div class='card animated";
+				<div class='card animated ";
 				
 					if (is_int($e / 2)) {
 						echo "fadeInRightShort";
@@ -88,7 +85,6 @@
 			} else {
 			
 			echo "
-				
 				<div class='card animated fadeInUp mb-3 newscard'>
 				
 				";	
@@ -116,7 +112,6 @@
 				</div>
 				</div>
 			</div>
-			
 			";
 			$e++;
 		}
