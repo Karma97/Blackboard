@@ -20,7 +20,7 @@
 		?>
 	<div class="main">		
 		<div class="container mt-3">
-		<div id="alle_news" class="animatedParent animateOnce" data-sequence='320'>
+		<div id="alle_news" class="animatedParent">
 		
 		<?php
 		
@@ -72,7 +72,16 @@
 			
 			echo "
 			
-				<div data-id='".$e."' class='card animated fadeInDownShort  mb-3 pointer' title='Jetzt klicken um zur News mit dem Titel \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='../news/".$row["nID"]."'\">
+				<div class='card animated";
+				
+					if (is_int($e / 2)) {
+						echo "fadeInRightShort";
+					} else {
+						echo "fadeInLeftShort";
+					}
+					
+				
+				echo " mb-3 pointer' title='Jetzt klicken um zur News mit dem Titel \"".$row["titel"]."\" zu kommen.' onclick=\"window.location.href='../news/".$row["nID"]."'\">
 				
 				";
 				
@@ -80,7 +89,7 @@
 			
 			echo "
 				
-				<div data-id='".$e."' class='card animated fadeInDownShort mb-3 newscard'>
+				<div class='card animated fadeInUp mb-3 newscard'>
 				
 				";	
 				

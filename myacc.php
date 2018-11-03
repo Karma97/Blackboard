@@ -741,7 +741,7 @@
 									
 									foreach ($query6 as $row) {
 												
-									$crypt_iNR2 = str_replace("/", "", crypt($row["iNR"],'SB')); 
+									$crypt_iNR2 = str_replace(array("/", "."), "", crypt($row["iNR"],'SB'));
 												
 									if (count(array_diff(scandir("profilbilder/".$row["iNR"].""), array('..', '.'))) > 0) {
 									

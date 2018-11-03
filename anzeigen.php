@@ -32,7 +32,7 @@
 				
 				$page = $_GET["seite"];
 				
-				$limit = 500;
+				$limit = 100;
 				$start_from = ($page - 1) * $limit;
 				
 				$page_vorhanden = true;
@@ -42,11 +42,11 @@
 				
 				if ($page_vorhanden == true) {
 
-					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR) LIMIT ".$start_from.", ".$limit."";	
+					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR) ORDER BY aNR DESC LIMIT ".$start_from.", ".$limit."";	
 					
 				} else {
 
-					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR)";
+					$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.aNR, anzeigen.ortID, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM anzeigen INNER JOIN orte USING(ortID) INNER JOIN inserent USING (iNR) ORDER BY aNR DESC";
 				
 				}
 				
@@ -60,9 +60,9 @@
 					$zahl = $_GET["rNR"];
 					
 						if ($page_vorhanden == true) {
-							$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."' LIMIT ".$start_from.", ".$limit."";		
+							$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."' ORDER BY aNR DESC LIMIT ".$start_from.", ".$limit."";		
 						} else {
-							$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."'";					
+							$abfrage = "SELECT inserent.iNR, orte.Bezeichnung, anzeigen.ortID, anzeigen.aNR, anzeigen.betreff, anzeigen.beschreibung, anzeigen.created_at FROM r_besitzt_a INNER JOIN anzeigen USING(aNR) INNER JOIN rubriken USING(rNR) INNER JOIN orte USING (ortID) INNER JOIN inserent USING (iNR) WHERE rNR = '".$zahl."' ORDER BY aNR DESC";					
 						}
 										
 					} else {
@@ -248,20 +248,7 @@
 									for ($i = $start; $i <= $total_pages; $i++) {
 										$sum += $i;
 									}
-									
-									/*
-									$sum = round($sum / $total_pages, 0);
-									
-									
-										for ($i = 2; $i <= ($total_pages - 1); $i++) {
-											if ($i == $page) {
-												$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$i."'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>".$i."</button></a>";
-											} else {
-												$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$i."'><button class='rounded btn btn-sm btn-dark mr-1 ml-1'>".$i."</button></a>";
-											}
-										}
-									*/
-												
+																					
 			 						if ($page == $total_pages) {
 										$pagLink .= "<a href='../../anzeigen/rubrik-".$zahl."/seite-".$total_pages."'><button class='rounded btn btn-sm btn-danger mr-1 ml-1'>".$total_pages."</button></a>"; 
 									} else {
@@ -286,7 +273,7 @@
 					}
 					
 					echo "
-					<div id='alle_anzeigen' class='animatedParent animateOnce' data-sequence='320'>
+					<div id='alle_anzeigen' class='animatedParent'>
 				";
 				
 				setlocale(LC_ALL, 'de_DE.utf8');
@@ -299,11 +286,20 @@
 				
 				$monat = date("n", strtotime($row["created_at"]));
 				
-				$crypt_iNR = str_replace("/", "",crypt($row["iNR"],'SB'));
+				$crypt_iNR = str_replace(array("/", "."), "", crypt($row["iNR"],'SB'));
 				
 					echo "
 					
-					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3 animated fadeInDownShort' data-id='".$k."'  title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
+					<div onclick=\"window.location.href = '../../anzeigen/anzeige-".$row["aNR"]."'\" class='pointer card mb-3 animated delay-450 ";
+					
+					if (is_int($k / 2)) {
+						echo "fadeInRightShort";
+					} else {
+						echo "fadeInLeftShort";
+					}
+					
+					echo "
+					' title='Jetzt klicken um zur Anzeige mit dem Betreff \"".strip_tags($row["betreff"])."\" zu kommen!'>
 						<div class='card-header bg-dark text-white'>
 							<p class='d-inline mb-0 mt-0 buttonpadding2'>
 								".strip_tags($row["betreff"])."

@@ -6,16 +6,16 @@
 	<div class="container">
 		<div class="row animatedParent animateOnce">
 			<div class="animated growIn col-sm footercol pointer">
-			Karriere
+			<a href="">Karriere</a>
 			</div>
 			<div class="animated growIn col-sm footercol pointer">
-			Impressum
+			<a href="">Impressum</a>
 			</div>
 			<div class="animated growIn col-sm footercol pointer">
-			Datenschutz
+			<a href="../../datenschutz">Datenschutz</a>
 			</div>
 			<div class="animated growIn col-sm footercol pointer">
-			Über uns
+			<a href="">Über uns</a>
 			</div>
 		</div>
 	</div>
@@ -42,3 +42,4 @@
 <script rel="text/javascript" src="../../js/css3-animate-it.js"></script>
 
 <p class="buttonscroll pl-2 pr-2 float-right"><a href="#scrolltop" class="scrollbutton"><button class="btn btn-dark"><i class="fas fa-angle-double-up"></i></button></a></p>
+

@@ -67,7 +67,7 @@
 			foreach ($verb -> query($sql) as $row) {
 				if ($i > 0) {
 				
-				$crypt_iNR = str_replace("/", "", crypt($row["iNR"],'SB'));
+				$crypt_iNR = str_replace(array("/", "."), "", crypt($row["iNR"],'SB'));
 				
 					echo "
 					<div class='col-lg-6' title='Jetzt Doppelklicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen!' ondblclick=\"window.location.href = './profil/".$crypt_iNR."'\">

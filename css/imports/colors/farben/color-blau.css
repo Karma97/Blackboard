@@ -1,0 +1,207 @@
+
+/* bootstrap bg- und btn-klassen */
+.bg-dark {
+	background-color: #03a9f4 !important;
+	color: #000000 !important;
+}
+
+.btn-dark {
+	background-color: #40c4ff !important;
+	border-color: #40c4ff !important;
+	color: #000000 !important;
+}
+
+.btn-dark:focus {
+	box-shadow: 0 0 0 0.2rem rgba(130,247,255,0.5);
+}
+
+.btn-dark:not(:disabled):not(.disabled).active:focus, .btn-dark:not(:disabled):not(.disabled):active:focus, .show>.btn-dark.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(130,247,255,0.5);
+}
+
+.btn-dark:hover {
+	background-color: #0094cc !important;
+	border-color: #0094cc !important;
+}
+
+.btn-light {
+	background-color: #0094cc !important;
+	border-color: #0094cc !important;
+	color: #000000 !important;
+}
+
+.btn-light:focus {#40c4ff
+	box-shadow: 0 0 0 0.2rem rgba(130,247,255,0.5);
+}
+
+.btn-light:not(:disabled):not(.disabled).active:focus, .btn-light:not(:disabled):not(.disabled):active:focus, .show>.btn-light.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(130,247,255,0.5);
+}
+
+.btn-light:hover {
+	background-color: #40c4ff !important;
+	border-color: #40c4ff !important;
+}
+
+/* bootstrap cards */
+.card-header {
+	background-color: !important;
+	color: #000000 !important;
+}
+.card-footer {
+	background-color: !important;
+	color: #000000 !important;	
+}
+
+/* footer */
+.footerbar {
+	background-color: #007ac1 !important;
+	color: #000000 !important;
+}
+
+.smallbar {
+	background-color: #03a9f4 !important;
+	color: #000000 !important;
+}
+
+.footericon:hover {
+	color: #404040 !important;
+}
+
+
+/* navbar */
+.navigationsleiste {
+	background-color: #01a9f4 !important;
+	color: #000000 !important;
+}
+
+.navigationsleiste a {
+	color: #000000 !important;
+	border-bottom: 2px solid transparent;
+	border-top: 2px solid transparent;
+}
+
+.navigationsleiste a:hover, .dropDown:hover {
+    background-color: #40c4ff !important;
+	color: #000000 !important;
+}
+
+.dropdownContent a:hover {
+	background-color: #40c4ff !important;
+	color: #000000 !important;
+}
+
+.dropDown .dropbtn {
+	color: #000000 !important;	
+	border-bottom: 2px solid transparent;
+	border-top: 2px solid transparent;
+}
+
+.dropdownContent {
+	background-color: #01a9f4 !important;	
+	color: #000000 !important;	
+}
+
+.dropdownContent a {
+	background-color: #01a9f4 !important;	
+	color: #000000 !important;		
+}
+
+.dropDown .navactive {
+	border-bottom: 2px solid #007ac1 !important;
+	border-top: 2px solid transparent;
+}
+
+.navactive {
+	border-bottom: 2px solid #007ac1 !important;
+	border-top: 2px solid transparent;
+}
+
+/* headerbar */
+.headerbar {
+	background-color: #007ac1 !important;
+	color: #000000 !important;
+}
+
+
+/* navbar scrollindicator */
+#scrollNavbarIndicator {
+	background-color: #01a9f4 !important;
+	color: #000000 !important;	
+}
+
+/* Pacman loadingscreen */
+#komplett, .pacmanC {
+	background: linear-gradient(to top, #40c4ff 0%, #007ac1 100%) !important;
+}
+
+.pacman:before, .pacman:after {
+	border: solid 5vh yellow !important;	
+}
+
+.pacman:before{
+  border-right-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+.pacman::after{
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+}
+
+/* hrefs */
+a {
+	color: #000000 !important;
+}
+
+a:hover {
+	color: #00446c !important;
+}
+
+a.href {
+	color: #000000 !important;
+}
+
+a.href:hover {
+	color: #00446c !important;
+}
+
+/* change pwd and email on myacc */
+#change_pwd_html {	
+    background-color: #ffffff !important;
+    border: 7px solid #03a9f4 !important;
+	box-shadow: #03a9f4 0 2px 18px !important;
+}
+
+#change_email_html {
+    background-color: #ffffff !important;
+    border: 7px solid #03a9f4 !important;
+	box-shadow: #03a9f4 0 2px 18px !important;	 
+}
+
+#account_löschung {
+    background-color: #ffffff !important;
+    border: 7px solid #03a9f4 !important;
+	box-shadow: #03a9f4 0 2px 18px !important;	
+}
+
+/* navbar login */
+.navbar_login {
+	background-color: #03a9f4 !important;
+}
+
+.navbar_login_item {
+	color: #000000 !important;	
+}
+
+.navbar_login_item_active {
+	border-bottom: 4px solid #007ac1 !important;
+}
+
+
+/* scrollto button */
+.buttonscroll button {
+    border: 2px solid #000000 !important;
+}
+
+

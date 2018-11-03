@@ -1,4 +1,3 @@
-/* Setzung der Zeichenkodierung (charset) */
 @charset "UTF-8";
 
 /* Media-Queries
@@ -38,8 +37,8 @@
 /* Image Preview */
 @import url("imports/image_preview.css");
 
-/* Scrollbar */
-@import url("imports/scrollbar/scrollbar.css");
+/* Scrollbar 
+@import url("imports/scrollbar/scrollbar.css"); */
 
 /* Colors */
-@import url("imports/colors.css");
+@import url("imports/colors/colors.css");

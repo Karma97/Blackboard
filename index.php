@@ -176,7 +176,7 @@
 						&nbsp; ".strip_tags($row["bezeichnung"])."
 				</h5>
 				
-				<div class='einfahren border pointer rounded-right text-white text-center bg-dark position-absolute' title='Jetzt klicken um zu den Anzeigen die zur Rubrik \"".strip_tags($row["bezeichnung"])."\" gehören zu gelangen!' onclick=\"window.location.href='anzeigen/".strip_tags($row["rNR"])."'\">
+				<div class='einfahren border pointer rounded-right text-white text-center bg-dark position-absolute' title='Jetzt klicken um zu den Anzeigen die zur Rubrik \"".strip_tags($row["bezeichnung"])."\" gehören zu gelangen!' onclick=\"window.location.href='anzeigen/rubrik-".strip_tags($row["rNR"])."/seite-1'\">
 				  <h5 class='h5rubriken mb-1 mt-1 faa-parent animated-hover'>
 					<i class='fas fa-caret-right faa-horizontal faa-slow'></i>
 				  </h5>
@@ -191,8 +191,132 @@
 	?>
 
 				</div>
-			</div>  
+			</div>  			
+			</div>
+			<?php
+			
+			if (!isset($_SESSION['vorname']) or !isset($_SESSION['iNR']) or !isset($_SESSION['news'])) {
+			
+			
+			} else {
+			
+			?>
+			<div class="container-fluid w-75 mb-5">
+				<div class='card-header bg-dark text-center'>
+					<?php 
+					
+					$anzahl_dargestellte_benutzer = 10;
+						
+						echo "
+						
+						Sie sehen <b>".$anzahl_dargestellte_benutzer."</b> Zufällige Benutzer!
+						<a href='benutzerliste'><button class='btn btn-sm btn-light ml-5'>Benutzerliste</button></a>
+						
+						";
+						
+					?>
+				</div>
+				<div class="row p-2">
+				<?php
+				
+				
+				
+				$sql7 = "SELECT * FROM inserent ";
+				$query7 = $verb -> query($sql7);
+				$countNumRows = count($query7 -> fetchAll());
+				
+				if ($countNumRows < $anzahl_dargestellte_benutzer) {
+				
+				} else {
+					for ($i = 0; $i < $anzahl_dargestellte_benutzer; $i++) {
+						
+						$rand = rand(2, $countNumRows);
+					
+						$sql8 = "SELECT * FROM inserent INNER JOIN besucherzahlen USING(iNR) WHERE iNR = '".$rand."'";
+						$query8 = $verb -> query($sql8);
+						
+						foreach ($query8 as $row) {
+						
+						$crypt_iNR = str_replace(array("/", "."), "", crypt($row["iNR"],'SB'));
+						
+							echo "
+							
+							<div class='col-lg-6' title='Jetzt Doppelklicken um zum Profil von \"".$row["vorname"]." ".$row["nachname"]."\" zu kommen!' ondblclick=\"window.location.href = './profil/".$crypt_iNR."'\">
+								<div class='card mt-1 mb-1 p-2 pt-1 pb-1'>
+								<div class='mb-0 mt-0 d-inline w-100'>
+								
+								";
+								
+								if ($row["profilbildpfad"] != null && file_exists("profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."")) {
+									echo "
+									
+									<img src='profilbilder/".$row["iNR"]."/".$row["profilbildpfad"]."' width='25' height='25' class='d-inline-block rounded-circle'>
+									
+									";
+								} else {
+									echo "
+									
+									<img src='images/user.png' class='rounded-circle d-inline' width='25' height='25'>
+									
+									";
+								}
+								
+								echo "
+								
+								~ ".$row["vorname"]." ".$row["nachname"]."
+								
+								
+								<p class='listeprofile mb-0 mt-0 d-inline float-right'>
+								
+								";
+								
+								$sql2 = "SELECT * FROM anzeigen WHERE iNR = '".$row["iNR"]."'";
+								$query2 = $verb -> query($sql2);
+								$countNumRows2 = count($query2 -> fetchAll());
+								
+								echo $countNumRows2;
+								
+								echo "
+									<i title='Aktuell ".$countNumRows2." Anzeigen' class='fas fa-clipboard-list'></i>
+									
+									&nbsp;
+									&nbsp;
+									
+									".$row["besucherzahl"]."
+									<i title='Aktuell ".$row["besucherzahl"]." Profilaufrufe' class='fas fa-eye'></i>
+									
+									&nbsp;
+									&nbsp;
+									
+									<a title='Nachricht schreiben' href='mailto:".$row["email"]."'><i class='fa-lg far fa-envelope'></i></a>
+								</p>
+								
+								
+								</div>
+								</div>
+							</div>
+							
+							";
+						
+						}
+						
+					}
+				}
+				
+				
+				
+				
+				
+				echo "
+				
+			</div>
 		</div>
+			
+			";
+			
+			}
+			
+			?>
 	</div>
 	
 
