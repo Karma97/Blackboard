@@ -16,3 +16,5 @@ function dispatch($action)
     $callback = $routes[$action];
     echo call_user_func($callback);
 }
+
+?>
